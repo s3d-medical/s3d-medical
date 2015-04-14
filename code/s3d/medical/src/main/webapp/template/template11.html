@@ -1,0 +1,163 @@
+<!-- 首页模版在此改 -->
+<body>
+<div class="row">
+   <div class="span24 doc-content">
+    <form id="Shouye_Form" action="update" method="post" class="form-horizontal">
+	<div class="row">
+	<table class="table table-bordered" width="100%">
+	<tr>
+		<td>
+		123123
+		</td>
+		<td>
+		123123
+		</td>
+		<td>
+		123123
+		</td>	
+		<td>
+		123123
+		</td>
+	</tr>
+	<tr>
+		<td>
+		123123
+		</td>
+		<td>
+		123123
+		</td>
+		<td>
+		123123
+		</td>
+		<td>
+		123123
+		</td>
+			
+	</tr>
+	</table>
+	</div>
+	
+	
+    <div class="row">
+      <div class="control-group span8">
+        <label class="control-label">文本：</label>
+        <div class="controls">
+        	<control type="text" name="fdName" class="control-text focus-onload storage" data-type="String" data-rules="{required:true}"></control>
+        </div>
+      </div>
+      <div class="control-group span8">
+        <label class="control-label">时间：</label>
+        <div class="controls">
+          <control type="text" name="fdCreateTime" class="calendar storage" data-type="DateTime" data-rules="{required:true}"></control>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="control-group span16">
+        <label class="control-label">多行文本：</label>
+        <div class="controls control-row-auto">
+          <control type="textarea" name="fdDescription" class="input-large storage" data-type="String" data-rules="{required:true}"></control>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="control-group span8">
+        <label class="control-label">单选：</label>
+        <div class="controls">
+        	<control type="radio" name="fdRadio" class="storage" data-type="String">
+        		<dictionary value="1" text="单选框1" shortcut="" />
+        		<dictionary value="2" text="单选框2" shortcut="" />
+        	</control>
+        </div>
+      </div>
+      <div class="control-group span8">
+        <label class="control-label">数据字典单选：</label>
+        <div class="controls">
+			<control type="radio" name="fdRadioDyn" dictionary-source="KS" class="storage" data-type="String" data-rules="{required:true}"></control>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="control-group span8">
+        <label class="control-label">多选：</label>
+        <div class="controls">
+        	<control type="checkbox" name="fdCheckbox" class="storage" data-type="String" data-isMultiValue="true">
+        		<dictionary value="1" text="多选框1" shortcut="" />
+        		<dictionary value="2" text="多选框2" shortcut="" />
+        	</control>
+        </div>
+      </div>
+      <div class="control-group span8">
+        <label class="control-label">数据字典多选：</label>
+        <div class="controls">
+          <control type="checkbox" name="fdCheckboxDyn" dictionary-source="KS" class="storage" data-isMultiValue="true" data-rules="{required:true}"></control>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="control-group span8">
+        <label class="control-label">下拉：</label>
+        <div class="controls">
+        	<control type="select" name="fdSelect" class="storage">
+        		<dictionary value="1" text="选项1" shortcut="1" />
+        		<dictionary value="2" text="选项2" shortcut="2" />
+        	</control>
+        </div>
+      </div>
+      <div class="control-group span8">
+        <label class="control-label">数据字典下拉：</label>
+        <div class="controls">
+          <control type="select" name="fdSelectDyn" class="storage" data-type="String" dictionary-source="ZJ" data-placeholder="请选择..." data-rules="{required:true}"></control>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="row">
+    	<div class="control-group span3">
+    		<label class="control-label">文本1：</label>
+	        <div class="controls">
+	          <input type="text" class="input-small">
+	        </div>
+    	</div>
+    	<div class="control-group span5">
+    		<label class="control-label">文本2：</label>
+	        <div class="controls">
+	          <input type="text">
+	        </div>
+    	</div>
+    	
+    	<div class="control-group span3">
+    		<label class="control-label">文本3：</label>
+	        <div class="controls">
+	          <input type="text">
+	        </div>
+    	</div>
+    	
+    	<div class="control-group span5">
+    		<label class="control-label">文本4：</label>
+	        <div class="controls">
+	          <input type="text">
+	        </div>
+    	</div>
+    	
+    </div>
+  </form>
+   </div>
+ </div>
+</body>
+<script type="text/javascript">
+	BUI.use('bui/form',function(Form){
+     	new Form.Form({
+       	srcNode : '#Shouye_Form'
+   	  }).render();
+ 	  	try{
+ 	  		$("select.bui-form-field-select").selectator({
+				labels: {
+					search: '搜索'
+				}
+			});
+ 	  		$(".focus-onload")[0].focus();
+ 	  	}catch(e){};
+  });  
+</script>
+	

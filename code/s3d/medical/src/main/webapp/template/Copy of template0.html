@@ -1,0 +1,592 @@
+<!-- 首页模版在此改 -->
+<body>
+<div class="row">
+   <div class="span20 doc-content">
+    <form id="Shouye_Form" action="update" method="post" class="form-horizontal">
+        
+    <div class="row">
+      <div class="control-group span5">
+        <label class="control-label">姓名：</label>
+        <div class="controls">
+        	<control type="text" name="fdName" class="control-text focus-onload storage" data-type="String" data-rules="{required:true}"></control>
+        </div>
+      </div>
+      
+      <div class="control-group span5">
+        <label class="control-label">性别：</label>
+        <div class="controls">
+          <control type="select" name="fdSex" dictionary-source="SEX" class="storage" data-isMultiValue="false" data-rules="{required:true}"></control>
+        </div>
+      </div>            
+            
+      <div class="control-group span5">
+        <label class="control-label">出生日期：</label>
+        <div class="controls">
+          <control type="text" name="fdBirthday" class="calendar storage" data-type="DateTime" data-rules="{required:false}"></control>
+        </div>
+      </div>
+      
+      <div class="control-group span5">
+        <label class="control-label">年龄：</label>
+        <div class="controls">
+        	<control type="text" name="fdOld_Year" class="control-text storage" data-type="Number" data-rules="{required:false}"></control>岁
+        	<control type="text" name="fdOld_Month" class="control-text storage" data-type="Number" data-rules="{required:false}"></control>月
+        	<control type="text" name="fdOld_Day" class="control-text storage" data-type="Number" data-rules="{required:false}"></control>天
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <div class="row">
+      <div class="control-group span5">
+        <label class="control-label">国籍：</label>
+        <div class="controls">
+          <control type="text" name="fdConntry" dictionary-source="GJ" class="storage" data-isMultiValue="false" data-rules="{required:true}"></control>
+        </div>
+      </div>           
+    
+      <div class="control-group span5">
+        <label class="control-label">民族：</label>
+        <div class="controls">
+          <control type="text" name="fdNation" dictionary-source="MZ" class="storage" data-isMultiValue="false" data-rules="{required:true}"></control>
+        </div>
+      </div>
+          
+      <div class="control-group span5">
+        <label class="control-label">新生儿出生体重（克）</label>
+        <div class="controls">
+        	<control type="text" name="fdWeight" class="control-text storage" data-type="Number" data-rules="{required:false}"></control>
+        </div>
+      </div>    
+
+      <div class="control-group span5">
+        <label class="control-label">身高</label>
+        <div class="controls">
+        	<control type="text" name="fdHeight" class="control-text storage" data-type="Number" data-rules="{required:false}"></control>cm
+        </div>
+      </div>        
+    
+    </div>        
+    
+    
+    
+    <div class="row">   
+      <div class="control-group span5">
+        <label class="control-label">证件类型：</label>
+        <div class="controls">
+          <control type="text" name="fdIdType" dictionary-source="ZJ" class="storage" data-isMultiValue="false" data-rules="{required:false}"></control>
+        </div>
+      </div>
+          
+      <div class="control-group span5">
+        <label class="control-label">证件号码：</label>
+        <div class="controls">
+        	<control type="text" name="fdIdNo" class="control-text storage" data-type="String" data-rules="{required:true}"></control>
+        </div>
+      </div>
+    
+      <div class="control-group span5">
+        <label class="control-label">婚姻：</label>
+        <div class="controls">
+          <control type="text" name="fdMarriage" dictionary-source="HY " class="storage" data-isMultiValue="false" data-rules="{required:false}"></control>
+        </div>
+      </div>
+    
+      <div class="control-group span5">
+        <label class="control-label">职业：</label>
+        <div class="controls">
+          <control type="text" name="fdVocation" dictionary-source="ZY " class="storage" data-isMultiValue="false" data-rules="{required:false}"></control>
+        </div>
+      </div>
+
+    </div>        
+    
+    
+    <div class="row">   
+      <div class="control-group span5">
+        <label class="control-label">本人电话：</label>
+        <div class="controls">
+        	<control type="text" name="fdPhone_Self" class="control-text storage" data-type="String" data-rules="{required:false}"></control>cm
+        </div>
+      </div>
+
+      <div class="control-group span5">
+        <label class="control-label">Email：</label>
+        <div class="controls">
+        	<control type="text" name="fdEmail" class="control-text storage" data-type="String" data-rules="{required:false}"></control>cm
+        </div>
+      </div>
+      
+      <div class="control-group span5">
+        <label class="control-label">QQ：</label>
+        <div class="controls">
+        	<control type="text" name="fdQQ" class="control-text storage" data-type="String" data-rules="{required:false}"></control>cm
+        </div>
+      </div>
+      
+      <div class="control-group span5">
+        <label class="control-label">现住地邮编：</label>
+        <div class="controls">
+        	<control type="text" name="fdZipno_Now" class="control-text storage" data-type="String" data-rules="{required:false}"></control>cm
+        </div>
+      </div>
+
+    </div>        
+          
+    <div class="row">   
+      <div class="control-group span20">
+        <label class="control-label">现住址：</label>
+        <div class="controls">
+        	<control type="text" name="fdAddress_Now" class="control-text storage" data-type="String" data-rules="{required:false}"></control>cm
+        </div>
+      </div>
+
+    </div>        
+
+
+    <div class="row">   
+      <div class="control-group span10">
+        <label class="control-label">出生地：</label>
+        <div class="controls">
+          <control type="text" name="fdHomeplace" dictionary-source="SS" class="storage" data-isMultiValue="false" data-rules="{required:false}"></control>
+        </div>
+      </div>
+    
+      <div class="control-group span10">
+        <label class="control-label">籍贯：</label>
+        <div class="controls">
+          <control type="text" name="fdNativeplace" dictionary-source="SS" class="storage" data-isMultiValue="false" data-rules="{required:false}"></control>
+        </div>
+      </div>
+    
+    </div>        
+    
+
+    <div class="row">   
+      <div class="control-group span10">
+        <label class="control-label">工作单位及地址：</label>
+        <div class="controls">
+        	<control type="text" name="fdPlace_Workunit" class="control-text storage" data-type="String" data-rules="{required:false}"></control>cm
+        </div>
+      </div>
+    
+      <div class="control-group span5">
+        <label class="control-label">单位电话：</label>
+        <div class="controls">
+        	<control type="text" name="fdPhone_Workunit" class="control-text storage" data-type="String" data-rules="{required:false}"></control>cm
+        </div>
+      </div>
+
+      <div class="control-group span5">
+        <label class="control-label">工作单位邮编：</label>
+        <div class="controls">
+        	<control type="text" name="fdZipno_Workunit" class="control-text storage" data-type="String" data-rules="{required:false}"></control>cm
+        </div>
+      </div>
+            
+    </div>        
+        
+
+
+    <div class="row">   
+      <div class="control-group span10">
+        <label class="control-label">户口地址：</label>
+        <div class="controls">
+        	<control type="text" name="fdPlace_Household" class="control-text storage" data-type="String" data-rules="{required:false}"></control>
+        </div>
+      </div>
+    
+      <div class="control-group span5">
+        <label class="control-label">户口地电话：</label>
+        <div class="controls">
+        	<control type="text" name="fdPhone_Household" class="control-text storage" data-type="String" data-rules="{required:false}"></control>
+        </div>
+      </div>
+
+      <div class="control-group span5">
+        <label class="control-label">户口地邮编：</label>
+        <div class="controls">
+        	<control type="text" name="fdZipno_Household" class="control-text storage" data-type="String" data-rules="{required:false}"></control>
+        </div>
+      </div>
+            
+    </div>        
+        
+
+    <div class="row">   
+      <div class="control-group span20">
+        <label class="control-label"><b>联系人信息</b></label>
+      </div>            
+    </div>        
+
+
+    <div class="row"> 
+      <div class="control-group span5">
+          <label class="control-label">联系人：</label>
+          <div class="controls">
+        	<control type="text" name="fdName_Linkman" class="control-text storage" data-type="String" data-rules="{required:false}"></control>
+         </div>      
+      </div>
+      
+      <div class="control-group span5">
+          <label class="control-label">与患者关系：</label>
+          <div class="controls">
+            <control type="select" name="fdRelation_Linkman" dictionary-source="GX" class="storage" data-isMultiValue="false" data-rules="{required:false}"></control>
+          </div>        
+      </div>
+
+      <div class="control-group span5">
+        <label class="control-label">联系人电话：</label>
+        <div class="controls">
+        	<control type="text" name="fdPhone_Linkman" class="control-text storage" data-type="String" data-rules="{required:false}"></control>
+        </div>
+      </div>
+
+      <div class="control-group span5">
+        <label class="control-label">Email：</label>
+        <div class="controls">
+        	<control type="text" name="fdEmail_Linkman" class="control-text storage" data-type="String" data-rules="{required:false}"></control>
+        </div>
+      </div>
+
+    </div>      
+
+
+    <div class="row">     
+      <div class="control-group span10>
+        <label class="control-label">联系人地址：</label>
+        <div class="controls">
+        	<control type="text" name="fdAddress_Linkman" class="control-text storage" data-type="String" data-rules="{required:false}"></control>
+        </div>
+      </div>
+                       
+      <div class="control-group span5">
+        <label class="control-label">邮编：</label>
+        <div class="controls">
+        	<control type="text" name="fdZipno_Linkman" class="control-text storage" data-type="String" data-rules="{required:false}"></control>
+        </div>
+      </div>
+
+      <div class="control-group span5">
+        <label class="control-label">QQ：</label>
+        <div class="controls">
+        	<control type="text" name="fdQQ_Linkman" class="control-text storage" data-type="String" data-rules="{required:false}"></control>
+        </div>
+      </div>
+
+    </div>        
+    
+
+    <div class="row">   
+      <div class="control-group span20">
+        <label class="control-label"><b>入院、出院记录</b></label>
+      </div>            
+    </div>        
+
+    <div class="row">   
+      <div class="control-group span20">
+          <label class="control-label">入院途径：</label>
+          <div class="controls">
+            <control type="select" name="fdAdmissonway" dictionary-source="RYTJ" class="storage" data-isMultiValue="false" data-rules="{required:true}"></control>
+          </div>        
+      </div>
+    </div> 
+
+    <div class="row">   
+      <div class="control-group span5">
+        <label class="control-label">健康卡号</label>
+        <div class="controls">
+        	<control type="text" name="fdCardno" class="control-text focus-onload storage" data-type="String" data-rules="{required:true}"></control>
+        </div>            
+      </div>   
+      
+      <div class="control-group span5">
+        <label class="control-label">第几次住院</label>
+        <div class="controls">
+        	<control type="text" name="fdTimesinhospital" class="control-text storage" data-type="Number" data-rules="{required:false}"></control>
+        </div>            
+      </div>   
+            
+      <div class="control-group span5">
+        <label class="control-label">医疗付费方式</label>
+        <div class="controls">
+        	<control type="text" name="fdPayment" class="control-text  storage" data-type="String" data-rules="{required:true}"></control>
+        </div>            
+      </div>   
+
+      <div class="control-group span5">
+        <label class="control-label">病案号</label>
+        <div class="controls">
+        	<control type="text" name="fdIdnumber" class="control-text  storage" data-type="String" data-rules="{required:true}"></control>
+        </div>            
+      </div>                              
+    </div>        
+
+
+    <div class="row">   
+      <div class="control-group span5">
+        <label class="control-label">入院时间</label>
+        <div class="controls">
+        	<control type="text" name="fdIntime" class="control-text  storage" data-type="DateTime" data-rules="{required:true}"></control>
+        </div>            
+      </div>   
+
+      <div class="control-group span5">
+          <label class="control-label">入院科别：</label>
+          <div class="controls">
+            <control type="select" name="fdIndepartment" dictionary-source="KS" class="storage" data-isMultiValue="false" data-rules="{required:true}"></control>
+          </div>        
+      </div>
+      
+      <div class="control-group span5">
+        <label class="control-label">入院病房</label>
+        <div class="controls">
+        	<control type="text" name="fdInroom" class="control-text  storage" data-type="String" data-rules="{required:false}"></control>
+        </div>            
+      </div>         
+
+       <div class="control-group span5">
+          <label class="control-label">转科科别：</label>
+          <div class="controls">
+            <control type="select" name="fdTransferdepartment" dictionary-source="KS" class="storage" data-isMultiValue="false" data-rules="{required:false}"></control>
+          </div>        
+      </div>
+      
+    </div>        
+
+
+
+    <div class="row">   
+      <div class="control-group span5">
+        <label class="control-label">出院时间</label>
+        <div class="controls">
+        	<control type="text" name="fdLeavetime" class="control-text  storage" data-type="DateTime" data-rules="{required:true}"></control>
+        </div>            
+      </div>   
+
+      <div class="control-group span5">
+          <label class="control-label">出院科别：</label>
+          <div class="controls">
+            <control type="select" name="fdLeavedepartment" dictionary-source="KS" class="storage" data-isMultiValue="false" data-rules="{required:true}"></control>
+          </div>        
+      </div>
+      
+      <div class="control-group span5">
+        <label class="control-label">出院病房</label>
+        <div class="controls">
+        	<control type="text" name="fdLeaveroom" class="control-text  storage" data-type="String" data-rules="{required:false}"></control>
+        </div>            
+      </div>         
+
+       <div class="control-group span5">
+          <label class="control-label">住院天数：</label>
+          <div class="controls">
+            <control type="text" name="fdHOD"  class="storage" data-type="Number"  data-isMultiValue="false"  data-rules="{required:false}"></control>
+          </div>        
+      </div>
+      
+    </div>  
+
+
+    <div class="row">   
+      <div class="control-group span20">
+          <label class="control-label">离院方式：</label>
+          <div class="controls">
+            <control type="select" name="fdLeaveway" dictionary-source="LYFS" class="storage" data-isMultiValue="false" data-rules="{required:true}"></control>
+          </div>        
+      </div>
+    </div> 
+
+
+    <div class="row">   
+      <div class="control-group span20">
+          <label class="control-label">拟接收的医疗机构名称：</label>
+          <div class="controls">
+            <control type="text" name="fdReceiveUnit"  class="storage"  data-type="String" data-isMultiValue="false" data-rules="{required:false}"></control>
+          </div>        
+      </div>
+    </div> 
+
+
+    <div class="row">   
+      <div class="control-group span5">
+          <label class="control-label">是否有出院31天内再住院计划：</label>
+          <div class="controls">
+        	<control type="select" name="fdReturnPlan" class="storage" data-type="String">
+        		<dictionary value="1" text="有" shortcut="" />
+        		<dictionary value="0" text="无" shortcut="" />
+        	</control>
+          </div>        
+      </div>
+      
+      <div class="control-group span15">
+          <label class="control-label">目的：</label>
+          <div class="controls">
+            <control type="text" name="fdTarget"  class="storage"  data-type="String" data-isMultiValue="false" data-rules="{required:false}"></control>
+          </div>        
+      </div>
+      
+    </div> 
+      
+    
+    <div class="row">   
+      <div class="control-group span20">
+        <label class="control-label"><b>检查、诊断记录</b></label>
+      </div>            
+    </div>        
+
+
+    <div class="row">   
+      <div class="control-group span10">
+          <label class="control-label">病史陈述者：</label>
+          <div class="controls">
+            <control type="text" name="fdRelator"  class="storage"  data-type="String" data-isMultiValue="false" data-rules="{required:false}"></control>
+          </div>        
+      </div>
+
+      <div class="control-group span10">
+          <label class="control-label">同患者的关系：</label>
+          <div class="controls">
+            <control type="select" name="fdRelation_Relator" dictionary-source="GX" class="storage" data-isMultiValue="false" data-rules="{required:true}"></control>
+          </div>        
+      </div>
+
+   </div>       
+
+
+    <div class="row">   
+      <div class="control-group span10">
+          <label class="control-label">门（急）诊诊断：</label>
+          <div class="controls">
+            <control type="text" name="fdInfo_outpertient"  class="storage"  data-type="String" data-isMultiValue="false" data-rules="{required:false}"></control>
+          </div>        
+      </div>
+
+      <div class="control-group span10">
+          <label class="control-label">入院时情况：</label>
+          <div class="controls">
+            <control type="select" name="fdInfo_Indepartment" dictionary-source="RYJC" class="storage" data-isMultiValue="false" data-rules="{required:true}"></control>
+          </div>        
+      </div>
+
+   </div>       
+
+
+    <div class="row">   
+      <div class="control-group span10">
+          <label class="control-label">入院诊断：</label>
+          <div class="controls">
+            <control type="text" name="fdDiagnose_First"  class="storage"  data-type="String" data-isMultiValue="false" data-rules="{required:false}"></control>
+          </div>        
+      </div>
+
+      <div class="control-group span10">
+          <label class="control-label">入院后确诊：</label>
+          <div class="controls">
+            <control type="text" name="fdDiagnose_Define"  class="storage"  data-type="String" data-isMultiValue="false" data-rules="{required:false}"></control>
+          </div>        
+      </div>
+
+   </div>       
+   
+
+   <div class="row">    
+      <div class="control-group span20">   
+   		   <label class="control-label">类别</label>
+   		   <label class="control-label">出院诊断</label>
+   		   <label class="control-label">疾病名称</label>
+   		   <label class="control-label">入院病情</label>
+   		   <label class="control-label">是否医院感染</label>
+   		   <label class="control-label">出院情况</label>
+      </div>
+   </div>          
+   
+
+   <div class="row">    
+      <div class="control-group span20">   
+         <div class="controls">
+          	  <control type="radio" name="fdCategory_1" class="storage" data-type="String" data-isMultiValue="false">
+        		<dictionary value="1" text="主要诊断" shortcut="" />
+        		<dictionary value="2" text="次要诊断" shortcut="" />
+        	  </control>
+         </div>
+         
+         <div class="controls">
+        	<control type="text" name="fdDiagnoseLeave_1" class="control-text storage" data-type="String" data-rules="{required:false}"></control>
+         </div>
+ 
+          <div class="controls">
+            <control type="select" name="fdICD_1" dictionary-source="JB" class="storage" data-isMultiValue="false" data-rules="{required:true}"></control>
+          </div>      
+          
+          <div class="controls">
+            <control type="select" name="fdInfo_Income_1" dictionary-source="RYBQ" class="storage" data-isMultiValue="false" data-rules="{required:false}"></control>
+          </div>                         
+
+          <div class="controls">
+          	  <control type="radio" name="fdInfectOnHospital_1" class="storage" data-type="String" data-isMultiValue="false">
+        		<dictionary value="0" text="/"  shortcut="" />
+        		<dictionary value="1" text="否"  shortcut="" />
+        		<dictionary value="2" text="是"  shortcut="" />
+        	  </control>
+          </div>
+                  
+          <div class="controls">
+            <control type="radio" name="fdInfo_Outcome_1" dictionary-source="CYQK" class="storage" data-isMultiValue="false" data-rules="{required:false}"></control>
+          </div>                         
+
+                  
+      </div>
+   </div>          
+      
+   
+   
+   
+
+    <div class="row">   
+      <div class="control-group span8">
+        <label class="control-label"><b>手术记录</b></label>
+      </div>            
+    </div>        
+
+
+
+    <div class="row">   
+      <div class="control-group span8">
+        <label class="control-label"><b>其他相关信息</b></label>
+      </div>            
+    </div>        
+
+
+
+    <div class="row">   
+      <div class="control-group span8">
+        <label class="control-label"><b>费用信息</b></label>
+      </div>            
+    </div>        
+
+
+
+  </form>
+   </div>
+ </div>
+</body>
+
+
+<script type="text/javascript">
+	BUI.use('bui/form',function(Form){
+     	new Form.Form({
+       	srcNode : '#Shouye_Form'
+   	  }).render();
+ 	  	try{
+ 	  		$("select.bui-form-field-select").selectator({
+				labels: {
+					search: '搜索'
+				}
+			});
+ 	  		$(".focus-onload")[0].focus();
+ 	  	}catch(e){};
+  });  
+</script>
+	
