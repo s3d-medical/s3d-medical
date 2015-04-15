@@ -99,7 +99,7 @@ margin-left: 88px;
 			</div>
 			<div class="formLogin">
 				<form name="formLogin" action="<%=path %>/j_spring_security_check" id="formLogin" method="post">
-					<input type=hidden id="redirectTo" name="redirectTo" value="<%=path%><c:out value="${redirectTo}" />">
+					<input type=hidden id="redirectTo" name="redirectTo" value="<%=path%><%--<c:out value="${redirectTo}" />--%>">
 					<div class="tip">
 						<input class="userName" name="username" type="text" id="username" title="用户名" iscookie="true" value="admin" nullmsg="请输入用户名!" />
 					</div>

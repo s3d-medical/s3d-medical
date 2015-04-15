@@ -102,8 +102,7 @@ function Login() {
 			if (d.status) {
 				loginsuccess();
 				//setTimeout("window.location.href='"+(formData['redirectTo']?formData['redirectTo']:contentBase)+"'", 100);
-
-				setTimeout("window.location.href='"+(formData['redirectTo']?formData['redirectTo']:contentBase)+"'", 100);
+				setTimeout("window.location.href='sysmng'", 100);
 			} else {
 				showError(d.message);
 			}
