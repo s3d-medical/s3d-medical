@@ -35,7 +35,8 @@ define('js/main',['bui/common','bui/module','bui/layout','bui/grid','bui/data','
     },
     _initEvent: function(){
       this.__initResize();
-      this.__initKeyMaster();
+      // Cancel shortcut since it's conflict with other shortcut
+      //this.__initKeyMaster();
       this.__initMousewheel();
     },
     __initLayout: function(){
