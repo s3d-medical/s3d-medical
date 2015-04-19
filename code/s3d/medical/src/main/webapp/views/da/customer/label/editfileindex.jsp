@@ -91,7 +91,7 @@ var Com_Parameter = {
               <a hideFocus="true" title="右旋(e)" href="#" data-cmd="rightHand" class="btn-group-item btn-group-right">&#xf013b;</a>
             </div>
              <div class="btn-group btn-cmd-group">
-              <a hideFocus="true" title="输入病案号(空格)" href="#"  class="btn-group-item btn-group-left">&#xf00be;</a>
+              <a hideFocus="true" title="输入病案号(空格)" href="#" class="btn-group-item btn-group-left" onclick="window.mainPicGrid.fire('fillIndexPage')">&#xf00be;</a>
               
               <a hideFocus="true" title="确认并进入下一张(回车)" href="#"  class="btn-group-item btn-group-right">&#xf00b2;</a>
             </div>

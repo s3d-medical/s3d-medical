@@ -2262,7 +2262,7 @@ legend {
   width: auto;
 }
 .form-horizontal .controls {
-  margin-left: 10px;
+  /*margin-left: 10px;*/
   float: left;
   display: inline;
   *zoom: 1;

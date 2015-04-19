@@ -124,6 +124,8 @@
 	border-radius: 3px;
 	padding: 1px;
 	margin-right: 20px;
+	/*customize*/
+	display: none;
 }
 .multiple .selectator_chosen_item_right {
 	display: none;
@@ -273,7 +275,8 @@
 }
 /* option item - title */
 .selectator_option_title {
-	margin-left: 35px;
+	/* customize */
+	/*margin-left: 35px;*/
 }
 /* option item - subtitle */
 .selectator_option_subtitle {
@@ -284,11 +287,13 @@
 /* option item - right */
 .selectator_option_right {
 	float: right;
-	width: 30px;
 	background-color: #ccc;
-	/*font-size: 15px;*/
 	color: #fff;
 	text-align: center;
 	border-radius: 3px;
+	/* customize */
+	/*width: 30px;*/
 	/*padding: 6px;*/
+	/*font-size: 15px;*/
+	padding: 0 4px;
 }
