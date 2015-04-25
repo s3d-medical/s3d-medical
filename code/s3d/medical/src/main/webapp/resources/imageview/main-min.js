@@ -220,7 +220,7 @@ define('js/main',['bui/common','bui/module','bui/layout','bui/grid','bui/data','
           })
         })(i, viewWraps[i], viewContents[i])
       }
-      $(document).mousewheel(function(event, delta){
+      /*$(document).mousewheel(function(event, delta){
         viewContent = viewContents[_self.get('activeImgView')];
         if(_self.get('canMove')){
           _self.set('canMove', false);
@@ -237,7 +237,7 @@ define('js/main',['bui/common','bui/module','bui/layout','bui/grid','bui/data','
             });
           }
         }
-      })
+      })*/
     },
     __getKeyTarget: function(){
       var activeImgView = this.get('activeImgView');
