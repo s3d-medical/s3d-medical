@@ -42,7 +42,7 @@ public class BaseDaoImp extends HibernateDaoSupport implements IBaseDao{
 	}
 
 	public EntityObject findByPrimaryKey(String id)  {
-		return findByPrimaryKey(id, null, false);
+		return findByPrimaryKey(id, null, true);
 	}
 
 	public EntityObject findByPrimaryKey(String id, Object modelInfo,

@@ -11,12 +11,15 @@ import org.apache.commons.configuration.ConfigurationException;
 
 import com.s3d.webapps.framework.AppConfiguration;
 
-public class AppContextInitListener implements ServletContextListener,
+/**
+ * Web application configuration files including mail template, parameters.
+ */
+public class AppConfigurationInitListener implements ServletContextListener,
 		HttpSessionListener {
 
 	private static final String	ETC_FILE	= "etc_file";
 
-	public AppContextInitListener() {
+	public AppConfigurationInitListener() {
 
 	}
 
