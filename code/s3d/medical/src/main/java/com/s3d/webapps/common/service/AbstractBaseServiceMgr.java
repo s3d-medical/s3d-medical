@@ -56,13 +56,13 @@ public class AbstractBaseServiceMgr implements BaseServiceMgr {
 		getBaseDao().flushHibernateSession();
 	}
 
-	public EntityObject findByPrimaryKey(String id)  {
-		return getBaseDao().findByPrimaryKey(id);
+	public <R extends EntityObject>  R findByPrimaryKey(String id)  {
+		return (R)getBaseDao().findByPrimaryKey(id);
 	}
 
-	public EntityObject findByPrimaryKey(String id, Object modelInfo,
+	public <R extends EntityObject> R findByPrimaryKey(String id, Object modelInfo,
 			boolean noLazy)  {
-		return getBaseDao().findByPrimaryKey(id, modelInfo, noLazy);
+		return (R)getBaseDao().findByPrimaryKey(id, modelInfo, noLazy);
 	}
 		
 	public List findByPrimaryKeys(String[] ids)  {

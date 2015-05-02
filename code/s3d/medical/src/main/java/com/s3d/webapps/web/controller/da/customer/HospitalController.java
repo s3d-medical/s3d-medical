@@ -141,53 +141,55 @@ public class HospitalController extends BaseController<DaCustomerHospital>{
 		hqlInfo.setOrderBy("daCustomerHospital.fdOrgType desc, daCustomerHospital.fdName");
 		
 		List<DaCustomerHospital> list = getBaseService().findList(hqlInfo);
-		
-		OutputJson(list,new IJSONSerializeConfig() {
-			
-			@Override
-			public String[] getPropertyFilterNames() {
-				return new String[]{"fdParent","hbmParent","new","fdHierarchyId"};
-			}
-			
-			@Override
-			public Map<String, Object> getAdditionalProperties(Object object) {
-				if (object instanceof DaCustomerHospital) {
-					DaCustomerHospital hospital = (DaCustomerHospital) object;
-					Map<String, Object> map = new HashMap<String, Object>();
-					
-					map.put("cls", "icon-org"+hospital.getFdOrgType());
-					if((HospitalOrgConstant.HSP_TYPE_HOSORPRO | hospital.getFdOrgType()) == HospitalOrgConstant.HSP_TYPE_HOSORPRO){
-						map.put("leaf", false);
-					}
-					if(hospital.getFdParent()!=null){
-						map.put("fdParentId", hospital.getFdParent().getFdId());
-					}
-					
-					if(HospitalOrgConstant.HSP_TYPE_LABEL == hospital.getFdOrgType()){ //计算盘号 未识别分类的数量  未识别病案号的数量 
-						Long fileNoNullCount = daCustomerLabelService.getFileNoNullCount(hospital.getFdId());
-						map.put("fileNoNullCount", fileNoNullCount );
-						Long categoryNullCount = daCustomerLabelService.getCategoryNullCount(hospital.getFdId());
-						map.put("categoryNullCount", categoryNullCount);
-						
-						if(fileNoNullCount!=null && categoryNullCount!=null){
-							if(fileNoNullCount==0 && categoryNullCount == 0) {
-								map.put("noFillIndexPageCount", daCustomerLabelService.getNoFillIndexPageCount(hospital.getFdId()));
-							}
-						}
-					}
-					
-					return map;
-				}
-				
-				return null;
-			}
 
-			@Override
-			public String getDateFormat() {
-				return "yyyy-MM-dd";
-			}
-		},response);
+		OutputJson(list,new IJSONSerializeConfigImpl(),response);
 		
 		return null;
 	}
+
+    class IJSONSerializeConfigImpl implements IJSONSerializeConfig{
+        @Override
+        public String[] getPropertyFilterNames() {
+            return new String[]{"fdParent","hbmParent","new","fdHierarchyId"};
+        }
+
+        @Override
+        public Map<String, Object> getAdditionalProperties(Object object) {
+            if (object instanceof DaCustomerHospital) {
+                DaCustomerHospital hospital = (DaCustomerHospital) object;
+                Map<String, Object> map = new HashMap<String, Object>();
+
+                map.put("cls", "icon-org"+hospital.getFdOrgType());
+                if((HospitalOrgConstant.HSP_TYPE_HOSORPRO | hospital.getFdOrgType()) == HospitalOrgConstant.HSP_TYPE_HOSORPRO){
+                    map.put("leaf", false);
+                }
+                if(hospital.getFdParent()!=null){
+                    map.put("fdParentId", hospital.getFdParent().getFdId());
+                }
+
+                if(HospitalOrgConstant.HSP_TYPE_LABEL == hospital.getFdOrgType()){ //计算盘号 未识别分类的数量  未识别病案号的数量
+                    Long fileNoNullCount = daCustomerLabelService.getFileNoNullCount(hospital.getFdId());
+                    map.put("fileNoNullCount", fileNoNullCount );
+                    Long categoryNullCount = daCustomerLabelService.getCategoryNullCount(hospital.getFdId());
+                    map.put("categoryNullCount", categoryNullCount);
+
+                    if(fileNoNullCount!=null && categoryNullCount!=null){
+                        if(fileNoNullCount==0 && categoryNullCount == 0) {
+                            map.put("noFillIndexPageCount", daCustomerLabelService.getNoFillIndexPageCount(hospital.getFdId()));
+                        }
+                    }
+                }
+
+                return map;
+            }
+
+            return null;
+        }
+
+        @Override
+        public String getDateFormat() {
+            return "yyyy-MM-dd";
+        }
+    }
 }
+

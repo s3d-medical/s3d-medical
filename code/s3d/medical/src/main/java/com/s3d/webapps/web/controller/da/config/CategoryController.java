@@ -61,34 +61,34 @@ public class CategoryController extends BaseController<DaConfigCategory>{
 	
 	@Override
 	protected IJSONSerializeConfig listjsonSerializeConfig() {
-		return new IJSONSerializeConfig() {
-			@Override
-			public String[] getPropertyFilterNames() {
-				return new String[]{"new"};
-			}
-			
-			@Override
-			public Map<String, Object> getAdditionalProperties(Object object) {
-				
-				
-				return null;
-			}
-
-			@Override
-			public String getDateFormat() {
-				return "yyyy-MM-dd";
-			}
-		};
+		return new IJSONSerializeConfigImpl() ;
 	}
 	
 	@RequestMappingAuthority(roles={"SYSROLE_ADMIN"})
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public ModelAndView update(DaConfigCategory vo) {
-		DaConfigCategory daConfigCategory = (DaConfigCategory) getBaseService().findByPrimaryKey(vo.getFdId());
+		DaConfigCategory daConfigCategory = getBaseService().findByPrimaryKey(vo.getFdId());
 		daConfigCategory.setFdStatus(vo.getFdStatus());
 		daConfigCategory.setFdShortcut(vo.getFdShortcut());
 		daConfigCategory.setFdName(vo.getFdName());
 		getBaseService().update(daConfigCategory);
 		return success(getMessage("msg.operation.success"),true,true);
 	}
+
+    class IJSONSerializeConfigImpl implements IJSONSerializeConfig{
+
+        @Override
+        public String[] getPropertyFilterNames() {
+            return new String[]{"new"};
+        }
+
+        @Override
+        public Map<String, Object> getAdditionalProperties(Object object) {
+            return null;
+        }
+        @Override
+        public String getDateFormat() {
+            return "yyyy-MM-dd";
+        }
+    }
 }

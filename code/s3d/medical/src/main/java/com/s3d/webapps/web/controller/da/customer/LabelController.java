@@ -118,7 +118,7 @@ public class LabelController extends BaseController<DaCustomerLabel>{
 	
 	@RequestMapping("/editcategory/{fdId}")
 	public String editcategory(HttpServletRequest request, Model model,@PathVariable("fdId") String fdId) {
-		EntityObject object = getBaseService().findByPrimaryKey(fdId);
+		DaCustomerLabel object = getBaseService().findByPrimaryKey(fdId);
 		model.addAttribute("model", object);
 		return getRequestMappingPath() + "/editcategory";
 	}

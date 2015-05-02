@@ -131,36 +131,7 @@ public class PictureController extends BaseController<DaCustomerPicture>{
 	
 	@Override
 	protected IJSONSerializeConfig listjsonSerializeConfig() {
-		return new IJSONSerializeConfig() {
-			@Override
-			public String[] getPropertyFilterNames() {
-				return new String[]{"new","interceptFieldCallback","fdCreateTime","fdOrder","fdPicPath","fdLastModifiedTime","fdMd5Hash","fdThumb","fdLabel","fdCategory"};
-			}
-			
-			@Override
-			public Map<String, Object> getAdditionalProperties(Object object) {
-				if (object instanceof DaCustomerPicture) {
-					Map<String, Object> map = new HashMap<String, Object>();
-					DaCustomerPicture picture = (DaCustomerPicture) object;
-					map.put("fdLabelName", picture.getFdLabel().getFdName());
-					if(picture.getFdCategory()!=null){
-						map.put("categoryCheck", true);
-						map.put("fdCategoryName", picture.getFdCategory().getFdName());
-						map.put("fdCategoryId", picture.getFdCategory().getFdId());
-					}
-					if(StringUtil.isNotNull(picture.getFdFileNo())){
-						map.put("fileNoCheck", true);
-					}
-					return map;
-				}
-				return null;
-			}
-
-			@Override
-			public String getDateFormat() {
-				return "yyyy-MM-dd";
-			}
-		};
+		return new IJSONSerializeConfigImpl();
 	}
 	
 	@RequestMapping("/getthumb/{fdId}")
@@ -281,4 +252,36 @@ public class PictureController extends BaseController<DaCustomerPicture>{
 		oldFileName = oldFileName.replace("+", "%20");
 		return oldFileName;
 	}
+
+    class IJSONSerializeConfigImpl implements IJSONSerializeConfig{
+
+        @Override
+        public String[] getPropertyFilterNames() {
+            return new String[]{"new","interceptFieldCallback","fdCreateTime","fdOrder","fdPicPath","fdLastModifiedTime","fdMd5Hash","fdThumb","fdLabel","fdCategory"};
+        }
+
+        @Override
+        public Map<String, Object> getAdditionalProperties(Object object) {
+            if (object instanceof DaCustomerPicture) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                DaCustomerPicture picture = (DaCustomerPicture) object;
+                map.put("fdLabelName", picture.getFdLabel().getFdName());
+                if(picture.getFdCategory()!=null){
+                    map.put("categoryCheck", true);
+                    map.put("fdCategoryName", picture.getFdCategory().getFdName());
+                    map.put("fdCategoryId", picture.getFdCategory().getFdId());
+                }
+                if(StringUtil.isNotNull(picture.getFdFileNo())){
+                    map.put("fileNoCheck", true);
+                }
+                return map;
+            }
+            return null;
+        }
+
+        @Override
+        public String getDateFormat() {
+            return "yyyy-MM-dd";
+        }
+    }
 }

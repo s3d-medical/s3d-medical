@@ -12,6 +12,7 @@
         <module>medical</module>
         <module>db-script</module>
         <module>autodb</module>
+        <module>tech</module>
     </modules>
     <dependencies>
         <dependency>

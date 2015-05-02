@@ -100,24 +100,7 @@ public class SetController extends BaseController<DaConfigSet>{
 	
 	@Override
 	protected IJSONSerializeConfig listjsonSerializeConfig() {
-		return new IJSONSerializeConfig() {
-			@Override
-			public String[] getPropertyFilterNames() {
-				return new String[]{"new"};
-			}
-			
-			@Override
-			public Map<String, Object> getAdditionalProperties(Object object) {
-				
-				
-				return null;
-			}
-
-			@Override
-			public String getDateFormat() {
-				return "yyyy-MM-dd";
-			}
-		};
+		return new IJSONSerializeConfigImpl();
 	}
 	
 	@RequestMappingAuthority(roles={"SYSROLE_ADMIN"})
@@ -130,4 +113,22 @@ public class SetController extends BaseController<DaConfigSet>{
 		getBaseService().update(daConfigSet);
 		return success(getMessage("msg.operation.success"),true,true);
 	}
+
+
+    class IJSONSerializeConfigImpl implements IJSONSerializeConfig{
+        @Override
+        public String[] getPropertyFilterNames() {
+            return new String[]{"new"};
+        }
+
+        @Override
+        public Map<String, Object> getAdditionalProperties(Object object) {
+            return null;
+        }
+
+        @Override
+        public String getDateFormat() {
+            return "yyyy-MM-dd";
+        }
+    }
 }
