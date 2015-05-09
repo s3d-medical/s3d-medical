@@ -162,7 +162,7 @@ public abstract class BaseController<T extends BaseEntityObject>{
 		result.put("results", totalCount);
 		result.put("hasError", false);
 		
-		OutputJson(result , listjsonSerializeConfig() ,response);
+		toJson(result, listjsonSerializeConfig(), response);
 		
 		return null;
 	}
@@ -209,7 +209,7 @@ public abstract class BaseController<T extends BaseEntityObject>{
 //		json.put("statusCode", statusCode);
 //		json.put("message", message);
 //		json.put("forwardUrl", forwardUrl);
-//		OutputJson(json, null, response);
+//		toJson(json, null, response);
 //		
 //		return null;
 	}
@@ -313,7 +313,7 @@ public abstract class BaseController<T extends BaseEntityObject>{
 		return false;
 	}
 	
-	protected void OutputJson(Object object,final IJSONSerializeConfig config,HttpServletResponse httpServletResponse) {
+	protected void toJson(Object object,final IJSONSerializeConfig config,HttpServletResponse httpServletResponse) {
 		PrintWriter out = null;
 		httpServletResponse.setContentType("application/json");
 		httpServletResponse.setCharacterEncoding("utf-8");

@@ -49,7 +49,7 @@ public class ShouyeController extends BaseController<DaCustomerShouye>{
 	@RequestMapping("/gethtml")
 	public String getHTMLTepmlate(HttpServletRequest request,HttpServletResponse response) {
 		String fdId = request.getParameter("id");
-		DaCustomerPicture picture =  (DaCustomerPicture) daCustomerPictureService.findByPrimaryKey(fdId);
+		DaCustomerPicture picture =  daCustomerPictureService.findByPrimaryKey(fdId);
 		try {
 			String result = daCustomerShouyeService.genarateEditingShouyeHTML(picture);
 			PrintWriter out = response.getWriter();
