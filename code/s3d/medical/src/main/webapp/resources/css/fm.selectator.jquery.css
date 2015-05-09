@@ -39,6 +39,8 @@
 .selectator.single {
 	height: 24px;
 	padding: 1px 10px !important;
+	line-height: 20px;
+	vertical-align: middle;
 }
 .selectator:after {
 	position: absolute;
@@ -181,13 +183,13 @@
 	outline: none;
 	padding: 6px 0 0 0;
 }
-.single                 .selectator_input {
+.single  .selectator_input {
 	border: 1px solid #7f9db9;
 	position: absolute;
 	bottom: -40px;
 	left: -1px;
 	z-index: 101;
-	padding: 10px 25px;
+	padding: 10px 5px;
 	width: 100%;
 	width: calc(100% + 2px);
 	border-bottom: 0;
@@ -209,7 +211,7 @@
 }
 
 /* options holder */
-                           .selectator_options {
+.selectator_options {
 	margin: 0;
 	padding: 0;
 	border: 1px solid #7f9db9;
@@ -220,20 +222,20 @@
 	-moz-box-sizing: border-box;
 	z-index: 101;
 	background-color: #fff;
-	overflow-y: scroll;
+	overflow-y: auto;
 	max-height: 250px;
 	list-style: none;
 	left: -1px;
 	right: -1px;
 }
-.single                    .selectator_options {
+.single .selectator_options {
 	padding-top: 0;
 	border-top: 0;
 }
-       .disable_search     .selectator_options {
+.disable_search .selectator_options {
 	border-top: 1px solid #7f9db9;
 }
-.single.disable_search     .selectator_options {
+.single.disable_search .selectator_options {
 	padding-top: 0;
 }
 .selectator.options-hidden .selectator_options {
