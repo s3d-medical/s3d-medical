@@ -1,48 +1,33 @@
 package com.s3d.webapps.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
+
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.Enumeration;
 
 
 public class ConfigLocationsUtil {
-	
-	private static String webContentPath;
-	
-	public static String getWebContentPath() {
-		if (webContentPath == null) {
-			URL url = null;
-			try {
-				Enumeration urls = Thread.currentThread()
-						.getContextClassLoader().getResources("/");
-				while (urls.hasMoreElements()) {
-					URL tmpUrl = (URL) urls.nextElement();
-					String tmpPath = tmpUrl.getPath();
-					if (!tmpPath.endsWith("/")) {
-						tmpPath = tmpPath + "/";
-					}
-					if (tmpPath.endsWith("WEB-INF/classes/")) {
-						url = tmpUrl;
-						break;
-					}
-				}
+    private static Logger logger = LoggerFactory.getLogger(ConfigLocationsUtil.class);
+    private static String webContentPath;
 
-				if (url == null) {
-					url = Thread.currentThread().getContextClassLoader()
-							.getResource("da.properties");
-				}
-			} catch (IOException localIOException) {
-			}
-			webContentPath = url.getPath().substring(0,
-					url.getPath().lastIndexOf("/WEB-INF/"));
-			if (webContentPath.startsWith("file:")) {
-				webContentPath = webContentPath.substring(5);
-			}
-
-			System.out.println("webContentPath:" + webContentPath + "\n");
-		}
-		return webContentPath;
-	}
-
-
+    public static String getWebContentPath() {
+        if(!StringUtils.hasText(webContentPath)){
+            URL url = ConfigLocationsUtil.class.getClassLoader().getResource("");
+            try {
+                webContentPath = java.net.URLDecoder.decode(url.getPath(),"utf-8");
+                webContentPath = webContentPath.substring(0,
+                        webContentPath.lastIndexOf("/WEB-INF/"));
+                if (webContentPath.startsWith("file:")) {
+                    webContentPath = webContentPath.substring(5);
+                }
+            } catch (UnsupportedEncodingException e) {
+                logger.error("Failed to get web content path", e.getCause());
+            }
+        }
+        return webContentPath;
+    }
 }

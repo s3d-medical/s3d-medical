@@ -142,7 +142,7 @@ public class HospitalController extends BaseController<DaCustomerHospital>{
 		
 		List<DaCustomerHospital> list = getBaseService().findList(hqlInfo);
 
-		OutputJson(list,new IJSONSerializeConfigImpl(),response);
+		toJson(list,new IJSONSerializeConfigImpl(),response);
 		
 		return null;
 	}
