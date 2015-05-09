@@ -19,7 +19,7 @@ angular.module("mainPage", [])
 
         $scope.page = {
             dischargeDiagnosis: [{diagnosis: "", sickCode: "", enterSickState: ""}],
-            operationHistory: []
+            operationHistory: [{operateCode: "", date: "", grade: "", operationName: "", operator: "", firstAssistant: "", secondAssistant: "", cutHealGrade: "", anaesthesiaType: "", anaesthetist: ""}]
         };
 
 
