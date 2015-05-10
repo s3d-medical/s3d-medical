@@ -53,6 +53,9 @@
         .width-40 {
             width: 40px !important;
         }
+        .width-70 {
+            width: 70px;
+        }
         .width-120 {
             width: 120px !important;
         }
@@ -62,11 +65,19 @@
         .width-160 {
             width: 160px !important;
         }
+        .width-200 {
+            width: 200px;
+        }
         .width-330 {
             width: 330px !important;
         }
         .overflow-hidden {
             overflow: hidden;
+        }
+        .text-ellipsis {
+            text-overflow : ellipsis;
+            white-space : nowrap;
+            overflow : hidden;
         }
 
 
@@ -89,6 +100,19 @@
         }
         .selectator_chosen_item_title {
             color: #0000ff;
+        }
+        table input[type='text'] {
+            width: 100%;
+            padding: 0;
+        }
+        .out-diagnosis .selectator.single {
+            width: 100% !important;
+        }
+        .out-diagnosis .selectator_chosen_item_title {
+            max-width: 175px;
+            text-overflow : ellipsis;
+            white-space : nowrap;
+            overflow : hidden;
         }
     </style>
 </head>
@@ -240,12 +264,12 @@
                 </span>
             </div>
             <div>
-                <table>
+                <table class="out-diagnosis">
                     <thead>
                         <tr>
                             <td>出院诊断</td>
-                            <td>疾病编码</td>
-                            <td>入院病情</td>
+                            <td class="width-200">疾病编码</td>
+                            <td class="width-120">入院病情</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -346,54 +370,34 @@
                 <table>
                     <thead>
                         <tr>
-                            <td>手术及操作编码</td>
-                            <td>手术及操作日期</td>
-                            <td>手术级别</td>
-                            <td>手术及操作名称</td>
-                            <td>手术及操作医师-术者</td>
-                            <td>Ⅰ助</td>
-                            <td>Ⅱ助</td>
-                            <td>切口愈合等级</td>
-                            <td>麻醉方式</td>
-                            <td>麻醉医师</td>
+                            <td rowspan="2" class="width-70">手术及操作编码</td>
+                            <td rowspan="2" class="width-70">手术及操作日期</td>
+                            <td rowspan="2" class="width-70">手术级别</td>
+                            <td rowspan="2" class="width-120">手术及操作名称</td>
+                            <td colspan="3">手术及操作医师</td>
+                            <td rowspan="2" class="width-70">切口愈合等级</td>
+                            <td rowspan="2">麻醉方式</td>
+                            <td rowspan="2">麻醉医师</td>
                         </tr>
+                        <tr>
+                            <td class="width-70">术者</td>
+                            <td class="width-70">Ⅰ助</td>
+                            <td class="width-70">Ⅱ助</td>
+                        </tr>
+
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        <tr ng-repeat="i in page.operationHistory">
+                            <td><input type="text" ng-model="i.operateCode"></td>
+                            <td><input type="text" ng-model="i.date"></td>
+                            <td><input type="text" ng-model="i.grade"></td>
+                            <td><input type="text" ng-model="i.operationName"></td>
+                            <td><input type="text" ng-model="i.operator"></td>
+                            <td><input type="text" ng-model="i.firstAssistant"></td>
+                            <td><input type="text" ng-model="i.secondAssistant"></td>
+                            <td><input type="text" ng-model="i.cutHealGrade"></td>
+                            <td><input type="text" ng-model="i.anaesthesiaType"></td>
+                            <td><input type="text" ng-model="i.anaesthetist"></td>
                         </tr>
                     </tbody>
                 </table>

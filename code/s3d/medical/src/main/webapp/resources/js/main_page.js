@@ -9,7 +9,7 @@ angular.module("mainPage", [])
             marriages: [{id: "1", name: "未婚", shortcut: "WH"}, {id: "2", name: "已婚", shortcut: "YH"}, {id: "3", name: "丧偶", shortcut: "SO"}, {id: "4", name: "离异", shortcut: "LY"}, {id: "5", name: "其他", shortcut: "QT"}],
             jobs: [{id: "1", name: "工人", shortcut: "GR"}, {id: "2", name: "农民", shortcut: "NM"}, {id: "3", name: "自由职业", shortcut: "ZYZY"}, {id: "4", name: "公务员", shortcut: "GWY"}, {id: "5", name: "其他", shortcut: "QT"}],
             relationships: [{id: "1", name: "父子", shortcut: "FZ"}, {id: "2", name: "父女", shortcut: "FN"}, {id: "3", name: "母子", shortcut: "MZ"}, {id: "4", name: "母女", shortcut: "MV"}],
-            sickCodes: [{id: "E10-E14", name: "E10-E14", shortcut: "E10-E14"}, {id: "I10.X02", name: "I10.X02", shortcut: "I10.X02"}, {id: "I11.901", name: "I11.901", shortcut: "I11.901"}, {id: "X59.952", name: "X59.952", shortcut: "X59.952"}],
+            sickCodes: [{id: "E10-E14", name: "E10-E14(糖尿病)", shortcut: "TNB"}, {id: "I10.X02", name: "I10.X02(高血压)", shortcut: "GXY"}, {id: "I11.901", name: "I11.901(高血压性心脏病 NOS)", shortcut: "XZB"}, {id: "X59.952", name: "X59.952(骨折)", shortcut: "GZ"}],
             inTypes: [{id: "1", name: "门诊", shortcut: "MZ"}, {id: "2", name: "急诊", shortcut: "JZ"}, {id: "3", name: "其他医疗机构转入", shortcut: "QTYLJJZR"}, {id: "4", name: "其他", shortcut: "QT"}],
             inSickStates: [{id: "1", name: "有", shortcut: "Y"}, {id: "2", name: "临床未确定", shortcut: "LCWQD"}, {id: "3", name: "情况不明", shortcut: "QKBM"}, {id: "4", name: "无", shortcut: "W"}],
             outTypes: [{id: "1", name: "医嘱离院", shortcut: "YZLY"}, {id: "2", name: "医嘱转院", shortcut: "YZZY"}, {id: "3", name: "医嘱转社区卫生服务机构/乡镇卫生院", shortcut: "YZZSQ"}, {id: "4", name: "非医嘱离院", shortcut: "FYZLY"}, {id: "5", name: "死亡", shortcut: "SW"}, {id: "6", name: "其他", shortcut: "QT"}],
@@ -36,20 +36,7 @@ angular.module("mainPage", [])
         function setDefaultPage () {
             $scope.page = {
                 "dischargeDiagnosis": [],
-                "operationHistory": [
-                    {
-                        "operateCode": "",
-                        "date": "",
-                        "grade": "",
-                        "operationName": "",
-                        "operator": "",
-                        "firstAssistant": "",
-                        "secondAssistant": "",
-                        "cutHealGrade": "",
-                        "anaesthesiaType": "",
-                        "anaesthetist": ""
-                    }
-                ],
+                "operationHistory": [],
                 "country": "",
                 "nation": "",
                 "payType": 1,
@@ -177,7 +164,19 @@ angular.module("mainPage", [])
                     "diagnosis": "",
                     "sickCode": "",
                     "inSickState": ""
-                })
+                });
+                $scope.page.operationHistory.push({
+                    "operateCode": "",
+                    "date": "",
+                    "grade": "",
+                    "operationName": "",
+                    "operator": "",
+                    "firstAssistant": "",
+                    "secondAssistant": "",
+                    "cutHealGrade": "",
+                    "anaesthesiaType": "",
+                    "anaesthetist": ""
+                });
             }
         }
     }]);
