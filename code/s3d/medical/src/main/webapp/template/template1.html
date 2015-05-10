@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link type="text/css" rel="stylesheet" href="../resources/css/fm.selectator.jquery.css"/>
-    <link type="text/css" rel="stylesheet" href="../resources/bui/css/bui-min.css"/>
+    <!--<link type="text/css" rel="stylesheet" href="../resources/bui/css/dpl-min.css"/>-->
     <style type="text/css">
         /* common */
         input[type='text'] {
@@ -37,6 +37,9 @@
         }
         td {
             border: solid 1px;
+        }
+        .text-center {
+            text-align: center;
         }
         .ml-10 {
             margin-left: 10px;
@@ -84,6 +87,9 @@
         .container-body > div {
             margin-top: 5px;
         }
+        .selectator_chosen_item_title {
+            color: #0000ff;
+        }
     </style>
 </head>
 <body topmargin=0  leftmargin=0 >
@@ -92,10 +98,8 @@
         <div class="container-header">
             <div>
                 <span>医疗付费方式：</span>
-                <select ng-model="page.payType">
-                    <option value="1" searchcontent="XJ">现金</option>
-                    <option value="2" searchcontent="YLK">医疗卡</option>
-                </select>
+                <label><input type="radio" name="payType" value="1" ng-model="page.payType">现金</label>
+                <label><input type="radio" name="payType" value="2" ng-model="page.payType">医保卡</label>
             </div>
             <div class="mt-5 overflow-hidden">
                 <span>
@@ -113,8 +117,8 @@
             <div>
                 <span>姓名<input ng-model="page.name" type="text"></span>
                 <span class="ml-10">性别
-                    <label><input type="radio" name="sex" ng-model="page.sex" value="0">男</label>
-                    <label><input type="radio" name="sex" ng-model="page.sex" value="1">女</label>
+                    <label><input type="radio" name="sex" ng-model="page.sex" value="1">男</label>
+                    <label><input type="radio" name="sex" ng-model="page.sex" value="2">女</label>
                 </span>
                 <span class="ml-10">出生日期<input ng-model="page.birthdayYear" type="text" class="width-40">年<input ng-model="page.birthdayMonth" type="text" class="width-20">月<input ng-model="page.birthdayDay" type="text" class="width-20">日</span>
                 <span class="ml-10">年龄<input ng-model="page.age" type="text" class="width-40"></span>
@@ -198,19 +202,19 @@
             </div>
             <div>
                 <span>入院途径
-                    <select ng-model="page.enterType">
-                        <option ng-repeat="i in settings.enterTypes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
+                    <select ng-model="page.inType">
+                        <option ng-repeat="i in settings.inTypes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                 </span>
             </div>
             <div>
-                <span>入院时间<input ng-model="page.enterYear" type="text">年<input ng-model="page.enterMonth" type="text">月<input ng-model="page.enterDay" type="text">日<input ng-model="page.enterHour" type="text">时</span>
+                <span>入院时间<input ng-model="page.inYear" type="text">年<input ng-model="page.inMonth" type="text">月<input ng-model="page.inDay" type="text">日<input ng-model="page.inHour" type="text">时</span>
                 <span class="ml-10">入院科别
-                    <select ng-model="page.enterDepartment">
+                    <select ng-model="page.inDepartment">
                         <option ng-repeat="i in settings.departments" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                 </span>
-                <span class="ml-10">病房<input ng-model="page.enterSickroom" type="text"></span>
+                <span class="ml-10">病房<input ng-model="page.inSickroom" type="text"></span>
                 <span class="ml-10">转科科别
                     <select ng-model="page.changeDepartment">
                         <option ng-repeat="i in settings.departments" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
@@ -218,13 +222,13 @@
                 </span>
             </div>
             <div>
-                <span>出院时间<input ng-model="page.leaveYear" type="text">年<input ng-model="page.leaveMonth" type="text">月<input ng-model="page.leaveDay" type="text">日<input ng-model="page.leaveHour" type="text">时</span>
+                <span>出院时间<input ng-model="page.outYear" type="text">年<input ng-model="page.outMonth" type="text">月<input ng-model="page.outDay" type="text">日<input ng-model="page.outHour" type="text">时</span>
                 <span class="ml-10">出院科别
-                    <select ng-model="page.leaveDepartment">
+                    <select ng-model="page.outDepartment">
                         <option ng-repeat="i in settings.departments" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                 </span>
-                <span class="ml-10">病房<input ng-model="page.leaveSickroom" type="text"></span>
+                <span class="ml-10">病房<input ng-model="page.outSickroom" type="text"></span>
                 <span class="ml-10">实际住院<input ng-model="page.daysInHospital" type="text">天</span>
             </div>
             <div>
@@ -257,34 +261,14 @@
                                 </select>
                             </td>
                             <td>
-                                <select ng-model="d.enterSickState">
-                                    <option ng-repeat="i in settings.enterSickStates" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
+                                <select ng-model="d.inSickState">
+                                    <option ng-repeat="i in settings.inSickStates" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                                 </select>
                             </td>
                         </tr>
-                        <!--<tr>
-                            <td>其他诊断：<input class="diagnosis" type="text"></td>
-                            <td><input class="diagnosisSickCode" type="text"></td>
-                            <td><input class="sickState" type="text"></td>
-                        </tr>
-                        <tr>
-                            <td></td><td></td><td></td>
-                        </tr>
-                        <tr>
-                            <td></td><td></td><td></td>
-                        </tr>
-                        <tr>
-                            <td></td><td></td><td></td>
-                        </tr>
-                        <tr>
-                            <td></td><td></td><td></td>
-                        </tr>
-                        <tr>
-                            <td></td><td></td><td></td>
-                        </tr>-->
                     </tbody>
                 </table>
-                <div>+</div>
+                <!--<div>+</div>-->
             </div>
             <div>
                 <span>损伤、中毒的外部原因<input ng-model="page.outCause" type="text"></span>
@@ -307,29 +291,29 @@
             </div>
             <div>
                 <span>药物过敏
-                    <label><input type="radio" name="allergic" value="0" ng-model="page.medicalAllergy">无</label>
-                    <label><input type="radio" name="allergic" value="1" ng-model="page.medicalAllergy">有</label>
+                    <label><input type="radio" name="allergic" value="1" ng-model="page.medicalAllergy">无</label>
+                    <label><input type="radio" name="allergic" value="2" ng-model="page.medicalAllergy">有</label>
                 </span>
                 <span>过敏药物<input ng-model="page.allergicMedication" type="text"></span>
                 <span>死亡患者尸检
                     <label><input type="radio" name="autopsy" value="1" ng-model="page.autopsy">是</label>
-                    <label><input type="radio" name="autopsy" value="0" ng-model="page.autopsy">否</label>
+                    <label><input type="radio" name="autopsy" value="2" ng-model="page.autopsy">否</label>
                 </span>
             </div>
             <div>
                 <span>血型
-                    <label><input type="radio" name="bloodType" value="0" ng-model="page.bloodType">A</label>
-                    <label><input type="radio" name="bloodType" value="1" ng-model="page.bloodType">B</label>
-                    <label><input type="radio" name="bloodType" value="2" ng-model="page.bloodType">O</label>
-                    <label><input type="radio" name="bloodType" value="3" ng-model="page.bloodType">AB</label>
-                    <label><input type="radio" name="bloodType" value="4" ng-model="page.bloodType">不详</label>
-                    <label><input type="radio" name="bloodType" value="5" ng-model="page.bloodType">未查</label>
+                    <label><input type="radio" name="bloodType" value="1" ng-model="page.bloodType">A</label>
+                    <label><input type="radio" name="bloodType" value="2" ng-model="page.bloodType">B</label>
+                    <label><input type="radio" name="bloodType" value="3" ng-model="page.bloodType">O</label>
+                    <label><input type="radio" name="bloodType" value="4" ng-model="page.bloodType">AB</label>
+                    <label><input type="radio" name="bloodType" value="5" ng-model="page.bloodType">不详</label>
+                    <label><input type="radio" name="bloodType" value="6" ng-model="page.bloodType">未查</label>
                 </span>
                 <span class="ml-10">RH
-                    <label><input type="radio" name="rh" value="0" ng-model="page.rh">阴</label>
-                    <label><input type="radio" name="rh" value="1" ng-model="page.rh">阳</label>
-                    <label><input type="radio" name="rh" value="2" ng-model="page.rh">不详</label>
-                    <label><input type="radio" name="rh" value="3" ng-model="page.rh">未查</label>
+                    <label><input type="radio" name="rh" value="1" ng-model="page.rh">阴</label>
+                    <label><input type="radio" name="rh" value="2" ng-model="page.rh">阳</label>
+                    <label><input type="radio" name="rh" value="3" ng-model="page.rh">不详</label>
+                    <label><input type="radio" name="rh" value="4" ng-model="page.rh">未查</label>
                 </span>
             </div>
             <div>
@@ -346,9 +330,9 @@
             </div>
             <div>
                 <span>病案质量
-                    <label><input type="radio" name="caseQuality" value="0" ng-model="page.caseQuality">甲</label>
-                    <label><input type="radio" name="caseQuality" value="1" ng-model="page.caseQuality">乙</label>
-                    <label><input type="radio" name="caseQuality" value="2" ng-model="page.caseQuality">丙</label>
+                    <label><input type="radio" name="caseQuality" value="1" ng-model="page.caseQuality">甲</label>
+                    <label><input type="radio" name="caseQuality" value="2" ng-model="page.caseQuality">乙</label>
+                    <label><input type="radio" name="caseQuality" value="3" ng-model="page.caseQuality">丙</label>
                 </span>
                 <span>
                     <span>质控医师<input ng-model="page.qualityDoctor" type="text"></span>
@@ -387,13 +371,37 @@
                             <td></td>
                             <td></td>
                         </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
             <div>
                 <span>离院方式
-                    <select ng-model="page.leaveType">
-                        <option ng-repeat="i in settings.leaveTypes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
+                    <select ng-model="page.outType">
+                        <option ng-repeat="i in settings.outTypes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                     拟接收医疗机构名称
                     <input type="text" ng-model="page.acceptOrganization">
@@ -402,8 +410,8 @@
             </div>
             <div>
                 <span>是否有出院31天内再住院计划
-                    <label><input type="radio" name="willReturn" value="0" ng-model="page.willReturn">无</label>
-                    <label><input type="radio" name="willReturn" value="1" ng-model="page.willReturn">有，目的</label>
+                    <label><input type="radio" name="willReturn" value="1" ng-model="page.willReturn">无</label>
+                    <label><input type="radio" name="willReturn" value="2" ng-model="page.willReturn">有，目的</label>
                     <input ng-model="page.returnPurpose" type="text">
                 </span>
             </div>
@@ -421,7 +429,7 @@
                 <span>2.诊断类：（5）病理诊断费：<input type="text"ng-model="page.expenseDiagnosisPathology">（6）实验室诊断费：<input type="text"ng-model="page.expenseDiagnosisLab">（7）影像学诊断费<input type="text"ng-model="page.expenseDiagnosisImaging">（8）临床诊断项目费：<input type="text"ng-model="page.expenseDiagnosisClinical"></span>
             </div>
             <div>
-                <span>3.治疗类：（9）非手术治疗项目费：<input type="text"ng-model="page.expenseCureNonOperation">（临床物理治疗费：<input type="text"ng-model="page.expenseCureClinicalphysics">）（10）手术治疗费：<input type="text"ng-model="page.expenseCureOperationCure">（麻醉费<input type="text"ng-model="page.expenseCureAnaesthesia">手术费：<input type="text"ng-model="page.expenseCureOpertion">）</span>
+                <span>3.治疗类：（9）非手术治疗项目费：<input type="text"ng-model="page.expenseCureNonOperation">（临床物理治疗费：<input type="text"ng-model="page.expenseCureClinicalPhysics">）（10）手术治疗费：<input type="text"ng-model="page.expenseCureOperationCure">（麻醉费<input type="text"ng-model="page.expenseCureAnaesthesia">手术费：<input type="text"ng-model="page.expenseCureOperation">）</span>
             </div>
             <div>
                 <span>4.康复类：（11）康复费：<input type="text"ng-model="page.expenseRecovery"></span>
@@ -444,7 +452,7 @@
             <div>
                 <span>10.其他类：（24）其他费：<input type="text"ng-model="page.expenseOther"></span>
             </div>
-            <div>
+            <div class="text-center">
                 <input type="button" value="保存" ng-click="save()">
                 <input type="button" value="取消" ng-click="cancel()">
             </div>
