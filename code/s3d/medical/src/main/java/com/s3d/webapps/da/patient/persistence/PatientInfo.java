@@ -1,5 +1,12 @@
 package com.s3d.webapps.da.patient.persistence;
 
+import org.springframework.stereotype.Component;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,27 +14,50 @@ import java.util.Date;
  * @version 1.0
  * @created 10-����-2015 10:31:08
  */
-public class PatientInfo {
+@Entity
+@Table(name = "p_patient_info")
+public class PatientInfo implements Serializable {
 
-	private String fullName;
-	private int sex;
-	private Date birthDate;
-	private int ageYear;
-    private int ageMonth;
-	private String nationality;
-	private float birthWeight;
-	private String idCardNo;
-	private int maritalStatus;
+    @Column(name = "full_name")
+    private String fullName;
+    @Column(name = "sex")
+    private Integer sex;
 
-	public Company company;
+    @Column(name = "birth_date")
+    private Date birthDate;
 
-	public ContactPerson contactPerson;
+    @Column(name = "ageYear")
+    private Integer ageYear;
 
-	public NativePlace nativePlace;
+    @Column(name = "age_month")
+    private Integer ageMonth;
 
-	public PresentAddress presentAddress;
+    @Column(name = "nationality")
+    private String nationality;
 
-	public RegisteredResidence registeredResidence;
+    @Column(name = "weight_of_birth")
+    private Float weightOfBirth;
+
+    @Column(name = "weight_of_admission")
+    private Float weightOfAdmission;
+
+    @Column(name = "race")
+    private Integer race;
+
+    @Column(name = "id_card_no")
+    private String idCardNo;
+
+    @Column(name = "career")
+    private Integer career;
+
+    @Column(name = "marital_status")
+    private Integer maritalStatus;
+
+    private Company company;
+    private ContactPerson contactPerson;
+    private NativePlace nativePlace;
+    private PresentAddress presentAddress;
+    private RegisteredResidence registeredResidence;
 
     public String getFullName() {
         return fullName;
@@ -37,11 +67,11 @@ public class PatientInfo {
         this.fullName = fullName;
     }
 
-    public int getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
@@ -53,19 +83,19 @@ public class PatientInfo {
         this.birthDate = birthDate;
     }
 
-    public int getAgeYear() {
+    public Integer getAgeYear() {
         return ageYear;
     }
 
-    public void setAgeYear(int ageYear) {
+    public void setAgeYear(Integer ageYear) {
         this.ageYear = ageYear;
     }
 
-    public int getAgeMonth() {
+    public Integer getAgeMonth() {
         return ageMonth;
     }
 
-    public void setAgeMonth(int ageMonth) {
+    public void setAgeMonth(Integer ageMonth) {
         this.ageMonth = ageMonth;
     }
 
@@ -77,12 +107,28 @@ public class PatientInfo {
         this.nationality = nationality;
     }
 
-    public float getBirthWeight() {
-        return birthWeight;
+    public float getWeightOfBirth() {
+        return weightOfBirth;
     }
 
-    public void setBirthWeight(float birthWeight) {
-        this.birthWeight = birthWeight;
+    public void setWeightOfBirth(float weightOfBirth) {
+        this.weightOfBirth = weightOfBirth;
+    }
+
+    public float getWeightOfAdmission() {
+        return weightOfAdmission;
+    }
+
+    public void setWeightOfAdmission(float weightOfAdmission) {
+        this.weightOfAdmission = weightOfAdmission;
+    }
+
+    public Integer getRace() {
+        return race;
+    }
+
+    public void setRace(Integer race) {
+        this.race = race;
     }
 
     public String getIdCardNo() {
@@ -93,11 +139,19 @@ public class PatientInfo {
         this.idCardNo = idCardNo;
     }
 
-    public int getMaritalStatus() {
+    public Integer getCareer() {
+        return career;
+    }
+
+    public void setCareer(Integer career) {
+        this.career = career;
+    }
+
+    public Integer getMaritalStatus() {
         return maritalStatus;
     }
 
-    public void setMaritalStatus(int maritalStatus) {
+    public void setMaritalStatus(Integer maritalStatus) {
         this.maritalStatus = maritalStatus;
     }
 

@@ -1,32 +1,49 @@
 package com.s3d.webapps.da.patient.persistence;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.io.Serializable;
+
 /**
  * @author wind.chen
  * @version 1.0
  * @created  -2015 10:17:02
  */
-public class BaseAddress {
+public class BaseAddress  implements Serializable {
 
-	private String province;
-	private String city;
+    @Id
+    @GeneratedValue
+    @Column(name="id")
+    private Integer id;
 
-	public BaseAddress(){
+    @Column(name="province")
+	private Integer province;
 
-	}
+    @Column(name="city")
+    private Integer city;
 
-    public String getProvince() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getProvince() {
         return province;
     }
 
-    public void setProvince(String province) {
+    public void setProvince(Integer province) {
         this.province = province;
     }
 
-    public String getCity() {
+    public Integer getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(Integer city) {
         this.city = city;
     }
-}//end BaseAddress
+}

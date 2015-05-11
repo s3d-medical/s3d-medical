@@ -1,32 +1,33 @@
 package com.s3d.webapps.da.primarypage.persistence;
 
+import javax.persistence.*;
+
 /**
- * @author Administrator
+ * @author wind.chen
  * @version 1.0
- * @created 10-����-2015 14:14:21
+ * parent holds public properties, other properties in subclass.
  */
+@Entity
+@Table(name = "mr_diagnosis")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Diagnose {
 
-	private String name;
-	private String code;
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private Integer id;
 
-	public Diagnose(){
+    @Column(name = "name")
+    private String name;
 
-	}
+    @Column(name = "code")
+    private String code;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Diagnose(String name, String code) {
         this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
         this.code = code;
+    }
+
+    public Diagnose() {
     }
 }

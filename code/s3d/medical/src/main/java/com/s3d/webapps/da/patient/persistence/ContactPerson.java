@@ -1,16 +1,32 @@
 package com.s3d.webapps.da.patient.persistence;
 
+import javax.persistence.*;
+import java.io.Serializable;
+
 /**
  * @author wind.chen
  * @version 1.0
  * @created 2015 10:24:46
  */
-public class ContactPerson {
+@Entity
+@Table(name = "p_contact_person")
+public class ContactPerson implements Serializable {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private Integer id;
 
-	private String relationship;
-	private String fullName;
-	private String address;
-	private String phoneNo;
+    @Column(name = "relationship")
+    private String relationship;
+
+    @Column(name = "full_name")
+    private String fullName;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "phone_no")
+    private String phoneNo;
 
     public String getRelationship() {
         return relationship;
