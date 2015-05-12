@@ -13,7 +13,7 @@
             outline: none;
             padding: 0 5px;
             color: #0000ff;
-            width: 60px;
+            width: 65px;
             text-align: center;
         }
         table {
@@ -114,6 +114,9 @@
             white-space : nowrap;
             overflow : hidden;
         }
+        .out-diagnosis span~input[type='text'] {
+            width: 85%;
+        }
     </style>
 </head>
 <body topmargin=0  leftmargin=0 >
@@ -129,10 +132,10 @@
                 <span>
                     健康卡号：<input ng-model="page.healthCard" type="text" class="borderless">
                 </span>
-                <span>
+                <span style="  margin-left: 200px;">
                     第<input ng-model="page.hospitalizedTimes" type="text"class="width-20 borderless">次住院
                 </span>
-                <span>
+                <span style="  margin-left: 200px;">
                     病案号：<input ng-model="page.caseNumber" type="text"class="borderless">
                 </span>
             </div>
@@ -140,13 +143,13 @@
         <div class="container-body">
             <div>
                 <span>姓名<input ng-model="page.name" type="text"></span>
-                <span class="ml-10">性别
-                    <label><input type="radio" name="sex" ng-model="page.sex" value="1">男</label>
-                    <label><input type="radio" name="sex" ng-model="page.sex" value="2">女</label>
+                <span style="margin-left: 50px;">性别
+                    <label><input type="radio" name="sex" ng-model="page.sex" value="1">1.男</label>
+                    <label><input type="radio" name="sex" ng-model="page.sex" value="2">2.女</label>
                 </span>
-                <span class="ml-10">出生日期<input ng-model="page.birthdayYear" type="text" class="width-40">年<input ng-model="page.birthdayMonth" type="text" class="width-20">月<input ng-model="page.birthdayDay" type="text" class="width-20">日</span>
-                <span class="ml-10">年龄<input ng-model="page.age" type="text" class="width-40"></span>
-                <span class="ml-10">国籍
+                <span style="margin-left: 50px;">出生日期<input ng-model="page.birthdayYear" type="text" class="width-40">年<input ng-model="page.birthdayMonth" type="text" class="width-20">月<input ng-model="page.birthdayDay" type="text" class="width-20">日</span>
+                <span style="margin-left: 50px;">年龄<input ng-model="page.age" type="text" class="width-40">岁</span>
+                <span style="margin-left: 50px;">国籍
                     <select ng-init="page.country = settings.countries[0].id" ng-model="page.country">
                         <option ng-repeat="i in settings.countries" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
@@ -154,8 +157,8 @@
             </div>
             <div>
                 <span>（年龄不足1周岁的）年龄<input ng-model="page.babyAge" type="text">月</span>
-                <span class="ml-10">新生儿出生体重<input ng-model="page.babyBornWeight" type="text">克</span>
-                <span class="ml-10">新生儿入院体重<input ng-model="page.babyHospitalizedWeight" type="text">克</span>
+                <span style="margin-left: 90px;">新生儿出生体重<input ng-model="page.babyBornWeight" type="text">克</span>
+                <span style="margin-left: 74px;">新生儿入院体重<input ng-model="page.babyHospitalizedWeight" type="text">克</span>
             </div>
             <div>
                 <span>出生地
@@ -171,7 +174,7 @@
                     </select>
                     县
                 </span>
-                <span class="ml-10">籍贯
+                <span style="margin-left: 50px;">籍贯
                     <select ng-model="page.hometownState">
                         <option ng-repeat="i in settings.locations" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
@@ -181,7 +184,7 @@
                     </select>
                     市
                 </span>
-                <span class="ml-10">民族
+                <span style="margin-left: 52px;">民族
                 <select ng-init="page.nation = settings.nations[0].id" ng-model="page.nation">
                     <option ng-repeat="i in settings.nations" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                 </select>
