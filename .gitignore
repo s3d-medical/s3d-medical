@@ -49,3 +49,5 @@ target/
 out/
 document/design/medical.eap
 *.ldb
+code/s3d/classes/artifacts/tech_1_0_jar/tech-1.0.jar
+code/s3d/classes/artifacts/db_script_1_0_jar/db-script-1.0.jar
