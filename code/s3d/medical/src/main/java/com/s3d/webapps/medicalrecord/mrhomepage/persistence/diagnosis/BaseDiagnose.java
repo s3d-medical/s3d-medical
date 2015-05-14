@@ -1,4 +1,4 @@
-package com.s3d.webapps.da.mrhomepage.persistence.diagnosis;
+package com.s3d.webapps.medicalrecord.mrhomepage.persistence.diagnosis;
 
 import com.s3d.tech.data.persistence.AbstractGeneralProperties;
 

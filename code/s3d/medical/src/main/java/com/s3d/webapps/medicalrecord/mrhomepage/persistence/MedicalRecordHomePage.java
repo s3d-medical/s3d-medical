@@ -1,15 +1,15 @@
-package com.s3d.webapps.da.mrhomepage.persistence;
+package com.s3d.webapps.medicalrecord.mrhomepage.persistence;
 
 import com.s3d.tech.data.persistence.AbstractGeneralProperties;
 import com.s3d.webapps.medicalrecord.patient.persistence.PatientInfo;
-import com.s3d.webapps.da.mrhomepage.persistence.diagnosis.DiagnosisClinic;
-import com.s3d.webapps.da.mrhomepage.persistence.diagnosis.DiagnosisDischarge;
-import com.s3d.webapps.da.mrhomepage.persistence.diagnosis.DiagnosisExternalReason;
-import com.s3d.webapps.da.mrhomepage.persistence.diagnosis.DiagnosisPathology;
-import com.s3d.webapps.da.mrhomepage.persistence.expense.ExpenseInvoice;
-import com.s3d.webapps.da.mrhomepage.persistence.inOrout.RegisterAdmission;
-import com.s3d.webapps.da.mrhomepage.persistence.inOrout.RegisterDischarge;
-import com.s3d.webapps.da.mrhomepage.persistence.quality.QualityControlInfo;
+import com.s3d.webapps.medicalrecord.mrhomepage.persistence.diagnosis.DiagnosisClinic;
+import com.s3d.webapps.medicalrecord.mrhomepage.persistence.diagnosis.DiagnosisDischarge;
+import com.s3d.webapps.medicalrecord.mrhomepage.persistence.diagnosis.DiagnosisExternalReason;
+import com.s3d.webapps.medicalrecord.mrhomepage.persistence.diagnosis.DiagnosisPathology;
+import com.s3d.webapps.medicalrecord.mrhomepage.persistence.expense.ExpenseInvoice;
+import com.s3d.webapps.medicalrecord.mrhomepage.persistence.inOrout.RegisterAdmission;
+import com.s3d.webapps.medicalrecord.mrhomepage.persistence.inOrout.RegisterDischarge;
+import com.s3d.webapps.medicalrecord.mrhomepage.persistence.quality.QualityControlInfo;
 
 import javax.persistence.*;
 import java.util.ArrayList;

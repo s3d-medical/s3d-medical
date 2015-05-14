@@ -1,4 +1,4 @@
-package com.s3d.webapps.da.mrhomepage.persistence.inOrout;
+package com.s3d.webapps.medicalrecord.mrhomepage.persistence.inOrout;
 
 import com.s3d.tech.data.persistence.AbstractGeneralProperties;
 

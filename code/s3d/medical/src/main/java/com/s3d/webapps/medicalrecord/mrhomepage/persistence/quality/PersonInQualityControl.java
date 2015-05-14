@@ -1,4 +1,4 @@
-package com.s3d.webapps.da.mrhomepage.persistence.quality;
+package com.s3d.webapps.medicalrecord.mrhomepage.persistence.quality;
 
 import com.s3d.tech.data.persistence.AbstractGeneralProperties;
 

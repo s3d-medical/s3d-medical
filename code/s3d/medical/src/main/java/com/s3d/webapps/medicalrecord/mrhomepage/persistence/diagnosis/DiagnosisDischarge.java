@@ -1,6 +1,6 @@
-package com.s3d.webapps.da.mrhomepage.persistence.diagnosis;
+package com.s3d.webapps.medicalrecord.mrhomepage.persistence.diagnosis;
 
-import com.s3d.webapps.da.mrhomepage.persistence.MedicalRecordHomePage;
+import com.s3d.webapps.medicalrecord.mrhomepage.persistence.MedicalRecordHomePage;
 
 import javax.persistence.*;
 

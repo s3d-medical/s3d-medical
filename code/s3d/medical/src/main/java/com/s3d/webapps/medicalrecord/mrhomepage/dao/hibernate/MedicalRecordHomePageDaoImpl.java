@@ -1,9 +1,8 @@
-package com.s3d.webapps.da.mrhomepage.dao.hibernate;
+package com.s3d.webapps.medicalrecord.mrhomepage.dao.hibernate;
 
-import com.s3d.tech.data.dao.GenericDao;
 import com.s3d.tech.data.dao.hibernate.HibernateDao;
-import com.s3d.webapps.da.mrhomepage.dao.MedicalRecordHomePageDao;
-import com.s3d.webapps.da.mrhomepage.persistence.MedicalRecordHomePage;
+import com.s3d.webapps.medicalrecord.mrhomepage.dao.MedicalRecordHomePageDao;
+import com.s3d.webapps.medicalrecord.mrhomepage.persistence.MedicalRecordHomePage;
 
 /**
  * @author wind.chen
