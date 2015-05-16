@@ -11,35 +11,34 @@
 <title>数字首页录入</title>
 <script type="text/javascript">
 <%String WEBAPPS_Parameter_Style = request.getParameter("s_css");
-if (WEBAPPS_Parameter_Style == null
-		|| WEBAPPS_Parameter_Style.equals("")) {
-	Cookie[] cookies = request.getCookies();
-	if (cookies != null && cookies.length > 0)
-		for (int i = 0; i < cookies.length; i++)
-			if ("WEBAPPS_Style".equals(cookies[i].getName())) {
-				WEBAPPS_Parameter_Style = cookies[i].getValue();
-				break;
-			}
-}
-if (WEBAPPS_Parameter_Style == null
-		|| WEBAPPS_Parameter_Style.equals(""))
-	WEBAPPS_Parameter_Style = "default";
+	if (WEBAPPS_Parameter_Style == null
+			|| WEBAPPS_Parameter_Style.equals("")) {
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null && cookies.length > 0)
+			for (int i = 0; i < cookies.length; i++)
+				if ("WEBAPPS_Style".equals(cookies[i].getName())) {
+					WEBAPPS_Parameter_Style = cookies[i].getValue();
+					break;
+				}
+	}
+	if (WEBAPPS_Parameter_Style == null
+			|| WEBAPPS_Parameter_Style.equals(""))
+		WEBAPPS_Parameter_Style = "default";
 
-if (WEBAPPS_Parameter_Style.toLowerCase().indexOf("script") > 0) {
-	WEBAPPS_Parameter_Style = "default";
-}
-request.setAttribute("WEBAPPS_Parameter_Style",WEBAPPS_Parameter_Style);
-String WEBAPPS_Parameter_ContextPath = request.getContextPath()+ "/";
-request.setAttribute("WEBAPPS_Parameter_ContextPath", WEBAPPS_Parameter_ContextPath);
-String WEBAPPS_Parameter_ResPath = WEBAPPS_Parameter_ContextPath + "resources/";
-request.setAttribute("WEBAPPS_Parameter_ResPath",
-		WEBAPPS_Parameter_ResPath);
-String WEBAPPS_Parameter_StylePath = WEBAPPS_Parameter_ResPath
-		+ "style/" + WEBAPPS_Parameter_Style + "/";
-request.setAttribute("WEBAPPS_Parameter_StylePath",
-		WEBAPPS_Parameter_StylePath);
-request.setAttribute("WEBAPPS_Parameter_CurrentUserId", UserUtil
-		.getUser().getFdId());%>
+	if (WEBAPPS_Parameter_Style.toLowerCase().indexOf("script") > 0) {
+		WEBAPPS_Parameter_Style = "default";
+	}
+	request.setAttribute("WEBAPPS_Parameter_Style", WEBAPPS_Parameter_Style);
+	String WEBAPPS_Parameter_ContextPath = request.getContextPath()+ "/";
+	request.setAttribute("WEBAPPS_Parameter_ContextPath", WEBAPPS_Parameter_ContextPath);
+	String WEBAPPS_Parameter_ResPath = WEBAPPS_Parameter_ContextPath + "resources/";
+	request.setAttribute("WEBAPPS_Parameter_ResPath",WEBAPPS_Parameter_ResPath);
+	String WEBAPPS_Parameter_StylePath = WEBAPPS_Parameter_ResPath + "style/" + WEBAPPS_Parameter_Style + "/";
+	request.setAttribute("WEBAPPS_Parameter_StylePath", WEBAPPS_Parameter_StylePath);
+	request.setAttribute("WEBAPPS_Parameter_CurrentUserId", UserUtil.getUser().getFdId());
+	String WEBAPPS_Parameter_Template = WEBAPPS_Parameter_ContextPath+"template/";
+	request.setAttribute("WEBAPPS_Parameter_Template", WEBAPPS_Parameter_Template);
+%>
 var Com_Parameter = {
 	ContextPath:"${WEBAPPS_Parameter_ContextPath}",
 	ResPath:"${WEBAPPS_Parameter_ResPath}",
@@ -65,6 +64,8 @@ var Com_Parameter = {
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/screenfull.js"></script>
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}imageview/config.js"></script>
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/fm.selectator.jquery.js"></script>
+<script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/angular.js"></script>
+<script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/main-page.js"></script>
  <style>
     .bui-stdmod-body{
       overflow-x : hidden;
@@ -73,7 +74,7 @@ var Com_Parameter = {
   </style>
 </head>
 
-<body onselectstart="return false">
+<body onselectstart="return false" ng-controller="MainPageController">
 
   <div id="J_Layout">
     <div class="north top-container">
@@ -168,8 +169,10 @@ var Com_Parameter = {
           <div class="imgview-content-inner imgview-content-6" id="imgview-content-6"></div>
         </div>
       </div>
-      
+
     </div>
+	  <button id="btnSave" ng-click="save()" style="display: none;"/>
+	  <button id="btnGetData" ng-click="getData()" style="display: none;"/>
   </div>
 
   <script>
@@ -405,7 +408,8 @@ var Com_Parameter = {
 					text:'保存',
 					elCls : 'button button-primary',
 					handler : function(){
-						var frm = $(".bui-stdmod-body form")[0];
+						$("#btnSave").click();
+						/*var frm = $(".bui-stdmod-body form")[0];
 						var dataPara = $(frm).serialize();
 						var $dialog=this;
 					    $.ajax({
@@ -416,8 +420,7 @@ var Com_Parameter = {
 					        	//
 					    		$dialog.close();
 					        }
-					    });
-						
+					    });*/
 					}
 				},{
 					text:'关闭',
@@ -427,8 +430,9 @@ var Com_Parameter = {
 					}
 				}],
 				loader : {
-					url : '<c:url value="/da/customer/shouye/gethtml" />',
-					autoLoad : false, 
+					url : '${WEBAPPS_Parameter_Template}' + '/template1.html',
+					<%--url : '<c:url value="/da/customer/shouye/gethtml" />',--%>
+					autoLoad : false,
 					params : {id : ''},
 					lazyLoad : false
 				},
@@ -440,7 +444,20 @@ var Com_Parameter = {
 					var item = grid.getSelection()[0];
 					dialog.show();
 					window.key.setScope('fill');
-				    dialog.get('loader').load({id : item.fdId});
+					if (!dialog.get("loader").get("hasLoad")) {
+						dialog.get('loader').load(/*{id : item.fdId}*/);
+						setTimeout(function() {
+							angular.bootstrap(document, ['mainPage']);
+							$("#btnGetData").click();
+							$("select").selectator({
+								labels: {
+									search: '搜索'
+								}
+							});
+						}, 500);
+					}
+					// get data from server - settings, page data
+					$("#btnGetData").click();
 				}
 			});
 			window.key('escape',"fill",function(e,o){

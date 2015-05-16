@@ -29,8 +29,8 @@ angular.module("mainPage", [])
             console.log($scope.page);
 
         };
-        $scope.cancel = function () {
-            console.log("cancel...");
+        $scope.getData = function () {
+            console.log("get data...");
         };
 
         function setDefaultPage () {
