@@ -18,6 +18,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+
+        <dependency>
             <groupId>net.sf.opencsv</groupId>
             <artifactId>opencsv</artifactId>
             <version>2.3</version>
@@ -38,17 +44,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.10</version>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.s3d</groupId>
-            <artifactId>tech</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.s3d</groupId>
-            <artifactId>db-script</artifactId>
-            <version>1.0</version>
         </dependency>
 
         <dependency>

@@ -13,12 +13,4 @@
     <artifactId>db-script</artifactId>
     <packaging>jar</packaging>
     <name>db scripts</name>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-            <version>3.3.2</version>
-        </dependency>
-    </dependencies>
 </project>
