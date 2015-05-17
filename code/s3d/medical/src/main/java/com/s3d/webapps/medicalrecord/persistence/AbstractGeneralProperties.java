@@ -1,14 +1,14 @@
-package com.s3d.tech.data.po;
+package com.s3d.webapps.medicalrecord.persistence;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * @author  wind
  * @date 2015/5/13.
  */
+@Entity
+@MappedSuperclass
 public abstract class AbstractGeneralProperties implements Serializable {
     @Id
     @GeneratedValue
@@ -18,7 +18,7 @@ public abstract class AbstractGeneralProperties implements Serializable {
     public Integer getId() {
         return id;
     }
-
+    
     public void setId(Integer id) {
         this.id = id;
     }

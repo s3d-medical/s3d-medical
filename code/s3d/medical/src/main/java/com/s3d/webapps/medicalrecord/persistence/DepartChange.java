@@ -1,8 +1,6 @@
 package com.s3d.webapps.medicalrecord.persistence;
 
 
-import com.s3d.tech.data.po.AbstractGeneralProperties;
-
 import javax.persistence.*;
 
 /**
@@ -11,7 +9,11 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="mr_depart_change")
-public class DepartChange  extends AbstractGeneralProperties {
+public class DepartChange {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    protected Integer id;
 
     @Column(name="departs")
 	private String departs;
@@ -24,20 +26,7 @@ public class DepartChange  extends AbstractGeneralProperties {
         this.departs = departs;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof DepartChange)) return false;
-
-        DepartChange that = (DepartChange) o;
-
-        if (departs != null ? !departs.equals(that.departs) : that.departs != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return departs != null ? departs.hashCode() : 0;
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

@@ -1,6 +1,6 @@
 package com.s3d.webapps.medicalrecord.persistence.diagnosis;
 
-import com.s3d.tech.data.po.AbstractGeneralProperties;
+import com.s3d.webapps.medicalrecord.persistence.AbstractGeneralProperties;
 
 import javax.persistence.*;
 
@@ -14,6 +14,10 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @MappedSuperclass
 public abstract class BaseDiagnose extends AbstractGeneralProperties {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    protected Integer id;
 
     @Column(name = "name")
     protected String name;

@@ -13,7 +13,8 @@
 		<property name="use_sql_comments">false</property><!-- 配置在输出的SQL语句前面添加提示信息 -->
 		<property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>  
 		<property name="hibernate.cache.use_query_cache">true</property>
-		<property name="hibernate.hbm2ddl.auto">update</property>  
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
 		<!-- 
 		<mapping
 			resource="com/s3d/webapps/sys/security/persistence/BaseSecurityElement.hbm.xml" />

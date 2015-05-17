@@ -53,15 +53,13 @@
         <!-- 关闭abanded连接时输出错误日志 -->
         <property name="logAbandoned" value="true"/>
 
-        <!-- 监控数据库 -->
-        <!--
-        <property name="filters" value="stat" />
-         -->
         <property name="filters" value="mergeStat"/>
     </bean>
 
+    <!-- <property name="mappingDirectoryLocations"> can be moved to classpath:hibernate.cfg.xml, Certainly,
+            classpath:hibernate.cfg.xml can be removed and directly configured in sessionFactory-->
     <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
         <property name="mappingDirectoryLocations">
@@ -69,12 +67,15 @@
                 <value>classpath:/hbm</value>
             </list>
         </property>
+        <property name="packagesToScan">
+            <list>
+                <value>com.s3d.webapps.medicalrecord.persistence</value>
+            </list>
+        </property>
     </bean>
 
     <!-- transaction manager, use JtaTransactionManager for global tx -->
-
-    <bean id="transactionManager"
-          class="org.springframework.orm.hibernate3.HibernateTransactionManager" autowire="byName">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 

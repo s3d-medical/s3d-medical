@@ -2,7 +2,7 @@ package com.s3d.webapps.medicalrecord.persistence.patient;
 
 
 
-import com.s3d.tech.data.po.AbstractGeneralProperties;
+import com.s3d.webapps.medicalrecord.persistence.AbstractGeneralProperties;
 
 import javax.persistence.*;
 

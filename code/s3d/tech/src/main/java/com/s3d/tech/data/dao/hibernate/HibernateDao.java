@@ -66,7 +66,6 @@ public class HibernateDao<T, ID extends Serializable> {
 	 * 
 	 * @param sessionFactory Hibernate sessionFactory
 	 */
-	@Resource(name="dwSessionFactory")
 	public void setSessionFactory(final SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 		this.hibernateTemplate = new HibernateTemplate(this.sessionFactory,true);

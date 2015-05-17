@@ -1,7 +1,6 @@
 package com.s3d.webapps.medicalrecord.persistence;
 
 
-import com.s3d.tech.data.po.AbstractGeneralProperties;
 import com.s3d.webapps.medicalrecord.persistence.patient.PatientInfo;
 import com.s3d.webapps.medicalrecord.persistence.diagnosis.DiagnosisClinic;
 import com.s3d.webapps.medicalrecord.persistence.diagnosis.DiagnosisDischarge;
