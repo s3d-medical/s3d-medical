@@ -2,6 +2,8 @@ package com.s3d.webapps.medicalrecord.persistence.quality;
 
 
 import com.s3d.webapps.medicalrecord.persistence.AbstractGeneralProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,7 +29,8 @@ public class QualityControlInfo  extends AbstractGeneralProperties {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "qualityControlInfo")
     @JoinColumn(name="quality_control_info_id")
-	public List<PersonInQualityControl> personsInQualityControl = new ArrayList<PersonInQualityControl>();
+    @Fetch(FetchMode.SUBSELECT)
+    public List<PersonInQualityControl> personsInQualityControl = new ArrayList<PersonInQualityControl>();
 
 	public QualityControlInfo(){
 

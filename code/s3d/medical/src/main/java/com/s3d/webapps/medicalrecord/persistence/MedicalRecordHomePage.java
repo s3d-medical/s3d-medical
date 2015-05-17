@@ -7,9 +7,11 @@ import com.s3d.webapps.medicalrecord.persistence.diagnosis.DiagnosisDischarge;
 import com.s3d.webapps.medicalrecord.persistence.diagnosis.DiagnosisExternalReason;
 import com.s3d.webapps.medicalrecord.persistence.diagnosis.DiagnosisPathology;
 import com.s3d.webapps.medicalrecord.persistence.expense.ExpenseInvoice;
-import com.s3d.webapps.medicalrecord.persistence.inOrout.RegisterAdmission;
-import com.s3d.webapps.medicalrecord.persistence.inOrout.RegisterDischarge;
+import com.s3d.webapps.medicalrecord.persistence.entryexit.RegisterAdmission;
+import com.s3d.webapps.medicalrecord.persistence.entryexit.RegisterDischarge;
 import com.s3d.webapps.medicalrecord.persistence.quality.QualityControlInfo;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -69,6 +71,7 @@ public class MedicalRecordHomePage extends AbstractGeneralProperties {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "medicalRecordHomePage")
     @JoinColumn(name = "medical_record_home_page_id")
+    @Fetch(FetchMode.SUBSELECT)
     private List<DiagnosisDischarge> diagnosisDischargeList = new ArrayList<DiagnosisDischarge>();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -82,6 +85,7 @@ public class MedicalRecordHomePage extends AbstractGeneralProperties {
     // -------- persons in charge.-------------
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "medicalRecordHomePage")
     @JoinColumn(name = "medical_record_home_page_id")
+    @Fetch(FetchMode.SUBSELECT)
     private List<PersonInCharge> personsInChargeList = new ArrayList<PersonInCharge>();
 
     // --------------quality -----------------
@@ -95,6 +99,7 @@ public class MedicalRecordHomePage extends AbstractGeneralProperties {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "medicalRecordHomePage")
     @JoinColumn(name="medical_record_home_page_id")
+    @Fetch(FetchMode.SUBSELECT)
     public List<Operation> operationList = new ArrayList<Operation>();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

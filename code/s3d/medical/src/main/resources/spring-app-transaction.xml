@@ -56,12 +56,19 @@
         <property name="filters" value="mergeStat"/>
     </bean>
 
-    <!-- <property name="mappingDirectoryLocations"> can be moved to classpath:hibernate.cfg.xml, Certainly,
-            classpath:hibernate.cfg.xml can be removed and directly configured in sessionFactory-->
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
+        <property name="hibernateProperties">
+            <props>
+                <!--<prop key="hibernate.hbm2ddl.auto">validate</prop>-->
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="use_sql_comments">false</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>
+            </props>
+        </property>
         <property name="mappingDirectoryLocations">
             <list>
                 <value>classpath:/hbm</value>
@@ -105,7 +112,7 @@
     <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
         <property name="beanNames">
             <!-- 所有名字以DAO,Service结尾的bean,将由该"bean后处理器"为其创建事务代理;实际上应该在业务层进行事务管理,这里只是举一个简单例子 -->
-            <value>*DAO,*Service</value>
+            <value>*Service</value>
         </property>
         <!--  下面定义BeanNameAutoProxyCreator所需的事务拦截器-->
         <property name="interceptorNames">

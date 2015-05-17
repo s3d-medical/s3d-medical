@@ -1,6 +1,8 @@
 package com.s3d.webapps.medicalrecord.persistence.expense;
 
 import com.s3d.webapps.medicalrecord.persistence.AbstractGeneralProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -23,6 +25,7 @@ public class ExpenseInvoice extends AbstractGeneralProperties {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "expenseInvoice")
     @JoinColumn(name = "expense_invoice_id")
+    @Fetch(FetchMode.SUBSELECT)
     private List<ExpenseItem> expenseItems = new ArrayList<ExpenseItem>();
 
     public ExpenseInvoice() {

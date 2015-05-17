@@ -14,11 +14,6 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @MappedSuperclass
 public abstract class BaseDiagnose extends AbstractGeneralProperties {
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    protected Integer id;
-
     @Column(name = "name")
     protected String name;
 

@@ -38,6 +38,14 @@ public class DiagnosisDischarge extends BaseDiagnose {
         this.category = category;
     }
 
+    public MedicalRecordHomePage getMedicalRecordHomePage() {
+        return medicalRecordHomePage;
+    }
+
+    public void setMedicalRecordHomePage(MedicalRecordHomePage medicalRecordHomePage) {
+        this.medicalRecordHomePage = medicalRecordHomePage;
+    }
+
     public Integer getCategory() {
         return category;
     }

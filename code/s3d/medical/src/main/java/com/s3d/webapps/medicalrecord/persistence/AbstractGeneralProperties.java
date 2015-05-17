@@ -7,7 +7,6 @@ import java.io.Serializable;
  * @author  wind
  * @date 2015/5/13.
  */
-@Entity
 @MappedSuperclass
 public abstract class AbstractGeneralProperties implements Serializable {
     @Id

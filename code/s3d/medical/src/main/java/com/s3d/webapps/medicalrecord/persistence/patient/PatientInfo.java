@@ -1,6 +1,8 @@
 package com.s3d.webapps.medicalrecord.persistence.patient;
 
 import com.s3d.webapps.medicalrecord.persistence.AbstractGeneralProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Date;
