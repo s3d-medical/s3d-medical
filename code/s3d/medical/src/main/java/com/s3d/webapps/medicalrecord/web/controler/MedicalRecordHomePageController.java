@@ -31,15 +31,17 @@ public class MedicalRecordHomePageController {
      * @return
      */
     @RequestMapping(value = "/homepages/{seq}", method = RequestMethod.GET)
-    public void getMedicalRecordHomePageData(HttpServletRequest request, HttpServletResponse response,  Model model, @PathVariable String seq) {
-        model.addAttribute("data", "wind.chen");
+    public Model getMedicalRecordHomePageData(HttpServletRequest request, HttpServletResponse response,  Model model, @PathVariable String seq) {
+        model.addAttribute("data", "ssssss");
+        return model;
     }
 
-    @RequestMapping(value = "/homepages/{seq}", method = RequestMethod.GET)
-    @ResponseBody
-    public void saveMedicalRecordHomePageData(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable String seq) {
+    @RequestMapping(value = "/homepages/{seq}", method = RequestMethod.POST)
+    public Model saveMedicalRecordHomePageData(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable String seq) {
         // do something.
-
-        model.addAttribute("result", "ok");
+        model.addAttribute("result", "ok1111111111");
+        model.addAttribute("result1", "222");
+        model.addAttribute("result3", "4444");
+        return model;
     }
 }
