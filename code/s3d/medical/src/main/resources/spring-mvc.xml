@@ -24,8 +24,8 @@
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
 			<list>
-                <ref bean="utf8StringHttpMessageConverter"/>
                 <ref bean="jacksonMessageConverter"/>
+                <ref bean="utf8StringHttpMessageConverter"/>
 			</list>
 		</property>
 	</bean>
@@ -39,7 +39,6 @@
     <bean id="jacksonMessageConverter"  class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
         <property name="supportedMediaTypes">
             <list>
-                <value>text/html;charset=UTF-8</value>
                 <value>application/json;charset=UTF-8</value>
             </list>
         </property>
@@ -57,25 +56,31 @@
 
 
     <!-- 3. view resolver  -->
-    <bean id="contentNegotiatingViewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <!--  enable .json suffix, paramter ? format in url. -->
+        <property name="favorPathExtension" value="true"/>
+        <property name="favorParameter" value="false"/>
+        <!-- this needs client set header accept:"application/json" or others -->
+        <property name="ignoreAcceptHeader" value="false" />
+        <!-- it's valid for accept:*/* , null accept will exception. -->
+        <property name="defaultContentType" value="application/json"/>
+
         <property name="mediaTypes">
             <map>
                 <entry key="json" value="application/json"/>
             </map>
         </property>
+
         <property name="defaultViews">
             <list>
-                <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>
+                <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
             </list>
         </property>
-        <property name="order" value="0"/>
-    </bean>
-
-    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-           p:viewClass="org.springframework.web.servlet.view.JstlView" p:prefix="/views/"
-           p:suffix=".jsp" >
         <property name="order" value="1"/>
     </bean>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:viewClass="org.springframework.web.servlet.view.JstlView" p:prefix="/views/"  p:suffix=".jsp" />
 
 	<!-- CommonsMultipartResolver -->
 	<bean id="multipartResolver"
