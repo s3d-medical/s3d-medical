@@ -1,6 +1,7 @@
 package com.s3d.webapps.medicalrecord.persistence.patient;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,16 +10,8 @@ import javax.persistence.Table;
  * @version 1.0
  */
 @Entity
-@Table(name="p_native_place")
+@DiscriminatorValue(value = "native")
 public class NativePlace extends BaseAddress {
-    @Column(name="county")
-    private Integer county;
 
-    public Integer getCounty() {
-        return county;
-    }
 
-    public void setCounty(Integer county) {
-        this.county = county;
-    }
 }
