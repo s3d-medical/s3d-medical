@@ -1,9 +1,6 @@
 package com.s3d.webapps.medicalrecord.persistence.patient;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author wind.chen
@@ -11,7 +8,8 @@ import javax.persistence.Table;
  * @created 10-����-2015 10:24:44
  */
 @Entity
-@DiscriminatorValue(value = "present")
+@Table(name="p_present_address")
+@PrimaryKeyJoinColumn(name = "present_address_id")
 public class PresentAddress extends BaseAddress {
 
     @Column(name="county")
@@ -22,6 +20,13 @@ public class PresentAddress extends BaseAddress {
 
     @Column(name="zip_code")
 	private String zipCode;
+
+    public void fill(String province, String city, String county, String phoneNo, String zipCode) {
+        super.fill(province, city);
+        this.county = county;
+        this.phoneNo = phoneNo;
+        this.zipCode = zipCode;
+    }
 
     public String getCounty() {
         return county;

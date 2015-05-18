@@ -16,5 +16,6 @@ public class DiagnosisExternalReason extends BaseDiagnose {
         super(name, code);
     }
 
-
+    public DiagnosisExternalReason() {
+    }
 }

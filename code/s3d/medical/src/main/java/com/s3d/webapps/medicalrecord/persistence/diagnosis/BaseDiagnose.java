@@ -1,8 +1,7 @@
 package com.s3d.webapps.medicalrecord.persistence.diagnosis;
 
-import com.s3d.webapps.medicalrecord.persistence.AbstractGeneralProperties;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author wind.chen
@@ -12,20 +11,39 @@ import javax.persistence.*;
 @Entity
 @Table(name = "mr_diagnosis")
 @Inheritance(strategy = InheritanceType.JOINED)
-@MappedSuperclass
-public abstract class BaseDiagnose extends AbstractGeneralProperties {
+public class BaseDiagnose implements Serializable{
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    protected Integer id;
+
     @Column(name = "name")
     protected String name;
 
     @Column(name = "code")
     protected String code;
 
+
+    public BaseDiagnose() {
+
+    }
+
     public BaseDiagnose(String name, String code) {
         this.name = name;
         this.code = code;
     }
 
-    public BaseDiagnose() {
+    public void fill(String name, String code) {
+        this.name = name;
+        this.code = code;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

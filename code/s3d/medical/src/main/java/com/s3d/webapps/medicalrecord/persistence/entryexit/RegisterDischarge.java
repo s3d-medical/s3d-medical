@@ -1,8 +1,9 @@
-package com.s3d.webapps.medicalrecord.persistence.inOrout;
+package com.s3d.webapps.medicalrecord.persistence.entryexit;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * @author wind.chen
@@ -15,13 +16,13 @@ public class RegisterDischarge extends BaseRegister {
     private Integer totalDays;
 
     @Column(name="discharge_type")
-	private Integer dischargeType;
+	private String dischargeType;
 
     @Column(name="accepting_agency_name")
 	private String acceptingAgencyName;
 
     @Column(name="has_readmission_plan")
-	private Boolean hasReadmissionPlan;
+	private String hasReadmissionPlan;
 
     @Column(name="readmission_goal")
 	private String readmissionGoal;
@@ -29,6 +30,16 @@ public class RegisterDischarge extends BaseRegister {
 	public RegisterDischarge(){
 
 	}
+
+    public void fill(Date registeredTime, String depart, String sickRoomNo, Integer totalDays,
+                     String dischargeType, String acceptingAgencyName, String hasReadmissionPlan, String readmissionGoal) {
+        this.fill(registeredTime, depart, sickRoomNo);
+        this.totalDays = totalDays;
+        this.dischargeType = dischargeType;
+        this.acceptingAgencyName = acceptingAgencyName;
+        this.hasReadmissionPlan = hasReadmissionPlan;
+        this.readmissionGoal = readmissionGoal;
+    }
 
     public Integer getTotalDays() {
         return totalDays;
@@ -38,11 +49,11 @@ public class RegisterDischarge extends BaseRegister {
         this.totalDays = totalDays;
     }
 
-    public Integer getDischargeType() {
+    public String getDischargeType() {
         return dischargeType;
     }
 
-    public void setDischargeType(Integer dischargeType) {
+    public void setDischargeType(String dischargeType) {
         this.dischargeType = dischargeType;
     }
 
@@ -54,11 +65,11 @@ public class RegisterDischarge extends BaseRegister {
         this.acceptingAgencyName = acceptingAgencyName;
     }
 
-    public Boolean getHasReadmissionPlan() {
+    public String getHasReadmissionPlan() {
         return hasReadmissionPlan;
     }
 
-    public void setHasReadmissionPlan(Boolean hasReadmissionPlan) {
+    public void setHasReadmissionPlan(String hasReadmissionPlan) {
         this.hasReadmissionPlan = hasReadmissionPlan;
     }
 

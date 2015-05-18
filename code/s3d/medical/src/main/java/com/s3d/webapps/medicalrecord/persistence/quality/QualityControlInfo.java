@@ -1,7 +1,5 @@
 package com.s3d.webapps.medicalrecord.persistence.quality;
 
-
-import com.s3d.webapps.medicalrecord.persistence.AbstractGeneralProperties;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -19,29 +17,65 @@ import java.util.List;
  */
 @Entity
 @Table(name="mr_quality_control_info")
-public class QualityControlInfo  extends AbstractGeneralProperties {
+public class QualityControlInfo{
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    protected Integer id;
 
-    @Column(name="quality_level")
-	private Integer qualityLevel;
+    @Column(name="case_quality")
+	private String caseQuality;
 
     @Column(name="quality_date")
 	private Date qualityDate;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "qualityControlInfo")
-    @JoinColumn(name="quality_control_info_id")
-    @Fetch(FetchMode.SUBSELECT)
-    public List<PersonInQualityControl> personsInQualityControl = new ArrayList<PersonInQualityControl>();
+    @Column(name="quality_doctor")
+    private String qualityDoctor;
+
+    @Column(name="quality_nurse")
+    private String qualityNurse;
 
 	public QualityControlInfo(){
 
 	}
 
-    public Integer getQualityLevel() {
-        return qualityLevel;
+    public void fill(String caseQuality, String qualityDoctor, String qualityNurse, Date qualityDate) {
+        this.caseQuality = caseQuality;
+        this.qualityDate = qualityDate;
+        this.qualityDoctor = qualityDoctor;
+        this.qualityNurse = qualityNurse;
     }
 
-    public void setQualityLevel(Integer qualityLevel) {
-        this.qualityLevel = qualityLevel;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getCaseQuality() {
+        return caseQuality;
+    }
+
+    public void setCaseQuality(String caseQuality) {
+        this.caseQuality = caseQuality;
+    }
+
+    public String getQualityDoctor() {
+        return qualityDoctor;
+    }
+
+    public void setQualityDoctor(String qualityDoctor) {
+        this.qualityDoctor = qualityDoctor;
+    }
+
+    public String getQualityNurse() {
+        return qualityNurse;
+    }
+
+    public void setQualityNurse(String qualityNurse) {
+        this.qualityNurse = qualityNurse;
     }
 
     public Date getQualityDate() {
@@ -52,14 +86,6 @@ public class QualityControlInfo  extends AbstractGeneralProperties {
         this.qualityDate = qualityDate;
     }
 
-    public List<PersonInQualityControl> getPersonsInQualityControl() {
-        return personsInQualityControl;
-    }
-
-    public void setPersonsInQualityControl(List<PersonInQualityControl> personsInQualityControl) {
-        this.personsInQualityControl = personsInQualityControl;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,10 +94,11 @@ public class QualityControlInfo  extends AbstractGeneralProperties {
 
         QualityControlInfo that = (QualityControlInfo) o;
 
-        if (personsInQualityControl != null ? !personsInQualityControl.equals(that.personsInQualityControl) : that.personsInQualityControl != null)
-            return false;
+        if (caseQuality != null ? !caseQuality.equals(that.caseQuality) : that.caseQuality != null) return false;
         if (qualityDate != null ? !qualityDate.equals(that.qualityDate) : that.qualityDate != null) return false;
-        if (qualityLevel != null ? !qualityLevel.equals(that.qualityLevel) : that.qualityLevel != null) return false;
+        if (qualityDoctor != null ? !qualityDoctor.equals(that.qualityDoctor) : that.qualityDoctor != null)
+            return false;
+        if (qualityNurse != null ? !qualityNurse.equals(that.qualityNurse) : that.qualityNurse != null) return false;
 
         return true;
     }
@@ -79,9 +106,10 @@ public class QualityControlInfo  extends AbstractGeneralProperties {
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (qualityLevel != null ? qualityLevel.hashCode() : 0);
+        result = 31 * result + (caseQuality != null ? caseQuality.hashCode() : 0);
         result = 31 * result + (qualityDate != null ? qualityDate.hashCode() : 0);
-        result = 31 * result + (personsInQualityControl != null ? personsInQualityControl.hashCode() : 0);
+        result = 31 * result + (qualityDoctor != null ? qualityDoctor.hashCode() : 0);
+        result = 31 * result + (qualityNurse != null ? qualityNurse.hashCode() : 0);
         return result;
     }
 }

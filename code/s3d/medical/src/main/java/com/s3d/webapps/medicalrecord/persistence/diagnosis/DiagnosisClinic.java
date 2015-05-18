@@ -17,5 +17,6 @@ public class DiagnosisClinic extends BaseDiagnose {
         super(name, code);
     }
 
-
+    public DiagnosisClinic() {
+    }
 }

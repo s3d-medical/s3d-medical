@@ -1,9 +1,7 @@
 package com.s3d.webapps.medicalrecord.persistence.patient;
 
-
-import com.s3d.webapps.medicalrecord.persistence.AbstractGeneralProperties;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author wind.chen
@@ -12,19 +10,38 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "p_contact_person")
-public class ContactPerson  extends AbstractGeneralProperties {
-
-    @Column(name = "relationship")
-    private String relationship;
+public class ContactPerson implements Serializable{
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    protected Integer id;
 
     @Column(name = "full_name")
     private String fullName;
+
+    @Column(name = "relationship")
+    private String relationship;
 
     @Column(name = "address")
     private String address;
 
     @Column(name = "phone_no")
     private String phoneNo;
+
+    public void fill(String fullName, String relationship, String address, String phoneNo) {
+        this.relationship = relationship;
+        this.fullName = fullName;
+        this.address = address;
+        this.phoneNo = phoneNo;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getRelationship() {
         return relationship;

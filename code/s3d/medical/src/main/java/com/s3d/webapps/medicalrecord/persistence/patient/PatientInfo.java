@@ -1,10 +1,11 @@
 package com.s3d.webapps.medicalrecord.persistence.patient;
 
-import com.s3d.webapps.medicalrecord.persistence.AbstractGeneralProperties;
+import com.s3d.tech.utils.DateUtils;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,7 +15,11 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "p_patient_info")
-public class PatientInfo  extends AbstractGeneralProperties {
+public class PatientInfo implements Serializable{
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    protected Integer id;
 
     @Column(name = "full_name")
     private String fullName;
@@ -52,21 +57,20 @@ public class PatientInfo  extends AbstractGeneralProperties {
     @Column(name = "marital_status")
     private String maritalStatus;
 
-
-    @ManyToOne(fetch= FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="native_place_id", referencedColumnName = "id")
-    private NativePlace nativePlace;
-
     @OneToOne(fetch= FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="birth_place_id", referencedColumnName = "id")
+    @JoinColumn(name="birth_place_id", referencedColumnName = "birth_place_id")
     private BirthPlace birthPlace;
 
     @ManyToOne(fetch= FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="present_address_id", referencedColumnName = "id")
+    @JoinColumn(name="native_place_id", referencedColumnName = "native_place_id")
+    private NativePlace nativePlace;
+
+    @ManyToOne(fetch= FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name="present_address_id", referencedColumnName = "present_address_id")
     private PresentAddress presentAddress;
 
     @OneToOne(fetch= FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="registered_residence_id", referencedColumnName = "id")
+    @JoinColumn(name="registered_residence_id", referencedColumnName = "registered_residence_id")
     private RegisteredResidence registeredResidence;
 
     @ManyToOne(fetch= FetchType.EAGER,cascade=CascadeType.ALL)
@@ -77,6 +81,62 @@ public class PatientInfo  extends AbstractGeneralProperties {
     @JoinColumn(name="contact_person_id", referencedColumnName = "id")
     private ContactPerson contactPerson;
 
+    public PatientInfo() {
+        this.birthPlace = new BirthPlace();
+        this.nativePlace = new NativePlace();
+        this.presentAddress = new PresentAddress();
+        this.registeredResidence = new RegisteredResidence();
+        this.company = new Company();
+        this.contactPerson = new ContactPerson();
+    }
+
+    public void fillPatientBasicInfo(String fullName, String sex, Date birthDate, Integer ageYear, Integer ageMonth,
+                                     String nationality, Integer weightOfBirth, Integer weightOfAdmission, String race, String idCardNo, String career, String maritalStatus) {
+        this.fullName = fullName;
+        this.sex = sex;
+        this.birthDate = birthDate;
+        this.ageYear = ageYear;
+        this.ageMonth = ageMonth;
+        this.nationality = nationality;
+        this.weightOfBirth = weightOfBirth;
+        this.weightOfAdmission = weightOfAdmission;
+        this.race = race;
+        this.idCardNo = idCardNo;
+        this.career = career;
+        this.maritalStatus = maritalStatus;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void fillBirthPlace(String province, String city, String county){
+        this.birthPlace.fill(province, city, county);
+    }
+
+    public void fillNativeAddress(String province, String city){
+        this.nativePlace.fill(province, city);
+    }
+
+    public void fillPresentAddress(String province, String city, String county, String phoneNo, String zipCode){
+        this.presentAddress.fill(province, city, county, phoneNo, zipCode);
+    }
+
+    public void fillRegisteredResidence(String province, String city, String county, String zipCode){
+        this.registeredResidence.fill(province, city, county, zipCode);
+    }
+
+    public void fillCompany(String name, String address, String phoneNo, String zipCode){
+        this.company.fill(name, address, phoneNo, zipCode);
+    }
+
+    public void fillContactPerson(String fullName, String relationship, String address, String phoneNo){
+        this.contactPerson.fill(fullName,relationship,  address, phoneNo);
+    }
 
     public String getFullName() {
         return fullName;

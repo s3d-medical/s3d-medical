@@ -1,7 +1,11 @@
-package com.s3d.webapps.medicalrecord.persistence;
+package com.s3d.webapps.medicalrecord.persistence.operation;
 
+
+import com.s3d.tech.utils.DateUtils;
+import com.s3d.webapps.medicalrecord.persistence.MedicalRecordHomePage;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +14,12 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "mr_operation")
-public class Operation  extends AbstractGeneralProperties {
+public class Operation implements Serializable {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    protected Integer id;
 
     @Column(name="name")
     private String name;
@@ -48,6 +57,28 @@ public class Operation  extends AbstractGeneralProperties {
 
     public Operation() {
 
+    }
+
+    public void fill(String code, String operatedDate, String level, String name, String majorOperator, String assistant1, String assistant2,
+                     String healedInGrade, String anesthesiaType, String anesthesiaDoctor) {
+        this.name = name;
+        this.code = code;
+        this.operatedDate = DateUtils.convertToDate(operatedDate);
+        this.level = level;
+        this.healedInGrade = healedInGrade;
+        this.majorOperator = majorOperator;
+        this.assistant1 = assistant1;
+        this.assistant2 = assistant2;
+        this.anesthesiaType = anesthesiaType;
+        this.anesthesiaDoctor = anesthesiaDoctor;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

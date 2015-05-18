@@ -1,10 +1,10 @@
 package com.s3d.webapps.medicalrecord.persistence.expense;
 
-import com.s3d.webapps.medicalrecord.persistence.AbstractGeneralProperties;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "mr_expense_invoice")
-public class ExpenseInvoice extends AbstractGeneralProperties {
+public class ExpenseInvoice implements Serializable {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    protected Integer id;
+
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
 
@@ -30,6 +35,14 @@ public class ExpenseInvoice extends AbstractGeneralProperties {
 
     public ExpenseInvoice() {
 
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public BigDecimal getTotalAmount() {

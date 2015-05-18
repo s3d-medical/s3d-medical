@@ -13,29 +13,17 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name="discharge_id")
 public class DiagnosisDischarge extends BaseDiagnose {
 
-    @Column(name="category")
-	private Integer category;
-
     @Column(name="illness_state")
-	private Integer illnessState;
+	private String illnessState;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="medical_record_home_page_id", referencedColumnName = "id")
     private MedicalRecordHomePage medicalRecordHomePage;
 
-    public DiagnosisDischarge(String name, String code, Integer category, Integer illnessState) {
-        super(name, code);
-        this.category = category;
+
+    public void fill(String name, String code, String illnessState) {
+        super.fill(name, code);
         this.illnessState = illnessState;
-    }
-
-    public DiagnosisDischarge(Integer category) {
-        this.category = category;
-    }
-
-    public DiagnosisDischarge(String name, String code, Integer category) {
-        super(name, code);
-        this.category = category;
     }
 
     public MedicalRecordHomePage getMedicalRecordHomePage() {
@@ -46,44 +34,13 @@ public class DiagnosisDischarge extends BaseDiagnose {
         this.medicalRecordHomePage = medicalRecordHomePage;
     }
 
-    public Integer getCategory() {
-        return category;
-    }
 
-    public void setCategory(Integer category) {
-        this.category = category;
-    }
-
-    public Integer getIllnessState() {
+    public String getIllnessState() {
         return illnessState;
     }
 
-    public void setIllnessState(Integer illnessState) {
+    public void setIllnessState(String illnessState) {
         this.illnessState = illnessState;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof DiagnosisDischarge)) return false;
-        if (!super.equals(o)) return false;
-
-        DiagnosisDischarge that = (DiagnosisDischarge) o;
-
-        if (category != null ? !category.equals(that.category) : that.category != null) return false;
-        if (illnessState != null ? !illnessState.equals(that.illnessState) : that.illnessState != null) return false;
-        if (medicalRecordHomePage != null ? !medicalRecordHomePage.equals(that.medicalRecordHomePage) : that.medicalRecordHomePage != null)
-            return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (category != null ? category.hashCode() : 0);
-        result = 31 * result + (illnessState != null ? illnessState.hashCode() : 0);
-        result = 31 * result + (medicalRecordHomePage != null ? medicalRecordHomePage.hashCode() : 0);
-        return result;
-    }
 }

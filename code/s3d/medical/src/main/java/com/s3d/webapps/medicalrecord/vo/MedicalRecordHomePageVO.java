@@ -1,8 +1,9 @@
 package com.s3d.webapps.medicalrecord.vo;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -10,797 +11,683 @@ import java.util.List;
  * @date 2015/5/15.
  */
 public class MedicalRecordHomePageVO {
+    private String businessKey;
 
-    private Integer payType;
-    private String healthCard;
-    private Integer hospitalizedTimes = 0;
-    private String name;
-    private String sex;
-    private Integer birthdayYear;
-    private String caseNumber;
-    private Integer birthdayDay;
-    private Integer birthdayMonth;
-    private Integer age;
-    private Integer country;
-    private Integer babyAge;
-    private BigDecimal babyBornWeight;
-    private BigDecimal babyHospitalizedWeight;
-    // born address
-    private String bornState;
-    private String bornCity;
-    private String bornDistrict;
-    // native address 籍贯
-    private String hometownCity;
-    private String hometownState;
-    private String nation;
-    private String idCard;
-    private String job;
-    private String marriage;
+    HomePageBasicInfoVO homePageBasicInfoVO = new HomePageBasicInfoVO();
 
-    // residence address 现住址
-    private String addressState;
-    private String addressCity;
-    private String addressDistrict;
-    private String addressPhone;
-    private String addressPostcode;
-    // registered address户口
-    private String residenceState;
-    private String residenceCity;
-    private String residenceDistrict;
-    private String residencePostcode;
-    // company information.
-    private String workPlaceAddress;
-    private String workPlacePhone;
-    private String workPlacePostcode;
-    // contract person
-    private String contact;
-    private String relationship;
-    private String contactAddress;
-    private String contactPhone;
+    // patient info   -- part
+    private PatientInfoVO patientInfoVO = new PatientInfoVO();
 
-    // enter hospital.
-    private String inType;
-    private Integer inYear;
-    private Integer inMonth;
-    private Integer inDay;
-    private Integer inDepartment;
-    private String inSickroom;
-    //change departs.
-    private String changeDepartment;
-    // discharge register 离院.
-    private Integer outYear;
-    private Integer outMonth;
-    private Integer outDay;
-    private String outDepartment;
-    private String outSickroom;
-    private Integer daysInHospital;
-    private Integer outType;
-    private String acceptOrganization;
-    private Integer willReturn;
-    private String returnPurpose;
+    // enter or leave hospital. -- part
+    private EntryExitRecordVO entryExitRecordVO = new EntryExitRecordVO();
 
-    // clinic diagnosis
-    private String outpatientDiagnosis;
-    private String outpatientSickCode;
-    // discharge diagnosis. list.
-    private List<DischargeDiagnosisVO> dischargeDiagnosis = new ArrayList<DischargeDiagnosisVO>();
-    // external reason
-    private String outCause;
-    private String outSickCode;
-    // pathology diagnosis.
-    private String pathologyDiagnosis;
-    private String pathologySickCode;
-    private String pathologyNumber;
-    // Allergy
-    private String medicalAllergy;
-    private String allergicMedication;
+    // diagnosis -- part
+    private DiagnosisRecordVO diagnosisRecordVO = new DiagnosisRecordVO();
 
-    // autopsy
-    private Integer autopsy;
-    private Integer bloodType;
-    private Integer rh;
+    // related doctors. -- part
+    private DoctorAndQualityRecordVO doctorAndQualityRecordVO = new DoctorAndQualityRecordVO();
 
-    // related doctors.
-    private String director;
-    private String deputyDirector;
-    private String attendingDoctor;
-    private String residentDoctor;
-    private String primaryNurse;
-    private String refresherDoctor;
-    private String intern;
-    private String coder;
-    private Integer caseQuality;
-    private String qualityDoctor;
-    private String qualityNurse;
-    private Date qualityDate;
-
+    // operations.
     private List<OperationHistoryVO> operationHistory = new ArrayList<OperationHistoryVO>();
-    // comma
-    private Integer comaDayBeforeHospital;
-    private Integer comaHourBeforeHospital;
-    private Integer comaMinuteBeforeHospital;
-    private Integer comaDayAfterHospital;
-    private Integer comaHourAfterHospital;
-    private Integer comaMinuteAfterHospital;
 
-    // expense
-    private BigDecimal expenseTotal;
-    private BigDecimal expensePersonal;
-    private BigDecimal expenseNormalMedicalService;
-    private BigDecimal expenseNormalCureOperating;
-    private BigDecimal expenseNormalNurse;
-    private BigDecimal expenseNormalOther;
-    private BigDecimal expenseDiagnosisPathology;
-    private BigDecimal expenseDiagnosisLab;
-    private BigDecimal expenseDiagnosisImaging;
-    private BigDecimal expenseDiagnosisClinical;
-    private BigDecimal expenseCureNonOperation;
-    private BigDecimal expenseCureClinicalPhysics;
-    private BigDecimal expenseCureOperationCure;
-    private BigDecimal expenseCureAnaesthesia;
-    private BigDecimal expenseCureOperation;
-    private BigDecimal expenseRecovery;
-    private BigDecimal expenseChineseMedicineCure;
-    private BigDecimal expenseWesternMedicineMedication;
-    private BigDecimal expenseWesternMedicineAntibiosisMedication;
-    private BigDecimal expenseChineseMedicinePatentDrag;
-    private BigDecimal expenseChineseMedicineHerb;
-    private BigDecimal expenseBlood;
-    private BigDecimal expenseBloodAlbumin;
-    private BigDecimal expenseBloodGlobulin;
-    private BigDecimal expenseBloodCoagulationFactor;
-    private BigDecimal expenseBloodCellFactor;
-    private BigDecimal expenseConsumptionExamine;
-    private BigDecimal expenseConsumptionCure;
-    private BigDecimal expenseConsumptionOperation;
-    private BigDecimal expenseOther;
+    // comma -- part
+    ComaRecordVO comaRecordVO = new ComaRecordVO();
 
-    public Integer getPayType() {
-        return payType;
+    // expense -- part
+    private ExpenseRecordVO expenseRecordVO = new ExpenseRecordVO();
+
+
+    // read and fill data or home page vo.
+
+    public PatientInfoVO readPatientInfoVO() {
+        return patientInfoVO;
     }
 
-    public void setPayType(Integer payType) {
-        this.payType = payType;
+    public void fillInPatientInfoVO(PatientInfoVO patientInfoVO) {
+        this.patientInfoVO = patientInfoVO;
     }
 
-    public String getHealthCard() {
-        return healthCard;
+    public EntryExitRecordVO readEntryExitRecordVO() {
+        return entryExitRecordVO;
     }
 
-    public void setHealthCard(String healthCard) {
-        this.healthCard = healthCard;
+    public void fillInEntryExitRecordVO(EntryExitRecordVO entryExitRecordVO) {
+        this.entryExitRecordVO = entryExitRecordVO;
     }
 
-    public Integer getHospitalizedTimes() {
-        return hospitalizedTimes;
+    public DiagnosisRecordVO readDiagnosisRecordVO() {
+        return diagnosisRecordVO;
     }
 
-    public void setHospitalizedTimes(Integer hospitalizedTimes) {
-        this.hospitalizedTimes = hospitalizedTimes;
+    public void fillInDiagnosisRecordVO(DiagnosisRecordVO diagnosisRecordVO) {
+        this.diagnosisRecordVO = diagnosisRecordVO;
+    }
+
+    public DoctorAndQualityRecordVO readDoctorRecordVO() {
+        return doctorAndQualityRecordVO;
+    }
+
+    public void fillInDoctorRecordVO(DoctorAndQualityRecordVO doctorAndQualityRecordVO) {
+        this.doctorAndQualityRecordVO = doctorAndQualityRecordVO;
+    }
+
+    public ComaRecordVO readComaRecordVO() {
+        return comaRecordVO;
+    }
+
+    public void fillInComaRecordVO(ComaRecordVO comaRecordVO) {
+        this.comaRecordVO = comaRecordVO;
+    }
+
+    public ExpenseRecordVO readExpenseRecordVO() {
+        return expenseRecordVO;
+    }
+
+    public void fillInExpenseRecordVO(ExpenseRecordVO expenseRecordVO) {
+        this.expenseRecordVO = expenseRecordVO;
+    }
+
+    public void fillHomePageBasicInfoVO(HomePageBasicInfoVO homePageBasicInfo){
+        this.homePageBasicInfoVO = homePageBasicInfo;
+    }
+    public HomePageBasicInfoVO readHomePageBasicInfoVO(){
+       return  this.homePageBasicInfoVO;
+    }
+
+
+
+   //-----------------------------------------setter getter ------------------------
+
+    public String getBusinessKey() {
+        return businessKey;
+    }
+
+    public void setBusinessKey(String businessKey) {
+        this.businessKey = businessKey;
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public Integer getBirthdayYear() {
-        return birthdayYear;
-    }
-
-    public void setBirthdayYear(Integer birthdayYear) {
-        this.birthdayYear = birthdayYear;
-    }
-
-    public String getCaseNumber() {
-        return caseNumber;
-    }
-
-    public void setCaseNumber(String caseNumber) {
-        this.caseNumber = caseNumber;
-    }
-
-    public Integer getBirthdayDay() {
-        return birthdayDay;
-    }
-
-    public void setBirthdayDay(Integer birthdayDay) {
-        this.birthdayDay = birthdayDay;
-    }
-
-    public Integer getBirthdayMonth() {
-        return birthdayMonth;
-    }
-
-    public void setBirthdayMonth(Integer birthdayMonth) {
-        this.birthdayMonth = birthdayMonth;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public Integer getCountry() {
-        return country;
-    }
-
-    public void setCountry(Integer country) {
-        this.country = country;
-    }
-
-    public Integer getBabyAge() {
-        return babyAge;
-    }
-
-    public void setBabyAge(Integer babyAge) {
-        this.babyAge = babyAge;
-    }
-
-    public BigDecimal getBabyBornWeight() {
-        return babyBornWeight;
-    }
-
-    public void setBabyBornWeight(BigDecimal babyBornWeight) {
-        this.babyBornWeight = babyBornWeight;
-    }
-
-    public BigDecimal getBabyHospitalizedWeight() {
-        return babyHospitalizedWeight;
-    }
-
-    public void setBabyHospitalizedWeight(BigDecimal babyHospitalizedWeight) {
-        this.babyHospitalizedWeight = babyHospitalizedWeight;
-    }
-
-    public String getBornState() {
-        return bornState;
-    }
-
-    public void setBornState(String bornState) {
-        this.bornState = bornState;
-    }
-
-    public String getBornCity() {
-        return bornCity;
-    }
-
-    public void setBornCity(String bornCity) {
-        this.bornCity = bornCity;
-    }
-
-    public String getBornDistrict() {
-        return bornDistrict;
-    }
-
-    public void setBornDistrict(String bornDistrict) {
-        this.bornDistrict = bornDistrict;
-    }
-
-    public String getHometownCity() {
-        return hometownCity;
-    }
-
-    public void setHometownCity(String hometownCity) {
-        this.hometownCity = hometownCity;
-    }
-
-    public String getHometownState() {
-        return hometownState;
-    }
-
-    public void setHometownState(String hometownState) {
-        this.hometownState = hometownState;
-    }
-
-    public String getNation() {
-        return nation;
-    }
-
-    public void setNation(String nation) {
-        this.nation = nation;
-    }
-
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
-    }
-
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
-    }
-
-    public String getMarriage() {
-        return marriage;
-    }
-
-    public void setMarriage(String marriage) {
-        this.marriage = marriage;
-    }
-
-    public String getAddressState() {
-        return addressState;
-    }
-
-    public void setAddressState(String addressState) {
-        this.addressState = addressState;
-    }
-
-    public String getAddressCity() {
-        return addressCity;
-    }
-
-    public void setAddressCity(String addressCity) {
-        this.addressCity = addressCity;
-    }
-
-    public String getAddressDistrict() {
-        return addressDistrict;
-    }
-
-    public void setAddressDistrict(String addressDistrict) {
-        this.addressDistrict = addressDistrict;
-    }
-
-    public String getAddressPhone() {
-        return addressPhone;
-    }
-
-    public void setAddressPhone(String addressPhone) {
-        this.addressPhone = addressPhone;
-    }
-
-    public String getAddressPostcode() {
-        return addressPostcode;
-    }
-
-    public void setAddressPostcode(String addressPostcode) {
-        this.addressPostcode = addressPostcode;
-    }
-
-    public String getResidenceState() {
-        return residenceState;
+        return patientInfoVO.getName();
     }
 
     public void setResidenceState(String residenceState) {
-        this.residenceState = residenceState;
+        patientInfoVO.setResidenceState(residenceState);
     }
 
-    public String getResidenceCity() {
-        return residenceCity;
+    public void setBornDistrict(String bornDistrict) {
+        patientInfoVO.setBornDistrict(bornDistrict);
     }
 
-    public void setResidenceCity(String residenceCity) {
-        this.residenceCity = residenceCity;
-    }
-
-    public String getResidenceDistrict() {
-        return residenceDistrict;
-    }
-
-    public void setResidenceDistrict(String residenceDistrict) {
-        this.residenceDistrict = residenceDistrict;
-    }
-
-    public String getResidencePostcode() {
-        return residencePostcode;
-    }
-
-    public void setResidencePostcode(String residencePostcode) {
-        this.residencePostcode = residencePostcode;
-    }
-
-    public String getWorkPlaceAddress() {
-        return workPlaceAddress;
-    }
-
-    public void setWorkPlaceAddress(String workPlaceAddress) {
-        this.workPlaceAddress = workPlaceAddress;
-    }
-
-    public String getWorkPlacePhone() {
-        return workPlacePhone;
+    public Integer getAge() {
+        return patientInfoVO.getAge();
     }
 
     public void setWorkPlacePhone(String workPlacePhone) {
-        this.workPlacePhone = workPlacePhone;
+        patientInfoVO.setWorkPlacePhone(workPlacePhone);
     }
 
-    public String getWorkPlacePostcode() {
-        return workPlacePostcode;
+    public void setBabyBornWeight(Integer babyBornWeight) {
+        patientInfoVO.setBabyBornWeight(babyBornWeight);
     }
 
-    public void setWorkPlacePostcode(String workPlacePostcode) {
-        this.workPlacePostcode = workPlacePostcode;
+    public void setJob(String job) {
+        patientInfoVO.setJob(job);
     }
 
-    public String getContact() {
-        return contact;
+    public String getAddressDistrict() {
+        return patientInfoVO.getAddressDistrict();
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setBabyHospitalizedWeight(Integer babyHospitalizedWeight) {
+        patientInfoVO.setBabyHospitalizedWeight(babyHospitalizedWeight);
     }
 
-    public String getRelationship() {
-        return relationship;
+    public void setHometownState(String hometownState) {
+        patientInfoVO.setHometownState(hometownState);
+    }
+
+    public Integer getBirthdayMonth() {
+        return patientInfoVO.getBirthdayMonth();
+    }
+
+    public void setAddressCity(String addressCity) {
+        patientInfoVO.setAddressCity(addressCity);
+    }
+
+    public String getHometownState() {
+        return patientInfoVO.getHometownState();
+    }
+
+    public String getJob() {
+        return patientInfoVO.getJob();
+    }
+
+    public String getResidenceCity() {
+        return patientInfoVO.getResidenceCity();
+    }
+
+    public String getMarriage() {
+        return patientInfoVO.getMarriage();
     }
 
     public void setRelationship(String relationship) {
-        this.relationship = relationship;
+        patientInfoVO.setRelationship(relationship);
     }
 
-    public String getContactAddress() {
-        return contactAddress;
+    public void setBornCity(String bornCity) {
+        patientInfoVO.setBornCity(bornCity);
     }
 
-    public void setContactAddress(String contactAddress) {
-        this.contactAddress = contactAddress;
+    public void setSex(String sex) {
+        patientInfoVO.setSex(sex);
+    }
+
+    public void setBabyAge(Integer babyAge) {
+        patientInfoVO.setBabyAge(babyAge);
+    }
+
+    public String getAddressPhone() {
+        return patientInfoVO.getAddressPhone();
+    }
+
+    public String getHometownCity() {
+        return patientInfoVO.getHometownCity();
+    }
+
+    public void setAddressState(String addressState) {
+        patientInfoVO.setAddressState(addressState);
+    }
+
+    public String getBornCity() {
+        return patientInfoVO.getBornCity();
+    }
+
+    public void setMarriage(String marriage) {
+        patientInfoVO.setMarriage(marriage);
+    }
+
+    public void setAddressDistrict(String addressDistrict) {
+        patientInfoVO.setAddressDistrict(addressDistrict);
+    }
+
+    public String getSex() {
+        return patientInfoVO.getSex();
+    }
+
+    public String getRelationship() {
+        return patientInfoVO.getRelationship();
+    }
+
+    public void setAddressPostcode(String addressPostcode) {
+        patientInfoVO.setAddressPostcode(addressPostcode);
+    }
+
+    public void setBirthdayYear(Integer birthdayYear) {
+        patientInfoVO.setBirthdayYear(birthdayYear);
+    }
+
+    public Integer getBirthdayDay() {
+        return patientInfoVO.getBirthdayDay();
+    }
+
+    public void setHometownCity(String hometownCity) {
+        patientInfoVO.setHometownCity(hometownCity);
+    }
+
+    public String getResidenceDistrict() {
+        return patientInfoVO.getResidenceDistrict();
+    }
+
+    public String getAddressPostcode() {
+        return patientInfoVO.getAddressPostcode();
+    }
+
+    public String getContact() {
+        return patientInfoVO.getContact();
+    }
+
+    public void setResidenceDistrict(String residenceDistrict) {
+        patientInfoVO.setResidenceDistrict(residenceDistrict);
+    }
+
+    public void setWorkPlaceAddress(String workPlaceAddress) {
+        patientInfoVO.setWorkPlaceAddress(workPlaceAddress);
+    }
+
+    public void setCountry(String country) {
+        patientInfoVO.setCountry(country);
+    }
+
+    public String getWorkPlacePostcode() {
+        return patientInfoVO.getWorkPlacePostcode();
+    }
+
+    public Integer getBabyHospitalizedWeight() {
+        return patientInfoVO.getBabyHospitalizedWeight();
+    }
+
+    public Integer getBabyBornWeight() {
+        return patientInfoVO.getBabyBornWeight();
+    }
+
+    public String getAddressState() {
+        return patientInfoVO.getAddressState();
     }
 
     public String getContactPhone() {
-        return contactPhone;
+        return patientInfoVO.getContactPhone();
+    }
+
+    public void setContact(String contact) {
+        patientInfoVO.setContact(contact);
+    }
+
+    public String getBornDistrict() {
+        return patientInfoVO.getBornDistrict();
+    }
+
+    public void setResidenceCity(String residenceCity) {
+        patientInfoVO.setResidenceCity(residenceCity);
+    }
+
+    public void setBornState(String bornState) {
+        patientInfoVO.setBornState(bornState);
+    }
+
+    public void setWorkPlacePostcode(String workPlacePostcode) {
+        patientInfoVO.setWorkPlacePostcode(workPlacePostcode);
+    }
+
+    public void setBirthdayMonth(Integer birthdayMonth) {
+        patientInfoVO.setBirthdayMonth(birthdayMonth);
+    }
+
+    public String getIdCard() {
+        return patientInfoVO.getIdCard();
+    }
+
+    public void setResidencePostcode(String residencePostcode) {
+        patientInfoVO.setResidencePostcode(residencePostcode);
+    }
+
+    public void setAge(Integer age) {
+        patientInfoVO.setAge(age);
+    }
+
+    public void setIdCard(String idCard) {
+        patientInfoVO.setIdCard(idCard);
+    }
+
+    public String getWorkPlaceAddress() {
+        return patientInfoVO.getWorkPlaceAddress();
+    }
+
+    public String getAddressCity() {
+        return patientInfoVO.getAddressCity();
     }
 
     public void setContactPhone(String contactPhone) {
-        this.contactPhone = contactPhone;
+        patientInfoVO.setContactPhone(contactPhone);
+    }
+
+    public void setNation(String nation) {
+        patientInfoVO.setNation(nation);
+    }
+
+    public void setName(String name) {
+        patientInfoVO.setName(name);
+    }
+
+    public Integer getBirthdayYear() {
+        return patientInfoVO.getBirthdayYear();
+    }
+
+    public void setBirthdayDay(Integer birthdayDay) {
+        patientInfoVO.setBirthdayDay(birthdayDay);
+    }
+
+    public String getCountry() {
+        return patientInfoVO.getCountry();
+    }
+
+    public String getBornState() {
+        return patientInfoVO.getBornState();
+    }
+
+    public void setContactAddress(String contactAddress) {
+        patientInfoVO.setContactAddress(contactAddress);
+    }
+
+    public String getWorkPlacePhone() {
+        return patientInfoVO.getWorkPlacePhone();
+    }
+
+    public Integer getBabyAge() {
+        return patientInfoVO.getBabyAge();
+    }
+
+    public String getResidencePostcode() {
+        return patientInfoVO.getResidencePostcode();
+    }
+
+    public String getContactAddress() {
+        return patientInfoVO.getContactAddress();
+    }
+
+    public void setAddressPhone(String addressPhone) {
+        patientInfoVO.setAddressPhone(addressPhone);
+    }
+
+    public String getResidenceState() {
+        return patientInfoVO.getResidenceState();
+    }
+
+    public String getNation() {
+        return patientInfoVO.getNation();
     }
 
     public String getInType() {
-        return inType;
-    }
-
-    public void setInType(String inType) {
-        this.inType = inType;
-    }
-
-    public Integer getInYear() {
-        return inYear;
-    }
-
-    public void setInYear(Integer inYear) {
-        this.inYear = inYear;
-    }
-
-    public Integer getInMonth() {
-        return inMonth;
-    }
-
-    public void setInMonth(Integer inMonth) {
-        this.inMonth = inMonth;
-    }
-
-    public Integer getInDay() {
-        return inDay;
-    }
-
-    public void setInDay(Integer inDay) {
-        this.inDay = inDay;
-    }
-
-    public Integer getInDepartment() {
-        return inDepartment;
-    }
-
-    public void setInDepartment(Integer inDepartment) {
-        this.inDepartment = inDepartment;
-    }
-
-    public String getInSickroom() {
-        return inSickroom;
+        return entryExitRecordVO.getInType();
     }
 
     public void setInSickroom(String inSickroom) {
-        this.inSickroom = inSickroom;
+        entryExitRecordVO.setInSickroom(inSickroom);
     }
 
-    public String getChangeDepartment() {
-        return changeDepartment;
+    public void setInType(String inType) {
+        entryExitRecordVO.setInType(inType);
     }
 
-    public void setChangeDepartment(String changeDepartment) {
-        this.changeDepartment = changeDepartment;
-    }
-
-    public Integer getOutYear() {
-        return outYear;
+    public Integer getInDay() {
+        return entryExitRecordVO.getInDay();
     }
 
     public void setOutYear(Integer outYear) {
-        this.outYear = outYear;
+        entryExitRecordVO.setOutYear(outYear);
     }
 
-    public Integer getOutMonth() {
-        return outMonth;
+    public String getWillReturn() {
+        return entryExitRecordVO.getWillReturn();
     }
 
-    public void setOutMonth(Integer outMonth) {
-        this.outMonth = outMonth;
+    public void setInDepartment(String inDepartment) {
+        entryExitRecordVO.setInDepartment(inDepartment);
     }
 
-    public Integer getOutDay() {
-        return outDay;
+    public void setWillReturn(String willReturn) {
+        entryExitRecordVO.setWillReturn(willReturn);
     }
 
-    public void setOutDay(Integer outDay) {
-        this.outDay = outDay;
-    }
-
-    public String getOutDepartment() {
-        return outDepartment;
-    }
-
-    public void setOutDepartment(String outDepartment) {
-        this.outDepartment = outDepartment;
-    }
-
-    public String getOutSickroom() {
-        return outSickroom;
-    }
-
-    public void setOutSickroom(String outSickroom) {
-        this.outSickroom = outSickroom;
-    }
-
-    public Integer getDaysInHospital() {
-        return daysInHospital;
-    }
-
-    public void setDaysInHospital(Integer daysInHospital) {
-        this.daysInHospital = daysInHospital;
-    }
-
-    public Integer getOutType() {
-        return outType;
-    }
-
-    public void setOutType(Integer outType) {
-        this.outType = outType;
-    }
-
-    public String getAcceptOrganization() {
-        return acceptOrganization;
-    }
-
-    public void setAcceptOrganization(String acceptOrganization) {
-        this.acceptOrganization = acceptOrganization;
-    }
-
-    public Integer getWillReturn() {
-        return willReturn;
-    }
-
-    public void setWillReturn(Integer willReturn) {
-        this.willReturn = willReturn;
+    public Integer getOutYear() {
+        return entryExitRecordVO.getOutYear();
     }
 
     public String getReturnPurpose() {
-        return returnPurpose;
+        return entryExitRecordVO.getReturnPurpose();
+    }
+
+    public void setInYear(Integer inYear) {
+        entryExitRecordVO.setInYear(inYear);
     }
 
     public void setReturnPurpose(String returnPurpose) {
-        this.returnPurpose = returnPurpose;
+        entryExitRecordVO.setReturnPurpose(returnPurpose);
+    }
+
+    public void setInDay(Integer inDay) {
+        entryExitRecordVO.setInDay(inDay);
+    }
+
+    public void setAcceptOrganization(String acceptOrganization) {
+        entryExitRecordVO.setAcceptOrganization(acceptOrganization);
+    }
+
+    public String getOutDepartment() {
+        return entryExitRecordVO.getOutDepartment();
+    }
+
+    public void setInMonth(Integer inMonth) {
+        entryExitRecordVO.setInMonth(inMonth);
+    }
+
+    public Integer getInYear() {
+        return entryExitRecordVO.getInYear();
+    }
+
+    public void setInTime(String inTime) {
+        entryExitRecordVO.setInTime(inTime);
+    }
+
+    public String getInTime() {
+        return entryExitRecordVO.getInTime();
+    }
+
+    public String getOutTime() {
+        return entryExitRecordVO.getOutTime();
+    }
+
+    public void setOutTime(String outTime) {
+        entryExitRecordVO.setOutTime(outTime);
+    }
+
+    public void setDaysInHospital(Integer daysInHospital) {
+        entryExitRecordVO.setDaysInHospital(daysInHospital);
+    }
+
+    public String getInDepartment() {
+        return entryExitRecordVO.getInDepartment();
+    }
+
+    public Integer getOutMonth() {
+        return entryExitRecordVO.getOutMonth();
+    }
+
+    public String getOutType() {
+        return entryExitRecordVO.getOutType();
+    }
+
+    public void setOutType(String outType) {
+        entryExitRecordVO.setOutType(outType);
+    }
+
+    public Integer getInMonth() {
+        return entryExitRecordVO.getInMonth();
+    }
+
+    public void setOutDepartment(String outDepartment) {
+        entryExitRecordVO.setOutDepartment(outDepartment);
+    }
+
+    public String getInSickroom() {
+        return entryExitRecordVO.getInSickroom();
+    }
+
+    public Integer getDaysInHospital() {
+        return entryExitRecordVO.getDaysInHospital();
+    }
+
+    public void setOutMonth(Integer outMonth) {
+        entryExitRecordVO.setOutMonth(outMonth);
+    }
+
+    public String getAcceptOrganization() {
+        return entryExitRecordVO.getAcceptOrganization();
+    }
+
+    public void setOutSickroom(String outSickroom) {
+        entryExitRecordVO.setOutSickroom(outSickroom);
+    }
+
+    public Integer getOutDay() {
+        return entryExitRecordVO.getOutDay();
+    }
+
+    public String getOutSickroom() {
+        return entryExitRecordVO.getOutSickroom();
+    }
+
+    public void setOutDay(Integer outDay) {
+        entryExitRecordVO.setOutDay(outDay);
     }
 
     public String getOutpatientDiagnosis() {
-        return outpatientDiagnosis;
+        return diagnosisRecordVO.getOutpatientDiagnosis();
     }
 
-    public void setOutpatientDiagnosis(String outpatientDiagnosis) {
-        this.outpatientDiagnosis = outpatientDiagnosis;
-    }
-
-    public String getOutpatientSickCode() {
-        return outpatientSickCode;
-    }
-
-    public void setOutpatientSickCode(String outpatientSickCode) {
-        this.outpatientSickCode = outpatientSickCode;
-    }
-
-    public List<DischargeDiagnosisVO> getDischargeDiagnosis() {
-        return dischargeDiagnosis;
-    }
 
     public void setDischargeDiagnosis(List<DischargeDiagnosisVO> dischargeDiagnosis) {
-        this.dischargeDiagnosis = dischargeDiagnosis;
-    }
-
-    public String getOutCause() {
-        return outCause;
-    }
-
-    public void setOutCause(String outCause) {
-        this.outCause = outCause;
-    }
-
-    public String getOutSickCode() {
-        return outSickCode;
+        diagnosisRecordVO.setDischargeDiagnosis(dischargeDiagnosis);
     }
 
     public void setOutSickCode(String outSickCode) {
-        this.outSickCode = outSickCode;
+        diagnosisRecordVO.setOutSickCode(outSickCode);
     }
 
-    public String getPathologyDiagnosis() {
-        return pathologyDiagnosis;
+    public void setOutpatientDiagnosis(String outpatientDiagnosis) {
+        diagnosisRecordVO.setOutpatientDiagnosis(outpatientDiagnosis);
+    }
+
+    public void setOutCause(String outCause) {
+        diagnosisRecordVO.setOutCause(outCause);
+    }
+
+
+
+    public String getOutCause() {
+        return diagnosisRecordVO.getOutCause();
     }
 
     public void setPathologyDiagnosis(String pathologyDiagnosis) {
-        this.pathologyDiagnosis = pathologyDiagnosis;
-    }
-
-    public String getPathologySickCode() {
-        return pathologySickCode;
+        diagnosisRecordVO.setPathologyDiagnosis(pathologyDiagnosis);
     }
 
     public void setPathologySickCode(String pathologySickCode) {
-        this.pathologySickCode = pathologySickCode;
+        diagnosisRecordVO.setPathologySickCode(pathologySickCode);
+    }
+    public void setPathologyNumber(String pathologyNumber) {
+        diagnosisRecordVO.setPathologyNumber(pathologyNumber);
     }
 
     public String getPathologyNumber() {
-        return pathologyNumber;
+        return diagnosisRecordVO.getPathologyNumber();
     }
 
-    public void setPathologyNumber(String pathologyNumber) {
-        this.pathologyNumber = pathologyNumber;
+    public String getPathologySickCode() {
+        return diagnosisRecordVO.getPathologySickCode();
     }
 
-    public String getMedicalAllergy() {
-        return medicalAllergy;
+    public String getOutSickCode() {
+        return diagnosisRecordVO.getOutSickCode();
+    }
+    public List<DischargeDiagnosisVO> getDischargeDiagnosis() {
+        return diagnosisRecordVO.getDischargeDiagnosis();
     }
 
-    public void setMedicalAllergy(String medicalAllergy) {
-        this.medicalAllergy = medicalAllergy;
+    public String getOutpatientSickCode() {
+        return diagnosisRecordVO.getOutpatientSickCode();
     }
 
-    public String getAllergicMedication() {
-        return allergicMedication;
+    public String getPathologyDiagnosis() {
+        return diagnosisRecordVO.getPathologyDiagnosis();
     }
 
-    public void setAllergicMedication(String allergicMedication) {
-        this.allergicMedication = allergicMedication;
+    public void setOutpatientSickCode(String outpatientSickCode) {
+        diagnosisRecordVO.setOutpatientSickCode(outpatientSickCode);
     }
-
-    public Integer getAutopsy() {
-        return autopsy;
-    }
-
-    public void setAutopsy(Integer autopsy) {
-        this.autopsy = autopsy;
-    }
-
-    public Integer getBloodType() {
-        return bloodType;
-    }
-
-    public void setBloodType(Integer bloodType) {
-        this.bloodType = bloodType;
-    }
-
-    public Integer getRh() {
-        return rh;
-    }
-
-    public void setRh(Integer rh) {
-        this.rh = rh;
-    }
-
     public String getDirector() {
-        return director;
-    }
-
-    public void setDirector(String director) {
-        this.director = director;
-    }
-
-    public String getDeputyDirector() {
-        return deputyDirector;
-    }
-
-    public void setDeputyDirector(String deputyDirector) {
-        this.deputyDirector = deputyDirector;
-    }
-
-    public String getAttendingDoctor() {
-        return attendingDoctor;
-    }
-
-    public void setAttendingDoctor(String attendingDoctor) {
-        this.attendingDoctor = attendingDoctor;
-    }
-
-    public String getResidentDoctor() {
-        return residentDoctor;
-    }
-
-    public void setResidentDoctor(String residentDoctor) {
-        this.residentDoctor = residentDoctor;
-    }
-
-    public String getPrimaryNurse() {
-        return primaryNurse;
-    }
-
-    public void setPrimaryNurse(String primaryNurse) {
-        this.primaryNurse = primaryNurse;
-    }
-
-    public String getRefresherDoctor() {
-        return refresherDoctor;
-    }
-
-    public void setRefresherDoctor(String refresherDoctor) {
-        this.refresherDoctor = refresherDoctor;
-    }
-
-    public String getIntern() {
-        return intern;
-    }
-
-    public void setIntern(String intern) {
-        this.intern = intern;
-    }
-
-    public String getCoder() {
-        return coder;
-    }
-
-    public void setCoder(String coder) {
-        this.coder = coder;
-    }
-
-    public Integer getCaseQuality() {
-        return caseQuality;
-    }
-
-    public void setCaseQuality(Integer caseQuality) {
-        this.caseQuality = caseQuality;
-    }
-
-    public String getQualityDoctor() {
-        return qualityDoctor;
-    }
-
-    public void setQualityDoctor(String qualityDoctor) {
-        this.qualityDoctor = qualityDoctor;
-    }
-
-    public String getQualityNurse() {
-        return qualityNurse;
+        return doctorAndQualityRecordVO.getDirector();
     }
 
     public void setQualityNurse(String qualityNurse) {
-        this.qualityNurse = qualityNurse;
+        doctorAndQualityRecordVO.setQualityNurse(qualityNurse);
     }
 
-    public Date getQualityDate() {
-        return qualityDate;
+    public String getQualityDate() {
+        return doctorAndQualityRecordVO.getQualityDate();
     }
 
-    public void setQualityDate(Date qualityDate) {
-        this.qualityDate = qualityDate;
+    public void setQualityDoctor(String qualityDoctor) {
+        doctorAndQualityRecordVO.setQualityDoctor(qualityDoctor);
+    }
+
+    public void setCaseQuality(String caseQuality) {
+        doctorAndQualityRecordVO.setCaseQuality(caseQuality);
+    }
+
+    public void setDeputyDirector(String deputyDirector) {
+        doctorAndQualityRecordVO.setDeputyDirector(deputyDirector);
+    }
+
+    public String getResidentDoctor() {
+        return doctorAndQualityRecordVO.getResidentDoctor();
+    }
+
+    public void setIntern(String intern) {
+        doctorAndQualityRecordVO.setIntern(intern);
+    }
+
+    public void setDirector(String director) {
+        doctorAndQualityRecordVO.setDirector(director);
+    }
+
+    public String getCaseQuality() {
+        return doctorAndQualityRecordVO.getCaseQuality();
+    }
+
+    public String getRefresherDoctor() {
+        return doctorAndQualityRecordVO.getRefresherDoctor();
+    }
+
+    public void setCoder(String coder) {
+        doctorAndQualityRecordVO.setCoder(coder);
+    }
+
+    public String getPrimaryNurse() {
+        return doctorAndQualityRecordVO.getPrimaryNurse();
+    }
+
+    public String getCoder() {
+        return doctorAndQualityRecordVO.getCoder();
+    }
+
+    public void setPrimaryNurse(String primaryNurse) {
+        doctorAndQualityRecordVO.setPrimaryNurse(primaryNurse);
+    }
+
+    public void setRefresherDoctor(String refresherDoctor) {
+        doctorAndQualityRecordVO.setRefresherDoctor(refresherDoctor);
+    }
+
+    public void setQualityDate(String qualityDate) {
+        doctorAndQualityRecordVO.setQualityDate(qualityDate);
+    }
+
+    public String getQualityDoctor() {
+        return doctorAndQualityRecordVO.getQualityDoctor();
+    }
+
+    public String getQualityNurse() {
+        return doctorAndQualityRecordVO.getQualityNurse();
+    }
+
+    public String getIntern() {
+        return doctorAndQualityRecordVO.getIntern();
+    }
+
+    public void setResidentDoctor(String residentDoctor) {
+        doctorAndQualityRecordVO.setResidentDoctor(residentDoctor);
+    }
+
+    public void setAttendingDoctor(String attendingDoctor) {
+        doctorAndQualityRecordVO.setAttendingDoctor(attendingDoctor);
+    }
+
+    public String getDeputyDirector() {
+        return doctorAndQualityRecordVO.getDeputyDirector();
+    }
+
+    public String getAttendingDoctor() {
+        return doctorAndQualityRecordVO.getAttendingDoctor();
     }
 
     public List<OperationHistoryVO> getOperationHistory() {
@@ -812,290 +699,291 @@ public class MedicalRecordHomePageVO {
     }
 
     public Integer getComaDayBeforeHospital() {
-        return comaDayBeforeHospital;
-    }
-
-    public void setComaDayBeforeHospital(Integer comaDayBeforeHospital) {
-        this.comaDayBeforeHospital = comaDayBeforeHospital;
-    }
-
-    public Integer getComaHourBeforeHospital() {
-        return comaHourBeforeHospital;
-    }
-
-    public void setComaHourBeforeHospital(Integer comaHourBeforeHospital) {
-        this.comaHourBeforeHospital = comaHourBeforeHospital;
-    }
-
-    public Integer getComaMinuteBeforeHospital() {
-        return comaMinuteBeforeHospital;
-    }
-
-    public void setComaMinuteBeforeHospital(Integer comaMinuteBeforeHospital) {
-        this.comaMinuteBeforeHospital = comaMinuteBeforeHospital;
-    }
-
-    public Integer getComaDayAfterHospital() {
-        return comaDayAfterHospital;
-    }
-
-    public void setComaDayAfterHospital(Integer comaDayAfterHospital) {
-        this.comaDayAfterHospital = comaDayAfterHospital;
-    }
-
-    public Integer getComaHourAfterHospital() {
-        return comaHourAfterHospital;
+        return comaRecordVO.getComaDayBeforeHospital();
     }
 
     public void setComaHourAfterHospital(Integer comaHourAfterHospital) {
-        this.comaHourAfterHospital = comaHourAfterHospital;
+        comaRecordVO.setComaHourAfterHospital(comaHourAfterHospital);
     }
 
-    public Integer getComaMinuteAfterHospital() {
-        return comaMinuteAfterHospital;
+    public void setComaDayAfterHospital(Integer comaDayAfterHospital) {
+        comaRecordVO.setComaDayAfterHospital(comaDayAfterHospital);
+    }
+
+    public Integer getComaHourBeforeHospital() {
+        return comaRecordVO.getComaHourBeforeHospital();
     }
 
     public void setComaMinuteAfterHospital(Integer comaMinuteAfterHospital) {
-        this.comaMinuteAfterHospital = comaMinuteAfterHospital;
+        comaRecordVO.setComaMinuteAfterHospital(comaMinuteAfterHospital);
+    }
+
+    public Integer getComaDayAfterHospital() {
+        return comaRecordVO.getComaDayAfterHospital();
+    }
+
+    public void setComaDayBeforeHospital(Integer comaDayBeforeHospital) {
+        comaRecordVO.setComaDayBeforeHospital(comaDayBeforeHospital);
+    }
+
+    public Integer getComaMinuteBeforeHospital() {
+        return comaRecordVO.getComaMinuteBeforeHospital();
+    }
+
+    public Integer getComaMinuteAfterHospital() {
+        return comaRecordVO.getComaMinuteAfterHospital();
+    }
+
+    public Integer getComaHourAfterHospital() {
+        return comaRecordVO.getComaHourAfterHospital();
+    }
+
+    public void setComaMinuteBeforeHospital(Integer comaMinuteBeforeHospital) {
+        comaRecordVO.setComaMinuteBeforeHospital(comaMinuteBeforeHospital);
+    }
+
+    public void setComaHourBeforeHospital(Integer comaHourBeforeHospital) {
+        comaRecordVO.setComaHourBeforeHospital(comaHourBeforeHospital);
     }
 
     public BigDecimal getExpenseTotal() {
-        return expenseTotal;
-    }
-
-    public void setExpenseTotal(BigDecimal expenseTotal) {
-        this.expenseTotal = expenseTotal;
-    }
-
-    public BigDecimal getExpensePersonal() {
-        return expensePersonal;
-    }
-
-    public void setExpensePersonal(BigDecimal expensePersonal) {
-        this.expensePersonal = expensePersonal;
-    }
-
-    public BigDecimal getExpenseNormalMedicalService() {
-        return expenseNormalMedicalService;
-    }
-
-    public void setExpenseNormalMedicalService(BigDecimal expenseNormalMedicalService) {
-        this.expenseNormalMedicalService = expenseNormalMedicalService;
-    }
-
-    public BigDecimal getExpenseNormalCureOperating() {
-        return expenseNormalCureOperating;
-    }
-
-    public void setExpenseNormalCureOperating(BigDecimal expenseNormalCureOperating) {
-        this.expenseNormalCureOperating = expenseNormalCureOperating;
-    }
-
-    public BigDecimal getExpenseNormalNurse() {
-        return expenseNormalNurse;
-    }
-
-    public void setExpenseNormalNurse(BigDecimal expenseNormalNurse) {
-        this.expenseNormalNurse = expenseNormalNurse;
-    }
-
-    public BigDecimal getExpenseNormalOther() {
-        return expenseNormalOther;
-    }
-
-    public void setExpenseNormalOther(BigDecimal expenseNormalOther) {
-        this.expenseNormalOther = expenseNormalOther;
-    }
-
-    public BigDecimal getExpenseDiagnosisPathology() {
-        return expenseDiagnosisPathology;
-    }
-
-    public void setExpenseDiagnosisPathology(BigDecimal expenseDiagnosisPathology) {
-        this.expenseDiagnosisPathology = expenseDiagnosisPathology;
+        return expenseRecordVO.getExpenseTotal();
     }
 
     public BigDecimal getExpenseDiagnosisLab() {
-        return expenseDiagnosisLab;
-    }
-
-    public void setExpenseDiagnosisLab(BigDecimal expenseDiagnosisLab) {
-        this.expenseDiagnosisLab = expenseDiagnosisLab;
-    }
-
-    public BigDecimal getExpenseDiagnosisImaging() {
-        return expenseDiagnosisImaging;
-    }
-
-    public void setExpenseDiagnosisImaging(BigDecimal expenseDiagnosisImaging) {
-        this.expenseDiagnosisImaging = expenseDiagnosisImaging;
-    }
-
-    public BigDecimal getExpenseDiagnosisClinical() {
-        return expenseDiagnosisClinical;
-    }
-
-    public void setExpenseDiagnosisClinical(BigDecimal expenseDiagnosisClinical) {
-        this.expenseDiagnosisClinical = expenseDiagnosisClinical;
+        return expenseRecordVO.getExpenseDiagnosisLab();
     }
 
     public BigDecimal getExpenseCureNonOperation() {
-        return expenseCureNonOperation;
-    }
-
-    public void setExpenseCureNonOperation(BigDecimal expenseCureNonOperation) {
-        this.expenseCureNonOperation = expenseCureNonOperation;
-    }
-
-    public BigDecimal getExpenseCureClinicalPhysics() {
-        return expenseCureClinicalPhysics;
-    }
-
-    public void setExpenseCureClinicalPhysics(BigDecimal expenseCureClinicalPhysics) {
-        this.expenseCureClinicalPhysics = expenseCureClinicalPhysics;
-    }
-
-    public BigDecimal getExpenseCureOperationCure() {
-        return expenseCureOperationCure;
-    }
-
-    public void setExpenseCureOperationCure(BigDecimal expenseCureOperationCure) {
-        this.expenseCureOperationCure = expenseCureOperationCure;
-    }
-
-    public BigDecimal getExpenseCureAnaesthesia() {
-        return expenseCureAnaesthesia;
-    }
-
-    public void setExpenseCureAnaesthesia(BigDecimal expenseCureAnaesthesia) {
-        this.expenseCureAnaesthesia = expenseCureAnaesthesia;
-    }
-
-    public BigDecimal getExpenseCureOperation() {
-        return expenseCureOperation;
-    }
-
-    public void setExpenseCureOperation(BigDecimal expenseCureOperation) {
-        this.expenseCureOperation = expenseCureOperation;
-    }
-
-    public BigDecimal getExpenseRecovery() {
-        return expenseRecovery;
-    }
-
-    public void setExpenseRecovery(BigDecimal expenseRecovery) {
-        this.expenseRecovery = expenseRecovery;
-    }
-
-    public BigDecimal getExpenseChineseMedicineCure() {
-        return expenseChineseMedicineCure;
-    }
-
-    public void setExpenseChineseMedicineCure(BigDecimal expenseChineseMedicineCure) {
-        this.expenseChineseMedicineCure = expenseChineseMedicineCure;
-    }
-
-    public BigDecimal getExpenseWesternMedicineMedication() {
-        return expenseWesternMedicineMedication;
-    }
-
-    public void setExpenseWesternMedicineMedication(BigDecimal expenseWesternMedicineMedication) {
-        this.expenseWesternMedicineMedication = expenseWesternMedicineMedication;
-    }
-
-    public BigDecimal getExpenseWesternMedicineAntibiosisMedication() {
-        return expenseWesternMedicineAntibiosisMedication;
-    }
-
-    public void setExpenseWesternMedicineAntibiosisMedication(BigDecimal expenseWesternMedicineAntibiosisMedication) {
-        this.expenseWesternMedicineAntibiosisMedication = expenseWesternMedicineAntibiosisMedication;
-    }
-
-    public BigDecimal getExpenseChineseMedicinePatentDrag() {
-        return expenseChineseMedicinePatentDrag;
-    }
-
-    public void setExpenseChineseMedicinePatentDrag(BigDecimal expenseChineseMedicinePatentDrag) {
-        this.expenseChineseMedicinePatentDrag = expenseChineseMedicinePatentDrag;
-    }
-
-    public BigDecimal getExpenseChineseMedicineHerb() {
-        return expenseChineseMedicineHerb;
-    }
-
-    public void setExpenseChineseMedicineHerb(BigDecimal expenseChineseMedicineHerb) {
-        this.expenseChineseMedicineHerb = expenseChineseMedicineHerb;
-    }
-
-    public BigDecimal getExpenseBlood() {
-        return expenseBlood;
-    }
-
-    public void setExpenseBlood(BigDecimal expenseBlood) {
-        this.expenseBlood = expenseBlood;
-    }
-
-    public BigDecimal getExpenseBloodAlbumin() {
-        return expenseBloodAlbumin;
-    }
-
-    public void setExpenseBloodAlbumin(BigDecimal expenseBloodAlbumin) {
-        this.expenseBloodAlbumin = expenseBloodAlbumin;
-    }
-
-    public BigDecimal getExpenseBloodGlobulin() {
-        return expenseBloodGlobulin;
-    }
-
-    public void setExpenseBloodGlobulin(BigDecimal expenseBloodGlobulin) {
-        this.expenseBloodGlobulin = expenseBloodGlobulin;
-    }
-
-    public BigDecimal getExpenseBloodCoagulationFactor() {
-        return expenseBloodCoagulationFactor;
-    }
-
-    public void setExpenseBloodCoagulationFactor(BigDecimal expenseBloodCoagulationFactor) {
-        this.expenseBloodCoagulationFactor = expenseBloodCoagulationFactor;
-    }
-
-    public BigDecimal getExpenseBloodCellFactor() {
-        return expenseBloodCellFactor;
+        return expenseRecordVO.getExpenseCureNonOperation();
     }
 
     public void setExpenseBloodCellFactor(BigDecimal expenseBloodCellFactor) {
-        this.expenseBloodCellFactor = expenseBloodCellFactor;
+        expenseRecordVO.setExpenseBloodCellFactor(expenseBloodCellFactor);
     }
 
-    public BigDecimal getExpenseConsumptionExamine() {
-        return expenseConsumptionExamine;
+    public BigDecimal getExpenseNormalMedicalService() {
+        return expenseRecordVO.getExpenseNormalMedicalService();
     }
 
-    public void setExpenseConsumptionExamine(BigDecimal expenseConsumptionExamine) {
-        this.expenseConsumptionExamine = expenseConsumptionExamine;
+    public void setExpenseCureNonOperation(BigDecimal expenseCureNonOperation) {
+        expenseRecordVO.setExpenseCureNonOperation(expenseCureNonOperation);
     }
 
-    public BigDecimal getExpenseConsumptionCure() {
-        return expenseConsumptionCure;
+    public void setExpenseChineseMedicineCure(BigDecimal expenseChineseMedicineCure) {
+        expenseRecordVO.setExpenseChineseMedicineCure(expenseChineseMedicineCure);
     }
 
-    public void setExpenseConsumptionCure(BigDecimal expenseConsumptionCure) {
-        this.expenseConsumptionCure = expenseConsumptionCure;
+    public BigDecimal getExpenseCureAnaesthesia() {
+        return expenseRecordVO.getExpenseCureAnaesthesia();
     }
 
     public BigDecimal getExpenseConsumptionOperation() {
-        return expenseConsumptionOperation;
+        return expenseRecordVO.getExpenseConsumptionOperation();
     }
 
-    public void setExpenseConsumptionOperation(BigDecimal expenseConsumptionOperation) {
-        this.expenseConsumptionOperation = expenseConsumptionOperation;
+    public BigDecimal getExpenseDiagnosisClinical() {
+        return expenseRecordVO.getExpenseDiagnosisClinical();
     }
 
-    public BigDecimal getExpenseOther() {
-        return expenseOther;
+    public void setExpenseRecovery(BigDecimal expenseRecovery) {
+        expenseRecordVO.setExpenseRecovery(expenseRecovery);
+    }
+
+    public BigDecimal getExpenseWesternMedicineMedication() {
+        return expenseRecordVO.getExpenseWesternMedicineMedication();
+    }
+
+    public void setExpenseNormalMedicalService(BigDecimal expenseNormalMedicalService) {
+        expenseRecordVO.setExpenseNormalMedicalService(expenseNormalMedicalService);
+    }
+
+    public void setExpenseBlood(BigDecimal expenseBlood) {
+        expenseRecordVO.setExpenseBlood(expenseBlood);
+    }
+
+    public BigDecimal getExpenseBloodCellFactor() {
+        return expenseRecordVO.getExpenseBloodCellFactor();
+    }
+
+    public BigDecimal getExpenseNormalOther() {
+        return expenseRecordVO.getExpenseNormalOther();
+    }
+
+    public BigDecimal getExpenseBlood() {
+        return expenseRecordVO.getExpenseBlood();
     }
 
     public void setExpenseOther(BigDecimal expenseOther) {
-        this.expenseOther = expenseOther;
+        expenseRecordVO.setExpenseOther(expenseOther);
     }
+
+    public void setExpenseNormalNurse(BigDecimal expenseNormalNurse) {
+        expenseRecordVO.setExpenseNormalNurse(expenseNormalNurse);
+    }
+
+    public BigDecimal getExpenseChineseMedicinePatentDrag() {
+        return expenseRecordVO.getExpenseChineseMedicinePatentDrag();
+    }
+
+    public void setExpenseNormalCureOperating(BigDecimal expenseNormalCureOperating) {
+        expenseRecordVO.setExpenseNormalCureOperating(expenseNormalCureOperating);
+    }
+
+    public BigDecimal getExpenseBloodAlbumin() {
+        return expenseRecordVO.getExpenseBloodAlbumin();
+    }
+
+    public BigDecimal getExpenseNormalNurse() {
+        return expenseRecordVO.getExpenseNormalNurse();
+    }
+
+    public BigDecimal getExpenseConsumptionCure() {
+        return expenseRecordVO.getExpenseConsumptionCure();
+    }
+
+    public BigDecimal getExpenseRecovery() {
+        return expenseRecordVO.getExpenseRecovery();
+    }
+
+    public void setExpenseWesternMedicineMedication(BigDecimal expenseWesternMedicineMedication) {
+        expenseRecordVO.setExpenseWesternMedicineMedication(expenseWesternMedicineMedication);
+    }
+
+    public void setExpenseBloodAlbumin(BigDecimal expenseBloodAlbumin) {
+        expenseRecordVO.setExpenseBloodAlbumin(expenseBloodAlbumin);
+    }
+
+    public void setExpensePersonal(BigDecimal expensePersonal) {
+        expenseRecordVO.setExpensePersonal(expensePersonal);
+    }
+
+    public BigDecimal getExpenseChineseMedicineCure() {
+        return expenseRecordVO.getExpenseChineseMedicineCure();
+    }
+
+    public void setExpenseConsumptionCure(BigDecimal expenseConsumptionCure) {
+        expenseRecordVO.setExpenseConsumptionCure(expenseConsumptionCure);
+    }
+
+    public BigDecimal getExpenseDiagnosisPathology() {
+        return expenseRecordVO.getExpenseDiagnosisPathology();
+    }
+
+    public BigDecimal getExpenseBloodGlobulin() {
+        return expenseRecordVO.getExpenseBloodGlobulin();
+    }
+
+    public void setExpenseBloodCoagulationFactor(BigDecimal expenseBloodCoagulationFactor) {
+        expenseRecordVO.setExpenseBloodCoagulationFactor(expenseBloodCoagulationFactor);
+    }
+
+    public void setExpenseCureClinicalPhysics(BigDecimal expenseCureClinicalPhysics) {
+        expenseRecordVO.setExpenseCureClinicalPhysics(expenseCureClinicalPhysics);
+    }
+
+    public BigDecimal getExpenseWesternMedicineAntibiosisMedication() {
+        return expenseRecordVO.getExpenseWesternMedicineAntibiosisMedication();
+    }
+
+    public BigDecimal getExpenseConsumptionExamine() {
+        return expenseRecordVO.getExpenseConsumptionExamine();
+    }
+
+    public BigDecimal getExpensePersonal() {
+        return expenseRecordVO.getExpensePersonal();
+    }
+
+    public BigDecimal getExpenseCureOperation() {
+        return expenseRecordVO.getExpenseCureOperation();
+    }
+
+    public BigDecimal getExpenseNormalCureOperating() {
+        return expenseRecordVO.getExpenseNormalCureOperating();
+    }
+
+    public void setExpenseConsumptionExamine(BigDecimal expenseConsumptionExamine) {
+        expenseRecordVO.setExpenseConsumptionExamine(expenseConsumptionExamine);
+    }
+
+    public void setExpenseCureAnaesthesia(BigDecimal expenseCureAnaesthesia) {
+        expenseRecordVO.setExpenseCureAnaesthesia(expenseCureAnaesthesia);
+    }
+
+    public void setExpenseChineseMedicinePatentDrag(BigDecimal expenseChineseMedicinePatentDrag) {
+        expenseRecordVO.setExpenseChineseMedicinePatentDrag(expenseChineseMedicinePatentDrag);
+    }
+
+    public BigDecimal getExpenseChineseMedicineHerb() {
+        return expenseRecordVO.getExpenseChineseMedicineHerb();
+    }
+
+    public void setExpenseDiagnosisImaging(BigDecimal expenseDiagnosisImaging) {
+        expenseRecordVO.setExpenseDiagnosisImaging(expenseDiagnosisImaging);
+    }
+
+    public void setExpenseChineseMedicineHerb(BigDecimal expenseChineseMedicineHerb) {
+        expenseRecordVO.setExpenseChineseMedicineHerb(expenseChineseMedicineHerb);
+    }
+
+    public void setExpenseWesternMedicineAntibiosisMedication(BigDecimal expenseWesternMedicineAntibiosisMedication) {
+        expenseRecordVO.setExpenseWesternMedicineAntibiosisMedication(expenseWesternMedicineAntibiosisMedication);
+    }
+
+    public void setExpenseDiagnosisLab(BigDecimal expenseDiagnosisLab) {
+        expenseRecordVO.setExpenseDiagnosisLab(expenseDiagnosisLab);
+    }
+
+    public void setExpenseDiagnosisPathology(BigDecimal expenseDiagnosisPathology) {
+        expenseRecordVO.setExpenseDiagnosisPathology(expenseDiagnosisPathology);
+    }
+
+    public BigDecimal getExpenseBloodCoagulationFactor() {
+        return expenseRecordVO.getExpenseBloodCoagulationFactor();
+    }
+
+    public void setExpenseConsumptionOperation(BigDecimal expenseConsumptionOperation) {
+        expenseRecordVO.setExpenseConsumptionOperation(expenseConsumptionOperation);
+    }
+
+    public void setExpenseDiagnosisClinical(BigDecimal expenseDiagnosisClinical) {
+        expenseRecordVO.setExpenseDiagnosisClinical(expenseDiagnosisClinical);
+    }
+
+    public BigDecimal getExpenseDiagnosisImaging() {
+        return expenseRecordVO.getExpenseDiagnosisImaging();
+    }
+
+    public BigDecimal getExpenseCureOperationCure() {
+        return expenseRecordVO.getExpenseCureOperationCure();
+    }
+
+    public BigDecimal getExpenseOther() {
+        return expenseRecordVO.getExpenseOther();
+    }
+
+    public void setExpenseTotal(BigDecimal expenseTotal) {
+        expenseRecordVO.setExpenseTotal(expenseTotal);
+    }
+
+    public void setExpenseCureOperation(BigDecimal expenseCureOperation) {
+        expenseRecordVO.setExpenseCureOperation(expenseCureOperation);
+    }
+
+    public BigDecimal getExpenseCureClinicalPhysics() {
+        return expenseRecordVO.getExpenseCureClinicalPhysics();
+    }
+
+    public void setExpenseNormalOther(BigDecimal expenseNormalOther) {
+        expenseRecordVO.setExpenseNormalOther(expenseNormalOther);
+    }
+
+    public void setExpenseBloodGlobulin(BigDecimal expenseBloodGlobulin) {
+        expenseRecordVO.setExpenseBloodGlobulin(expenseBloodGlobulin);
+    }
+
+    public void setExpenseCureOperationCure(BigDecimal expenseCureOperationCure) {
+        expenseRecordVO.setExpenseCureOperationCure(expenseCureOperationCure);
+    }
+
 }

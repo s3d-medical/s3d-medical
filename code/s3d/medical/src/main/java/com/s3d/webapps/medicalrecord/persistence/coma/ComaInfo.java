@@ -1,6 +1,7 @@
-package com.s3d.webapps.medicalrecord.persistence;
+package com.s3d.webapps.medicalrecord.persistence.coma;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author wind.chen
@@ -8,7 +9,11 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="mr_comma_info")
-public class ComaInfo extends AbstractGeneralProperties {
+public class ComaInfo implements Serializable {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    protected Integer id;
 
     @Column(name="days_before_admission")
 	private Integer daysBeforeAdmission;
@@ -27,6 +32,26 @@ public class ComaInfo extends AbstractGeneralProperties {
 
     @Column(name="minutes_in_hospital")
 	private Integer minutesInHospital;
+
+    public ComaInfo() {
+    }
+
+    public void fill(Integer daysBeforeAdmission, Integer hoursBeforeAdmission, Integer minutesBeforeAdmission, Integer daysInHospital, Integer hoursInHospital, Integer minutesInHospital) {
+        this.daysBeforeAdmission = daysBeforeAdmission;
+        this.hoursBeforeAdmission = hoursBeforeAdmission;
+        this.minutesBeforeAdmission = minutesBeforeAdmission;
+        this.daysInHospital = daysInHospital;
+        this.hoursInHospital = hoursInHospital;
+        this.minutesInHospital = minutesInHospital;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getDaysBeforeAdmission() {
         return daysBeforeAdmission;

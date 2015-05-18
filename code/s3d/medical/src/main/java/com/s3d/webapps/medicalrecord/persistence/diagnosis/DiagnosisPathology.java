@@ -17,8 +17,17 @@ public class DiagnosisPathology extends BaseDiagnose {
     @Column(name="pathology_no")
 	private String pathologyNo;
 
+    public DiagnosisPathology() {
+
+    }
+
     public DiagnosisPathology(String name, String code, String pathologyNo) {
         super(name, code);
+        this.pathologyNo = pathologyNo;
+    }
+
+    public void fill(String name, String code, String pathologyNo) {
+        super.fill(name, code);
         this.pathologyNo = pathologyNo;
     }
 

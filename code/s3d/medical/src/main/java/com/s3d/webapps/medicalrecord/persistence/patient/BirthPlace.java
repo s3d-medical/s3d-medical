@@ -1,18 +1,24 @@
 package com.s3d.webapps.medicalrecord.persistence.patient;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  * @author wind.chen
  * @version 1.0
  */
 @Entity
-@DiscriminatorValue(value = "birth")
+@Table(name="p_birth_place")
+@PrimaryKeyJoinColumn(name="birth_place_id")
 public class BirthPlace extends BaseAddress {
     @Column(name="county")
     private String county;
+
+    public BirthPlace() {
+    }
+    public void fill(String province, String city, String county) {
+        this.fill(province, city);
+        this.county = county;
+    }
 
     public String getCounty() {
         return county;

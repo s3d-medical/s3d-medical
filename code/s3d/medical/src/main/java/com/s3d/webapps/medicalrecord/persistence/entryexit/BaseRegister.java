@@ -1,24 +1,51 @@
-package com.s3d.webapps.medicalrecord.persistence.inOrout;
-
-import com.s3d.webapps.medicalrecord.persistence.AbstractGeneralProperties;
+package com.s3d.webapps.medicalrecord.persistence.entryexit;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author  wind.chen
  * @date 2015/5/11.
  */
+@MappedSuperclass
+public abstract class BaseRegister implements Serializable{
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    protected Integer id;
 
-public class BaseRegister extends AbstractGeneralProperties {
     @Column(name="registered_time")
     protected Date registeredTime;
 
     @Column(name="depart")
-    protected Integer depart;
+    protected String depart;
 
     @Column(name="sick_room_no")
     protected String sickRoomNo;
+
+    public BaseRegister() {
+    }
+
+    public BaseRegister(Date registeredTime, String depart, String sickRoomNo) {
+        this.registeredTime = registeredTime;
+        this.depart = depart;
+        this.sickRoomNo = sickRoomNo;
+    }
+
+    public void fill(Date registeredTime, String depart, String sickRoomNo) {
+        this.registeredTime = registeredTime;
+        this.depart = depart;
+        this.sickRoomNo = sickRoomNo;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Date getRegisteredTime() {
         return registeredTime;
@@ -28,11 +55,11 @@ public class BaseRegister extends AbstractGeneralProperties {
         this.registeredTime = registeredTime;
     }
 
-    public Integer getDepart() {
+    public String getDepart() {
         return depart;
     }
 
-    public void setDepart(Integer depart) {
+    public void setDepart(String depart) {
         this.depart = depart;
     }
 

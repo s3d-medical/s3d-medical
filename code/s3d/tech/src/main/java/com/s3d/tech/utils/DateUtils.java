@@ -90,7 +90,19 @@ public class DateUtils {
      * @return
      */
     public static Date convertToDate(String srcDate){
+        if(StringUtils.isEmpty(srcDate)){
+            return null;
+        }
         return convertToSpecifiedDateTime(srcDate, DEFAULT_DATE_FORMAT, null, null);
+    }
+
+    public static Date convertToDate(Integer year, Integer month, Integer day){
+        if(year != null && month != null && day != null ){
+            StringBuilder sb = new StringBuilder();
+            sb.append(year).append("-").append(month).append("-").append(day).append(" 00:00:00");
+            return DateUtils.convertToDate(sb.toString());
+        }
+        return null;
     }
 
     /**
@@ -104,6 +116,18 @@ public class DateUtils {
 		String strDate = convertToSpecifiedPatternStr(dateTime, DEFAULT_DATE_FORMAT, null, null);
         return convertToSpecifiedDateTime(strDate, DEFAULT_DATE_FORMAT, null, null);
 	}
+
+    public static Date convertToDateTime(Integer year, Integer month, Integer day, String time){
+        if(year != null && month != null && day != null ){
+            StringBuilder sb = new StringBuilder();
+            sb.append(year).append("-").append(month).append("-").append(day);
+            if(time != null && !"".equals(time)){
+                  sb.append(" ").append(time);
+            }
+            return DateUtils.convertToDateTime(sb.toString());
+        }
+        return null;
+    }
 
 	public static Date convertToDateTime(String dateString){
 		return convertToSpecifiedDateTime(dateString, DEFAULT_DATETIME_FORMAT, null, null);
@@ -224,12 +248,50 @@ public class DateUtils {
 		return addHourToDate(givenDate, hours);
 	}
 
+    public static Integer getYearInt(Date dateTime){
+        if(dateTime == null){
+            return null;
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateTime);
+        return cal.get(Calendar.YEAR);
+    }
+    public static Integer getMonthInt(Date dateTime){
+        if(dateTime == null){
+            return null;
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateTime);
+        return cal.get(Calendar.MONTH);
+    }
+    public static Integer getDayOfMonthInt(Date dateTime){
+        if(dateTime == null){
+            return null;
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateTime);
+        return cal.get(Calendar.DAY_OF_MONTH);
+    }
+
+    //TODO
+    public static String getTimeOfDate(Date dateTime){
+        if(dateTime == null){
+            return null;
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateTime);
+        return "00:00:00";
+    }
+
 	/**
 	 * get hour from date. 
 	 * @param dateTime
 	 * @return
 	 */
-	public static int getHourInt(Date dateTime) {
+	public static Integer getHourInt(Date dateTime) {
+        if(dateTime == null){
+            return null;
+        }
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(dateTime);
 		return cal.get(Calendar.HOUR_OF_DAY);

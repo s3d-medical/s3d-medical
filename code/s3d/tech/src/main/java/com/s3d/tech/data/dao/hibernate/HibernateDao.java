@@ -10,6 +10,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.metadata.ClassMetadata;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.util.Assert;
 
@@ -66,6 +67,7 @@ public class HibernateDao<T, ID extends Serializable> {
 	 * 
 	 * @param sessionFactory Hibernate sessionFactory
 	 */
+    @Autowired
 	public void setSessionFactory(final SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 		this.hibernateTemplate = new HibernateTemplate(this.sessionFactory,true);

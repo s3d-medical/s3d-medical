@@ -1,7 +1,9 @@
-package com.s3d.webapps.medicalrecord.persistence;
+package com.s3d.webapps.medicalrecord.persistence.doctor;
 
+import com.s3d.webapps.medicalrecord.persistence.MedicalRecordHomePage;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * role name:
@@ -11,8 +13,12 @@ import javax.persistence.*;
 
  */
 @Entity
-@Table(name="person_in_charge")
-public class PersonInCharge  extends AbstractGeneralProperties {
+@Table(name="mr_doctor_in_charge")
+public class DoctorInCharge implements Serializable{
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    protected Integer id;
 
     @Column(name="worker_role")
 	private Integer workerRole;
@@ -24,7 +30,7 @@ public class PersonInCharge  extends AbstractGeneralProperties {
     @JoinColumn(name="medical_record_home_page_id", referencedColumnName = "id")
     private MedicalRecordHomePage medicalRecordHomePage;
 
-	public PersonInCharge(){
+	public DoctorInCharge(){
 
 	}
 
@@ -52,13 +58,21 @@ public class PersonInCharge  extends AbstractGeneralProperties {
         this.medicalRecordHomePage = medicalRecordHomePage;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PersonInCharge)) return false;
+        if (!(o instanceof DoctorInCharge)) return false;
+        if (!super.equals(o)) return false;
 
-        PersonInCharge that = (PersonInCharge) o;
+        DoctorInCharge that = (DoctorInCharge) o;
 
         if (doctor != null ? !doctor.equals(that.doctor) : that.doctor != null) return false;
         if (medicalRecordHomePage != null ? !medicalRecordHomePage.equals(that.medicalRecordHomePage) : that.medicalRecordHomePage != null)
@@ -70,7 +84,8 @@ public class PersonInCharge  extends AbstractGeneralProperties {
 
     @Override
     public int hashCode() {
-        int result = workerRole != null ? workerRole.hashCode() : 0;
+        int result = super.hashCode();
+        result = 31 * result + (workerRole != null ? workerRole.hashCode() : 0);
         result = 31 * result + (doctor != null ? doctor.hashCode() : 0);
         result = 31 * result + (medicalRecordHomePage != null ? medicalRecordHomePage.hashCode() : 0);
         return result;

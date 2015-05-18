@@ -1,6 +1,10 @@
 package com.s3d.webapps.medicalrecord.persistence;
 
 
+import com.s3d.webapps.medicalrecord.persistence.HomePageBasicInfo.HomePageBasicInfo;
+import com.s3d.webapps.medicalrecord.persistence.operation.Operation;
+import com.s3d.webapps.medicalrecord.persistence.coma.ComaInfo;
+import com.s3d.webapps.medicalrecord.persistence.doctor.DoctorInCharge;
 import com.s3d.webapps.medicalrecord.persistence.patient.PatientInfo;
 import com.s3d.webapps.medicalrecord.persistence.diagnosis.DiagnosisClinic;
 import com.s3d.webapps.medicalrecord.persistence.diagnosis.DiagnosisDischarge;
@@ -24,28 +28,18 @@ import java.util.List;
  */
 @Entity
 @Table(name = "mr_medical_record_home_page")
-public class MedicalRecordHomePage extends AbstractGeneralProperties {
+public class MedicalRecordHomePage {
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    protected Integer id;
 
-    @Column(name = "payment_type")
-    private String paymentType;
+    @Column(name="business_key")
+    private String businessKey;
 
-    @Column(name = "health_card_no")
-    private String healthCardNo;
-
-    @Column(name = "seq_no")
-    private Integer seqNo;
-
-    @Column(name = "if_drug_allergy")
-    private Integer ifDrugAllergy;
-
-    @Column(name = "if_autopsy")
-    private Boolean ifAutopsy;
-
-    @Column(name = "blood_type")
-    private Integer bloodType;
-
-    @Column(name = "is_rh")
-    private Integer isRH;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "home_page_basic_info_id", referencedColumnName = "id")
+    private HomePageBasicInfo homePageBasicInfo;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "patient_info_id", referencedColumnName = "id")
@@ -54,11 +48,6 @@ public class MedicalRecordHomePage extends AbstractGeneralProperties {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "register_admission_id")
     private RegisterAdmission registerAdmission;
-
-    // department changes
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "depart_change_id")
-    public DepartChange departChange;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "register_discharge_id")
@@ -86,16 +75,12 @@ public class MedicalRecordHomePage extends AbstractGeneralProperties {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "medicalRecordHomePage")
     @JoinColumn(name = "medical_record_home_page_id")
     @Fetch(FetchMode.SUBSELECT)
-    private List<PersonInCharge> personsInChargeList = new ArrayList<PersonInCharge>();
+    private List<DoctorInCharge> doctorInChargeList = new ArrayList<DoctorInCharge>();
 
     // --------------quality -----------------
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "quality_control_info_id")
-    public QualityControlInfo qualityControl;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "expense_invoice")
-    public ExpenseInvoice expenseInvoice;
+    public QualityControlInfo qualityControlInfo;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "medicalRecordHomePage")
     @JoinColumn(name="medical_record_home_page_id")
@@ -106,64 +91,38 @@ public class MedicalRecordHomePage extends AbstractGeneralProperties {
     @JoinColumn(name = "comma_info_id")
     public ComaInfo comaInfo;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "expense_invoice_id")
+    public ExpenseInvoice expenseInvoice;
+
     public MedicalRecordHomePage() {
 
     }
 
-    public String getPaymentType() {
-        return paymentType;
+    ///////////////////////////////////////////////////////setter, getter //////////////////////////
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getHealthCardNo() {
-        return healthCardNo;
+    public String getBusinessKey() {
+        return businessKey;
     }
 
-    public void setHealthCardNo(String healthCardNo) {
-        this.healthCardNo = healthCardNo;
+    public void setBusinessKey(String businessKey) {
+        this.businessKey = businessKey;
     }
 
-    public Integer getSeqNo() {
-        return seqNo;
+    public HomePageBasicInfo getHomePageBasicInfo() {
+        return homePageBasicInfo;
     }
 
-    public void setSeqNo(Integer seqNo) {
-        this.seqNo = seqNo;
-    }
-
-    public Integer getIfDrugAllergy() {
-        return ifDrugAllergy;
-    }
-
-    public void setIfDrugAllergy(Integer ifDrugAllergy) {
-        this.ifDrugAllergy = ifDrugAllergy;
-    }
-
-    public Boolean getIfAutopsy() {
-        return ifAutopsy;
-    }
-
-    public void setIfAutopsy(Boolean ifAutopsy) {
-        this.ifAutopsy = ifAutopsy;
-    }
-
-    public Integer getBloodType() {
-        return bloodType;
-    }
-
-    public void setBloodType(Integer bloodType) {
-        this.bloodType = bloodType;
-    }
-
-    public Integer getIsRH() {
-        return isRH;
-    }
-
-    public void setIsRH(Integer isRH) {
-        this.isRH = isRH;
+    public void setHomePageBasicInfo(HomePageBasicInfo homePageBasicInfo) {
+        this.homePageBasicInfo = homePageBasicInfo;
     }
 
     public PatientInfo getPatientInfo() {
@@ -180,14 +139,6 @@ public class MedicalRecordHomePage extends AbstractGeneralProperties {
 
     public void setRegisterAdmission(RegisterAdmission registerAdmission) {
         this.registerAdmission = registerAdmission;
-    }
-
-    public DepartChange getDepartChange() {
-        return departChange;
-    }
-
-    public void setDepartChange(DepartChange departChange) {
-        this.departChange = departChange;
     }
 
     public RegisterDischarge getRegisterDischarge() {
@@ -230,20 +181,20 @@ public class MedicalRecordHomePage extends AbstractGeneralProperties {
         this.diagnosisPathology = diagnosisPathology;
     }
 
-    public List<PersonInCharge> getPersonsInChargeList() {
-        return personsInChargeList;
+    public List<DoctorInCharge> getDoctorInChargeList() {
+        return doctorInChargeList;
     }
 
-    public void setPersonsInChargeList(List<PersonInCharge> personsInChargeList) {
-        this.personsInChargeList = personsInChargeList;
+    public void setDoctorInChargeList(List<DoctorInCharge> doctorInChargeList) {
+        this.doctorInChargeList = doctorInChargeList;
     }
 
-    public QualityControlInfo getQualityControl() {
-        return qualityControl;
+    public QualityControlInfo getQualityControlInfo() {
+        return qualityControlInfo;
     }
 
-    public void setQualityControl(QualityControlInfo qualityControl) {
-        this.qualityControl = qualityControl;
+    public void setQualityControlInfo(QualityControlInfo qualityControlInfo) {
+        this.qualityControlInfo = qualityControlInfo;
     }
 
     public ExpenseInvoice getExpenseInvoice() {

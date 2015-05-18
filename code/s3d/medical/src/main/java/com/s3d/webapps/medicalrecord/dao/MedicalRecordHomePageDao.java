@@ -8,5 +8,5 @@ import com.s3d.webapps.medicalrecord.persistence.MedicalRecordHomePage;
  * @dte 2015/5/15.
  */
 public interface MedicalRecordHomePageDao extends GenericDao<MedicalRecordHomePage,Integer> {
-
+    MedicalRecordHomePage getByBusinessKey(String businessKey);
 }

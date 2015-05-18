@@ -1,8 +1,7 @@
 package com.s3d.webapps.medicalrecord.persistence.patient;
 
-import com.s3d.webapps.medicalrecord.persistence.AbstractGeneralProperties;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author wind.chen
@@ -11,20 +10,33 @@ import javax.persistence.*;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="address_type")
+@Table(name="p_address")
+@DiscriminatorColumn(name = "address_type")
 @DiscriminatorValue(value = "base")
-@MappedSuperclass
-public abstract class BaseAddress {
+public class BaseAddress implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "id")
     protected Integer id;
 
     @Column(name="province")
-	private String province;
+    protected String province;
 
     @Column(name="city")
-    private String city;
+    protected String city;
+
+    public BaseAddress() {
+    }
+
+    public BaseAddress(String province, String city) {
+        this.province = province;
+        this.city = city;
+    }
+
+    protected void fill(String province, String city) {
+        this.province = province;
+        this.city = city;
+    }
 
     public Integer getId() {
         return id;

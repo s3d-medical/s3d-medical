@@ -1,6 +1,9 @@
 package com.s3d.webapps.medicalrecord.vo;
 
+import com.s3d.tech.utils.DateUtils;
+import com.s3d.webapps.medicalrecord.persistence.operation.Operation;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.util.Date;
 
@@ -10,7 +13,7 @@ import java.util.Date;
  */
 public class OperationHistoryVO {
     private String operateCode;
-    private Date date;
+    private String date;
     private String grade;
     private String operationName;
     private String operator;
@@ -20,10 +23,24 @@ public class OperationHistoryVO {
     private String anaesthesiaType;
     private String anaesthetist;
 
-    @JsonIgnore
     public OperationHistoryVO() {
+
     }
 
+    public OperationHistoryVO(Operation operation) {
+        this.operateCode = operation.getCode();
+        this.date = DateUtils.convertToStrDate(operation.getOperatedDate());
+        this.grade = operation.getLevel();
+        this.operationName = operation.getName();
+        this.operator = operation.getMajorOperator();
+        this.firstAssistant = operation.getAssistant1();
+        this.secondAssistant = operation.getAssistant2();
+        this.cutHealGrade = operation.getHealedInGrade();
+        this.anaesthesiaType = operation.getAnesthesiaType();
+        this.anaesthetist = operation.getAnesthesiaDoctor();
+
+
+    }
     public String getOperateCode() {
         return operateCode;
     }
@@ -32,11 +49,11 @@ public class OperationHistoryVO {
         this.operateCode = operateCode;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -103,4 +120,5 @@ public class OperationHistoryVO {
     public void setAnaesthetist(String anaesthetist) {
         this.anaesthetist = anaesthetist;
     }
+
 }

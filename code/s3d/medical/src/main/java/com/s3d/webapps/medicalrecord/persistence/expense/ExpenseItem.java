@@ -1,9 +1,9 @@
 package com.s3d.webapps.medicalrecord.persistence.expense;
 
-
-import com.s3d.webapps.medicalrecord.persistence.AbstractGeneralProperties;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -12,7 +12,11 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "mr_expense_item")
-public class ExpenseItem extends AbstractGeneralProperties {
+public class ExpenseItem implements Serializable{
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    protected Integer id;
 
     @Column(name = "category")
     private Integer category;
@@ -29,6 +33,14 @@ public class ExpenseItem extends AbstractGeneralProperties {
 
     public ExpenseItem() {
 
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getCategory() {
