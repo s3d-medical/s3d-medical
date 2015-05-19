@@ -8,8 +8,7 @@ import javax.persistence.*;
  * @created 10-����-2015 10:24:44
  */
 @Entity
-@Table(name="p_present_address")
-@PrimaryKeyJoinColumn(name = "present_address_id")
+@DiscriminatorValue(value = "PresentAddress")
 public class PresentAddress extends BaseAddress {
 
     @Column(name="county")

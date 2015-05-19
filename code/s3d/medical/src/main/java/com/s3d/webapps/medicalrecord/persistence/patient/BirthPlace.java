@@ -7,8 +7,7 @@ import javax.persistence.*;
  * @version 1.0
  */
 @Entity
-@Table(name="p_birth_place")
-@PrimaryKeyJoinColumn(name="birth_place_id")
+@DiscriminatorValue(value = "BirthPlace")
 public class BirthPlace extends BaseAddress {
     @Column(name="county")
     private String county;

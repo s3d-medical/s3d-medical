@@ -58,19 +58,19 @@ public class PatientInfo implements Serializable{
     private String maritalStatus;
 
     @OneToOne(fetch= FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="birth_place_id", referencedColumnName = "birth_place_id")
+    @JoinColumn(name="birth_place_id")
     private BirthPlace birthPlace;
 
     @ManyToOne(fetch= FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="native_place_id", referencedColumnName = "native_place_id")
+    @JoinColumn(name="native_place_id")
     private NativePlace nativePlace;
 
     @ManyToOne(fetch= FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="present_address_id", referencedColumnName = "present_address_id")
+    @JoinColumn(name="present_address_id")
     private PresentAddress presentAddress;
 
     @OneToOne(fetch= FetchType.EAGER,cascade=CascadeType.ALL)
-    @JoinColumn(name="registered_residence_id", referencedColumnName = "registered_residence_id")
+    @JoinColumn(name="registered_residence_id")
     private RegisteredResidence registeredResidence;
 
     @ManyToOne(fetch= FetchType.EAGER,cascade=CascadeType.ALL)

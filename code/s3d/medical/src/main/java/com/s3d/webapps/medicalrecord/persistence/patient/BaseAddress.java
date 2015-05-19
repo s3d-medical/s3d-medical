@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name="p_address")
 @DiscriminatorColumn(name = "address_type")
-@DiscriminatorValue(value = "base")
+@DiscriminatorValue(value = "BaseAddress")
 public class BaseAddress implements Serializable {
     @Id
     @GeneratedValue

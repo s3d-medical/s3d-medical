@@ -7,8 +7,7 @@ import javax.persistence.*;
  * @version 1.0
  */
 @Entity
-@Table(name="p_native_place")
-@PrimaryKeyJoinColumn(name = "native_place_id")
+@DiscriminatorValue(value = "NativePlace")
 public class NativePlace extends BaseAddress {
     @Override
     protected void fill(String province, String city) {
