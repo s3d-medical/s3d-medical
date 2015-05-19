@@ -8,78 +8,91 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-	<!-- spring mvc -->
-	<!-- web mvc configuration -->
-	<!-- view resolver 视图解析器 -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:viewClass="org.springframework.web.servlet.view.JstlView" p:prefix="/views/"
-		p:suffix=".jsp" />
-	
+    <!-- 1. scan controllers in packages  -->
+    <context:annotation-config/>
 	<context:component-scan base-package="com.s3d.webapps.web.controller"  >
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
-	
-	<!-- MVC Annotation Driven -->
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    <context:component-scan base-package="com.s3d.webapps.medicalrecord.web.controler"  >
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+
+	<!-- 2. MVC Annotation Driven -->
+    <!--    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+    </bean>-->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
 			<list>
-				<bean id="utf8StringHttpMessageConverter"
-					class="org.springframework.http.converter.StringHttpMessageConverter">
-					<property name="supportedMediaTypes">
-						<list>
-							<value>text/plain;charset=UTF-8</value>
-						</list>
-					</property>
-				</bean>
-
-				<bean id="jacksonMessageConverter"
-					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-					<!-- 解决 HttpMediaTypeNotAcceptableException: Could not find acceptable 
-						representation -->
-					<property name="supportedMediaTypes">
-						<list>
-							<value>text/html;charset=UTF-8</value>
-						</list>
-					</property>
-				</bean>
-
+                <ref bean="jacksonMessageConverter"/>
+                <ref bean="utf8StringHttpMessageConverter"/>
 			</list>
 		</property>
 	</bean>
+    <bean id="utf8StringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="jacksonMessageConverter"  class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <mvc:annotation-driven conversion-service="conversionService" />
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="com.s3d.webapps.framework.spring.StringToDateConverter" />
+            </list>
+        </property>
+    </bean>
 
-	<mvc:annotation-driven conversion-service="conversionService" />
 
-	<bean id="conversionService"
-		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-		<property name="converters">
-			<list>
-				<bean class="com.s3d.webapps.framework.spring.StringToDateConverter" />
-			</list>
-		</property>
-	</bean>
 
-	<bean id="exceptionResolver"
-		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="exceptionMappings">
-			<props>
+    <!-- 3. view resolver  -->
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <!--  enable .json suffix, paramter ? format in url. -->
+        <property name="favorPathExtension" value="true"/>
+        <property name="favorParameter" value="false"/>
+        <!-- this needs client set header accept:"application/json" or others -->
+        <property name="ignoreAcceptHeader" value="false" />
+        <!-- it's valid for accept:*/* , null accept will exception. -->
+        <property name="defaultContentType" value="application/json"/>
 
-			</props>
-		</property>
-	</bean>
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/json"/>
+            </map>
+        </property>
+
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+            </list>
+        </property>
+        <property name="order" value="1"/>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:viewClass="org.springframework.web.servlet.view.JstlView" p:prefix="/views/"  p:suffix=".jsp" />
 
 	<!-- CommonsMultipartResolver -->
-
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="1024000000"></property>
 	</bean>
 
 
-	<!-- MessageResolve -->
-	<bean id="messageSource"
-		class="org.springframework.context.support.ResourceBundleMessageSource">
+
+	<!-- 4. locale  by interceptor-->
+        <!-- 4.1 load messages properties -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
 				<value>res.web.messages</value>
@@ -87,19 +100,32 @@
 			</list>
 		</property>
 	</bean>
-
-	<bean id="localeResolver"
-		class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
+        <!-- 4.2 based on cookie for locale -->
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
 		p:cookieName="clientLanguage" p:cookieMaxAge="10000" p:cookiePath="/"
 		p:defaultLocale="zh" />
-
+        <!-- 4.3 use interceptor to auto invoke locale localeResolver. Here for all request , locale is applied.
+                    You can use separately define interceptor for each url mapping handler. -->
 	<mvc:interceptors>
-		<bean id="localeChangeInterceptor"
-			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
 	</mvc:interceptors>
-	
+
+
+
+    <!-- 5 handle static resources   mvc:resources will register  SimpleUrlHandlerMapping. -->
 	<mvc:resources mapping="/resources/**" location="/resources/"
 		cache-period="31536000" />
 
 	<mvc:resources mapping="/template/**" location="/template/"/>
+
+
+    <!-- 6. Handle exception. -->
+    <bean id="exceptionResolver"
+          class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+            </props>
+        </property>
+    </bean>
+
 </beans> 

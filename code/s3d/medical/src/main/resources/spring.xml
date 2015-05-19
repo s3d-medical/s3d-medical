@@ -14,22 +14,24 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
 	<!-- 扫描service -->
-	<context:component-scan base-package="com.s3d.**.impl" >
+    <context:annotation-config/>
+	<context:component-scan base-package="com.s3d" >
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
-	<context:property-placeholder location="classpath*:/config.properties"/>
-    <!--  This can be substituted  context:property-placeholder
+    <!--  This can be substituted  <context:property-placeholder
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="ignoreResourceNotFound" value="true" />
 		<property name="locations" value="classpath*:/config.properties" />
 	</bean>
    -->
+	<context:property-placeholder location="classpath*:/config.properties"/>
 
 
-    <import resource="spring-data-transaction.xml"/>
-    <import resource="spring-beans.xml"/>
-    <import resource="spring-security.xml"/>
+
+    <import resource="classpath*:spring-app-transaction.xml"/>
+    <import resource="classpath*:spring-app-beans-def.xml"/>
+    <import resource="classpath*:spring-app-security.xml"/>
 
 
 
