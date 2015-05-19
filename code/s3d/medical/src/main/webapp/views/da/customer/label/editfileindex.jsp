@@ -45,7 +45,8 @@ var Com_Parameter = {
 	Style:"${WEBAPPS_Parameter_Style}",
 	StylePath:"${WEBAPPS_Parameter_StylePath}",
 	Lang:"<%=request.getLocale().toString().toLowerCase().replace('_', '-')%>",
-	CurrentUserId:"${WEBAPPS_Parameter_CurrentUserId}"
+	CurrentUserId:"${WEBAPPS_Parameter_CurrentUserId}",
+	elAngular: null
 };
 </script>
 <link rel="shortcut icon" href="${WEBAPPS_Parameter_ContextPath}favicon.ico">
@@ -171,8 +172,10 @@ var Com_Parameter = {
       </div>
 
     </div>
+	  <%--<div style="display: none;"></div>
 	  <button id="btnSave" ng-click="save()" style="display: none;"/>
 	  <button id="btnGetData" ng-click="getData()" style="display: none;"/>
+	  <input id="ifdId" type="hidden"/>--%>
   </div>
 
   <script>
@@ -408,19 +411,7 @@ var Com_Parameter = {
 					text:'保存',
 					elCls : 'button button-primary',
 					handler : function(){
-						$("#btnSave").click();
-						/*var frm = $(".bui-stdmod-body form")[0];
-						var dataPara = $(frm).serialize();
-						var $dialog=this;
-					    $.ajax({
-					        url: frm.action,
-					        type: frm.method,
-					        data: dataPara,
-					        success: function(){
-					        	//
-					    		$dialog.close();
-					        }
-					    });*/
+						Com_Parameter.elAngular.scope().save();
 					}
 				},{
 					text:'关闭',
@@ -446,18 +437,22 @@ var Com_Parameter = {
 					window.key.setScope('fill');
 					if (!dialog.get("loader").get("hasLoad")) {
 						dialog.get('loader').load(/*{id : item.fdId}*/);
-						setTimeout(function() {
-							angular.bootstrap(document, ['mainPage']);
-							$("#btnGetData").click();
-							$("select").selectator({
-								labels: {
-									search: '搜索'
-								}
-							});
-						}, 500);
+						$.ajax({
+							type: "get",
+							url: Com_Parameter.ResPath + "json/settings.json",
+							dataType: "json",
+							success: function (data) {
+								angular.bootstrap(document, ['mainPage']);
+								Com_Parameter.elAngular = angular.element($('body'));
+								Com_Parameter.elAngular.scope().$apply(function () {
+									Com_Parameter.elAngular.scope().settings = data;
+								});
+								Com_Parameter.elAngular.scope().getData(item.fdId, true);
+							}
+						});
+					} else {
+						Com_Parameter.elAngular.scope().getData(item.fdId, false);
 					}
-					// get data from server - settings, page data
-					$("#btnGetData").click();
 				}
 			});
 			window.key('escape',"fill",function(e,o){
@@ -469,6 +464,14 @@ var Com_Parameter = {
 			});
 		});
 	}
+
+	  function savePage() {
+
+	  }
+
+	  function ClosePage() {
+
+	  }
 
   </script>
   <script type="text/javascript">

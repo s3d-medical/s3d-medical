@@ -29,9 +29,9 @@
         thead {
             text-align: center;
         }
-        /*select {
-            margin-left: 5px;
-        }*/
+        select {
+            height: 24px;
+        }
         table {
             border-collapse: collapse;
         }
@@ -287,12 +287,12 @@
                             </td>
                             <td>
                                 <select ng-model="d.sickCode">
-                                    <option ng-repeat="i in settings.sickCodes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
+                                    <option ng-repeat="i in settings.sickCodes" ng-selected="d.sickCode == i.id" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                                 </select>
                             </td>
                             <td>
                                 <select ng-model="d.inSickState">
-                                    <option ng-repeat="i in settings.inSickStates" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
+                                    <option ng-repeat="i in settings.inSickStates" ng-selected="d.inSickState == i.id" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                                 </select>
                             </td>
                         </tr>
