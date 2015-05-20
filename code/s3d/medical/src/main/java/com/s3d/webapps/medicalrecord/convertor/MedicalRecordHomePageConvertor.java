@@ -1,7 +1,7 @@
 package com.s3d.webapps.medicalrecord.convertor;
 
 import com.s3d.tech.utils.DateUtils;
-import com.s3d.webapps.medicalrecord.persistence.HomePageBasicInfo.HomePageBasicInfo;
+import com.s3d.webapps.medicalrecord.persistence.homepagebasic.HomePageBasicInfo;
 import com.s3d.webapps.medicalrecord.persistence.MedicalRecordHomePage;
 import com.s3d.webapps.medicalrecord.persistence.diagnosis.DiagnosisDischarge;
 import com.s3d.webapps.medicalrecord.persistence.doctor.DoctorInCharge;
@@ -206,10 +206,10 @@ public class MedicalRecordHomePageConvertor {
     private void fillBasicInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
         HomePageBasicInfoVO basicInfoVO = homePageVO.readHomePageBasicInfoVO();
         HomePageBasicInfo homePageBasicInfo = homePage.getHomePageBasicInfo();
-        homePageBasicInfo.fillHomePageBasicInfo(basicInfoVO.getPayType(), basicInfoVO.getHealthCard(), basicInfoVO.getHospitalizedTimes(), basicInfoVO.getCaseNumber(),
+        homePageBasicInfo.fillHomePageBasicInfo(basicInfoVO.getBusinessKey(), basicInfoVO.getPayType(), basicInfoVO.getHealthCard(), basicInfoVO.getHospitalizedTimes(), basicInfoVO.getCaseNumber(),
                 basicInfoVO.getChangeDepartment(), basicInfoVO.getMedicalAllergy(), basicInfoVO.getAllergicMedication(), basicInfoVO.getAutopsy(), basicInfoVO.getBloodType(), basicInfoVO.getRh());
-
     }
+
     private void fillComaInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
         ComaRecordVO comaRecordVO = homePageVO.readComaRecordVO();
         homePage.getComaInfo().fill(comaRecordVO.getComaDayBeforeHospital(), comaRecordVO.getComaHourBeforeHospital(), comaRecordVO.getComaMinuteBeforeHospital(),

@@ -13,4 +13,9 @@
         <sqlFile path="scripts/2015-05-19_1_create_medical_record_tables.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
     </changeSet>
+
+    <changeSet id="3" author="wind" context="production">
+        <sqlFile path="scripts/2015-05-20_1_tune_mr_medical_record_home_page.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
 </databaseChangeLog>

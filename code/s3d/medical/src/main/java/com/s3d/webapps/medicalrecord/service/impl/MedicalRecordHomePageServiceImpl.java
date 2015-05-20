@@ -2,7 +2,7 @@ package com.s3d.webapps.medicalrecord.service.impl;
 
 import com.s3d.webapps.medicalrecord.convertor.MedicalRecordHomePageConvertor;
 import com.s3d.webapps.medicalrecord.dao.MedicalRecordHomePageDao;
-import com.s3d.webapps.medicalrecord.persistence.HomePageBasicInfo.HomePageBasicInfo;
+import com.s3d.webapps.medicalrecord.persistence.homepagebasic.HomePageBasicInfo;
 import com.s3d.webapps.medicalrecord.persistence.MedicalRecordHomePage;
 import com.s3d.webapps.medicalrecord.persistence.coma.ComaInfo;
 import com.s3d.webapps.medicalrecord.persistence.diagnosis.DiagnosisClinic;
@@ -19,10 +19,8 @@ import com.s3d.webapps.medicalrecord.service.MedicalRecordHomePageService;
 import com.s3d.webapps.medicalrecord.vo.MedicalRecordHomePageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

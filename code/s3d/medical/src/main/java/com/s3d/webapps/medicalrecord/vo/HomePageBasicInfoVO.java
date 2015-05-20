@@ -1,14 +1,13 @@
 package com.s3d.webapps.medicalrecord.vo;
 
-import com.s3d.webapps.medicalrecord.persistence.HomePageBasicInfo.HomePageBasicInfo;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.s3d.webapps.medicalrecord.persistence.homepagebasic.HomePageBasicInfo;
 
 /**
  * @author wind.chen
  * @date 2015/5/18.
  */
 public class HomePageBasicInfoVO {
-
+    private String businessKey;
     private String payType;
     private String healthCard;
     private Integer hospitalizedTimes = 0;
@@ -29,6 +28,7 @@ public class HomePageBasicInfoVO {
     }
 
     public void fill(HomePageBasicInfo basicInfo) {
+        this.businessKey = basicInfo.getBusinessKey();
         this.payType = basicInfo.getPaymentType();
         this.healthCard = basicInfo.getHealthCardNo();
         this.hospitalizedTimes = basicInfo.getHospitalizedTimes();
@@ -39,6 +39,14 @@ public class HomePageBasicInfoVO {
         this.autopsy = basicInfo.getIfAutopsy();
         this.bloodType = basicInfo.getBloodType();
         this.rh = basicInfo.getIfRH();
+    }
+
+    public String getBusinessKey() {
+        return businessKey;
+    }
+
+    public void setBusinessKey(String businessKey) {
+        this.businessKey = businessKey;
     }
 
     public String getPayType() {

@@ -1,7 +1,7 @@
 package com.s3d.webapps.medicalrecord.persistence;
 
 
-import com.s3d.webapps.medicalrecord.persistence.HomePageBasicInfo.HomePageBasicInfo;
+import com.s3d.webapps.medicalrecord.persistence.homepagebasic.HomePageBasicInfo;
 import com.s3d.webapps.medicalrecord.persistence.operation.Operation;
 import com.s3d.webapps.medicalrecord.persistence.coma.ComaInfo;
 import com.s3d.webapps.medicalrecord.persistence.doctor.DoctorInCharge;
@@ -33,9 +33,6 @@ public class MedicalRecordHomePage {
     @GeneratedValue
     @Column(name = "id")
     protected Integer id;
-
-    @Column(name="business_key")
-    private String businessKey;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "home_page_basic_info_id", referencedColumnName = "id")
@@ -107,14 +104,6 @@ public class MedicalRecordHomePage {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getBusinessKey() {
-        return businessKey;
-    }
-
-    public void setBusinessKey(String businessKey) {
-        this.businessKey = businessKey;
     }
 
     public HomePageBasicInfo getHomePageBasicInfo() {

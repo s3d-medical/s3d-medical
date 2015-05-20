@@ -27,7 +27,7 @@ public class MedicalRecordHomePageDaoImpl extends HibernateDao<MedicalRecordHome
         StringBuilder hql = new StringBuilder();
         Map paramMap = new HashMap();
         paramMap.put("businessKey", businessKey);
-        hql.append("from MedicalRecordHomePage t where t.businessKey = :businessKey");
+        hql.append("from MedicalRecordHomePage t where t.homePageBasicInfo.businessKey = :businessKey");
         Query query = this.getSession().createQuery(hql.toString());
         query.setString("businessKey" , businessKey);
         List<MedicalRecordHomePage> list = query.list();

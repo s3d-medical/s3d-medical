@@ -1,4 +1,4 @@
-package com.s3d.webapps.medicalrecord.persistence.HomePageBasicInfo;
+package com.s3d.webapps.medicalrecord.persistence.homepagebasic;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -45,7 +45,10 @@ public class HomePageBasicInfo implements Serializable{
     @Column(name = "if_rh")
     private String ifRH;
 
-    public void fillHomePageBasicInfo(String paymentType, String healthCardNo, Integer hospitalizedTimes, String seqNo,
+    @Column(name="business_key")
+    private String businessKey;
+
+    public void fillHomePageBasicInfo(String businessKey, String paymentType, String healthCardNo, Integer hospitalizedTimes, String seqNo,
                                       String departChanges, String ifDrugAllergy, String allergyDrug,
                                       String ifAutopsy, String bloodType, String ifRH) {
         this.paymentType = paymentType;
@@ -151,4 +154,13 @@ public class HomePageBasicInfo implements Serializable{
     public void setAllergyDrug(String allergyDrug) {
         this.allergyDrug = allergyDrug;
     }
+
+    public String getBusinessKey() {
+        return businessKey;
+    }
+
+    public void setBusinessKey(String businessKey) {
+        this.businessKey = businessKey;
+    }
+
 }
