@@ -105,6 +105,86 @@ public class MedicalRecordHomePageVO {
         this.homePageBasicInfoVO.setBusinessKey( businessKey);
     }
 
+    public void setMedicalAllergy(String medicalAllergy) {
+        homePageBasicInfoVO.setMedicalAllergy(medicalAllergy);
+    }
+
+    public void setRh(String rh) {
+        homePageBasicInfoVO.setRh(rh);
+    }
+
+    public Integer getHospitalizedTimes() {
+        return homePageBasicInfoVO.getHospitalizedTimes();
+    }
+
+    public void setAllergicMedication(String allergicMedication) {
+        homePageBasicInfoVO.setAllergicMedication(allergicMedication);
+    }
+
+    public String getRh() {
+        return homePageBasicInfoVO.getRh();
+    }
+
+    public String getMedicalAllergy() {
+        return homePageBasicInfoVO.getMedicalAllergy();
+    }
+
+    public String getBloodType() {
+        return homePageBasicInfoVO.getBloodType();
+    }
+
+    public void setCaseNumber(String caseNumber) {
+        homePageBasicInfoVO.setCaseNumber(caseNumber);
+    }
+
+    public void setHospitalizedTimes(Integer hospitalizedTimes) {
+        homePageBasicInfoVO.setHospitalizedTimes(hospitalizedTimes);
+    }
+
+    public void setBloodType(String bloodType) {
+        homePageBasicInfoVO.setBloodType(bloodType);
+    }
+
+    public String getAllergicMedication() {
+        return homePageBasicInfoVO.getAllergicMedication();
+    }
+
+    public String getChangeDepartment() {
+        return homePageBasicInfoVO.getChangeDepartment();
+    }
+
+    public void setAutopsy(String autopsy) {
+        homePageBasicInfoVO.setAutopsy(autopsy);
+    }
+
+    public void setPayType(String payType) {
+        homePageBasicInfoVO.setPayType(payType);
+    }
+
+    public String getHealthCard() {
+        return homePageBasicInfoVO.getHealthCard();
+    }
+
+    public String getCaseNumber() {
+        return homePageBasicInfoVO.getCaseNumber();
+    }
+
+    public String getAutopsy() {
+        return homePageBasicInfoVO.getAutopsy();
+    }
+
+    public String getPayType() {
+        return homePageBasicInfoVO.getPayType();
+    }
+
+    public void setChangeDepartment(String changeDepartment) {
+        homePageBasicInfoVO.setChangeDepartment(changeDepartment);
+    }
+
+    public void setHealthCard(String healthCard) {
+        homePageBasicInfoVO.setHealthCard(healthCard);
+    }
+
     public String getName() {
         return patientInfoVO.getName();
     }
