@@ -38,9 +38,8 @@ public class MedicalRecordHomePageController {
             //model.addAttribute("data", homePageVO);
             return homePageVO;
         } catch (Exception ex) {
-            logger.error("Failed to get MedicalRecordHomePage", ex.getCause());
+            logger.error("Failed to get MedicalRecordHomePage", ex);
         }
-        model.addAttribute("data", null);
         return null;
     }
 
@@ -54,7 +53,7 @@ public class MedicalRecordHomePageController {
                 return model;
             }
         } catch (Exception ex) {
-            logger.error("Failed to save MedicalRecordHomePage", ex.getCause());
+            logger.error("Failed to save MedicalRecordHomePage", ex);
         }
         model.addAttribute("result", "fail");
         return model;
