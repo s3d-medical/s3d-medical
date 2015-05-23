@@ -1,4 +1,4 @@
-package com.s3d.webapps.medicalrecord.web.controler;
+package com.s3d.webapps.medicalrecord.web.controller;
 
 import com.s3d.webapps.medicalrecord.service.MedicalRecordHomePageService;
 import com.s3d.webapps.medicalrecord.vo.MedicalRecordHomePageVO;
@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 
 /**
  * @author Administrator

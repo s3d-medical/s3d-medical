@@ -4,10 +4,10 @@ package com.s3d.webapps.pub.datatype;
  * @author wind.chen
  * @date 2015/4/23.
  */
-public enum DictionaryStatus {
+public enum ValidationStatus {
     INVALID("invalid"), VALID("valid");
 
-    DictionaryStatus(String value) {
+    ValidationStatus(String value) {
         this.value = value;
     }
 

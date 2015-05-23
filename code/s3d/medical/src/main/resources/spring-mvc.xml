@@ -13,10 +13,12 @@
 	<context:component-scan base-package="com.s3d.webapps.web.controller"  >
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
-    <context:component-scan base-package="com.s3d.webapps.medicalrecord.web.controler"  >
+    <context:component-scan base-package="com.s3d.webapps.medicalrecord.web.controller"  >
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
-
+    <context:component-scan base-package="com.s3d.webapps.config.web.controller"  >
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
 	<!-- 2. MVC Annotation Driven -->
     <!--    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
