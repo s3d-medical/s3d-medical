@@ -11,7 +11,6 @@ import java.util.List;
  * @date 2015/5/15.
  */
 public class MedicalRecordHomePageVO {
-    private String businessKey;
 
     HomePageBasicInfoVO homePageBasicInfoVO = new HomePageBasicInfoVO();
 
@@ -99,11 +98,11 @@ public class MedicalRecordHomePageVO {
    //-----------------------------------------setter getter ------------------------
 
     public String getBusinessKey() {
-        return businessKey;
+        return this.homePageBasicInfoVO.getBusinessKey();
     }
 
     public void setBusinessKey(String businessKey) {
-        this.businessKey = businessKey;
+        this.homePageBasicInfoVO.setBusinessKey( businessKey);
     }
 
     public String getName() {

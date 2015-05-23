@@ -61,6 +61,7 @@ public class HomePageBasicInfo implements Serializable{
         this.ifAutopsy = ifAutopsy;
         this.bloodType = bloodType;
         this.ifRH = ifRH;
+        this.businessKey = businessKey;
     }
 
     public HomePageBasicInfo() {

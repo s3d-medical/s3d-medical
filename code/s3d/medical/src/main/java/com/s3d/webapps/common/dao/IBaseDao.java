@@ -62,7 +62,7 @@ public interface IBaseDao {
 	 * @return model对象
 	 * @
 	 */
-	public abstract EntityObject findByPrimaryKey(String id) ;
+	public abstract <T extends EntityObject> T findByPrimaryKey(String id) ;
 
 	/**
 	 * 根据主键查找记录
@@ -75,7 +75,7 @@ public interface IBaseDao {
 	 * @return
 	 * @
 	 */
-	public abstract EntityObject findByPrimaryKey(String id, Object modelInfo,
+	public abstract <T extends EntityObject> T findByPrimaryKey(String id, Object modelInfo,
 			boolean noLazy) ;
 
 	/**

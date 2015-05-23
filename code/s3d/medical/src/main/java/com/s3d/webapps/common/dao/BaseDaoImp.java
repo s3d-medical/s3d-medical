@@ -41,11 +41,11 @@ public class BaseDaoImp extends HibernateDaoSupport implements IBaseDao{
 		getSession().flush();
 	}
 
-	public EntityObject findByPrimaryKey(String id)  {
+	public <T extends EntityObject> T findByPrimaryKey(String id)  {
 		return findByPrimaryKey(id, null, true);
 	}
 
-	public EntityObject findByPrimaryKey(String id, Object modelInfo,
+	public <T extends EntityObject> T findByPrimaryKey(String id, Object modelInfo,
 			boolean noLazy)  {
 		Object rtnVal = null;
 		if (id != null) {
@@ -70,7 +70,7 @@ public class BaseDaoImp extends HibernateDaoSupport implements IBaseDao{
 			} catch (HibernateObjectRetrievalFailureException e) {
 			}
 		}
-		return (EntityObject) rtnVal;
+		return (T) rtnVal;
 	}
 
 	public final List findByPrimaryKeys(String[] ids)  {
