@@ -32,15 +32,16 @@ public class MedicalRecordHomePageController {
      * @return
      */
     @RequestMapping(value = "/homepages/{seq}", method = RequestMethod.GET)
-    public MedicalRecordHomePageVO getMedicalRecordHomePageData(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable String seq) {
+    public Model getMedicalRecordHomePageData(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable String seq) {
         try {
             MedicalRecordHomePageVO homePageVO = this.medicalRecordHomePageService.getHomePageByBusinessKey(seq);
-            //model.addAttribute("data", homePageVO);
-            return homePageVO;
+            model.addAttribute("data", homePageVO);
+            return model;
         } catch (Exception ex) {
             logger.error("Failed to get MedicalRecordHomePage", ex);
         }
-        return null;
+        model.addAttribute("data", "");
+        return model;
     }
 
     @RequestMapping(value = "/homepages/{seq}", method = RequestMethod.POST)
@@ -48,6 +49,7 @@ public class MedicalRecordHomePageController {
         // do something.
         try {
             if (medicalRecordHomePageVO != null) {
+                medicalRecordHomePageVO.setBusinessKey(seq);
                 this.medicalRecordHomePageService.saveOrUpdateHomePage(medicalRecordHomePageVO);
                 model.addAttribute("result", "ok");
                 return model;
