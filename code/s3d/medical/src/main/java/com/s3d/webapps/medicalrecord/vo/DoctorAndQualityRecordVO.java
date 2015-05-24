@@ -3,10 +3,7 @@ package com.s3d.webapps.medicalrecord.vo;
 import com.s3d.tech.utils.DateUtils;
 import com.s3d.webapps.medicalrecord.persistence.doctor.DoctorInCharge;
 import com.s3d.webapps.medicalrecord.persistence.quality.QualityControlInfo;
-import com.s3d.webapps.util.DateUtil;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,9 +43,9 @@ public class DoctorAndQualityRecordVO {
         this.caseQuality = qualityControlInfo.getCaseQuality();
         this.qualityDoctor = qualityControlInfo.getQualityDoctor();
         this.qualityNurse = qualityControlInfo.getQualityNurse();
-        this.qualityYear = DateUtils.getYearInt(qualityControlInfo.getQualityDate());
-        this.qualityMonth = DateUtils.getMonthInt(qualityControlInfo.getQualityDate());
-        this.qualityDay = DateUtils.getDayOfMonthInt(qualityControlInfo.getQualityDate());
+        this.qualityYear = DateUtils.getYear(qualityControlInfo.getQualityDate());
+        this.qualityMonth = DateUtils.getMonth(qualityControlInfo.getQualityDate());
+        this.qualityDay = DateUtils.getDayInMonth(qualityControlInfo.getQualityDate());
     }
 
     public String getDirector() {

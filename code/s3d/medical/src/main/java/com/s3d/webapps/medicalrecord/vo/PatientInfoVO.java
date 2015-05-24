@@ -2,10 +2,6 @@ package com.s3d.webapps.medicalrecord.vo;
 
 import com.s3d.tech.utils.DateUtils;
 import com.s3d.webapps.medicalrecord.persistence.patient.*;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
-import java.util.Date;
 
 /**
  * @author  wind.chen
@@ -95,9 +91,9 @@ public class PatientInfoVO {
     private void fillBasicInfo(PatientInfo patientInfo) {
         this.name = patientInfo.getFullName();
         this.sex = patientInfo.getSex();
-        this.birthdayYear = DateUtils.getYearInt(patientInfo.getBirthDate());
-        this.birthdayDay = DateUtils.getMonthInt(patientInfo.getBirthDate());
-        this.birthdayMonth = DateUtils.getDayOfMonthInt(patientInfo.getBirthDate());
+        this.birthdayYear = DateUtils.getYear(patientInfo.getBirthDate());
+        this.birthdayDay = DateUtils.getMonth(patientInfo.getBirthDate());
+        this.birthdayMonth = DateUtils.getDayInMonth(patientInfo.getBirthDate());
         this.age = patientInfo.getAgeYear();
         this.country = patientInfo.getNationality();
         this.babyAge = patientInfo.getAgeMonth();

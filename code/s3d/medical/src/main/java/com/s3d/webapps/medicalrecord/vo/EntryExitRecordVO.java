@@ -3,9 +3,6 @@ package com.s3d.webapps.medicalrecord.vo;
 import com.s3d.tech.utils.DateUtils;
 import com.s3d.webapps.medicalrecord.persistence.entryexit.RegisterAdmission;
 import com.s3d.webapps.medicalrecord.persistence.entryexit.RegisterDischarge;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
-import java.io.Serializable;
 
 /**
  * @author  Administrator
@@ -49,10 +46,10 @@ public class EntryExitRecordVO {
             return;
         }
         this.inType = registerAdmission.getApproach();
-        this.inYear = DateUtils.getYearInt(registerAdmission.getRegisteredTime());
-        this.inMonth = DateUtils.getMonthInt(registerAdmission.getRegisteredTime());
-        this.inDay = DateUtils.getDayOfMonthInt(registerAdmission.getRegisteredTime());
-        this.inHour = DateUtils.getTimeOfDate(registerAdmission.getRegisteredTime());
+        this.inYear = DateUtils.getYear(registerAdmission.getRegisteredTime());
+        this.inMonth = DateUtils.getMonth(registerAdmission.getRegisteredTime());
+        this.inDay = DateUtils.getDayInMonth(registerAdmission.getRegisteredTime());
+        this.inHour = DateUtils.getHourMinute(registerAdmission.getRegisteredTime());
         this.inDepartment = registerAdmission.getDepart();
         this.inSickroom = registerAdmission.getSickRoomNo();
     }
@@ -61,10 +58,10 @@ public class EntryExitRecordVO {
         if (registerDischarge == null) {
             return;
         }
-        this.outYear = DateUtils.getYearInt(registerDischarge.getRegisteredTime());
-        this.outMonth = DateUtils.getMonthInt(registerDischarge.getRegisteredTime());
-        this.outDay = DateUtils.getDayOfMonthInt(registerDischarge.getRegisteredTime());
-        this.outHour = DateUtils.getTimeOfDate(registerDischarge.getRegisteredTime());
+        this.outYear = DateUtils.getYear(registerDischarge.getRegisteredTime());
+        this.outMonth = DateUtils.getMonth(registerDischarge.getRegisteredTime());
+        this.outDay = DateUtils.getDayInMonth(registerDischarge.getRegisteredTime());
+        this.outHour = DateUtils.getHourMinute(registerDischarge.getRegisteredTime());
         this.outDepartment = registerDischarge.getDepart();
         this.outSickroom = registerDischarge.getSickRoomNo();
         this.daysInHospital = registerDischarge.getTotalDays();

@@ -11,7 +11,6 @@ import com.s3d.webapps.medicalrecord.persistence.operation.Operation;
 import com.s3d.webapps.medicalrecord.persistence.patient.PatientInfo;
 import com.s3d.webapps.medicalrecord.vo.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -183,9 +182,9 @@ public class MedicalRecordHomePageConvertor {
 
     private void fillEntryAndExitInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
         EntryExitRecordVO entryExitRecordVO = homePageVO.readEntryExitRecordVO();
-        Date inDateTime = DateUtils.convertToDateTime(entryExitRecordVO.getInYear(), entryExitRecordVO.getInMonth(), entryExitRecordVO.getInDay(), entryExitRecordVO.getInHour());
+        Date inDateTime = DateUtils.convertToDateHourMinute(entryExitRecordVO.getInYear(), entryExitRecordVO.getInMonth(), entryExitRecordVO.getInDay(), entryExitRecordVO.getInHour());
         homePage.getRegisterAdmission().fill(inDateTime, entryExitRecordVO.getInDepartment(), entryExitRecordVO.getInSickroom(), entryExitRecordVO.getInType());
-        Date outDatetime = DateUtils.convertToDateTime(entryExitRecordVO.getOutYear(), entryExitRecordVO.getOutMonth(), entryExitRecordVO.getOutDay(), entryExitRecordVO.getOutHour());
+        Date outDatetime = DateUtils.convertToDateHourMinute(entryExitRecordVO.getOutYear(), entryExitRecordVO.getOutMonth(), entryExitRecordVO.getOutDay(), entryExitRecordVO.getOutHour());
         homePage.getRegisterDischarge().fill(outDatetime, entryExitRecordVO.getOutDepartment(), entryExitRecordVO.getOutSickroom(), entryExitRecordVO.getDaysInHospital(),
                 entryExitRecordVO.getOutType(), entryExitRecordVO.getAcceptOrganization(), entryExitRecordVO.getWillReturn(), entryExitRecordVO.getReturnPurpose());
 

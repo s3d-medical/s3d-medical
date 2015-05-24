@@ -15,18 +15,19 @@ import java.util.*;
  * Convert date to String or convert String to Date. Methods are named with prefix convertXXX.
  */
 public class DateUtils {
+    private static final Log log = LogFactory.getLog(DateUtils.class);
     public static final String TIMEZONE_GMT = "GMT";
     public static final String TIMEZONE_UTC = "UTC";
 
-    private static final Log log = LogFactory.getLog(DateUtils.class);
 	public static final String DEFAULT_DATETIME_FORMAT="yyyy-MM-dd HH:mm:ss";
+    public static final String DEFAULT_DATE_HOUR_MINUTE ="yyyy-MM-dd HH:mm";
+
+    public static final String DEFAULT_HOUR_MINUTE ="HH:mm";
+
     public static final String DEFAULT_DATE_FORMAT="yyyy-MM-dd";
-    public static final String OBLIQUE_LINE_DATE_FORMAT = "MM/dd/yyyy";
     public static final String DEFAULT_MONTH_YEAR_FORMAT= "MMMM, yyyy";
 
-    public static final long SECONDS_ONE_DAY = 24 * 60 * 60 ;
-    public static final long SECONDS_ONE_MONTH =(24 * 60 * 60 ) * 31;
-    public static final long SECONDS_HALF_YEAR =(24 * 60 * 60 ) * 31 * 6;
+
     public static final String COMPACT_DATETIME_FORMAT="yyyyMMddHHmmss";
     public static final String MONTH_DAY_DATE_FORMAT ="MMMMMMMMM-dd";
 
@@ -117,14 +118,14 @@ public class DateUtils {
         return convertToSpecifiedDateTime(strDate, DEFAULT_DATE_FORMAT, null, null);
 	}
 
-    public static Date convertToDateTime(Integer year, Integer month, Integer day, String time){
+    public static Date convertToDateHourMinute(Integer year, Integer month, Integer day, String time){
         if(year != null && month != null && day != null ){
             StringBuilder sb = new StringBuilder();
             sb.append(year).append("-").append(month).append("-").append(day);
             if(time != null && !"".equals(time)){
-                  sb.append(" ").append(time);
+                  sb.append(" ").append(time).append(":00:00");
             }
-            return DateUtils.convertToDateTime(sb.toString());
+            return DateUtils.convertToDateTime(sb.toString(), DEFAULT_DATE_HOUR_MINUTE);
         }
         return null;
     }
@@ -132,6 +133,10 @@ public class DateUtils {
 	public static Date convertToDateTime(String dateString){
 		return convertToSpecifiedDateTime(dateString, DEFAULT_DATETIME_FORMAT, null, null);
 	}
+
+    public static Date convertToDateTime(String dateString, String dateFormat){
+        return convertToSpecifiedDateTime(dateString, dateFormat, null, null);
+    }
 
 	private static Date convertToSpecifiedDateTime(String dateString, String targetFormatPattern, String timeZone, Locale locale) {
 		if (StringUtils.isBlank(dateString)) {
@@ -161,6 +166,7 @@ public class DateUtils {
         SimpleDateFormat sdf = createAFormatter(targetFormatPattern,timeZone,locale);
         return sdf.format(srcDateTime);
     }
+
     private static SimpleDateFormat createAFormatter(String targetFormatPattern, String timeZone, Locale locale){
         String givenFormat = targetFormatPattern;
         if(StringUtils.isBlank(givenFormat) ){
@@ -241,6 +247,7 @@ public class DateUtils {
 		cal.add(Calendar.HOUR_OF_DAY, hours);
 		return cal.getTime();
 	}
+
 	public static Date combinedDateHour(Date givenDate, int hours){
 		if(givenDate == null){
 			return null;
@@ -248,7 +255,7 @@ public class DateUtils {
 		return addHourToDate(givenDate, hours);
 	}
 
-    public static Integer getYearInt(Date dateTime){
+    public static Integer getYear(Date dateTime){
         if(dateTime == null){
             return null;
         }
@@ -256,7 +263,7 @@ public class DateUtils {
         cal.setTime(dateTime);
         return cal.get(Calendar.YEAR);
     }
-    public static Integer getMonthInt(Date dateTime){
+    public static Integer getMonth(Date dateTime){
         if(dateTime == null){
             return null;
         }
@@ -264,7 +271,7 @@ public class DateUtils {
         cal.setTime(dateTime);
         return cal.get(Calendar.MONTH);
     }
-    public static Integer getDayOfMonthInt(Date dateTime){
+    public static Integer getDayInMonth(Date dateTime){
         if(dateTime == null){
             return null;
         }
@@ -273,14 +280,11 @@ public class DateUtils {
         return cal.get(Calendar.DAY_OF_MONTH);
     }
 
-    //TODO
-    public static String getTimeOfDate(Date dateTime){
+    public static String getHourMinute(Date dateTime){
         if(dateTime == null){
             return null;
         }
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(dateTime);
-        return "00:00:00";
+        return DateUtils.convertToSpecifiedPatternStr(dateTime, DEFAULT_HOUR_MINUTE, null, null);
     }
 
 	/**
