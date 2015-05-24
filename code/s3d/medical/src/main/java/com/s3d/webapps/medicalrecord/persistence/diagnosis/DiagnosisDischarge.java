@@ -16,10 +16,9 @@ public class DiagnosisDischarge extends BaseDiagnose {
     @Column(name="illness_state")
 	private String illnessState;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name="medical_record_home_page_id", referencedColumnName = "id")
     private MedicalRecordHomePage medicalRecordHomePage;
-
 
     public void fill(String name, String code, String illnessState) {
         super.fill(name, code);

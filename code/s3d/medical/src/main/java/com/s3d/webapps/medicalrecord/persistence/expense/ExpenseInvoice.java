@@ -29,7 +29,6 @@ public class ExpenseInvoice implements Serializable {
     private BigDecimal selfPayingAmount;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "expenseInvoice")
-    @JoinColumn(name = "expense_invoice_id")
     @Fetch(FetchMode.SUBSELECT)
     private List<ExpenseItem> expenseItems = new ArrayList<ExpenseItem>();
 

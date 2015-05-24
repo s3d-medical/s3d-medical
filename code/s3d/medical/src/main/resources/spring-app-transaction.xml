@@ -76,8 +76,8 @@
         </property>
         <property name="packagesToScan">
             <list>
-                <value>com.s3d.webapps.medicalrecord.persistence</value>
                 <value>com.s3d.webapps.config.persistence</value>
+                <value>com.s3d.webapps.medicalrecord.persistence</value>
             </list>
         </property>
     </bean>

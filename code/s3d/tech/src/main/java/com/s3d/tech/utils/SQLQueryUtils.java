@@ -39,14 +39,14 @@ public class SQLQueryUtils {
     }
 
     private static void mapJavaHibernateType(){
-        JAVA_HIBERNATE_TYPE_MAP.put("int", Hibernate.INTEGER);
+/*        JAVA_HIBERNATE_TYPE_MAP.put("int", Hibernate.INTEGER);
         JAVA_HIBERNATE_TYPE_MAP.put("Integer", Hibernate.INTEGER);
         JAVA_HIBERNATE_TYPE_MAP.put("String", Hibernate.STRING);
         JAVA_HIBERNATE_TYPE_MAP.put("Date", Hibernate.DATE);
         JAVA_HIBERNATE_TYPE_MAP.put("double", Hibernate.DOUBLE);
         JAVA_HIBERNATE_TYPE_MAP.put("Double", Hibernate.DOUBLE);
         JAVA_HIBERNATE_TYPE_MAP.put("float", Hibernate.FLOAT);
-        JAVA_HIBERNATE_TYPE_MAP.put("Float", Hibernate.FLOAT);
+        JAVA_HIBERNATE_TYPE_MAP.put("Float", Hibernate.FLOAT);*/
     }
 
 

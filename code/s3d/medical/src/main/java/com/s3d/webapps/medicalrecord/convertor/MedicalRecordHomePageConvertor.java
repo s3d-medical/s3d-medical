@@ -11,6 +11,7 @@ import com.s3d.webapps.medicalrecord.persistence.operation.Operation;
 import com.s3d.webapps.medicalrecord.persistence.patient.PatientInfo;
 import com.s3d.webapps.medicalrecord.vo.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -171,6 +172,7 @@ public class MedicalRecordHomePageConvertor {
                 discharges.add(diagnosisDischarge);
             }
         }
+        homePage.setDiagnosisDischargeList(discharges);
         // external reason
         homePage.getDiagnosisExternalReason().fill(diagnosisRecordVO.getOutCause(), diagnosisRecordVO.getOutSickCode());
         // pathology

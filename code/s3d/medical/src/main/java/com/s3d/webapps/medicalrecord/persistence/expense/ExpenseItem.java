@@ -19,17 +19,17 @@ public class ExpenseItem implements Serializable{
     protected Integer id;
 
     @Column(name = "category")
-    private Integer category;
+    protected String category;
 
     @Column(name = "item_name")
-    private String itemName;
+    protected String itemName;
 
     @Column(name = "amount")
-    private BigDecimal amount;
+    protected BigDecimal amount;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "expense_invoice_id", referencedColumnName = "id")
-    private ExpenseInvoice expenseInvoice;
+    protected ExpenseInvoice expenseInvoice;
 
     public ExpenseItem() {
 
@@ -43,11 +43,11 @@ public class ExpenseItem implements Serializable{
         this.id = id;
     }
 
-    public Integer getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Integer category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

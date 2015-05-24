@@ -55,8 +55,8 @@ public class MedicalRecordHomePage {
     @JoinColumn(name = "diagnosis_clinic_id")
     private DiagnosisClinic diagnosisClinic;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "medicalRecordHomePage")
-    @JoinColumn(name = "medical_record_home_page_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,
+            fetch = FetchType.EAGER, mappedBy = "medicalRecordHomePage")
     @Fetch(FetchMode.SUBSELECT)
     private List<DiagnosisDischarge> diagnosisDischargeList = new ArrayList<DiagnosisDischarge>();
 
@@ -70,7 +70,6 @@ public class MedicalRecordHomePage {
 
     // -------- persons in charge.-------------
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "medicalRecordHomePage")
-    @JoinColumn(name = "medical_record_home_page_id")
     @Fetch(FetchMode.SUBSELECT)
     private List<DoctorInCharge> doctorInChargeList = new ArrayList<DoctorInCharge>();
 
@@ -79,8 +78,7 @@ public class MedicalRecordHomePage {
     @JoinColumn(name = "quality_control_info_id")
     public QualityControlInfo qualityControlInfo;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "medicalRecordHomePage")
-    @JoinColumn(name="medical_record_home_page_id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "medicalRecordHomePage")
     @Fetch(FetchMode.SUBSELECT)
     public List<Operation> operationList = new ArrayList<Operation>();
 
@@ -89,7 +87,7 @@ public class MedicalRecordHomePage {
     public ComaInfo comaInfo;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "expense_invoice_id")
+    @JoinColumn(name = "expense_invoice_id", referencedColumnName = "id")
     public ExpenseInvoice expenseInvoice;
 
     public MedicalRecordHomePage() {
