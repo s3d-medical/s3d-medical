@@ -246,7 +246,7 @@ var Com_Parameter = {
 		window.mainPicBrowser._paintNext = function(e,o,offset){
 			window.categoryShortCutObject.reset();
 			var results = window.mainPicStore.getResult();
-			var pressed = o.key; 
+			var pressed = o ? o.key : '';
 			if(pressed=='enter'){
 				var grid = window.mainPicGrid;
 				if(grid.getSelection().length==1){

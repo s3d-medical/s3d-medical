@@ -83,7 +83,7 @@ var Com_Parameter = {
         <div class="top-left-content pull-left clearfix">
           <!-- <input type="text" name="" id="search1" class="top-search ui-autocomplete-input" autocomplete="off"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span> -->
           <div class="tab-container clearfix">
-            <div class="btn-group">
+            <div class="btn-group btn-cmd-group">
               <a hideFocus="true" title="自动大小(c)" href="#" data-cmd="fitToggle" class="btn-group-item btn-group-left">&#xf0005;</a>
               <a hideFocus="true" title="放大(w)" href="#" data-cmd="zoom" class="btn-group-item btn-group-center">&#xf01b9;</a>
               <a hideFocus="true" title="缩小(s)" href="#" data-cmd="micrify" class="btn-group-item btn-group-center">&#xf01b8;</a>
@@ -92,7 +92,7 @@ var Com_Parameter = {
               <a hideFocus="true" title="左旋(q)" href="#" data-cmd="leftHand" class="btn-group-item btn-group-center">&#xf013a;</a>
               <a hideFocus="true" title="右旋(e)" href="#" data-cmd="rightHand" class="btn-group-item btn-group-right">&#xf013b;</a>
             </div>
-             <div class="btn-group">
+             <div class="btn-group btn-cmd-group">
               <a hideFocus="true" title="输入病案号(空格)" href="#" class="btn-group-item btn-group-left" onclick="window.mainPicGrid.fire('fillIndexPage')">&#xf00be;</a>
               
               <a hideFocus="true" title="确认并进入下一张(回车)" href="#" class="btn-group-item btn-group-right" onclick="window.mainPicGrid.fire('saveAndMoveToNextOne')">&#xf00b2;</a>
@@ -247,7 +247,7 @@ var Com_Parameter = {
 		};
 		window.mainPicBrowser._paintNext = function(e,o,offset){
 			var results = window.mainPicStore.getResult();
-			var pressed = o.key; 
+			var pressed = o ? o.key : '';
 			if(pressed=='enter'){
 				var grid = window.mainPicGrid;
 				if(grid.getSelection().length==1){
