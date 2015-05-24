@@ -260,7 +260,7 @@ var Com_Parameter = {
 							changed =  true;
 						}
 					}
-					if(changed) grid.updateItem(item);		
+					if(changed) grid.updateItem(item);
 				}
 			}
 			offset = offset || 1;
