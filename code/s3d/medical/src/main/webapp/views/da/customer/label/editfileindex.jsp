@@ -105,10 +105,10 @@ var Com_Parameter = {
         </div> -->
       </div>
     </div>
-    <div class="east">
+    <div class="east" style="padding-top: 22px;">
 		<!-- <div class="preview-list-wrap" id="preview-list-wrap">
     	</div>  -->
-    	<hr/>
+    	<%--<hr/>--%>
     	<div class="row">
 	      <div class="span16 doc-content">
 	        <form id="J_Form" action="<c:url value="/da/customer/label/editcategory" />" method="post" class="form-horizontal">
@@ -133,7 +133,7 @@ var Com_Parameter = {
 	        </form>
 	      </div>
 	    </div>
-	    <hr/>	
+	    <%--<hr/>--%>
      	 <div>
     	 	<table border="0">
     	 	<tr>
@@ -400,18 +400,20 @@ var Com_Parameter = {
 			var dialog = new Overlay.Dialog({
 				title:'数字首页录入',
 				width:800,
-				height:600,
+				height:document.body.clientHeight - 70,
 				left: 600,
 				align :{
-					node: 'div.east'	,
-					points: ['cc','cc']	,
-					offset: [0, 200]
+					node: 'div.east',
+					points: ['tl','tl'],
+					offset: [0, 0]
 				},
 				buttons:[{
 					text:'保存',
 					elCls : 'button button-primary',
 					handler : function(){
-						Com_Parameter.elAngular.scope().save();
+						Com_Parameter.elAngular.scope().save(grid.getSelection()[0].id, $.proxy(function () {
+							this.close();
+						}, this));
 					}
 				},{
 					text:'关闭',
@@ -439,8 +441,9 @@ var Com_Parameter = {
 						dialog.get('loader').load(/*{id : item.fdId}*/);
 						$.ajax({
 							type: "get",
-							url: Com_Parameter.ResPath + "json/settings.json",
+							url: Com_Parameter.ContextPath + "config/codetables",
 							dataType: "json",
+							cache: false,
 							success: function (data) {
 								angular.bootstrap(document, ['mainPage']);
 								Com_Parameter.elAngular = angular.element($('body'));

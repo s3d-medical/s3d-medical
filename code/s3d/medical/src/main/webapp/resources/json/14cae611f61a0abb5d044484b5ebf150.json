@@ -1,6 +1,14 @@
 {
-  "dischargeDiagnosis": [],
-  "operationHistory": [],
+  "dischargeDiagnosis": [
+    {"diagnosis": "感冒12", "sickCode": "I10.X02", "inSickState": "2"},
+    {"diagnosis": "感冒22", "sickCode": "I11.901", "inSickState": "3"},
+    {"diagnosis": "感冒32", "sickCode": "X59.952", "inSickState": "4"}
+  ],
+  "operationHistory": [
+    {"operateCode": "1111222", "date": "2014-12-01", "grade": "甲", "operationName": "手术名称1", "operator": "术者1", "firstAssistant": "1助11", "secondAssistant": "2助11", "cutHealGrade": "伤口愈合等级1", "anaesthesiaType": "麻醉方式1", "anaesthetist": "麻醉师1"},
+    {"operateCode": "222222", "date": "2014-12-05", "grade": "乙", "operationName": "手术名称2", "operator": "术者2", "firstAssistant": "1助22", "secondAssistant": "2助22", "cutHealGrade": "伤口愈合等级2", "anaesthesiaType": "麻醉方式2", "anaesthetist": "麻醉师2"},
+    {"operateCode": "333222", "date": "2014-12-09", "grade": "丙", "operationName": "手术名称3", "operator": "术者3", "firstAssistant": "1助33", "secondAssistant": "2助33", "cutHealGrade": "伤口愈合等级3", "anaesthesiaType": "麻醉方式3", "anaesthetist": "麻醉师3"}
+  ],
   "country": "1",
   "nation": "",
   "payType": 2,

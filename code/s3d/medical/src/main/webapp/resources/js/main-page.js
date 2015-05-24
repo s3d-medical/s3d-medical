@@ -4,25 +4,15 @@ angular.module("mainPage", [])
         // test data
         $scope.settings = null;
 
-        $scope.save = function () {
-            if (!$scope.page.name) {
-                alert("姓名不能为空！");
-                return;
-            }
-            // todo use angular.toJson to convert page object instead of JSON.stringify because of useless characters created by angular automatic
-            //console.log(angular.toJson($scope.page));
-            console.log($scope.page);
-
-        };
         $scope.getData = function (fdId, isInit) {
             $.ajax({
                 type: "get",
-                url: Com_Parameter.ResPath + "json/" + fdId + ".json",
+                url: Com_Parameter.ContextPath + "medicalRecord/homepages/" + fdId,
                 dataType: "json",
                 cache: false,
-                success: function (data) {
+                success: function (result) {
                     $scope.$apply(function () {
-                        $scope.page = data;
+                        $scope.page = result.data;
                         formatPageData();
                         !isInit && $("select").selectator("destroy");
                         setTimeout(function () {
@@ -36,6 +26,32 @@ angular.module("mainPage", [])
                 }
             });
         };
+
+        $scope.save = function (fdId, callback) {
+            if (!$scope.page.name) {
+                alert("姓名不能为空！");
+                return;
+            }
+            // todo use angular.toJson to convert page object instead of JSON.stringify because of useless characters created by angular automatic
+            //console.log(angular.toJson($scope.page));
+            $.ajax({
+                type: "post",
+                url: Com_Parameter.ContextPath + "medicalRecord/homepages/" + fdId,
+                dataType: "json",
+                contentType: "application/json",
+                data: angular.toJson($scope.page),
+                cache: false,
+                success: function (result) {
+                    if (result.result === 'ok') {
+                        alert("保存成功！");
+                    } else {
+                        alert("保存失败！");
+                    }
+                }
+            });
+            callback && callback();
+        };
+
         function formatPageData () {
             for (var i = $scope.page.dischargeDiagnosis.length; i < 10; i++) {
                 $scope.page.dischargeDiagnosis.push({"diagnosis": "", "sickCode": "", "inSickState": ""})
