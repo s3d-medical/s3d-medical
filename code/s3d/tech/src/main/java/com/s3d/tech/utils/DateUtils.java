@@ -31,14 +31,60 @@ public class DateUtils {
     public static final String COMPACT_DATETIME_FORMAT="yyyyMMddHHmmss";
     public static final String MONTH_DAY_DATE_FORMAT ="MMMMMMMMM-dd";
 
+
+    /**
+     * Convert date or date time to specified format pattern.
+     * @param srcDateTime
+     * @param targetFormatPattern
+     * @param timeZone
+     * @param locale
+     * @return
+     */
+    private static String convertToStrDateTimeSpecifiedPattern(Date srcDateTime, String targetFormatPattern, String timeZone, Locale locale){
+        if(srcDateTime == null ){
+            return null;
+        }
+
+        SimpleDateFormat sdf = createAFormatter(targetFormatPattern,timeZone,locale);
+        return sdf.format(srcDateTime);
+    }
+    private static Date convertToDateTimeSpecifiedPattern(String dateString, String targetFormatPattern, String timeZone, Locale locale) {
+        if (StringUtils.isBlank(dateString)) {
+            return null;
+        }
+        try {
+            SimpleDateFormat formatter = createAFormatter(targetFormatPattern,timeZone,locale);
+            return formatter.parse(dateString);
+        } catch (ParseException e) {
+            throw new RuntimeException("Failed to parse given string representing date.", e.getCause());
+        }
+    }
+
+    private static SimpleDateFormat createAFormatter(String targetFormatPattern, String timeZone, Locale locale){
+        String givenFormat = targetFormatPattern;
+        if(StringUtils.isBlank(givenFormat) ){
+            givenFormat = DEFAULT_DATETIME_FORMAT;
+        }
+        Locale givenLocale = locale;
+        if(givenLocale == null){
+            givenLocale = Locale.getDefault();
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(givenFormat, givenLocale);
+        if(StringUtils.isNotBlank(timeZone)){
+            sdf.setTimeZone(TimeZone.getTimeZone(timeZone));
+        }
+        return sdf;
+    }
+
+
     /**
      * Convert given a date or date time in string format to a simple format with only month and day. such as July-20
      * @param srcDateTime
      * @return
      */
     public static String convertToStrMonthDayInEnglish(String srcDateTime){
-        Date dateTime = convertToSpecifiedDateTime(srcDateTime, DEFAULT_DATE_FORMAT, null, null);
-        return convertToSpecifiedPatternStr(dateTime, MONTH_DAY_DATE_FORMAT, null, Locale.ENGLISH);
+        Date dateTime = convertToDateTimeSpecifiedPattern(srcDateTime, DEFAULT_DATE_FORMAT, null, null);
+        return convertToStrDateTimeSpecifiedPattern(dateTime, MONTH_DAY_DATE_FORMAT, null, Locale.ENGLISH);
     }
 
     /**
@@ -47,8 +93,8 @@ public class DateUtils {
      * @return
      */
     public static String convertToStrYearMonthInEnglish(String srcDateTime){
-        Date dateTime = convertToSpecifiedDateTime(srcDateTime, DEFAULT_DATE_FORMAT, null, null);
-        return convertToSpecifiedPatternStr(dateTime, DEFAULT_MONTH_YEAR_FORMAT, null, Locale.ENGLISH);
+        Date dateTime = convertToDateTimeSpecifiedPattern(srcDateTime, DEFAULT_DATE_FORMAT, null, null);
+        return convertToStrDateTimeSpecifiedPattern(dateTime, DEFAULT_MONTH_YEAR_FORMAT, null, Locale.ENGLISH);
     }
 
     /**
@@ -57,7 +103,7 @@ public class DateUtils {
      * @return  return a string holding a time part. like yyyy-MM-dd hh:mm:ss
      */
 	public static String convertToStrDateTime(Date dateTime) {
-        return convertToSpecifiedPatternStr(dateTime, DEFAULT_DATETIME_FORMAT, null, null);
+        return convertToStrDateTimeSpecifiedPattern(dateTime, DEFAULT_DATETIME_FORMAT, null, null);
 	}
 
     /**
@@ -67,11 +113,11 @@ public class DateUtils {
      * @return
      */
     public static String convertToStrDate(Date dateTime) {
-        return convertToSpecifiedPatternStr(dateTime, DEFAULT_DATE_FORMAT, null, null);
+        return convertToStrDateTimeSpecifiedPattern(dateTime, DEFAULT_DATE_FORMAT, null, null);
     }
 
     public static String convertToStrDate(Date dateTime, String dateFormatPattern) {
-        return convertToSpecifiedPatternStr(dateTime, dateFormatPattern, null, null);
+        return convertToStrDateTimeSpecifiedPattern(dateTime, dateFormatPattern, null, null);
     }
 
 	/**
@@ -80,7 +126,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static String convertToStrDateTimeCompressed(Date dateTime) {
-		return  convertToSpecifiedPatternStr(dateTime, COMPACT_DATETIME_FORMAT, null, null);
+		return  convertToStrDateTimeSpecifiedPattern(dateTime, COMPACT_DATETIME_FORMAT, null, null);
 	}
 
 
@@ -94,7 +140,7 @@ public class DateUtils {
         if(StringUtils.isEmpty(srcDate)){
             return null;
         }
-        return convertToSpecifiedDateTime(srcDate, DEFAULT_DATE_FORMAT, null, null);
+        return convertToDateTimeSpecifiedPattern(srcDate, DEFAULT_DATE_FORMAT, null, null);
     }
 
     public static Date convertToDate(Integer year, Integer month, Integer day){
@@ -114,8 +160,8 @@ public class DateUtils {
      */
 	public static Date convertToDate(Date dateTime){
         // convert to string
-		String strDate = convertToSpecifiedPatternStr(dateTime, DEFAULT_DATE_FORMAT, null, null);
-        return convertToSpecifiedDateTime(strDate, DEFAULT_DATE_FORMAT, null, null);
+		String strDate = convertToStrDateTimeSpecifiedPattern(dateTime, DEFAULT_DATE_FORMAT, null, null);
+        return convertToDateTimeSpecifiedPattern(strDate, DEFAULT_DATE_FORMAT, null, null);
 	}
 
     public static Date convertToDateHourMinute(Integer year, Integer month, Integer day, String time){
@@ -131,74 +177,11 @@ public class DateUtils {
     }
 
 	public static Date convertToDateTime(String dateString){
-		return convertToSpecifiedDateTime(dateString, DEFAULT_DATETIME_FORMAT, null, null);
+		return convertToDateTimeSpecifiedPattern(dateString, DEFAULT_DATETIME_FORMAT, null, null);
 	}
 
     public static Date convertToDateTime(String dateString, String dateFormat){
-        return convertToSpecifiedDateTime(dateString, dateFormat, null, null);
-    }
-
-	private static Date convertToSpecifiedDateTime(String dateString, String targetFormatPattern, String timeZone, Locale locale) {
-		if (StringUtils.isBlank(dateString)) {
-			return null;
-		}
-		try {
-            SimpleDateFormat formatter = createAFormatter(targetFormatPattern,timeZone,locale);
-            return formatter.parse(dateString);
-		} catch (ParseException e) {
-			throw new RuntimeException("Failed to parse given string representing date.", e.getCause());
-		}
-	}
-
-    /**
-     * Convert date or date time to specified format pattern.
-     * @param srcDateTime
-     * @param targetFormatPattern
-     * @param timeZone
-     * @param locale
-     * @return
-     */
-    private static String convertToSpecifiedPatternStr(Date srcDateTime, String targetFormatPattern, String timeZone, Locale locale){
-        if(srcDateTime == null ){
-            return null;
-        }
-
-        SimpleDateFormat sdf = createAFormatter(targetFormatPattern,timeZone,locale);
-        return sdf.format(srcDateTime);
-    }
-
-    private static SimpleDateFormat createAFormatter(String targetFormatPattern, String timeZone, Locale locale){
-        String givenFormat = targetFormatPattern;
-        if(StringUtils.isBlank(givenFormat) ){
-            givenFormat = DEFAULT_DATETIME_FORMAT;
-        }
-        Locale givenLocale = locale;
-        if(givenLocale == null){
-            givenLocale = Locale.getDefault();
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat(givenFormat, givenLocale);
-        if(StringUtils.isNotBlank(timeZone)){
-            sdf.setTimeZone(TimeZone.getTimeZone(timeZone));
-        }
-        return sdf;
-    }
-
-    public static Date addSecondsDateTime(Date sourceDateTime, int seconds){
-        if(sourceDateTime == null){
-            return sourceDateTime;
-        }
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(sourceDateTime);
-        cal.add(Calendar.SECOND, seconds);
-        Date newDateTime = cal.getTime();
-        return newDateTime;
-    }
-
-    public static long diffSeconds(Date beginDate, Date endDate){
-        Assert.isTrue(beginDate != null, "beginDate can not be null");
-        Assert.isTrue(endDate != null, "endDate can not be null");
-        long diff = endDate.getTime() - beginDate.getTime();
-        return (diff/1000);
+        return convertToDateTimeSpecifiedPattern(dateString, dateFormat, null, null);
     }
 
 	/**
@@ -233,27 +216,6 @@ public class DateUtils {
 	     Date lastDate = getLastDateOfMonth(givenDate);
 	     return addDayToDate(lastDate, 1);
 	}
-	
-	public static Date addDayToDate(Date givenDate, int days) {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(givenDate);
-		cal.add(Calendar.DATE, days);
-		return cal.getTime();
-	}
-	
-	public static Date addHourToDate(Date givenDate, int hours) {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(givenDate);
-		cal.add(Calendar.HOUR_OF_DAY, hours);
-		return cal.getTime();
-	}
-
-	public static Date combinedDateHour(Date givenDate, int hours){
-		if(givenDate == null){
-			return null;
-		}
-		return addHourToDate(givenDate, hours);
-	}
 
     public static Integer getYear(Date dateTime){
         if(dateTime == null){
@@ -263,14 +225,16 @@ public class DateUtils {
         cal.setTime(dateTime);
         return cal.get(Calendar.YEAR);
     }
+
     public static Integer getMonth(Date dateTime){
         if(dateTime == null){
             return null;
         }
         Calendar cal = Calendar.getInstance();
         cal.setTime(dateTime);
-        return cal.get(Calendar.MONTH);
+        return (cal.get(Calendar.MONTH) + 1);
     }
+
     public static Integer getDayInMonth(Date dateTime){
         if(dateTime == null){
             return null;
@@ -284,22 +248,57 @@ public class DateUtils {
         if(dateTime == null){
             return null;
         }
-        return DateUtils.convertToSpecifiedPatternStr(dateTime, DEFAULT_HOUR_MINUTE, null, null);
+        return DateUtils.convertToStrDateTimeSpecifiedPattern(dateTime, DEFAULT_HOUR_MINUTE, null, null);
     }
 
-	/**
-	 * get hour from date. 
-	 * @param dateTime
-	 * @return
-	 */
-	public static Integer getHourInt(Date dateTime) {
+    /**
+     * get hour from date.
+     * @param dateTime
+     * @return
+     */
+    public static Integer getHourInt(Date dateTime) {
         if(dateTime == null){
             return null;
         }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateTime);
+        return cal.get(Calendar.HOUR_OF_DAY);
+    }
+
+    public static Date addDayToDate(Date givenDate, int days) {
 		Calendar cal = Calendar.getInstance();
-		cal.setTime(dateTime);
-		return cal.get(Calendar.HOUR_OF_DAY);
+		cal.setTime(givenDate);
+		cal.add(Calendar.DATE, days);
+		return cal.getTime();
 	}
+	
+	public static Date addHourToDate(Date givenDate, int hours) {
+        if(givenDate == null){
+            return null;
+        }
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(givenDate);
+		cal.add(Calendar.HOUR_OF_DAY, hours);
+		return cal.getTime();
+	}
+
+    public static Date addSecondsDateTime(Date sourceDateTime, int seconds){
+        if(sourceDateTime == null){
+            return sourceDateTime;
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(sourceDateTime);
+        cal.add(Calendar.SECOND, seconds);
+        Date newDateTime = cal.getTime();
+        return newDateTime;
+    }
+
+    public static long diffSeconds(Date beginDate, Date endDate){
+        Assert.isTrue(beginDate != null, "beginDate can not be null");
+        Assert.isTrue(endDate != null, "endDate can not be null");
+        long diff = endDate.getTime() - beginDate.getTime();
+        return (diff/1000);
+    }
 
     /**
      * Convert the date of the time zone to UTC

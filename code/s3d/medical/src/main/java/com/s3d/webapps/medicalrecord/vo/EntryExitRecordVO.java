@@ -68,7 +68,7 @@ public class EntryExitRecordVO {
         this.outType = registerDischarge.getDischargeType();
         this.acceptOrganization = registerDischarge.getAcceptingAgencyName();
         this.willReturn = registerDischarge.getHasReadmissionPlan();
-        this.returnPurpose = registerDischarge.getHasReadmissionPlan();
+        this.returnPurpose = registerDischarge.getReadmissionGoal();
     }
 
     public String getInType() {
@@ -102,7 +102,6 @@ public class EntryExitRecordVO {
     public void setInDay(Integer inDay) {
         this.inDay = inDay;
     }
-
 
     public String getInDepartment() {
         return inDepartment;
