@@ -1,5 +1,7 @@
 package com.s3d.webapps.medicalrecord.vo;
 
+import com.s3d.webapps.medicalrecord.persistence.doctor.DoctorInCharge;
+import com.s3d.webapps.medicalrecord.persistence.quality.QualityControlInfo;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.math.BigDecimal;
@@ -34,7 +36,6 @@ public class MedicalRecordHomePageVO {
 
     // expense -- part
     private ExpenseRecordVO expenseRecordVO = new ExpenseRecordVO();
-
 
     // read and fill data or home page vo.
 
@@ -513,6 +514,22 @@ public class MedicalRecordHomePageVO {
         entryExitRecordVO.setReturnPurpose(returnPurpose);
     }
 
+    public String getInHour() {
+        return entryExitRecordVO.getInHour();
+    }
+
+    public void setInHour(String inHour) {
+        entryExitRecordVO.setInHour(inHour);
+    }
+
+    public String getOutHour() {
+        return entryExitRecordVO.getOutHour();
+    }
+
+    public void setOutHour(String outHour) {
+        entryExitRecordVO.setOutHour(outHour);
+    }
+
     public void setInDay(Integer inDay) {
         entryExitRecordVO.setInDay(inDay);
     }
@@ -531,22 +548,6 @@ public class MedicalRecordHomePageVO {
 
     public Integer getInYear() {
         return entryExitRecordVO.getInYear();
-    }
-
-    public void setInTime(String inTime) {
-        entryExitRecordVO.setInTime(inTime);
-    }
-
-    public String getInTime() {
-        return entryExitRecordVO.getInTime();
-    }
-
-    public String getOutTime() {
-        return entryExitRecordVO.getOutTime();
-    }
-
-    public void setOutTime(String outTime) {
-        entryExitRecordVO.setOutTime(outTime);
     }
 
     public void setDaysInHospital(Integer daysInHospital) {
@@ -681,8 +682,32 @@ public class MedicalRecordHomePageVO {
         doctorAndQualityRecordVO.setQualityNurse(qualityNurse);
     }
 
-    public String getQualityDate() {
-        return doctorAndQualityRecordVO.getQualityDate();
+    public void fill(List<DoctorInCharge> doctorInChargeList, QualityControlInfo qualityControlInfo) {
+        doctorAndQualityRecordVO.fill(doctorInChargeList, qualityControlInfo);
+    }
+
+    public Integer getQualityMonth() {
+        return doctorAndQualityRecordVO.getQualityMonth();
+    }
+
+    public Integer getQualityYear() {
+        return doctorAndQualityRecordVO.getQualityYear();
+    }
+
+    public void setQualityDay(Integer qualityDay) {
+        doctorAndQualityRecordVO.setQualityDay(qualityDay);
+    }
+
+    public void setQualityYear(Integer qualityYear) {
+        doctorAndQualityRecordVO.setQualityYear(qualityYear);
+    }
+
+    public Integer getQualityDay() {
+        return doctorAndQualityRecordVO.getQualityDay();
+    }
+
+    public void setQualityMonth(Integer qualityMonth) {
+        doctorAndQualityRecordVO.setQualityMonth(qualityMonth);
     }
 
     public void setQualityDoctor(String qualityDoctor) {
@@ -735,10 +760,6 @@ public class MedicalRecordHomePageVO {
 
     public void setRefresherDoctor(String refresherDoctor) {
         doctorAndQualityRecordVO.setRefresherDoctor(refresherDoctor);
-    }
-
-    public void setQualityDate(String qualityDate) {
-        doctorAndQualityRecordVO.setQualityDate(qualityDate);
     }
 
     public String getQualityDoctor() {

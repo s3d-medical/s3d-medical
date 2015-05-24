@@ -150,9 +150,10 @@ public class MedicalRecordHomePageConvertor {
         doctorInChargeList.get(6).setDoctor(doctorAndQualityRecordVO.getIntern());
         doctorInChargeList.get(7).setDoctor(doctorAndQualityRecordVO.getCoder());
 
+        Date qualityDate = DateUtils.convertToDate(doctorAndQualityRecordVO.getQualityYear(),
+                            doctorAndQualityRecordVO.getQualityMonth(), doctorAndQualityRecordVO.getQualityDay());
         homePage.getQualityControlInfo().fill(doctorAndQualityRecordVO.getCaseQuality(), doctorAndQualityRecordVO.getQualityDoctor(),
-                doctorAndQualityRecordVO.getQualityNurse(), DateUtils.convertToDate(doctorAndQualityRecordVO.getQualityDate()));
-
+                doctorAndQualityRecordVO.getQualityNurse(), qualityDate);
     }
 
     private void fillDiagnosisInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
@@ -182,9 +183,9 @@ public class MedicalRecordHomePageConvertor {
 
     private void fillEntryAndExitInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
         EntryExitRecordVO entryExitRecordVO = homePageVO.readEntryExitRecordVO();
-        Date inDateTime = DateUtils.convertToDateTime(entryExitRecordVO.getInYear(), entryExitRecordVO.getInMonth(), entryExitRecordVO.getInDay(), entryExitRecordVO.getInTime());
+        Date inDateTime = DateUtils.convertToDateTime(entryExitRecordVO.getInYear(), entryExitRecordVO.getInMonth(), entryExitRecordVO.getInDay(), entryExitRecordVO.getInHour());
         homePage.getRegisterAdmission().fill(inDateTime, entryExitRecordVO.getInDepartment(), entryExitRecordVO.getInSickroom(), entryExitRecordVO.getInType());
-        Date outDatetime = DateUtils.convertToDateTime(entryExitRecordVO.getOutYear(), entryExitRecordVO.getOutMonth(), entryExitRecordVO.getOutDay(), entryExitRecordVO.getOutTime());
+        Date outDatetime = DateUtils.convertToDateTime(entryExitRecordVO.getOutYear(), entryExitRecordVO.getOutMonth(), entryExitRecordVO.getOutDay(), entryExitRecordVO.getOutHour());
         homePage.getRegisterDischarge().fill(outDatetime, entryExitRecordVO.getOutDepartment(), entryExitRecordVO.getOutSickroom(), entryExitRecordVO.getDaysInHospital(),
                 entryExitRecordVO.getOutType(), entryExitRecordVO.getAcceptOrganization(), entryExitRecordVO.getWillReturn(), entryExitRecordVO.getReturnPurpose());
 

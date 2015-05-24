@@ -26,8 +26,9 @@ public class DoctorAndQualityRecordVO {
     private String caseQuality;
     private String qualityDoctor;
     private String qualityNurse;
-    private String qualityDate;
-
+    private Integer qualityYear;
+    private Integer qualityMonth;
+    private Integer qualityDay;
 
     public DoctorAndQualityRecordVO() {
     }
@@ -45,7 +46,9 @@ public class DoctorAndQualityRecordVO {
         this.caseQuality = qualityControlInfo.getCaseQuality();
         this.qualityDoctor = qualityControlInfo.getQualityDoctor();
         this.qualityNurse = qualityControlInfo.getQualityNurse();
-        this.qualityDate = DateUtils.convertToStrDate(qualityControlInfo.getQualityDate());
+        this.qualityYear = DateUtils.getYearInt(qualityControlInfo.getQualityDate());
+        this.qualityMonth = DateUtils.getMonthInt(qualityControlInfo.getQualityDate());
+        this.qualityDay = DateUtils.getDayOfMonthInt(qualityControlInfo.getQualityDate());
     }
 
     public String getDirector() {
@@ -136,11 +139,27 @@ public class DoctorAndQualityRecordVO {
         this.qualityNurse = qualityNurse;
     }
 
-    public String getQualityDate() {
-        return qualityDate;
+    public Integer getQualityYear() {
+        return qualityYear;
     }
 
-    public void setQualityDate(String qualityDate) {
-        this.qualityDate = qualityDate;
+    public void setQualityYear(Integer qualityYear) {
+        this.qualityYear = qualityYear;
+    }
+
+    public Integer getQualityMonth() {
+        return qualityMonth;
+    }
+
+    public void setQualityMonth(Integer qualityMonth) {
+        this.qualityMonth = qualityMonth;
+    }
+
+    public Integer getQualityDay() {
+        return qualityDay;
+    }
+
+    public void setQualityDay(Integer qualityDay) {
+        this.qualityDay = qualityDay;
     }
 }

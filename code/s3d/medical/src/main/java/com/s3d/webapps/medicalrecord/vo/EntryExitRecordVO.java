@@ -17,7 +17,7 @@ public class EntryExitRecordVO {
     private Integer inYear;
     private Integer inMonth;
     private Integer inDay;
-    private String inTime;
+    private String inHour;
 
     private String inDepartment;
     private String inSickroom;
@@ -26,7 +26,8 @@ public class EntryExitRecordVO {
     private Integer outYear;
     private Integer outMonth;
     private Integer outDay;
-    private String outTime;
+    private String outHour;
+
     private String outDepartment;
     private String outSickroom;
     private Integer daysInHospital;
@@ -51,7 +52,7 @@ public class EntryExitRecordVO {
         this.inYear = DateUtils.getYearInt(registerAdmission.getRegisteredTime());
         this.inMonth = DateUtils.getMonthInt(registerAdmission.getRegisteredTime());
         this.inDay = DateUtils.getDayOfMonthInt(registerAdmission.getRegisteredTime());
-        this.inTime = DateUtils.getTimeOfDate(registerAdmission.getRegisteredTime());
+        this.inHour = DateUtils.getTimeOfDate(registerAdmission.getRegisteredTime());
         this.inDepartment = registerAdmission.getDepart();
         this.inSickroom = registerAdmission.getSickRoomNo();
     }
@@ -63,7 +64,7 @@ public class EntryExitRecordVO {
         this.outYear = DateUtils.getYearInt(registerDischarge.getRegisteredTime());
         this.outMonth = DateUtils.getMonthInt(registerDischarge.getRegisteredTime());
         this.outDay = DateUtils.getDayOfMonthInt(registerDischarge.getRegisteredTime());
-        this.outTime = DateUtils.getTimeOfDate(registerDischarge.getRegisteredTime());
+        this.outHour = DateUtils.getTimeOfDate(registerDischarge.getRegisteredTime());
         this.outDepartment = registerDischarge.getDepart();
         this.outSickroom = registerDischarge.getSickRoomNo();
         this.daysInHospital = registerDischarge.getTotalDays();
@@ -105,13 +106,6 @@ public class EntryExitRecordVO {
         this.inDay = inDay;
     }
 
-    public String getInTime() {
-        return inTime;
-    }
-
-    public void setInTime(String inTime) {
-        this.inTime = inTime;
-    }
 
     public String getInDepartment() {
         return inDepartment;
@@ -185,14 +179,6 @@ public class EntryExitRecordVO {
         this.outType = outType;
     }
 
-    public String getOutTime() {
-        return outTime;
-    }
-
-    public void setOutTime(String outTime) {
-        this.outTime = outTime;
-    }
-
     public String getAcceptOrganization() {
         return acceptOrganization;
     }
@@ -215,5 +201,21 @@ public class EntryExitRecordVO {
 
     public void setReturnPurpose(String returnPurpose) {
         this.returnPurpose = returnPurpose;
+    }
+
+    public String getInHour() {
+        return inHour;
+    }
+
+    public void setInHour(String inHour) {
+        this.inHour = inHour;
+    }
+
+    public String getOutHour() {
+        return outHour;
+    }
+
+    public void setOutHour(String outHour) {
+        this.outHour = outHour;
     }
 }
