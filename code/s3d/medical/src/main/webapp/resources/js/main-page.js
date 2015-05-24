@@ -43,13 +43,13 @@ angular.module("mainPage", [])
                 cache: false,
                 success: function (result) {
                     if (result.result === 'ok') {
-                        alert("保存成功！");
+                        //alert("保存成功！");
+                        callback && callback();
                     } else {
                         alert("保存失败！");
                     }
                 }
             });
-            callback && callback();
         };
 
         function formatPageData () {

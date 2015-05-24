@@ -83,7 +83,7 @@ var Com_Parameter = {
         <div class="top-left-content pull-left clearfix">
           <!-- <input type="text" name="" id="search1" class="top-search ui-autocomplete-input" autocomplete="off"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span> -->
           <div class="tab-container clearfix">
-            <div class="btn-group btn-cmd-group">
+            <div class="btn-group">
               <a hideFocus="true" title="自动大小(c)" href="#" data-cmd="fitToggle" class="btn-group-item btn-group-left">&#xf0005;</a>
               <a hideFocus="true" title="放大(w)" href="#" data-cmd="zoom" class="btn-group-item btn-group-center">&#xf01b9;</a>
               <a hideFocus="true" title="缩小(s)" href="#" data-cmd="micrify" class="btn-group-item btn-group-center">&#xf01b8;</a>
@@ -92,10 +92,10 @@ var Com_Parameter = {
               <a hideFocus="true" title="左旋(q)" href="#" data-cmd="leftHand" class="btn-group-item btn-group-center">&#xf013a;</a>
               <a hideFocus="true" title="右旋(e)" href="#" data-cmd="rightHand" class="btn-group-item btn-group-right">&#xf013b;</a>
             </div>
-             <div class="btn-group btn-cmd-group">
+             <div class="btn-group">
               <a hideFocus="true" title="输入病案号(空格)" href="#" class="btn-group-item btn-group-left" onclick="window.mainPicGrid.fire('fillIndexPage')">&#xf00be;</a>
               
-              <a hideFocus="true" title="确认并进入下一张(回车)" href="#"  class="btn-group-item btn-group-right">&#xf00b2;</a>
+              <a hideFocus="true" title="确认并进入下一张(回车)" href="#" class="btn-group-item btn-group-right" onclick="window.mainPicGrid.fire('saveAndMoveToNextOne')">&#xf00b2;</a>
             </div>
             
           </div>
@@ -448,6 +448,9 @@ var Com_Parameter = {
 								angular.bootstrap(document, ['mainPage']);
 								Com_Parameter.elAngular = angular.element($('body'));
 								Com_Parameter.elAngular.scope().$apply(function () {
+									$.each(data.sickCodes, function(index, item) {
+										item.name += "(" + item.id + ")";
+									});
 									Com_Parameter.elAngular.scope().settings = data;
 								});
 								Com_Parameter.elAngular.scope().getData(item.fdId, true);
@@ -456,6 +459,17 @@ var Com_Parameter = {
 					} else {
 						Com_Parameter.elAngular.scope().getData(item.fdId, false);
 					}
+				}
+			});
+			grid.on('saveAndMoveToNextOne', function (ev) {
+				if (dialog.get('visible')) {
+					Com_Parameter.elAngular.scope().save(grid.getSelection()[0].id, $.proxy(function () {
+						dialog.close();
+						if (window.mainPicGridIndex < grid.getItems().length - 1) {
+							grid.setSelected(grid.getItems()[++window.mainPicGridIndex]);
+							grid.fire('fillIndexPage');
+						}
+					}, this));
 				}
 			});
 			window.key('escape',"fill",function(e,o){
