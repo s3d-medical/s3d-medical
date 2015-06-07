@@ -133,23 +133,26 @@
                 <span>医疗付费方式：</span>
                 <label><input type="radio" name="payType" value="1" ng-model="page.payType">现金</label>
                 <label><input type="radio" name="payType" value="2" ng-model="page.payType">医保卡</label>
+                <span style="margin-left: 384px;">
+                    示踪码：<input ng-model="page.trackNo" type="text" class="borderless width-120">
+                </span>
             </div>
             <div class="mt-5 overflow-hidden">
                 <span>
-                    健康卡号：<input ng-model="page.healthCard" type="text" class="borderless">
+                    健康卡号：<input ng-model="page.healthCard" type="text" class="borderless width-160" maxlength="20">
                 </span>
-                <span style="margin-left: 160px;">
+                <span style="margin-left: 90px;">
                     第<input ng-model="page.hospitalizedTimes" type="text"class="width-20 borderless">次住院
                 </span>
                 <span style="margin-left: 160px;">
-                    病案号：<input ng-model="page.caseNumber" type="text"class="borderless">
+                    病案号：<input ng-model="page.businessKey" type="text" class="borderless width-120" maxlength="7">
                 </span>
             </div>
         </div>
         <div class="container-body">
             <div>
-                <span>姓名<input ng-model="page.name" type="text"></span>
-                <span style="margin-left: 20px;">性别
+                <span>姓名<input ng-model="page.name" type="text" style="width: 85px;"></span>
+                <span>性别
                     <label><input type="radio" name="sex" ng-model="page.sex" value="1">1.男</label>
                     <label><input type="radio" name="sex" ng-model="page.sex" value="2">2.女</label>
                 </span>
@@ -268,7 +271,7 @@
                 <span>门（急）诊诊断<input ng-model="page.outpatientDiagnosis" type="text" class="width-330"></span>
                 <span class="ml-10" style="margin-left: 48px;">疾病编码
                     <select ng-model="page.outpatientSickCode" style="width: 204px;">
-                        <option ng-repeat="i in settings.sickCodes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
+                        <option ng-repeat="i in settings.sickCodes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.id}}</option>
                     </select>
                 </span>
             </div>
@@ -290,7 +293,7 @@
                             </td>
                             <td>
                                 <select ng-model="d.sickCode">
-                                    <option ng-repeat="i in settings.sickCodes" ng-selected="d.sickCode == i.id" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
+                                    <option ng-repeat="i in settings.sickCodes" ng-selected="d.sickCode == i.id" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.id}}</option>
                                 </select>
                             </td>
                             <td>
@@ -307,7 +310,7 @@
                 <span>损伤、中毒的外部原因<input ng-model="page.outCause" type="text" style="width: 347px;"></span>
                 <span>疾病编码
                     <select ng-model="page.outSickCode" style="width: 200px;">
-                        <option ng-repeat="i in settings.sickCodes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
+                        <option ng-repeat="i in settings.sickCodes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.id}}</option>
                     </select>
                 </span>
             </div>
@@ -317,7 +320,7 @@
             <div>
                 <span>疾病编码
                     <select ng-model="page.pathologySickCode" style="width: 200px;">
-                        <option ng-repeat="i in settings.sickCodes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
+                        <option ng-repeat="i in settings.sickCodes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.id}}</option>
                     </select>
                 </span>
                 <span>病理号<input ng-model="page.pathologyNumber" type="text"></span>

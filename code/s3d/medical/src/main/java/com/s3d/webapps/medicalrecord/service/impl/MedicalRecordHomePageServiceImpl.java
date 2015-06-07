@@ -34,7 +34,7 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
     public MedicalRecordHomePageVO getHomePageByBusinessKey(String businessKey) {
         MedicalRecordHomePage homePage = this.medicalRecordHomePageDao.getByBusinessKey(businessKey);
         if (homePage == null) {
-            homePage = this.buildOneEmpty();
+            homePage = this.buildOneEmpty(businessKey);
         }
         // convert to vo.
         MedicalRecordHomePageVO homePageVO = new MedicalRecordHomePageVO();
@@ -46,15 +46,16 @@ public class MedicalRecordHomePageServiceImpl implements MedicalRecordHomePageSe
     public void saveOrUpdateHomePage(MedicalRecordHomePageVO homePageVO) {
         MedicalRecordHomePage homePage = this.medicalRecordHomePageDao.getByBusinessKey(homePageVO.getBusinessKey());
         if (homePage == null) {
-            homePage = this.buildOneEmpty();
+            homePage = this.buildOneEmpty(homePageVO.getBusinessKey());
         }
         this.medicalRecordHomePageConvertor.copyToPo(homePageVO, homePage);
         this.medicalRecordHomePageDao.saveOrUpdate(homePage);
     }
 
-    protected MedicalRecordHomePage buildOneEmpty() {
+    protected MedicalRecordHomePage buildOneEmpty(String businessKey) {
         MedicalRecordHomePage medicalRecordHomePage = new MedicalRecordHomePage();
         medicalRecordHomePage.setHomePageBasicInfo(new HomePageBasicInfo());
+        medicalRecordHomePage.getHomePageBasicInfo().setBusinessKey(businessKey);
         medicalRecordHomePage.setPatientInfo(new PatientInfo());
         medicalRecordHomePage.setRegisterAdmission(new RegisterAdmission());
         medicalRecordHomePage.setRegisterDischarge(new RegisterDischarge());

@@ -44,12 +44,11 @@ public class MedicalRecordHomePageController {
         return model;
     }
 
-    @RequestMapping(value = "/homepages/{seq}", method = RequestMethod.POST)
-    public Model saveMedicalRecordHomePageData(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable String seq, @RequestBody MedicalRecordHomePageVO medicalRecordHomePageVO) {
+    @RequestMapping(value = "/homepages", method = RequestMethod.POST)
+    public Model saveMedicalRecordHomePageData(HttpServletRequest request, HttpServletResponse response, Model model, @RequestBody MedicalRecordHomePageVO medicalRecordHomePageVO) {
         // do something.
         try {
             if (medicalRecordHomePageVO != null) {
-                medicalRecordHomePageVO.setBusinessKey(seq);
                 this.medicalRecordHomePageService.saveOrUpdateHomePage(medicalRecordHomePageVO);
                 model.addAttribute("result", "ok");
                 return model;

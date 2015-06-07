@@ -3,16 +3,28 @@ angular.module("mainPage", [])
 
         // test data
         $scope.settings = null;
+        var defaultPageData = {
+            "payType": 1,
+            "sex": 1,
+            "medicalAllergy": 1,
+            "autopsy": 1,
+            "bloodType": 1,
+            "rh": 1,
+            "caseQuality": 1,
+            "willReturn": 1
+        };
 
-        $scope.getData = function (fdId, isInit) {
+        $scope.getData = function (fdFileNo, isInit) {
             $.ajax({
                 type: "get",
-                url: Com_Parameter.ContextPath + "medicalRecord/homepages/" + fdId,
+                url: Com_Parameter.ContextPath + "medicalRecord/homepages/" + fdFileNo,
                 dataType: "json",
                 cache: false,
                 success: function (result) {
+                    var pageData = result.data;
+                    !pageData.payType && $.extend(pageData, defaultPageData);
                     $scope.$apply(function () {
-                        $scope.page = result.data;
+                        $scope.page = pageData;
                         formatPageData();
                         !isInit && $("select").selectator("destroy");
                         setTimeout(function () {
@@ -27,16 +39,16 @@ angular.module("mainPage", [])
             });
         };
 
-        $scope.save = function (fdId, callback) {
-            if (!$scope.page.name) {
-                alert("姓名不能为空！");
+        $scope.save = function (/*fdId, */callback) {
+            if (!$scope.page.businessKey) {
+                alert("病案号不能为空！");
                 return;
             }
             // todo use angular.toJson to convert page object instead of JSON.stringify because of useless characters created by angular automatic
             //console.log(angular.toJson($scope.page));
             $.ajax({
                 type: "post",
-                url: Com_Parameter.ContextPath + "medicalRecord/homepages/" + fdId,
+                url: Com_Parameter.ContextPath + "medicalRecord/homepages",
                 dataType: "json",
                 contentType: "application/json",
                 data: angular.toJson($scope.page),
@@ -62,14 +74,29 @@ angular.module("mainPage", [])
         }
         function setDefaultPage () {
             $scope.page = {
-                "dischargeDiagnosis": [],
-                "operationHistory": [],
+                "dischargeDiagnosis": [{
+                    "diagnosis": "",
+                    "sickCodes": ["", "", ""],
+                    "inSickState": ""
+                }],
+                "operationHistory": [{
+                    "operateCode": "",
+                    "date": "",
+                    "grade": "",
+                    "operationName": "",
+                    "operator": "",
+                    "firstAssistant": "",
+                    "secondAssistant": "",
+                    "cutHealGrade": "",
+                    "anaesthesiaType": "",
+                    "anaesthetist": ""
+                }],
                 "country": "",
                 "nation": "",
                 "payType": 1,
                 "healthCard": "",
                 "hospitalizedTimes": "",
-                "caseNumber": "",
+                //"caseNumber": "",
                 "name": "",
                 "sex": 1,
                 "birthdayYear": "",
@@ -183,27 +210,9 @@ angular.module("mainPage", [])
                 "expenseConsumptionExamine": "",
                 "expenseConsumptionCure": "",
                 "expenseConsumptionOperation": "",
-                "expenseOther": ""
-            }
-
-            for (var i = 0; i < 10; i++) {
-                $scope.page.dischargeDiagnosis.push({
-                    "diagnosis": "",
-                    "sickCode": "",
-                    "inSickState": ""
-                });
-                $scope.page.operationHistory.push({
-                    "operateCode": "",
-                    "date": "",
-                    "grade": "",
-                    "operationName": "",
-                    "operator": "",
-                    "firstAssistant": "",
-                    "secondAssistant": "",
-                    "cutHealGrade": "",
-                    "anaesthesiaType": "",
-                    "anaesthetist": ""
-                });
+                "expenseOther": "",
+                "businessKey": "",
+                "trackNo": ""
             }
         }
     }]);

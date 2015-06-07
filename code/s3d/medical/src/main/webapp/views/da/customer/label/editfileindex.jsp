@@ -411,7 +411,7 @@ var Com_Parameter = {
 					text:'保存',
 					elCls : 'button button-primary',
 					handler : function(){
-						Com_Parameter.elAngular.scope().save(grid.getSelection()[0].id, $.proxy(function () {
+						Com_Parameter.elAngular.scope().save(/*grid.getSelection()[0].id, */$.proxy(function () {
 							this.close();
 						}, this));
 					}
@@ -448,22 +448,22 @@ var Com_Parameter = {
 								angular.bootstrap(document, ['mainPage']);
 								Com_Parameter.elAngular = angular.element($('body'));
 								Com_Parameter.elAngular.scope().$apply(function () {
-									$.each(data.sickCodes, function(index, item) {
+									/*$.each(data.sickCodes, function(index, item) {
 										item.name += "(" + item.id + ")";
-									});
+									});*/
 									Com_Parameter.elAngular.scope().settings = data;
 								});
-								Com_Parameter.elAngular.scope().getData(item.fdId, true);
+								Com_Parameter.elAngular.scope().getData(item.fdFileNo, true);
 							}
 						});
 					} else {
-						Com_Parameter.elAngular.scope().getData(item.fdId, false);
+						Com_Parameter.elAngular.scope().getData(item.fdFileNo, false);
 					}
 				}
 			});
 			grid.on('saveAndMoveToNextOne', function (ev) {
 				if (dialog.get('visible')) {
-					Com_Parameter.elAngular.scope().save(grid.getSelection()[0].id, $.proxy(function () {
+					Com_Parameter.elAngular.scope().save(/*grid.getSelection()[0].id, */$.proxy(function () {
 						dialog.close();
 						if (window.mainPicGridIndex < grid.getItems().length - 1) {
 							grid.setSelected(grid.getItems()[++window.mainPicGridIndex]);
