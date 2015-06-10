@@ -33,6 +33,7 @@ angular.module("mainPage", [])
                                     search: '搜索'
                                 }
                             });
+                            initHandyOperation();
                         }, 100);
                     });
                 }
@@ -72,6 +73,49 @@ angular.module("mainPage", [])
                 $scope.page.operationHistory.push({"operateCode": "", "date": "", "grade": "", "operationName": "", "operator": "", "firstAssistant": "", "secondAssistant": "", "cutHealGrade": "", "anaesthesiaType": "", "anaesthetist": ""});
             }
         }
+
+        function setUpWatch () {
+            // todo need test
+            if (!$scope.page.outDepartment) {
+                var watchInDepartment = $scope.$watch('page.inDepartment', function (newVal, oldVal) {
+                    if (!$scope.page.outDepartment) {
+                        $scope.page.outDepartment = newVal;
+                        $("#slOutDepartment").val(newVal);
+                        $("#slOutDepartment").selectator({
+                            labels: {
+                                search: '搜索'
+                            }
+                        });
+                    }
+                    watchInDepartment();
+                })
+            }
+            if (!$scope.page.dischargeDiagnosis[0].diagnosis) {
+                var watchDischargeDiagnosis = $scope.$watch("page.outpatientDiagnosis", function (newVal, oldVal) {
+                    if (!$scope.page.dischargeDiagnosis[0].diagnosis || ($scope.page.dischargeDiagnosis[0].diagnosis == oldVal)) {
+                        $scope.page.dischargeDiagnosis[0].diagnosis = newVal;
+                    } else {
+                        watchDischargeDiagnosis();
+                    }
+                })
+            }
+
+        }
+
+        function initHandyOperation() {
+            // Set focus to next input when press enter
+            var els = $(".sy-container input[type='text']");
+            els.each(function (index,item) {
+                $(item).on("keypress", function (event) {
+                    if(event.keyCode == 13 && index < els.length - 1) {
+                        els[index + 1].focus();
+                    }
+                })
+            })
+
+            setUpWatch();
+        }
+
         function setDefaultPage () {
             $scope.page = {
                 "dischargeDiagnosis": [{

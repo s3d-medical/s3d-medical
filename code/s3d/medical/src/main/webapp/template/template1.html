@@ -260,7 +260,7 @@
             <div>
                 <span>出院时间<input ng-model="page.outYear" type="text" style="width: 50px;">年<input ng-model="page.outMonth" type="text" style="width: 40px;">月<input ng-model="page.outDay" type="text" style="width: 40px;">日<input ng-model="page.outHour" type="text" style="width: 40px;">时</span>
                 <span class="ml-10">出院科别
-                    <select ng-model="page.outDepartment">
+                    <select id="slOutDepartment" ng-model="page.outDepartment">
                         <option ng-repeat="i in settings.departments" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                 </span>
@@ -268,7 +268,7 @@
                 <span class="ml-10">实际住院<input ng-model="page.daysInHospital" type="text">天</span>
             </div>
             <div>
-                <span>门（急）诊诊断<input ng-model="page.outpatientDiagnosis" type="text" class="width-330"></span>
+                <span>门（急）诊诊断<input ng-model="page.outpatientDiagnosis" type="text" class="width-330" maxlength="40"></span>
                 <span class="ml-10" style="margin-left: 48px;">疾病编码
                     <select ng-model="page.outpatientSickCode" style="width: 204px;">
                         <option ng-repeat="i in settings.sickCodes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.id}}</option>
