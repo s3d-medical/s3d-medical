@@ -7,13 +7,15 @@
     <!--<link type="text/css" rel="stylesheet" href="../resources/bui/css/dpl-min.css"/>-->
     <style type="text/css">
         /* common */
-        input[type='text'] {
+        input[type='text'],
+        textarea {
             border: none;
             border-bottom: solid 1px #000;
             outline: none;
             padding: 0 5px;
             color: #0000ff;
             width: 65px;
+            height: 100%;
             text-align: center;
         }
         table {
@@ -22,9 +24,11 @@
         table tr {
             height: 19px;
         }
-        table input[type='text'] {
+        table input[type='text'],
+        table textarea {
             border: none;
             text-align: left;
+
         }
         thead {
             text-align: center;
@@ -37,6 +41,15 @@
         }
         td {
             border: solid 1px;
+        }
+        .selectivity-multiple-input-container {
+            padding: 0;
+        }
+        .button {
+            font-size: 12px;
+            padding: 2px;
+            font-weight: normal;
+            margin-top: 2px;
         }
         .text-center {
             text-align: center;
@@ -117,9 +130,12 @@
             white-space : nowrap;
             overflow : hidden;
         }
-        .out-diagnosis span~input[type='text'] {
-            width: 80%;
+        /*.out-diagnosis textarea {
+            width: 99%;
         }
+        .out-diagnosis span~textarea {
+            width: 80%;
+        }*/
         .out-diagnosis select {
             width: 100%;
         }
@@ -159,7 +175,7 @@
                 <span style="margin-left: 30px;">出生日期<input ng-model="page.birthdayYear" type="text" class="width-40">年<input ng-model="page.birthdayMonth" type="text" class="width-20">月<input ng-model="page.birthdayDay" type="text" class="width-20">日</span>
                 <span style="margin-left: 30px;">年龄<input ng-model="page.age" type="text" class="width-40">岁</span>
                 <span style="margin-left: 30px;">国籍
-                    <select ng-init="page.country = settings.countries[0].id" ng-model="page.country">
+                    <select ng-init="page.country = settings.countries[0].id" ng-model="page.country" class="selectator">
                         <option ng-repeat="i in settings.countries" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                 </span>
@@ -171,30 +187,30 @@
             </div>
             <div>
                 <span>出生地
-                    <select ng-model="page.bornState" style="width: 70px;">
+                    <select ng-model="page.bornState" style="width: 70px;" class="selectator">
                         <option ng-repeat="i in settings.locations" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                     省（区、市）
-                    <select ng-model="page.bornCity" style="width: 70px;">
+                    <select ng-model="page.bornCity" style="width: 70px;" class="selectator">
                         <option ng-repeat="i in settings.locations" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
-                    市<select ng-model="page.bornDistrict" style="width: 70px;">
+                    市<select ng-model="page.bornDistrict" style="width: 70px;" class="selectator">
                         <option ng-repeat="i in settings.locations" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                     县
                 </span>
                 <span>籍贯
-                    <select ng-model="page.hometownState" style="width: 70px;">
+                    <select ng-model="page.hometownState" style="width: 70px;" class="selectator">
                         <option ng-repeat="i in settings.locations" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                     省（区、市）
-                    <select ng-model="page.hometownCity" style="width: 70px;">
+                    <select ng-model="page.hometownCity" style="width: 70px;" class="selectator">
                         <option ng-repeat="i in settings.locations" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                     市
                 </span>
                 <span>民族
-                <select ng-init="page.nation = settings.nations[0].id" ng-model="page.nation" style="width: 70px;">
+                <select ng-init="page.nation = settings.nations[0].id" ng-model="page.nation" style="width: 70px;" class="selectator">
                     <option ng-repeat="i in settings.nations" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                 </select>
                 </span>
@@ -202,12 +218,12 @@
             <div>
                 <span>身份证号<input ng-model="page.idCard" type="text" class="width-160"></span>
                 <span class="ml-10">职业
-                    <select ng-model="page.job">
+                    <select ng-model="page.job" class="selectator">
                         <option ng-repeat="i in settings.jobs" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                 </span>
                 <span class="ml-10">婚姻
-                    <select ng-model="page.marriage">
+                    <select ng-model="page.marriage" class="selectator">
                         <option ng-repeat="i in settings.marriages" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                 </span>
@@ -229,7 +245,7 @@
             <div>
                 <span>联系人姓名<input ng-model="page.contact" type="text"></span>
                 <span class="ml-10">关系
-                    <select ng-model="page.relationship">
+                    <select ng-model="page.relationship" class="selectator">
                         <option ng-repeat="i in settings.relationships" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                 </span>
@@ -238,7 +254,7 @@
             </div>
             <div>
                 <span>入院途径
-                    <select ng-model="page.inType">
+                    <select ng-model="page.inType" class="selectator">
                         <option ng-repeat="i in settings.inTypes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                 </span>
@@ -246,13 +262,13 @@
             <div>
                 <span>入院时间<input ng-model="page.inYear" type="text" style="width: 50px;">年<input ng-model="page.inMonth" type="text" style="width: 40px;">月<input ng-model="page.inDay" type="text" style="width: 40px;">日<input ng-model="page.inHour" type="text" style="width: 40px;">时</span>
                 <span class="ml-10">入院科别
-                    <select ng-model="page.inDepartment">
+                    <select ng-model="page.inDepartment" class="selectator">
                         <option ng-repeat="i in settings.departments" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                 </span>
                 <span class="ml-10">病房<input ng-model="page.inSickroom" type="text"></span>
                 <span class="ml-10">转科科别
-                    <select ng-model="page.changeDepartment">
+                    <select ng-model="page.changeDepartment" class="selectator">
                         <option ng-repeat="i in settings.departments" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                 </span>
@@ -260,7 +276,7 @@
             <div>
                 <span>出院时间<input ng-model="page.outYear" type="text" style="width: 50px;">年<input ng-model="page.outMonth" type="text" style="width: 40px;">月<input ng-model="page.outDay" type="text" style="width: 40px;">日<input ng-model="page.outHour" type="text" style="width: 40px;">时</span>
                 <span class="ml-10">出院科别
-                    <select id="slOutDepartment" ng-model="page.outDepartment">
+                    <select id="slOutDepartment" ng-model="page.outDepartment" class="selectator">
                         <option ng-repeat="i in settings.departments" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                 </span>
@@ -270,7 +286,7 @@
             <div>
                 <span>门（急）诊诊断<input ng-model="page.outpatientDiagnosis" type="text" class="width-330" maxlength="40"></span>
                 <span class="ml-10" style="margin-left: 48px;">疾病编码
-                    <select ng-model="page.outpatientSickCode" style="width: 204px;">
+                    <select ng-model="page.outpatientSickCode" style="width: 204px;" class="selectator">
                         <option ng-repeat="i in settings.sickCodes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.id}}</option>
                     </select>
                 </span>
@@ -289,27 +305,43 @@
                             <td>
                                 <span ng-show="$index == 0">主要诊断：</span>
                                 <span ng-show="$index == 1">其他诊断：</span>
-                                <input class="diagnosis" type="text" ng-model="d.diagnosis">
+                                <textarea class="diagnosis" ng-model="d.diagnosis" ng-style="{'width':$index<2?'79%':'97%'}"></textarea>
+                                <!--<input class="diagnosis" type="text" ng-model="d.diagnosis">-->
                             </td>
-                            <td>
-                                <select ng-model="d.sickCode">
-                                    <option ng-repeat="i in settings.sickCodes" ng-selected="d.sickCode == i.id" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.id}}</option>
+                            <td class="discharge-sick-code" style="text-align: center;">
+                                <select class="selectivity" name="" style="height: 24px;">
+                                    <option ng-repeat="i in settings.sickCodes" ng-selected="d.sickCodes.indexOf(i.id) > -1" value="{{i.id}}">{{i.id}}</option>
                                 </select>
                             </td>
                             <td>
-                                <select ng-model="d.inSickState">
+                                <select ng-model="d.inSickState" class="selectator">
+                                    <option ng-repeat="i in settings.inSickStates" ng-selected="d.inSickState == i.id" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="tpl-discharge-diagnosis-row" style="display: none;">
+                            <td>
+                                <textarea class="diagnosis" style="width: 97%;"></textarea>
+                            </td>
+                            <td class="discharge-sick-code" style="text-align: center;">
+                                <select class="tpl-selectivity" name="" style="height: 24px;">
+                                    <option ng-repeat="i in settings.sickCodes" value="{{i.id}}">{{i.id}}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select ng-model="d.inSickState" class="tpl-selectator">
                                     <option ng-repeat="i in settings.inSickStates" ng-selected="d.inSickState == i.id" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                                 </select>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <!--<div>+</div>-->
+                <button id="" class="button" ng-click="addNewDischargeDiagnosis()">添加出院诊断</button>
             </div>
             <div>
                 <span>损伤、中毒的外部原因<input ng-model="page.outCause" type="text" style="width: 347px;"></span>
                 <span>疾病编码
-                    <select ng-model="page.outSickCode" style="width: 200px;">
+                    <select ng-model="page.outSickCode" class="selectator" style="width: 200px;">
                         <option ng-repeat="i in settings.sickCodes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.id}}</option>
                     </select>
                 </span>
@@ -319,7 +351,7 @@
             </div>
             <div>
                 <span>疾病编码
-                    <select ng-model="page.pathologySickCode" style="width: 200px;">
+                    <select ng-model="page.pathologySickCode" class="selectator" style="width: 200px;">
                         <option ng-repeat="i in settings.sickCodes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.id}}</option>
                     </select>
                 </span>
@@ -416,7 +448,7 @@
             </div>
             <div>
                 <span>离院方式
-                    <select ng-model="page.outType" style="width: 210px;">
+                    <select ng-model="page.outType" class="selectator" style="width: 210px;">
                         <option ng-repeat="i in settings.outTypes" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
                     </select>
                 </span>

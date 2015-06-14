@@ -1,8 +1,8 @@
 {
   "dischargeDiagnosis": [
-    {"diagnosis": "感冒1", "sickCode": "I10.X02", "inSickState": "2"},
-    {"diagnosis": "感冒2", "sickCode": "I11.901", "inSickState": "3"},
-    {"diagnosis": "感冒3", "sickCode": "X59.952", "inSickState": "4"}
+    {"diagnosis": "感冒1", "sickCodes": ["A01.100"], "inSickState": "2"},
+    {"diagnosis": "感冒2", "sickCodes": ["I11.901"], "inSickState": "3"},
+    {"diagnosis": "感冒3", "sickCodes": ["X59.952"], "inSickState": "4"}
   ],
   "operationHistory": [
     {"operateCode": "1111", "date": "2014-12-01", "grade": "甲", "operationName": "手术名称1", "operator": "术者1", "firstAssistant": "1助11", "secondAssistant": "2助11", "cutHealGrade": "伤口愈合等级1", "anaesthesiaType": "麻醉方式1", "anaesthetist": "麻醉师1"},
@@ -14,7 +14,6 @@
   "payType": 1,
   "healthCard": "1001",
   "hospitalizedTimes": "12",
-  "caseNumber": "1002",
   "name": "陈秀兰1",
   "sex": 2,
   "birthdayYear": "1960",
@@ -128,5 +127,6 @@
   "expenseConsumptionExamine": "44",
   "expenseConsumptionCure": "45",
   "expenseConsumptionOperation": "56",
-  "expenseOther": "12"
+  "expenseOther": "12",
+  "trackNo": "11223344"
 }
