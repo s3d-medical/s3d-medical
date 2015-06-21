@@ -1,15 +1,16 @@
 package com.s3d.webapps.medicalrecord.convertor;
 
 import com.s3d.tech.utils.DateUtils;
-import com.s3d.webapps.medicalrecord.persistence.homepagebasic.HomePageBasicInfo;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.homepagebasic.HomePageBasicInfo;
 import com.s3d.webapps.medicalrecord.persistence.MedicalRecordHomePage;
-import com.s3d.webapps.medicalrecord.persistence.diagnosis.DiagnosisDischarge;
-import com.s3d.webapps.medicalrecord.persistence.doctor.DoctorInCharge;
-import com.s3d.webapps.medicalrecord.persistence.expense.ExpenseInvoice;
-import com.s3d.webapps.medicalrecord.persistence.expense.ExpenseItem;
-import com.s3d.webapps.medicalrecord.persistence.operation.Operation;
-import com.s3d.webapps.medicalrecord.persistence.patient.PatientInfo;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.diagnosis.DiagnosisDischarge;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.doctor.DoctorInCharge;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.expense.ExpenseInvoice;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.expense.ExpenseItem;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.operation.Operation;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.patient.PatientInfo;
 import com.s3d.webapps.medicalrecord.vo.*;
+import com.s3d.webapps.medicalrecord.vo.homepage.*;
 
 import java.util.Date;
 import java.util.List;
@@ -66,13 +67,14 @@ public class MedicalRecordHomePageConvertor {
 
     }
 
+
     public void copyToPo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage) {
         //1fill home basic info
         this.fillBasicInfo(homePageVO, homePage);
         //2 fill patient
         this.fillPatientInfo(homePageVO, homePage);
 
-        //3 entry exit
+        //3 join and leave hospital record.
         this.fillEntryAndExitInfo(homePageVO, homePage);
         //4 diagnosis
         this.fillDiagnosisInfo(homePageVO, homePage);
@@ -86,11 +88,125 @@ public class MedicalRecordHomePageConvertor {
         this.fillExpense(homePageVO, homePage);
     }
 
+    private void fillBasicInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
+        HomePageBasicInfoVO basicInfoVO = homePageVO.readHomePageBasicInfoVO();
+
+        HomePageBasicInfo homePageBasicInfo = homePage.getHomePageBasicInfo();
+
+        homePageBasicInfo.fillHomePageBasicInfo(basicInfoVO.getBusinessKey(),
+                basicInfoVO.getPayType(),
+                basicInfoVO.getHealthCard(),
+                basicInfoVO.getHospitalizedTimes(),
+                basicInfoVO.getTrackNo(),
+                basicInfoVO.getChangeDepartment(),
+                basicInfoVO.getMedicalAllergy(),
+                basicInfoVO.getAllergicMedication(),
+                basicInfoVO.getAutopsy(),
+                basicInfoVO.getBloodType(),
+                basicInfoVO.getRh());
+    }
+
+    /**
+     * fill patient information.
+     * @param homePageVO
+     * @param homePage
+     */
+    private void fillPatientInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
+        PatientInfoVO patientInfoVO = homePageVO.readPatientInfoVO();
+
+        Date birthDate = DateUtils.convertToDate(patientInfoVO.getBirthdayYear(), patientInfoVO.getBirthdayMonth(), patientInfoVO.getBirthdayDay());
+        PatientInfo patientInfo = homePage.getPatientInfo();
+
+        patientInfo.fillPatientBasicInfo(patientInfoVO.getName(), patientInfoVO.getSex(), birthDate, patientInfoVO.getAge(), patientInfoVO.getBabyAge(),
+                patientInfoVO.getCountry(), patientInfoVO.getBabyBornWeight(), patientInfoVO.getBabyHospitalizedWeight(),
+                patientInfoVO.getNation(), patientInfoVO.getIdCard(), patientInfoVO.getJob(), patientInfoVO.getMarriage());
+
+        patientInfo.fillBirthPlace(patientInfoVO.getBornState(), patientInfoVO.getBornCity(), patientInfoVO.getBornDistrict());
+
+        patientInfo.fillNativeAddress(patientInfoVO.getHometownState(), patientInfoVO.getHometownCity());
+
+        patientInfo.fillPresentAddress(patientInfoVO.getAddressState(), patientInfoVO.getAddressCity(), patientInfoVO.getAddressDistrict(), patientInfoVO.getAddressPhone(), patientInfoVO.getAddressPostcode());
+
+        patientInfo.fillRegisteredResidence(patientInfoVO.getResidenceState(), patientInfoVO.getResidenceCity(), patientInfoVO.getResidenceDistrict(), patientInfoVO.getResidencePostcode());
+
+        patientInfo.fillCompany("", patientInfoVO.getWorkPlaceAddress(), patientInfoVO.getWorkPlacePhone(), patientInfoVO.getWorkPlacePostcode());
+
+        patientInfo.fillContactPerson(patientInfoVO.getContact(), patientInfoVO.getRelationship(), patientInfoVO.getContactAddress(), patientInfoVO.getContactPhone());
+    }
+
+    /**
+     * join and leave hospital record.
+     * @param homePageVO
+     * @param homePage
+     */
+    private void fillEntryAndExitInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
+        EntryExitRecordVO entryExitRecordVO = homePageVO.readEntryExitRecordVO();
+
+        Date inDateTime = DateUtils.convertToDateHourMinute(entryExitRecordVO.getInYear(),
+                entryExitRecordVO.getInMonth(),
+                entryExitRecordVO.getInDay(),
+                entryExitRecordVO.getInHour());
+        homePage.getRegisterAdmission().fill(inDateTime,
+                entryExitRecordVO.getInDepartment(),
+                entryExitRecordVO.getInSickroom(),
+                entryExitRecordVO.getInType());
+
+        Date outDatetime = DateUtils.convertToDateHourMinute(entryExitRecordVO.getOutYear(),
+                entryExitRecordVO.getOutMonth(),
+                entryExitRecordVO.getOutDay(),
+                entryExitRecordVO.getOutHour());
+        homePage.getRegisterDischarge().fill(outDatetime,
+                entryExitRecordVO.getOutDepartment(),
+                entryExitRecordVO.getOutSickroom(),
+                entryExitRecordVO.getDaysInHospital(),
+                entryExitRecordVO.getOutType(),
+                entryExitRecordVO.getAcceptOrganization(),
+                entryExitRecordVO.getWillReturn(), entryExitRecordVO.getReturnPurpose());
+
+    }
+
+    /**
+     * fill diagnosis related data.
+     * @param homePageVO
+     * @param homePage
+     */
+    private void fillDiagnosisInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
+        DiagnosisRecordVO diagnosisRecordVO = homePageVO.readDiagnosisRecordVO();
+        // clinic
+        homePage.getDiagnosisClinic().fill(diagnosisRecordVO.getOutpatientDiagnosis(), diagnosisRecordVO.getOutpatientSickCodes());
+
+        // discharges remove old, then add new ones.
+        List<DischargeDiagnosisVO> dischargeVOs = diagnosisRecordVO.getDischargeDiagnosis();
+        List<DiagnosisDischarge> discharges = homePage.getDiagnosisDischargeList();
+        discharges.clear();
+        if (dischargeVOs != null && dischargeVOs.size() > 0) {
+            for (int i = 0; i < dischargeVOs.size(); i++) {
+                DischargeDiagnosisVO item = dischargeVOs.get(i);
+                DiagnosisDischarge diagnosisDischarge = new DiagnosisDischarge();
+                diagnosisDischarge.fill(item.getDiagnosis(), item.getSickCodes(), item.getInSickState());
+                diagnosisDischarge.setMedicalRecordHomePage(homePage); // fill relation
+                discharges.add(diagnosisDischarge);
+            }
+        }
+        homePage.setDiagnosisDischargeList(discharges);
+
+        // external reason
+        homePage.getDiagnosisExternalReason().fill(diagnosisRecordVO.getOutCause(), diagnosisRecordVO.getOutSickCodes());
+
+        // pathology
+        homePage.getDiagnosisPathology().fill(diagnosisRecordVO.getPathologyDiagnosis(), diagnosisRecordVO.getPathologySickCodes(), diagnosisRecordVO.getPathologyNumber());  // pathology diagnosis.
+
+    }
+
     private void fillExpense(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage) {
         ExpenseRecordVO expenseRecordVO = homePageVO.readExpenseRecordVO();
+
         ExpenseInvoice expenseInvoice = homePage.getExpenseInvoice();
+
         expenseInvoice.setTotalAmount(expenseRecordVO.getExpenseTotal());
+
         expenseInvoice.setSelfPayingAmount(expenseRecordVO.getExpensePersonal());
+
         List<ExpenseItem> items = expenseInvoice.getExpenseItems();
         items.get(0).setAmount(expenseRecordVO.getExpenseNormalMedicalService());
         items.get(1).setAmount(expenseRecordVO.getExpenseNormalCureOperating());
@@ -126,17 +242,30 @@ public class MedicalRecordHomePageConvertor {
         List<OperationHistoryVO> operationVOs = homePageVO.getOperationHistory();
         List<Operation> operations = homePage.getOperationList();
         operations.clear();
+
         if(operationVOs != null && operationVOs.size() >0){
+
             for(int i=0; i<operationVOs.size(); i++){
                 OperationHistoryVO itemVO = operationVOs.get(i);
                 Operation operation = new Operation();
-                operation.fill(itemVO.getOperateCode(), itemVO.getDate(), itemVO.getGrade(), itemVO.getOperationName(), itemVO.getOperator(),
-                        itemVO.getFirstAssistant(), itemVO.getSecondAssistant(), itemVO.getCutHealGrade(),  itemVO.getAnaesthesiaType(), itemVO.getAnaesthetist());
+                operation.fill(itemVO.getOperateCode(),
+                        itemVO.getDate(),
+                        itemVO.getGrade(),
+                        itemVO.getOperationName(),
+                        itemVO.getOperator(),
+                        itemVO.getFirstAssistant(),
+                        itemVO.getSecondAssistant(),
+                        itemVO.getCutHealGrade(),
+                        itemVO.getAnaesthesiaType(),
+                        itemVO.getAnaesthetist());
+
                 operation.setMedicalRecordHomePage(homePage);
                 operations.add(operation);
             }
+
         }
     }
+
     private void fillDoctorsAndQualityInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
         DoctorAndQualityRecordVO doctorAndQualityRecordVO = homePageVO.readDoctorRecordVO();
         List<DoctorInCharge> doctorInChargeList = homePage.getDoctorInChargeList();
@@ -153,68 +282,18 @@ public class MedicalRecordHomePageConvertor {
                             doctorAndQualityRecordVO.getQualityMonth(), doctorAndQualityRecordVO.getQualityDay());
         homePage.getQualityControlInfo().fill(doctorAndQualityRecordVO.getCaseQuality(), doctorAndQualityRecordVO.getQualityDoctor(),
                 doctorAndQualityRecordVO.getQualityNurse(), qualityDate);
-    }
 
-    private void fillDiagnosisInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
-        DiagnosisRecordVO diagnosisRecordVO = homePageVO.readDiagnosisRecordVO();
-        // clinic
-        homePage.getDiagnosisClinic().fill(diagnosisRecordVO.getOutpatientDiagnosis(), diagnosisRecordVO.getOutpatientSickCode());
-        // discharges remove old, then add new ones.
-        List<DischargeDiagnosisVO> dischargeVOs = diagnosisRecordVO.getDischargeDiagnosis();
-        List<DiagnosisDischarge> discharges = homePage.getDiagnosisDischargeList();
-        discharges.clear();
-        if (dischargeVOs != null && dischargeVOs.size() > 0) {
-            for (int i = 0; i < dischargeVOs.size(); i++) {
-                DischargeDiagnosisVO item = dischargeVOs.get(i);
-                DiagnosisDischarge diagnosisDischarge = new DiagnosisDischarge();
-                diagnosisDischarge.fill(item.getDiagnosis(), item.getSickCode(), item.getInSickState());
-                diagnosisDischarge.setMedicalRecordHomePage(homePage); // fill relation
-                discharges.add(diagnosisDischarge);
-            }
-        }
-        homePage.setDiagnosisDischargeList(discharges);
-        // external reason
-        homePage.getDiagnosisExternalReason().fill(diagnosisRecordVO.getOutCause(), diagnosisRecordVO.getOutSickCode());
-        // pathology
-        homePage.getDiagnosisPathology().fill(diagnosisRecordVO.getPathologyDiagnosis(), diagnosisRecordVO.getPathologySickCode(), diagnosisRecordVO.getPathologyNumber());  // pathology diagnosis.
-
-    }
-
-    private void fillEntryAndExitInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
-        EntryExitRecordVO entryExitRecordVO = homePageVO.readEntryExitRecordVO();
-        Date inDateTime = DateUtils.convertToDateHourMinute(entryExitRecordVO.getInYear(), entryExitRecordVO.getInMonth(), entryExitRecordVO.getInDay(), entryExitRecordVO.getInHour());
-        homePage.getRegisterAdmission().fill(inDateTime, entryExitRecordVO.getInDepartment(), entryExitRecordVO.getInSickroom(), entryExitRecordVO.getInType());
-        Date outDatetime = DateUtils.convertToDateHourMinute(entryExitRecordVO.getOutYear(), entryExitRecordVO.getOutMonth(), entryExitRecordVO.getOutDay(), entryExitRecordVO.getOutHour());
-        homePage.getRegisterDischarge().fill(outDatetime, entryExitRecordVO.getOutDepartment(), entryExitRecordVO.getOutSickroom(), entryExitRecordVO.getDaysInHospital(),
-                entryExitRecordVO.getOutType(), entryExitRecordVO.getAcceptOrganization(), entryExitRecordVO.getWillReturn(), entryExitRecordVO.getReturnPurpose());
-
-    }
-
-    private void fillPatientInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
-        PatientInfoVO patientInfoVO = homePageVO.readPatientInfoVO();
-        Date birthDate = DateUtils.convertToDate(patientInfoVO.getBirthdayYear(), patientInfoVO.getBirthdayMonth(), patientInfoVO.getBirthdayDay());
-        PatientInfo patientInfo = homePage.getPatientInfo();
-        patientInfo.fillPatientBasicInfo(patientInfoVO.getName(), patientInfoVO.getSex(), birthDate, patientInfoVO.getAge(), patientInfoVO.getBabyAge(),
-                patientInfoVO.getCountry(), patientInfoVO.getBabyBornWeight(), patientInfoVO.getBabyHospitalizedWeight(),
-                patientInfoVO.getNation(), patientInfoVO.getIdCard(), patientInfoVO.getJob(), patientInfoVO.getMarriage());
-        patientInfo.fillBirthPlace(patientInfoVO.getBornState(), patientInfoVO.getBornCity(), patientInfoVO.getBornDistrict());
-        patientInfo.fillNativeAddress(patientInfoVO.getHometownState(), patientInfoVO.getHometownCity());
-        patientInfo.fillPresentAddress(patientInfoVO.getAddressState(), patientInfoVO.getAddressCity(), patientInfoVO.getAddressDistrict(), patientInfoVO.getAddressPhone(), patientInfoVO.getAddressPostcode());
-        patientInfo.fillRegisteredResidence(patientInfoVO.getResidenceState(), patientInfoVO.getResidenceCity(), patientInfoVO.getResidenceDistrict(), patientInfoVO.getResidencePostcode());
-        patientInfo.fillCompany("", patientInfoVO.getWorkPlaceAddress(), patientInfoVO.getWorkPlacePhone(), patientInfoVO.getWorkPlacePostcode());
-        patientInfo.fillContactPerson(patientInfoVO.getContact(), patientInfoVO.getRelationship(), patientInfoVO.getContactAddress(), patientInfoVO.getContactPhone());
-    }
-
-    private void fillBasicInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
-        HomePageBasicInfoVO basicInfoVO = homePageVO.readHomePageBasicInfoVO();
-        HomePageBasicInfo homePageBasicInfo = homePage.getHomePageBasicInfo();
-        homePageBasicInfo.fillHomePageBasicInfo(basicInfoVO.getBusinessKey(), basicInfoVO.getPayType(), basicInfoVO.getHealthCard(), basicInfoVO.getHospitalizedTimes(), basicInfoVO.getCaseNumber(),
-                basicInfoVO.getChangeDepartment(), basicInfoVO.getMedicalAllergy(), basicInfoVO.getAllergicMedication(), basicInfoVO.getAutopsy(), basicInfoVO.getBloodType(), basicInfoVO.getRh());
     }
 
     private void fillComaInfo(MedicalRecordHomePageVO homePageVO, MedicalRecordHomePage homePage){
+
         ComaRecordVO comaRecordVO = homePageVO.readComaRecordVO();
-        homePage.getComaInfo().fill(comaRecordVO.getComaDayBeforeHospital(), comaRecordVO.getComaHourBeforeHospital(), comaRecordVO.getComaMinuteBeforeHospital(),
-                comaRecordVO.getComaDayAfterHospital(), comaRecordVO.getComaHourAfterHospital(), comaRecordVO.getComaMinuteAfterHospital());
+        homePage.getComaInfo().fill(comaRecordVO.getComaDayBeforeHospital(),
+                comaRecordVO.getComaHourBeforeHospital(),
+                comaRecordVO.getComaMinuteBeforeHospital(),
+                comaRecordVO.getComaDayAfterHospital(),
+                comaRecordVO.getComaHourAfterHospital(),
+                comaRecordVO.getComaMinuteAfterHospital());
     }
+
 }

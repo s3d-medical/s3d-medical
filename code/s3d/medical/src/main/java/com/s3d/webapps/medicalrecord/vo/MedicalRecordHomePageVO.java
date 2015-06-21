@@ -1,8 +1,8 @@
 package com.s3d.webapps.medicalrecord.vo;
 
-import com.s3d.webapps.medicalrecord.persistence.doctor.DoctorInCharge;
-import com.s3d.webapps.medicalrecord.persistence.quality.QualityControlInfo;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.doctor.DoctorInCharge;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.quality.QualityControlInfo;
+import com.s3d.webapps.medicalrecord.vo.homepage.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -32,12 +32,15 @@ public class MedicalRecordHomePageVO {
     private List<OperationHistoryVO> operationHistory = new ArrayList<OperationHistoryVO>();
 
     // comma -- part
-    ComaRecordVO comaRecordVO = new ComaRecordVO();
+    private ComaRecordVO comaRecordVO = new ComaRecordVO();
 
     // expense -- part
     private ExpenseRecordVO expenseRecordVO = new ExpenseRecordVO();
 
     // read and fill data or home page vo.
+
+    public MedicalRecordHomePageVO() {
+    }
 
     public PatientInfoVO readPatientInfoVO() {
         return patientInfoVO;
@@ -95,6 +98,10 @@ public class MedicalRecordHomePageVO {
     }
 
 
+    public void fill(List<DoctorInCharge> doctorInChargeList, QualityControlInfo qualityControlInfo) {
+        doctorAndQualityRecordVO.fill(doctorInChargeList, qualityControlInfo);
+    }
+
 
    //-----------------------------------------setter getter ------------------------
 
@@ -135,7 +142,7 @@ public class MedicalRecordHomePageVO {
     }
 
     public void setCaseNumber(String caseNumber) {
-        homePageBasicInfoVO.setCaseNumber(caseNumber);
+        homePageBasicInfoVO.setTrackNo(caseNumber);
     }
 
     public void setHospitalizedTimes(Integer hospitalizedTimes) {
@@ -167,7 +174,7 @@ public class MedicalRecordHomePageVO {
     }
 
     public String getCaseNumber() {
-        return homePageBasicInfoVO.getCaseNumber();
+        return homePageBasicInfoVO.getTrackNo();
     }
 
     public String getAutopsy() {
@@ -619,8 +626,12 @@ public class MedicalRecordHomePageVO {
         diagnosisRecordVO.setDischargeDiagnosis(dischargeDiagnosis);
     }
 
-    public void setOutSickCode(String outSickCode) {
-        diagnosisRecordVO.setOutSickCode(outSickCode);
+    public void setOutSickCodes(List<String> outSickCodes) {
+        diagnosisRecordVO.setOutSickCodes(outSickCodes);
+    }
+
+    public List<String> getOutSickCodes() {
+        return diagnosisRecordVO.getOutSickCodes();
     }
 
     public void setOutpatientDiagnosis(String outpatientDiagnosis) {
@@ -631,8 +642,6 @@ public class MedicalRecordHomePageVO {
         diagnosisRecordVO.setOutCause(outCause);
     }
 
-
-
     public String getOutCause() {
         return diagnosisRecordVO.getOutCause();
     }
@@ -641,8 +650,12 @@ public class MedicalRecordHomePageVO {
         diagnosisRecordVO.setPathologyDiagnosis(pathologyDiagnosis);
     }
 
-    public void setPathologySickCode(String pathologySickCode) {
-        diagnosisRecordVO.setPathologySickCode(pathologySickCode);
+    public List<String> getPathologySickCodes() {
+        return diagnosisRecordVO.getPathologySickCodes();
+    }
+
+    public void setPathologySickCodes(List<String> pathologySickCodes) {
+        diagnosisRecordVO.setPathologySickCodes(pathologySickCodes);
     }
     public void setPathologyNumber(String pathologyNumber) {
         diagnosisRecordVO.setPathologyNumber(pathologyNumber);
@@ -652,27 +665,20 @@ public class MedicalRecordHomePageVO {
         return diagnosisRecordVO.getPathologyNumber();
     }
 
-    public String getPathologySickCode() {
-        return diagnosisRecordVO.getPathologySickCode();
-    }
-
-    public String getOutSickCode() {
-        return diagnosisRecordVO.getOutSickCode();
-    }
     public List<DischargeDiagnosisVO> getDischargeDiagnosis() {
         return diagnosisRecordVO.getDischargeDiagnosis();
-    }
-
-    public String getOutpatientSickCode() {
-        return diagnosisRecordVO.getOutpatientSickCode();
     }
 
     public String getPathologyDiagnosis() {
         return diagnosisRecordVO.getPathologyDiagnosis();
     }
 
-    public void setOutpatientSickCode(String outpatientSickCode) {
-        diagnosisRecordVO.setOutpatientSickCode(outpatientSickCode);
+    public List<String> getOutpatientSickCodes() {
+        return diagnosisRecordVO.getOutpatientSickCodes();
+    }
+
+    public void setOutpatientSickCodes(List<String> outpatientSickCodes) {
+        diagnosisRecordVO.setOutpatientSickCodes(outpatientSickCodes);
     }
     public String getDirector() {
         return doctorAndQualityRecordVO.getDirector();
@@ -680,10 +686,6 @@ public class MedicalRecordHomePageVO {
 
     public void setQualityNurse(String qualityNurse) {
         doctorAndQualityRecordVO.setQualityNurse(qualityNurse);
-    }
-
-    public void fill(List<DoctorInCharge> doctorInChargeList, QualityControlInfo qualityControlInfo) {
-        doctorAndQualityRecordVO.fill(doctorInChargeList, qualityControlInfo);
     }
 
     public Integer getQualityMonth() {

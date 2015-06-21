@@ -1,19 +1,19 @@
 package com.s3d.webapps.medicalrecord.persistence;
 
 
-import com.s3d.webapps.medicalrecord.persistence.homepagebasic.HomePageBasicInfo;
-import com.s3d.webapps.medicalrecord.persistence.operation.Operation;
-import com.s3d.webapps.medicalrecord.persistence.coma.ComaInfo;
-import com.s3d.webapps.medicalrecord.persistence.doctor.DoctorInCharge;
-import com.s3d.webapps.medicalrecord.persistence.patient.PatientInfo;
-import com.s3d.webapps.medicalrecord.persistence.diagnosis.DiagnosisClinic;
-import com.s3d.webapps.medicalrecord.persistence.diagnosis.DiagnosisDischarge;
-import com.s3d.webapps.medicalrecord.persistence.diagnosis.DiagnosisExternalReason;
-import com.s3d.webapps.medicalrecord.persistence.diagnosis.DiagnosisPathology;
-import com.s3d.webapps.medicalrecord.persistence.expense.ExpenseInvoice;
-import com.s3d.webapps.medicalrecord.persistence.entryexit.RegisterAdmission;
-import com.s3d.webapps.medicalrecord.persistence.entryexit.RegisterDischarge;
-import com.s3d.webapps.medicalrecord.persistence.quality.QualityControlInfo;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.homepagebasic.HomePageBasicInfo;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.operation.Operation;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.coma.ComaInfo;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.doctor.DoctorInCharge;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.patient.PatientInfo;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.diagnosis.DiagnosisClinic;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.diagnosis.DiagnosisDischarge;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.diagnosis.DiagnosisExternalReason;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.diagnosis.DiagnosisPathology;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.expense.ExpenseInvoice;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.entryexit.RegisterAdmission;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.entryexit.RegisterDischarge;
+import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.quality.QualityControlInfo;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
