@@ -135,10 +135,16 @@
         box-sizing: border-box;
         height: 23px;
     }
+    .sy .ui-select-container {
+        text-align: left;
+    }
+    .sy .discharge-sick-code .ui-select-container {
+        width: 96%;
+    }
     .sy .ui-select-container input[type='text'] {
         height: 22px;
         width: 90%;
-        border: 1px solid #d0d1d4;
+        /*border: 1px solid #d0d1d4;*/
     }
 </style>
 <div class="sy">
@@ -333,12 +339,6 @@
                         <span ng-bind-html="i.id"></span>
                     </ui-select-choices>
                 </ui-select>
-                <ui-select multiple theme="bootstrap" ng-model="page.sickCodes1">
-                    <ui-select-match placeholder="搜索">{{$item.id}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.sickCodes | filter: $select.search">
-                        <div ng-bind-html="i.id | highlight: $select.search"></div>
-                    </ui-select-choices>
-                </ui-select>
             </span>
         </div>
         <div>
@@ -346,8 +346,8 @@
                 <thead>
                     <tr>
                         <td>出院诊断</td>
-                        <td class="width-200">疾病编码</td>
-                        <td class="width-120">入院病情</td>
+                        <td style="width: 190px;">疾病编码</td>
+                        <td style="width: 130px;">入院病情</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -355,11 +355,11 @@
                         <td>
                             <span ng-show="$index == 0">主要诊断：</span>
                             <span ng-show="$index == 1">其他诊断：</span>
-                            <textarea class="diagnosis" ng-model="d.diagnosis" ng-style="{'width':$index<2?'79%':'97%'}"></textarea>
+                            <textarea class="diagnosis" ng-model="d.diagnosis" ng-style="{'width':$index<2?'81%':'97%'}"></textarea>
                             <!--<input class="diagnosis" type="text" ng-model="d.diagnosis">-->
                         </td>
                         <td class="discharge-sick-code" style="text-align: center;">
-                            <ui-select multiple theme="bootstrap" ng-model="d.sickCodes">
+                            <ui-select multiple theme="bootstrap" ng-model="d.sickCodes" style="width: 185px;">
                                 <ui-select-match placeholder="搜索">{{$item.id}}</ui-select-match>
                                 <ui-select-choices repeat="i.id as i in settings.sickCodes | filter: $select.search">
                                     <div ng-bind-html="i.id | highlight: $select.search"></div>
@@ -367,24 +367,21 @@
                             </ui-select>
                         </td>
                         <td>
-                            <select ng-model="d.inSickState" class="selectator">
+                            <!--<ui-select multiple theme="bootstrap" ng-model="d.inSickState" style="width: 135px;">
+                                <ui-select-match placeholder="搜索">{{$item.name}}</ui-select-match>
+                                <ui-select-choices repeat="i.id as i in settings.inSickStates | filter: $select.search">
+                                    <div ng-bind-html="i.name"></div>
+                                </ui-select-choices>
+                            </ui-select>-->
+                            <ui-select ng-model="d.inSickState" style="width: 135px;">
+                                <ui-select-match placeholder="搜索">{{$select.selected.name}}</ui-select-match>
+                                <ui-select-choices repeat="i.id as i in settings.inSickStates | filter: $select.search track by i.shortcut">
+                                    <span ng-bind-html="i.name"></span>
+                                </ui-select-choices>
+                            </ui-select>
+                            <!--<select ng-model="d.inSickState" class="selectator">
                                 <option ng-repeat="i in settings.inSickStates" ng-selected="d.inSickState == i.id" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr class="tpl-discharge-diagnosis-row" style="display: none;">
-                        <td>
-                            <textarea class="diagnosis" style="width: 97%;"></textarea>
-                        </td>
-                        <td class="discharge-sick-code" style="text-align: center;">
-                            <select class="tpl-selectivity" name="" style="height: 24px;">
-                                <option ng-repeat="i in settings.sickCodes" value="{{i.id}}">{{i.id}}</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select ng-model="d.inSickState" class="tpl-selectator">
-                                <option ng-repeat="i in settings.inSickStates" ng-selected="d.inSickState == i.id" value="{{i.id}}" searchcontent="{{i.shortcut}}">{{i.name}}</option>
-                            </select>
+                            </select>-->
                         </td>
                     </tr>
                 </tbody>
@@ -504,6 +501,7 @@
                     </tr>
                 </tbody>
             </table>
+            <button class="button" ng-click="addNewOperationHistory()">添加手术记录</button>
         </div>
         <div>
             <span>离院方式

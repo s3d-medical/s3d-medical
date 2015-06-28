@@ -456,11 +456,11 @@ var Com_Parameter = {
 									});*/
 									Com_Parameter.elAngular.scope().settings = data;
 								});
-								Com_Parameter.elAngular.scope().getData(item.fdFileNo, true);
+								Com_Parameter.elAngular.scope().getData(item.fdFileNo);
 							}
 						});
 					} else {
-						Com_Parameter.elAngular.scope().getData(item.fdFileNo, false);
+						Com_Parameter.elAngular.scope().getData(item.fdFileNo);
 					}
 				}
 			});

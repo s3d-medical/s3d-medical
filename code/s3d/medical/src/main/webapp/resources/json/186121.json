@@ -1,9 +1,8 @@
 {
-  "sickCodes1": ["A01.100", "X59.952"],
   "dischargeDiagnosis": [
-    {"diagnosis": "感冒1", "sickCodes": ["A01.100", "X59.952"], "inSickState": "2"},
-    {"diagnosis": "感冒2", "sickCodes": ["X59.952", "I11.901"], "inSickState": "3"},
-    {"diagnosis": "感冒3", "sickCodes": ["X59.952", "A01.100", "I11.901"], "inSickState": "4"}
+    {"diagnosis": "感冒1", "sickCodes": ["A01.100", "X59.952"], "inSickState": "GXY"},
+    {"diagnosis": "感冒2", "sickCodes": ["X59.952", "I11.901"], "inSickState": "LXXGM"},
+    {"diagnosis": "感冒3", "sickCodes": ["X59.952", "A01.100", "I11.901"], "inSickState": "GXY"}
   ],
   "operationHistory": [
     {"operateCode": "1111", "date": "2014-12-01", "grade": "甲", "operationName": "手术名称1", "operator": "术者1", "firstAssistant": "1助11", "secondAssistant": "2助11", "cutHealGrade": "伤口愈合等级1", "anaesthesiaType": "麻醉方式1", "anaesthetist": "麻醉师1"},
