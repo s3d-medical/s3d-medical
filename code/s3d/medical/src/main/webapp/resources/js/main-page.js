@@ -1,4 +1,4 @@
-angular.module("mainPage", [])
+angular.module("mainPage", ['ui.select', 'ngSanitize'])
 .controller("MainPageController", ["$scope", function ($scope) {
 
         // test data
@@ -29,10 +29,10 @@ angular.module("mainPage", [])
                     $scope.$apply(function () {
                         $scope.page = pageData;
                         formatPageData();
-                        !isInit && $("select").selectator("destroy");
+                        //!isInit && $("select").selectator("destroy");
                         setTimeout(function () {
-                            initSelectator(".selectator");
-                            initSelectivity(".selectivity");
+                            /*initSelectator(".selectator");
+                            initSelectivity(".selectivity");*/
                             initHandyOperation();
                         }, 100);
                     });
@@ -46,11 +46,11 @@ angular.module("mainPage", [])
                 return;
             }
             // collect out discharge diagnosis sick codes
-            angular.forEach($scope.page.dischargeDiagnosis, function (item, index) {
+            /*angular.forEach($scope.page.dischargeDiagnosis, function (item, index) {
                 if (item.diagnosis) {
                     item.sickCodes = $(".out-diagnosis tbody tr:eq(" + index + ") td:eq(1) select").val();
                 }
-            });
+            });*/
             console.log($scope.page);
             return;
             // todo use angular.toJson to convert page object instead of JSON.stringify because of useless characters created by angular automatic
@@ -100,7 +100,7 @@ angular.module("mainPage", [])
                     if (!$scope.page.outDepartment) {
                         $scope.page.outDepartment = newVal;
                         $("#slOutDepartment").val(newVal);
-                        initSelectator("#slOutDepartment");
+                        //initSelectator("#slOutDepartment");
                     }
                     watchInDepartment();
                 })
@@ -119,7 +119,7 @@ angular.module("mainPage", [])
 
         function initHandyOperation() {
             // Set focus to next input when press enter
-            var els = $(".sy-container input[type='text']");
+            var els = $(".sy input[type='text']");
             els.each(function (index,item) {
                 $(item).on("keypress", function (event) {
                     if(event.keyCode == 13 && index < els.length - 1) {
@@ -132,21 +132,21 @@ angular.module("mainPage", [])
         }
 
         // init selectator
-        function initSelectator(el) {
+        /*function initSelectator(el) {
             $(el).selectator({
                 labels: {
                     search: '搜索'
                 }
             });
-        }
+        }*/
 
         // init selectivity
-        function initSelectivity(el) {
+        /*function initSelectivity(el) {
             $(el).selectivity({
                 multiple: true,
                 selectivityBackdrop: ".bui-dialog"
             })
-        }
+        }*/
 
         // generate sick codes select
         /*function getSickCodes() {

@@ -53,9 +53,9 @@ var Com_Parameter = {
 <link href="${WEBAPPS_Parameter_ResPath}bui/css/dpl-min.css" rel="stylesheet" type="text/css" />
 <link href="${WEBAPPS_Parameter_ResPath}bui/css/bui-min.css" rel="stylesheet" type="text/css" />
 <link href="${WEBAPPS_Parameter_ResPath}imageview/index.css" rel="stylesheet" type="text/css" />
-<link href="${WEBAPPS_Parameter_ResPath}css/fm.selectator.jquery.css" rel="stylesheet" type="text/css" />
-<link href="${WEBAPPS_Parameter_ResPath}css/selectivity-full.min.css" rel="stylesheet" type="text/css" />
-<link href="${WEBAPPS_Parameter_ResPath}css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="${WEBAPPS_Parameter_ResPath}/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="${WEBAPPS_Parameter_ResPath}/css/select.min.css" rel="stylesheet" type="text/css" />
+
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/jquery.js"></script>
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/base.js"></script>
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}bui/bui.js"></script>
@@ -66,9 +66,9 @@ var Com_Parameter = {
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/jquery.mousewheel.js"></script>
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/screenfull.js"></script>
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}imageview/config.js"></script>
-<script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/fm.selectator.jquery.js"></script>
-<script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/selectivity-full.min.js"></script>
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/angular.js"></script>
+<script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/angular-sanitize.js"></script>
+<script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/select.min.js"></script>
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/main-page.js"></script>
  <style>
     .bui-stdmod-body{
