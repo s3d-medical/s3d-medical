@@ -25,4 +25,8 @@
         <sqlFile path="scripts/2015-05-25_1_idx_tables_home_page.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
     </changeSet>
+    <changeSet id="6" author="wind" context="production">
+        <sqlFile path="scripts/2015-06-20_1_add_disease_code_table.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
 </databaseChangeLog>
