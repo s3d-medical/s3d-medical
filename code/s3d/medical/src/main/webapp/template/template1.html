@@ -333,9 +333,9 @@
         <div>
             <span>门（急）诊诊断<input ng-model="page.outpatientDiagnosis" type="text" class="width-330" maxlength="40"></span>
             <span class="ml-10" style="margin-left: 48px;">疾病编码
-                <ui-select ng-model="page.outpatientSickCode" style="width: 204px;">
-                    <ui-select-match placeholder="搜索">{{$select.selected.id}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.sickCodes | filter: $select.search track by i.shortcut">
+                <ui-select multiple ng-model="page.outpatientSickCodes" style="width: 195px;">
+                    <ui-select-match placeholder="搜索">{{$item.id}}</ui-select-match>
+                    <ui-select-choices repeat="i.id as i in settings.sickCodes | filter: $select.search">
                         <span ng-bind-html="i.id"></span>
                     </ui-select-choices>
                 </ui-select>
@@ -391,9 +391,9 @@
         <div>
             <span>损伤、中毒的外部原因<input ng-model="page.outCause" type="text" style="width: 347px;"></span>
             <span>疾病编码
-                <ui-select ng-model="page.outSickCode" style="width: 200px;">
-                    <ui-select-match placeholder="搜索">{{$select.selected.id}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.sickCodes | filter: $select.search track by i.shortcut">
+                <ui-select multiple ng-model="page.outSickCodes" style="width: 190px;">
+                    <ui-select-match placeholder="搜索">{{$item.id}}</ui-select-match>
+                    <ui-select-choices repeat="i.id as i in settings.sickCodes | filter: $select.search">
                         <span ng-bind-html="i.id"></span>
                     </ui-select-choices>
                 </ui-select>
@@ -404,9 +404,9 @@
         </div>
         <div>
             <span>疾病编码
-                <ui-select ng-model="page.pathologySickCode" style="width: 200px;">
-                    <ui-select-match placeholder="搜索">{{$select.selected.id}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.sickCodes | filter: $select.search track by i.shortcut">
+                <ui-select multiple ng-model="page.pathologySickCodes" style="width: 200px;">
+                    <ui-select-match multiple placeholder="搜索">{{$item.id}}</ui-select-match>
+                    <ui-select-choices repeat="i.id as i in settings.sickCodes | filter: $select.search">
                         <span ng-bind-html="i.id"></span>
                     </ui-select-choices>
                 </ui-select>
