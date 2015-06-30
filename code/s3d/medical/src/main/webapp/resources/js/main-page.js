@@ -1,5 +1,5 @@
 angular.module("mainPage", ['ui.select', 'ngSanitize'])
-.controller("MainPageController", ["$scope", function ($scope) {
+.controller("MainPageController", ["$scope", "$http", function ($scope, $http) {
 
         // test data
         $scope.settings = null;
@@ -14,7 +14,7 @@ angular.module("mainPage", ['ui.select', 'ngSanitize'])
             "willReturn": 1
         };
 
-        $scope.getData = function (fdFileNo, isInit) {
+        /*$scope.getData = function (fdFileNo) {
             $.ajax({
                 type: "get",
                 url: Com_Parameter.ContextPath + "medicalRecord/homepages/" + fdFileNo,
@@ -34,9 +34,20 @@ angular.module("mainPage", ['ui.select', 'ngSanitize'])
                     });
                 }
             });
+        };*/
+
+        $scope.getData = function (fdFileNo) {
+            $http({method: 'get', url: Com_Parameter.ContextPath + "medicalRecord/homepages/" + fdFileNo})
+                .success(function (resp) {
+                    var pageData = resp.data;
+                    !pageData.payType && $.extend(pageData, defaultPageData);
+                    $scope.page = pageData;
+                    formatPageData();
+                    initHandyOperation();
+                })
         };
 
-        $scope.save = function (/*fdId, */callback) {
+        $scope.save = function (callback) {
             if (!$scope.page.businessKey) {
                 alert("病案号不能为空！");
                 return;
