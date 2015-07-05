@@ -219,6 +219,10 @@ public class MedicalRecordHomePageVO {
         return patientInfoVO.getAddressDistrict();
     }
 
+    public void setAddressDistrict(String addressDistrict) {
+        patientInfoVO.setAddressDistrict(addressDistrict);
+    }
+
     public void setBabyHospitalizedWeight(Integer babyHospitalizedWeight) {
         patientInfoVO.setBabyHospitalizedWeight(babyHospitalizedWeight);
     }
@@ -285,10 +289,6 @@ public class MedicalRecordHomePageVO {
 
     public void setMarriage(String marriage) {
         patientInfoVO.setMarriage(marriage);
-    }
-
-    public void setAddressDistrict(String addressDistrict) {
-        patientInfoVO.setAddressDistrict(addressDistrict);
     }
 
     public String getSex() {
