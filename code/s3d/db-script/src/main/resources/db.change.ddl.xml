@@ -29,4 +29,8 @@
         <sqlFile path="scripts/2015-06-20_1_add_disease_code_table.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
     </changeSet>
+    <changeSet id="7" author="wind" context="production">
+        <sqlFile path="scripts/2015-07-05_1_tune_p_address.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
 </databaseChangeLog>
