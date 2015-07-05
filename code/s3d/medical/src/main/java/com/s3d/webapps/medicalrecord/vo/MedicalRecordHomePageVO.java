@@ -97,12 +97,6 @@ public class MedicalRecordHomePageVO {
        return  this.homePageBasicInfoVO;
     }
 
-
-    public void fill(List<DoctorInCharge> doctorInChargeList, QualityControlInfo qualityControlInfo) {
-        doctorAndQualityRecordVO.fill(doctorInChargeList, qualityControlInfo);
-    }
-
-
    //-----------------------------------------setter getter ------------------------
 
     public String getBusinessKey() {
@@ -141,7 +135,7 @@ public class MedicalRecordHomePageVO {
         return homePageBasicInfoVO.getBloodType();
     }
 
-    public void setCaseNumber(String caseNumber) {
+    public void setTrackNo(String caseNumber) {
         homePageBasicInfoVO.setTrackNo(caseNumber);
     }
 
@@ -173,7 +167,7 @@ public class MedicalRecordHomePageVO {
         return homePageBasicInfoVO.getHealthCard();
     }
 
-    public String getCaseNumber() {
+    public String getTrackNo() {
         return homePageBasicInfoVO.getTrackNo();
     }
 
