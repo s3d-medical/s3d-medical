@@ -1,6 +1,13 @@
-angular.module("mainPage", ['ui.select', 'ngSanitize'])
-.controller("MainPageController", ["$scope", "$http", function ($scope, $http) {
+(function () {
+    angular.module("mainPage", ['ui.select', 'ngSanitize'])
+        .controller("MainPageController", MainPageController)
+        .filter('provinceFilter', provinceFilter)
+        .filter('cityFilter', cityFilter)
+        .filter('districtFilter', districtFilter);
 
+    MainPageController.$inject = ["$scope", "$http"];
+
+    function MainPageController ($scope, $http) {
         // test data
         $scope.settings = null;
         var defaultPageData = {
@@ -13,28 +20,6 @@ angular.module("mainPage", ['ui.select', 'ngSanitize'])
             "caseQuality": 1,
             "willReturn": 1
         };
-
-        /*$scope.getData = function (fdFileNo) {
-            $.ajax({
-                type: "get",
-                url: Com_Parameter.ContextPath + "medicalRecord/homepages/" + fdFileNo,
-                //url: Com_Parameter.ResPath + "/json/186121.json",
-                dataType: "json",
-                cache: false,
-                success: function (result) {
-                    //var pageData = result;
-                    var pageData = result.data;
-                    !pageData.payType && $.extend(pageData, defaultPageData);
-                    $scope.$apply(function () {
-                        $scope.page = pageData;
-                        formatPageData();
-                        setTimeout(function () {
-                            initHandyOperation();
-                        }, 100);
-                    });
-                }
-            });
-        };*/
 
         $scope.getData = function (fdFileNo) {
             $http({method: 'get', url: Com_Parameter.ContextPath + "medicalRecord/homepages/" + fdFileNo})
@@ -53,7 +38,7 @@ angular.module("mainPage", ['ui.select', 'ngSanitize'])
                 return;
             }
             /*console.log($scope.page);
-            return;*/
+             return;*/
             // todo use angular.toJson to convert page object instead of JSON.stringify because of useless characters created by angular automatic
             //console.log(angular.toJson($scope.page));
             $.ajax({
@@ -90,27 +75,35 @@ angular.module("mainPage", ['ui.select', 'ngSanitize'])
         }
 
         function setUpWatch () {
-            // todo need test
+            // keep out department same as in department as default
             if (!$scope.page.outDepartment) {
                 var watchInDepartment = $scope.$watch('page.inDepartment', function (newVal, oldVal) {
-                    if (!$scope.page.outDepartment) {
+                    if (newVal && !$scope.page.outDepartment) {
                         $scope.page.outDepartment = newVal;
-                        $("#slOutDepartment").val(newVal);
-                        //initSelectator("#slOutDepartment");
+                        watchInDepartment();
                     }
-                    watchInDepartment();
+                })
+            }
+            // keep out sick room same as in sick room as default
+            if (!$scope.page.outSickroom) {
+                var watchInSickroom = $scope.$watch('page.inSickroom', function (newVal, oldVal) {
+                    if (oldVal == $scope.page.outSickroom) {
+                        $scope.page.outSickroom = newVal;
+                    } else {
+                        watchInSickroom();
+                    }
                 })
             }
             // keep major discharge diagnosis same as outpatient diagnosis first time
             /*if (!$scope.page.dischargeDiagnosis[0].diagnosis) {
-                var watchDischargeDiagnosis = $scope.$watch("page.outpatientDiagnosis", function (newVal, oldVal) {
-                    if (!$scope.page.dischargeDiagnosis[0].diagnosis || ($scope.page.dischargeDiagnosis[0].diagnosis == oldVal)) {
-                        $scope.page.dischargeDiagnosis[0].diagnosis = newVal;
-                    } else {
-                        watchDischargeDiagnosis();
-                    }
-                })
-            }*/
+             var watchDischargeDiagnosis = $scope.$watch("page.outpatientDiagnosis", function (newVal, oldVal) {
+             if (!$scope.page.dischargeDiagnosis[0].diagnosis || ($scope.page.dischargeDiagnosis[0].diagnosis == oldVal)) {
+             $scope.page.dischargeDiagnosis[0].diagnosis = newVal;
+             } else {
+             watchDischargeDiagnosis();
+             }
+             })
+             }*/
         }
 
         function initHandyOperation() {
@@ -126,5 +119,45 @@ angular.module("mainPage", ['ui.select', 'ngSanitize'])
 
             setUpWatch();
         }
+    }
 
-    }]);
+    function provinceFilter () {
+        return function (arr) {
+            var outArr = [];
+            angular.forEach(arr, function (item, index) {
+                if(/^\d+$/.test(item.id)) {
+                    outArr.push(item);
+                }
+            });
+            return outArr;
+        }
+    }
+
+    function cityFilter () {
+        return function (arr, p2) {
+            var outArr = [];
+            angular.forEach(arr, function (item, index) {
+                if (p2) {
+                    if(/^\d+\.\d+$/.test(item.id) && ~item.id.indexOf(p2 + '.')) {
+                        outArr.push(item);
+                    }
+                }
+            });
+            return outArr;
+        }
+    }
+
+    function districtFilter () {
+        return function (arr, p2) {
+            var outArr = [];
+            angular.forEach(arr, function (item, index) {
+                if (p2) {
+                    if(/^\d+\.\d+\.\d+$/.test(item.id) && ~item.id.indexOf(p2 + '.')) {
+                        outArr.push(item);
+                    }
+                }
+            });
+            return outArr;
+        }
+    }
+})();
