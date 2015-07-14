@@ -261,13 +261,63 @@
             </span>
         </div>
         <div>
-            <span>现住址<input ng-model="page.addressState" type="text" style="width: 77px;">省（区、市）<input ng-model="page.addressCity" type="text">市<input ng-model="page.addressDistrict" type="text">县</span>
+            <span>现住址
+                <ui-select ng-model="page.addressState" style="width: 70px;">
+                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="i.id as i in settings.locations | filter: $select.search | provinceFilter track by i.id">
+                        <span ng-bind-html="i.name"></span>
+                    </ui-select-choices>
+                </ui-select>
+                <!--<input ng-model="page.addressState" type="text" style="width: 77px;">-->
+                省（区、市）
+                <ui-select ng-model="page.addressCity" style="width: 70px;">
+                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="i.id as i in settings.locations | filter: $select.search | cityFilter:page.addressState track by i.id">
+                        <span ng-bind-html="i.name"></span>
+                    </ui-select-choices>
+                </ui-select>
+                <!--<input ng-model="page.addressCity" type="text">-->
+                市
+                <ui-select ng-model="page.addressDistrict" style="width: 70px;">
+                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="i.id as i in settings.locations | filter: $select.search | districtFilter:page.addressCity track by i.id">
+                        <span ng-bind-html="i.name"></span>
+                    </ui-select-choices>
+                </ui-select>
+                <!--<input ng-model="page.addressDistrict" type="text">-->
+                县
+            </span>
             <span style="margin-left: 90px;">电话<input ng-model="page.addressPhone" type="text" class="width-120"></span>
             <span class="ml-10">邮编<input ng-model="page.addressPostcode" type="text"></span>
         </div>
         <div>
-            <span>户口地址<input ng-model="page.residenceState" type="text">省（区、市）<input ng-model="page.residenceCity" type="text">市<input ng-model="page.residenceDistrict" type="text">县</span>
-            <span style="margin-left: 258px;">邮编<input ng-model="page.residencePostcode" type="text"></span>
+            <span>户口地址
+                <ui-select ng-model="page.residenceState" style="width: 70px;">
+                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="i.id as i in settings.locations | filter: $select.search | provinceFilter track by i.id">
+                        <span ng-bind-html="i.name"></span>
+                    </ui-select-choices>
+                </ui-select>
+                <!--<input ng-model="page.residenceState" type="text">-->
+                省（区、市）
+                <ui-select ng-model="page.residenceCity" style="width: 70px;">
+                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="i.id as i in settings.locations | filter: $select.search | cityFilter:page.residenceState track by i.id">
+                        <span ng-bind-html="i.name"></span>
+                    </ui-select-choices>
+                </ui-select>
+                <!--<input ng-model="page.residenceCity" type="text">-->
+                市
+                <ui-select ng-model="page.residenceDistrict" style="width: 70px;">
+                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="i.id as i in settings.locations | filter: $select.search | districtFilter:page.residenceCity track by i.id">
+                        <span ng-bind-html="i.name"></span>
+                    </ui-select-choices>
+                </ui-select>
+                <!--<input ng-model="page.residenceDistrict" type="text">-->
+                县
+            </span>
+            <span style="margin-left: 246px;">邮编<input ng-model="page.residencePostcode" type="text"></span>
         </div>
         <div>
             <span>工作单位及地址</span><input ng-model="page.workPlaceAddress" type="text" class="width-330">

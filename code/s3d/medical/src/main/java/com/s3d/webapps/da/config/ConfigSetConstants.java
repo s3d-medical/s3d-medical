@@ -21,7 +21,8 @@ public class ConfigSetConstants {
 	public static final String[] ConfigSetType_CYQK = new String[]{"CYQK","出院情况","编码"};	
 
 	public static final String[] ConfigSetType_SEX = new String[]{"SEX","性别","编码"};
-	
+	public static final String[] ConfigSetType_DOCTOR = new String[]{"DOCTOR","医生"};
+
 	public static final Map<String, String[]> TypeMap = new HashMap<String, String[]>();
 	static{
 		TypeMap.put(ConfigSetType_FL[0], ConfigSetType_FL);
@@ -39,7 +40,8 @@ public class ConfigSetConstants {
 		TypeMap.put(ConfigSetType_RYJC[0], ConfigSetType_RYJC);
 		TypeMap.put(ConfigSetType_RYBQ[0], ConfigSetType_RYBQ);
 		TypeMap.put(ConfigSetType_CYQK[0], ConfigSetType_CYQK);
-		TypeMap.put(ConfigSetType_SEX[0], ConfigSetType_SEX);		
+		TypeMap.put(ConfigSetType_SEX[0], ConfigSetType_SEX);
+		TypeMap.put(ConfigSetType_DOCTOR[0], ConfigSetType_DOCTOR);
 	}
 	
 }
