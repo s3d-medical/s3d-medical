@@ -33,7 +33,7 @@
         <sqlFile path="scripts/2015-07-05_1_tune_p_address.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
     </changeSet>
-    <changeSet id="7" author="gary" context="production">
+    <changeSet id="8" author="gary" context="production">
         <sqlFile path="scripts/2015-07-12_1_create_da_config_doctor_table.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
     </changeSet>

@@ -1,17 +1,23 @@
 package com.s3d.webapps.da.config.dao;
 
 import com.s3d.tech.data.dao.GenericDao;
-import com.s3d.webapps.da.config.persistence.DaConfigDoctor;
+import com.s3d.webapps.config.persistence.ConfigDoctor;
+
+import java.util.List;
 
 /**
  * Created by Gary.Feng on 2015/7/12.
  */
-public interface IDaConfigDoctorDao extends GenericDao<DaConfigDoctor, Integer> {
+public interface IDaConfigDoctorDao extends GenericDao<ConfigDoctor, Integer> {
 
-    Integer addDoctor(DaConfigDoctor doctor);
+    List<ConfigDoctor> getDoctors(String hospitalId);
 
-    void updateDoctor(DaConfigDoctor doctor);
+    ConfigDoctor getDoctor(Integer id);
 
-    void deleteDoctor(DaConfigDoctor doctor);
+    Integer addDoctor(ConfigDoctor doctor);
+
+    void updateDoctor(ConfigDoctor doctor);
+
+    void deleteDoctor(Integer id);
 
 }

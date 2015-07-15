@@ -1,13 +1,15 @@
 package com.s3d.webapps.web.controller.da.config;
 
-import com.s3d.webapps.common.controller.BaseController;
-import com.s3d.webapps.common.json.IJSONSerializeConfig;
-import com.s3d.webapps.da.config.persistence.DaConfigSet;
+import com.s3d.webapps.config.persistence.ConfigDoctor;
+import com.s3d.webapps.da.config.service.IDaConfigDoctorService;
+import com.s3d.webapps.util.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -32,79 +34,52 @@ public class DoctorSetController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Model getDoctors(HttpServletRequest request, Model model) {
-        List<DoctorVO> vos = new ArrayList<DoctorVO>();
-        vos.add(new DoctorVO(1, "Kevin", "k", 1));
-        vos.add(new DoctorVO(2, "Stin", "s", 1));
-        vos.add(new DoctorVO(3, "Krol", "l", 1));
-        model.addAttribute("doctors", vos);
+        String hospitalId = request.getParameter("hospitalId");
+        List<ConfigDoctor> doctors;
+        if (StringUtil.isNull(hospitalId)) {
+            doctors = new ArrayList<ConfigDoctor>();
+        } else {
+            doctors = daConfigDoctorService.getDoctors(hospitalId);
+        }
+        model.addAttribute("doctors", doctors);
         return model;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public Model addDoctor(HttpServletRequest request, Model model) {
-
-        return model;
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String addDoctorHome(HttpServletRequest request, Model model) {
+        return "/da/config/doctor/add";
     }
 
-    @RequestMapping(value = "/edit/{doctorId}", method = RequestMethod.PUT)
-    public Model editDoctor(HttpServletRequest request, Model model, @PathVariable Integer doctorId) {
-
-        return model;
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ModelAndView addDoctor(ConfigDoctor doctor) {
+        daConfigDoctorService.addDoctor(doctor);
+        return new ModelAndView("success");
     }
 
-    @RequestMapping(value = "/delete/{doctorId}", method = RequestMethod.DELETE)
-    public Model deleteDoctor(HttpServletRequest request, Model model, @PathVariable Integer doctorId) {
-
-        return model;
+    @RequestMapping(value = "/edit/{doctorId}", method = RequestMethod.GET)
+    public String editDoctorHome(HttpServletRequest request, Model model, @PathVariable Integer doctorId) {
+        ConfigDoctor doctor = daConfigDoctorService.getDoctor(doctorId);
+        model.addAttribute("doctor", doctor);
+        return "/da/config/doctor/edit";
     }
 
-    protected IJSONSerializeConfig listjsonSerializeConfig() {
-        return null;
+    @RequestMapping(value = "/edit/{doctorId}", method = RequestMethod.POST)
+    public ModelAndView editDoctor(ConfigDoctor doctor, Model model, @PathVariable Integer doctorId) {
+        daConfigDoctorService.updateDoctor(doctor);
+        return new ModelAndView("success");
     }
 
-    class DoctorVO {
-        private Integer id;
-        private String name;
-        private String shortcut;
-        private Integer status;
-
-        public DoctorVO (Integer id, String name, String shortcut, Integer status) {
-            this.id = id;
-            this.name = name;
-            this.shortcut = shortcut;
-            this.status = status;
-        }
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getShortcut() {
-            return shortcut;
-        }
-
-        public void setShortcut(String shortcut) {
-            this.shortcut = shortcut;
-        }
-
-        public Integer getStatus() {
-            return status;
-        }
-
-        public void setStatus(Integer status) {
-            this.status = status;
-        }
+    @RequestMapping(value = "/delete/{doctorId}", method = RequestMethod.GET)
+    public ModelAndView deleteDoctor(HttpServletRequest request, Model model, @PathVariable Integer doctorId) {
+        daConfigDoctorService.deleteDoctor(doctorId);
+        return new ModelAndView("success");
     }
+
+    private IDaConfigDoctorService daConfigDoctorService;
+
+    @Autowired
+    public void setDaConfigDoctorService(IDaConfigDoctorService daConfigDoctorService) {
+        this.daConfigDoctorService = daConfigDoctorService;
+    }
+
 }

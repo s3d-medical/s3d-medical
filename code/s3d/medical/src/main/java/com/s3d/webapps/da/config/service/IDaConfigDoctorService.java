@@ -1,16 +1,22 @@
 package com.s3d.webapps.da.config.service;
 
-import com.s3d.webapps.da.config.persistence.DaConfigDoctor;
+import com.s3d.webapps.config.persistence.ConfigDoctor;
+
+import java.util.List;
 
 /**
  * Created by Gary.Feng on 2015/7/12.
  */
 public interface IDaConfigDoctorService {
 
-    Integer addDoctor(DaConfigDoctor doctor);
+    List<ConfigDoctor> getDoctors(String hospitalId);
 
-    void updateDoctor(DaConfigDoctor doctor);
+    ConfigDoctor getDoctor(Integer id);
 
-    void deleteDoctor(DaConfigDoctor doctor);
+    Integer addDoctor(ConfigDoctor doctor);
+
+    void updateDoctor(ConfigDoctor doctor);
+
+    void deleteDoctor(Integer id);
 
 }

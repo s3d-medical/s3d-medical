@@ -1,4 +1,4 @@
-package com.s3d.webapps.da.config.persistence;
+package com.s3d.webapps.config.persistence;
 
 import javax.persistence.*;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "da_config_doctor")
-public class DaConfigDoctor {
+public class ConfigDoctor {
 
     @Id
     @GeneratedValue
