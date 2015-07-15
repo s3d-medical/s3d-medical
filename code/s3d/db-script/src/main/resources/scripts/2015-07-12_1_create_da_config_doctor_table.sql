@@ -5,7 +5,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `da_config_doctor`;
 CREATE TABLE medical.da_config_doctor (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `hospital_id` VARCHAR(36) NOT NULL,
   `department_id` VARCHAR(36) NULL,
   `position` VARCHAR(36) NULL,
