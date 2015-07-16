@@ -38,4 +38,18 @@ public class DaConfigDoctorDao extends HibernateDao<ConfigDoctor, Integer> imple
     public void deleteDoctor(Integer id) {
         delete(id);
     }
+
+    @Override
+    public List<ConfigDoctor> getDoctorsByMainPage(Integer mainPageId) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT * FROM da_config_doctor dcd WHERE dcd.hospital_id = (");
+        sql.append("SELECT dch.fd_id FROM da_customer_hospital dch WHERE dch.fd_id = (");
+        sql.append("SELECT dch.fd_parent_id FROM da_customer_hospital dch WHERE dch.fd_id = (");
+        sql.append("SELECT dch.fd_parent_id FROM da_customer_hospital dch WHERE dch.fd_id = (");
+        sql.append("SELECT dcs.fd_label_id FROM da_customer_shouye dcs WHERE dcs.fd_file_no = :mainPageId");
+        sql.append("))))");
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("mainPageId", mainPageId);
+        return sqlList(sql.toString(), params);
+    }
 }

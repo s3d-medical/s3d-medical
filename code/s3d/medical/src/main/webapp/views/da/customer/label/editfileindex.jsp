@@ -444,16 +444,18 @@ var Com_Parameter = {
 						dialog.get('loader').load(/*{id : item.fdId}*/);
 						$.ajax({
 							type: "get",
-							url: Com_Parameter.ContextPath + "config/codetables",
+							url: Com_Parameter.ContextPath + "config/codetables?businessKey=" + item.fdFileNo,
 							dataType: "json",
 							cache: false,
-							success: function (data) {
+							success: function (resp) {
 								angular.bootstrap(document, ['mainPage']);
 								Com_Parameter.elAngular = angular.element($('body'));
 								Com_Parameter.elAngular.scope().$apply(function () {
 									/*$.each(data.sickCodes, function(index, item) {
 										item.name += "(" + item.id + ")";
 									});*/
+									var data = resp.settings;
+									data.doctors = resp.doctors;
 									Com_Parameter.elAngular.scope().settings = data;
 								});
 								Com_Parameter.elAngular.scope().getData(item.fdFileNo);

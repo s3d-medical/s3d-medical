@@ -20,4 +20,6 @@ public interface IDaConfigDoctorDao extends GenericDao<ConfigDoctor, Integer> {
 
     void deleteDoctor(Integer id);
 
+    List<ConfigDoctor> getDoctorsByMainPage(Integer mainPageId);
+
 }

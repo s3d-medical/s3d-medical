@@ -19,4 +19,6 @@ public interface IDaConfigDoctorService {
 
     void deleteDoctor(Integer id);
 
+    List<ConfigDoctor> getDoctorsByMainPage(Integer mainPageId);
+
 }

@@ -2,10 +2,7 @@ package com.s3d.tech.data.dao.hibernate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -18,6 +15,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author  wind.chen
@@ -234,6 +232,22 @@ public class HibernateDao<T, ID extends Serializable> {
 	 */
 	public List<T> get(final Criterion... criterions) {
 		return createCriteria(criterions).list();
+	}
+
+	/**
+	 * Query by sql
+	 * @param sql
+	 * @param params
+	 * @return
+	 */
+	protected List<T> sqlList(String sql, Map<String, Object> params) {
+		SQLQuery query = getSession().createSQLQuery(sql);
+		Set<String> paramNames = params.keySet();
+		for (String name : paramNames) {
+			query.setParameter(name, params.get(name));
+		}
+		query.addEntity(entityClass);
+		return query.list();
 	}
 
 	/**

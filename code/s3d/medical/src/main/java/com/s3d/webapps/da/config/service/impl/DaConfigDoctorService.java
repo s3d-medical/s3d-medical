@@ -37,6 +37,11 @@ public class DaConfigDoctorService implements IDaConfigDoctorService {
         daConfigDocrotDao.deleteDoctor(id);
     }
 
+    @Override
+    public List<ConfigDoctor> getDoctorsByMainPage(Integer mainPageId) {
+        return daConfigDocrotDao.getDoctorsByMainPage(mainPageId);
+    }
+
     @Autowired
     private DaConfigDoctorDao daConfigDocrotDao;
 

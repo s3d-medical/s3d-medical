@@ -3,7 +3,9 @@ package com.s3d.webapps.config.web.controller;
 import com.s3d.webapps.config.service.ConfigSetService;
 
 import com.s3d.webapps.config.vo.CodeTableItemVO;
+import com.s3d.webapps.da.config.service.IDaConfigDoctorService;
 import com.s3d.webapps.pub.datatype.ValidationStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -24,8 +26,11 @@ import java.util.Map;
 @RequestMapping("/config")
 public class ConfigSetController {
     @RequestMapping(value = "/codetables", method = RequestMethod.GET)
-    public Map<String, List<CodeTableItemVO>> getAllCodeTables(HttpServletRequest request, HttpServletResponse response, Model model) {
-        return this.configSetService.getCodeTablesInMap(ValidationStatus.VALID);
+    public Model getAllCodeTables(HttpServletRequest request, HttpServletResponse response, Model model) {
+        Integer businessKey = Integer.parseInt(request.getParameter("businessKey"));
+        model.addAttribute("settings", this.configSetService.getCodeTablesInMap(ValidationStatus.VALID));
+        model.addAttribute("doctors", daConfigDoctorService.getDoctorsByMainPage(businessKey));
+        return model;
     }
 
     @Resource
@@ -34,4 +39,11 @@ public class ConfigSetController {
     }
 
     private ConfigSetService configSetService;
+
+    private IDaConfigDoctorService daConfigDoctorService;
+
+    @Autowired
+    public void setDaConfigDoctorService(IDaConfigDoctorService daConfigDoctorService) {
+        this.daConfigDoctorService = daConfigDoctorService;
+    }
 }
