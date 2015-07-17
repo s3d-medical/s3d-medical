@@ -482,16 +482,32 @@
             </span>
         </div>
         <div>
-            <span>科主任<input ng-model="page.director" type="text" style="width: 90px;"></span>
-            <span style="margin-left: 22px;">主任（副主任）医师<input ng-model="page.deputyDirector" type="text" style="width: 90px;"></span>
-            <span style="margin-left: 22px;">主治医师<input ng-model="page.attendingDoctor" type="text" style="width: 90px;"></span>
-            <span style="margin-left: 22px;">住院医师<input ng-model="page.residentDoctor" type="text" style="width: 90px;"></span>
+            <span>科主任
+                <single-select collection="settings.doctors" ng-model="page.director" style="width: 90px;"></single-select>
+            </span>
+            <span style="margin-left: 22px;">主任（副主任）医师
+                <single-select collection="settings.doctors" ng-model="page.deputyDirector" style="width: 90px;"></single-select>
+            </span>
+            <span style="margin-left: 22px;">主治医师
+                <single-select collection="settings.doctors" ng-model="page.attendingDoctor" style="width: 90px;"></single-select>
+            </span>
+            <span style="margin-left: 22px;">住院医师
+                <single-select collection="settings.doctors" ng-model="page.residentDoctor" style="width: 90px;"></single-select>
+            </span>
         </div>
         <div>
-            <span>责任护士<input ng-model="page.primaryNurse" type="text" style="width: 78px;"></span>
-            <span style="margin-left: 22px;">进修医师<input ng-model="page.refresherDoctor" type="text" style="width: 150px;"></span>
-            <span style="margin-left: 22px;">实习医师<input ng-model="page.intern" type="text" style="width: 90px;"></span>
-            <span style="margin-left: 22px;">编码员<input ng-model="page.coder" type="text" style="width: 102px;"></span>
+            <span>责任护士
+                <single-select collection="settings.doctors" ng-model="page.primaryNurse" style="width: 90px;"></single-select>
+            </span>
+            <span style="margin-left: 70px;">进修医师
+                <single-select collection="settings.doctors" ng-model="page.refresherDoctor" style="width: 90px;"></single-select>
+            </span>
+            <span style="margin-left: 22px;">实习医师
+                <single-select collection="settings.doctors" ng-model="page.intern" style="width: 90px;"></single-select>
+            </span>
+            <span style="margin-left: 34px;">编码员
+                <single-select collection="settings.doctors" ng-model="page.coder" style="width: 90px;"></single-select>
+            </span>
         </div>
         <div>
             <span>病案质量
@@ -500,11 +516,17 @@
                 <label><input type="radio" name="caseQuality" value="3" ng-model="page.caseQuality">丙</label>
             </span>
             <span>
-                <span style="margin-left: 23px;">质控医师<input ng-model="page.qualityDoctor" type="text"></span>
+                <span style="margin-left: 20px;">质控医师
+                    <single-select collection="settings.doctors" ng-model="page.qualityDoctor" style="width: 90px;"></single-select>
+                    <!--<input ng-model="page.qualityDoctor" type="text">-->
+                </span>
             </span>
             <span>
-                <span style="margin-left: 25px;">质控护士<input ng-model="page.qualityNurse" type="text"></span>
-                <span style="margin-left: 35px;">质控日期<input ng-model="page.qualityYear" type="text" style="width: 50px;">年<input ng-model="page.qualityMonth" type="text" style="width: 40px;">月<input ng-model="page.qualityDay" type="text" style="width: 40px;">日</span>
+                <span style="margin-left: 22px;">质控护士
+                    <single-select collection="settings.doctors" ng-model="page.qualityNurse" style="width: 90px;"></single-select>
+                    <!--<input ng-model="page.qualityNurse" type="text">-->
+                </span>
+                <span style="margin-left: 15px;">质控日期<input ng-model="page.qualityYear" type="text" style="width: 50px;">年<input ng-model="page.qualityMonth" type="text" style="width: 40px;">月<input ng-model="page.qualityDay" type="text" style="width: 40px;">日</span>
             </span>
         </div>
         <div>

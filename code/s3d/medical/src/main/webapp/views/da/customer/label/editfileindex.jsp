@@ -70,7 +70,8 @@ var Com_Parameter = {
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/angular-sanitize.js"></script>
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/select.min.js"></script>
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/main-page.js"></script>
- <style>
+<script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}ng/directives/single.select.js"></script>
+	<style>
     .bui-stdmod-body{
       overflow-x : hidden;
       overflow-y : auto;
@@ -504,5 +505,4 @@ var Com_Parameter = {
 	  });  
 	</script>
 </body>
-
 </html>
