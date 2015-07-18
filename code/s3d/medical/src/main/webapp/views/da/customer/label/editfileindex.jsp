@@ -71,6 +71,7 @@ var Com_Parameter = {
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/select.min.js"></script>
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}js/main-page.js"></script>
 <script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}ng/directives/single.select.js"></script>
+<script type="text/javascript" src="${WEBAPPS_Parameter_ResPath}ng/directives/multiple.select.js"></script>
 	<style>
     .bui-stdmod-body{
       overflow-x : hidden;

@@ -179,12 +179,7 @@
             <span style="margin-left: 30px;">出生日期<input ng-model="page.birthdayYear" type="text" class="width-40">年<input ng-model="page.birthdayMonth" type="text" class="width-20">月<input ng-model="page.birthdayDay" type="text" class="width-20">日</span>
             <span style="margin-left: 30px;">年龄<input ng-model="page.age" type="text" class="width-40">岁</span>
             <span style="margin-left: 55px;">国籍
-                <ui-select ng-model="page.country" style="width: 70px;">
-                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.countries | filter: $select.search track by i.shortcut">
-                        <span ng-bind-html="i.name"></span>
-                    </ui-select-choices>
-                </ui-select>
+                <single-select collection="settings.countries" ng-model="page.country" style="width: 70px;"></single-select>
             </span>
         </div>
         <div>
@@ -233,31 +228,16 @@
                 市
             </span>
             <span>民族
-                <ui-select ng-model="page.nation" style="width: 65px;">
-                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.nations | filter: $select.search track by i.shortcut">
-                        <span ng-bind-html="i.name"></span>
-                    </ui-select-choices>
-                </ui-select>
+                <single-select collection="settings.nations" ng-model="page.nation" style="width: 65px;"></single-select>
             </span>
         </div>
         <div>
             <span>身份证号<input ng-model="page.idCard" type="text" class="width-160"></span>
             <span class="ml-10">职业
-                <ui-select ng-model="page.job" style="width: 90px;">
-                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.jobs | filter: $select.search track by i.shortcut">
-                        <span ng-bind-html="i.name"></span>
-                    </ui-select-choices>
-                </ui-select>
+                <single-select collection="settings.jobs" ng-model="page.job" style="width: 90px;"></single-select>
             </span>
             <span style="margin-left: 16px;">婚姻
-                <ui-select ng-model="page.marriage" style="width: 70px;">
-                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.marriages | filter: $select.search track by i.shortcut">
-                        <span ng-bind-html="i.name"></span>
-                    </ui-select-choices>
-                </ui-select>
+                <single-select collection="settings.marriages" ng-model="page.marriage" style="width: 70px;"></single-select>
             </span>
         </div>
         <div>
@@ -327,55 +307,30 @@
         <div>
             <span>联系人姓名<input ng-model="page.contact" type="text"></span>
             <span class="ml-10">关系
-                <ui-select ng-model="page.relationship" style="width: 90px;">
-                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.relationships | filter: $select.search track by i.shortcut">
-                        <span ng-bind-html="i.name"></span>
-                    </ui-select-choices>
-                </ui-select>
+                <single-select collection="settings.relationships" ng-model="page.relationship" style="width: 90px;"></single-select>
             </span>
             <span class="ml-10">地址<input ng-model="page.contactAddress" type="text" style="width: 301px;"></span>
             <span class="ml-10">电话<input ng-model="page.contactPhone" type="text"></span>
         </div>
         <div>
             <span>入院途径
-                <ui-select ng-model="page.inType" style="width: 90px;">
-                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.inTypes | filter: $select.search track by i.shortcut">
-                        <span ng-bind-html="i.name"></span>
-                    </ui-select-choices>
-                </ui-select>
+                <single-select collection="settings.inTypes" ng-model="page.inType" style="width: 90px;"></single-select>
             </span>
         </div>
         <div>
             <span>入院时间<input ng-model="page.inYear" type="text" style="width: 50px;">年<input ng-model="page.inMonth" type="text" style="width: 40px;">月<input ng-model="page.inDay" type="text" style="width: 40px;">日<input ng-model="page.inHour" type="text" style="width: 40px;">时</span>
             <span class="ml-10">入院科别
-                <ui-select ng-model="page.inDepartment" style="width: 90px;">
-                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.departments | filter: $select.search track by i.shortcut">
-                        <span ng-bind-html="i.name"></span>
-                    </ui-select-choices>
-                </ui-select>
+                <single-select collection="settings.departments" ng-model="page.inDepartment" style="width: 90px;"></single-select>
             </span>
             <span class="ml-10">病房<input ng-model="page.inSickroom" type="text"></span>
             <span class="ml-10">转科科别
-                <ui-select ng-model="page.changeDepartment" style="width: 90px;">
-                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.departments | filter: $select.search track by i.shortcut">
-                        <span ng-bind-html="i.name"></span>
-                    </ui-select-choices>
-                </ui-select>
+                <single-select collection="settings.departments" ng-model="page.changeDepartment" style="width: 90px;"></single-select>
             </span>
         </div>
         <div>
             <span>出院时间<input ng-model="page.outYear" type="text" style="width: 50px;">年<input ng-model="page.outMonth" type="text" style="width: 40px;">月<input ng-model="page.outDay" type="text" style="width: 40px;">日<input ng-model="page.outHour" type="text" style="width: 40px;">时</span>
             <span class="ml-10">出院科别
-                <ui-select ng-model="page.outDepartment" style="width: 90px;">
-                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.departments | filter: $select.search track by i.shortcut">
-                        <span ng-bind-html="i.name"></span>
-                    </ui-select-choices>
-                </ui-select>
+                <single-select collection="settings.departments" ng-model="page.outDepartment" style="width: 90px;"></single-select>
             </span>
             <span class="ml-10">病房<input ng-model="page.outSickroom" type="text"></span>
             <span class="ml-10">实际住院<input ng-model="page.daysInHospital" type="text">天</span>
@@ -383,12 +338,7 @@
         <div>
             <span>门（急）诊诊断<input ng-model="page.outpatientDiagnosis" type="text" class="width-330" maxlength="40"></span>
             <span class="ml-10" style="margin-left: 48px;">疾病编码
-                <ui-select multiple ng-model="page.outpatientSickCodes" style="width: 195px;">
-                    <ui-select-match placeholder="">{{$item.id}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.sickCodes | filter: $select.search">
-                        <span ng-bind-html="i.id"></span>
-                    </ui-select-choices>
-                </ui-select>
+                <multiple-select collection="settings.sickCodes" ng-model="page.outpatientSickCodes" style="width: 195px;"></multiple-select>
             </span>
         </div>
         <div>
@@ -409,12 +359,7 @@
                             <!--<input class="diagnosis" type="text" ng-model="d.diagnosis">-->
                         </td>
                         <td class="discharge-sick-code" style="text-align: center;">
-                            <ui-select multiple theme="bootstrap" ng-model="d.sickCodes" style="width: 185px;">
-                                <ui-select-match placeholder="">{{$item.id}}</ui-select-match>
-                                <ui-select-choices repeat="i.id as i in settings.sickCodes | filter: $select.search">
-                                    <div ng-bind-html="i.id | highlight: $select.search"></div>
-                                </ui-select-choices>
-                            </ui-select>
+                            <multiple-select collection="settings.sickCodes" ng-model="d.sickCodes" style="width: 185px;"></multiple-select>
                         </td>
                         <td>
                             <ui-select ng-model="d.inSickState" style="width: 135px;">
@@ -432,12 +377,7 @@
         <div>
             <span>损伤、中毒的外部原因<input ng-model="page.outCause" type="text" style="width: 347px;"></span>
             <span>疾病编码
-                <ui-select multiple ng-model="page.outSickCodes" style="width: 190px;">
-                    <ui-select-match placeholder="">{{$item.id}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.sickCodes | filter: $select.search">
-                        <span ng-bind-html="i.id"></span>
-                    </ui-select-choices>
-                </ui-select>
+                <multiple-select collection="settings.sickCodes" ng-model="page.outSickCodes" style="width: 190px;"></multiple-select>
             </span>
         </div>
         <div>
@@ -445,12 +385,7 @@
         </div>
         <div>
             <span>疾病编码
-                <ui-select multiple ng-model="page.pathologySickCodes" style="width: 200px;">
-                    <ui-select-match multiple placeholder="">{{$item.id}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.sickCodes | filter: $select.search">
-                        <span ng-bind-html="i.id"></span>
-                    </ui-select-choices>
-                </ui-select>
+                <multiple-select collection="settings.sickCodes" ng-model="page.pathologySickCodes" style="width: 200px;"></multiple-select>
             </span>
             <span>病理号<input ng-model="page.pathologyNumber" type="text"></span>
         </div>
@@ -568,12 +503,7 @@
         </div>
         <div>
             <span>离院方式
-                <ui-select ng-model="page.outType" style="width: 200px;">
-                    <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="i.id as i in settings.outTypes | filter: $select.search track by i.shortcut">
-                        <span ng-bind-html="i.name"></span>
-                    </ui-select-choices>
-                </ui-select>
+                <single-select collection="settings.outTypes" ng-model="page.outType" style="width: 90px;"></single-select>
             </span>
             <span style="margin-left: 20px;">拟接收医疗机构名称
                 <input type="text" ng-model="page.acceptOrganization" style="width: 323px;">
