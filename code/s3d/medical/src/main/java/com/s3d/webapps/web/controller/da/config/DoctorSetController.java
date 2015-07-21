@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("/da/config/doctors")
 public class DoctorSetController {
 
-    @RequestMapping(value = "index", method = RequestMethod.GET)
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(HttpServletRequest request,Model model) {
         /*String type = request.getParameter("type");
         String[] v = getTypeAttribute(type);

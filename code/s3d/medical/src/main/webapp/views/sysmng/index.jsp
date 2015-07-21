@@ -95,7 +95,8 @@
                     {id:'RYJCmng',text:'入院检查情况',href:'<c:url value="/da/config/set" />?type=RYJC'},
                     {id:'RYBQmng',text:'入院病情',href:'<c:url value="/da/config/set" />?type=RYBQ'},
                     {id:'RYSEXmng',text:'性别',href:'<c:url value="/da/config/set" />?type=SEX'},
-                    {id:'YSmng',text:'医生',href:'<c:url value="/da/config/doctors/index" />'}
+                    {id:'YSmng',text:'医生',href:'<c:url value="/da/config/doctors/index" />'},
+                    {id:'SSBMmng',text:'手术编码',href:'<c:url value="/da/config/operations/index" />'}
                   ]
                 }]
           }];

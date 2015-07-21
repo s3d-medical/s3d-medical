@@ -13,7 +13,7 @@ import java.util.Map;
  * Created by Gary.Feng on 2015/7/12.
  */
 @Repository
-public class DaConfigDoctorDao extends HibernateDao<ConfigDoctor, Integer> implements IDaConfigDoctorDao {
+public class DaConfigDoctorDaoImp extends HibernateDao<ConfigDoctor, Integer> implements IDaConfigDoctorDao {
     @Override
     public List<ConfigDoctor> getDoctors(String hospitalId) {
         String hql = "from ConfigDoctor where hospitalId = :hospitalId";
