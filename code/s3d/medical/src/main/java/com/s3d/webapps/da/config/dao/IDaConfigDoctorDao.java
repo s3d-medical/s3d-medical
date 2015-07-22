@@ -2,6 +2,7 @@ package com.s3d.webapps.da.config.dao;
 
 import com.s3d.tech.data.dao.GenericDao;
 import com.s3d.webapps.config.persistence.ConfigDoctor;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.List;
 
@@ -20,6 +21,6 @@ public interface IDaConfigDoctorDao extends GenericDao<ConfigDoctor, Integer> {
 
     void deleteDoctor(Integer id);
 
-    List<ConfigDoctor> getDoctorsByMainPage(Integer mainPageId);
+    List<ConfigDoctor> getDoctorsByMainPage(String businessKey, Integer status);
 
 }

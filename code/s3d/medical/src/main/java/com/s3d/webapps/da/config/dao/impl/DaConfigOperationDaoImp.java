@@ -16,13 +16,18 @@ import java.util.Map;
 @Repository
 public class DaConfigOperationDaoImp extends HibernateDao<ConfigOperation, Integer> implements IDaConfigOperationDao {
     @Override
-    public List<ConfigOperation> getOperations(String hospitalId) {
+    public List<ConfigOperation> getOperations(String hospitalId, Integer status) {
         StringBuilder hql = new StringBuilder();
         hql.append("from ConfigOperation");
+        hql.append(" where 1 = 1");
         Map<String, Object> params = new HashMap<String, Object>();
         if (StringUtils.isNotEmpty(hospitalId)) {
-            hql.append(" where hospitalId = :hospitalId");
+            hql.append(" and hospitalId = :hospitalId");
             params.put("hospitalId", hospitalId);
+        }
+        if (null != status) {
+            hql.append(" and status = :status");
+            params.put("status", status);
         }
         return get(hql.toString(), params);
     }

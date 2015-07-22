@@ -14,5 +14,5 @@ import java.util.Map;
 public interface ConfigSetService {
     public List<ConfigSet> getConfigSets(String fdType, ValidationStatus validationStatus);
     public List<CodeTableItemVO> getCodeTables(String fdType, ValidationStatus validationStatus);
-    public Map<String, List<CodeTableItemVO>> getCodeTablesInMap(ValidationStatus validationStatus);
+    public Map<String, Object> getCodeTablesInMap(ValidationStatus validationStatus, String businessKey, String hospitalId);
 }

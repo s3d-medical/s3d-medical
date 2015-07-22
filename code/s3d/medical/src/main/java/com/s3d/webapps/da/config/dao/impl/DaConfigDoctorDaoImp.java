@@ -40,16 +40,20 @@ public class DaConfigDoctorDaoImp extends HibernateDao<ConfigDoctor, Integer> im
     }
 
     @Override
-    public List<ConfigDoctor> getDoctorsByMainPage(Integer mainPageId) {
+    public List<ConfigDoctor> getDoctorsByMainPage(String businessKey, Integer status) {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT * FROM da_config_doctor dcd WHERE dcd.hospital_id = (");
         sql.append("SELECT dch.fd_id FROM da_customer_hospital dch WHERE dch.fd_id = (");
         sql.append("SELECT dch.fd_parent_id FROM da_customer_hospital dch WHERE dch.fd_id = (");
         sql.append("SELECT dch.fd_parent_id FROM da_customer_hospital dch WHERE dch.fd_id = (");
-        sql.append("SELECT dcs.fd_label_id FROM da_customer_shouye dcs WHERE dcs.fd_file_no = :mainPageId");
+        sql.append("SELECT dcs.fd_label_id FROM da_customer_shouye dcs WHERE dcs.fd_file_no = :businessKey");
         sql.append("))))");
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("mainPageId", mainPageId);
+        if (null != status) {
+            sql.append(" AND dcd.status = :status");
+            params.put("status", status);
+        }
+        params.put("businessKey", businessKey);
         return sqlList(sql.toString(), params);
     }
 }

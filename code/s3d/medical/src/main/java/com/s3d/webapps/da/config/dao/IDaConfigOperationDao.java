@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface IDaConfigOperationDao extends GenericDao<ConfigOperation, Integer> {
 
-    List<ConfigOperation> getOperations(String hospitalId);
+    List<ConfigOperation> getOperations(String hospitalId, Integer status);
 
     ConfigOperation getOperation(Integer id);
 

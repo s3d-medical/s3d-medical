@@ -28,7 +28,7 @@ public class OperationSetController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Model getOperations(HttpServletRequest request, Model model) {
         String hospitalId = request.getParameter("hospitalId");
-        List<ConfigOperation> operations = operationService.getOperations(hospitalId);
+        List<ConfigOperation> operations = operationService.getOperations(hospitalId, null);
         model.addAttribute("operations", operations);
         return model;
     }

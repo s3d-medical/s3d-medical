@@ -457,7 +457,6 @@ var Com_Parameter = {
 										item.name += "(" + item.id + ")";
 									});*/
 									var data = resp.settings;
-									data.doctors = resp.doctors;
 									Com_Parameter.elAngular.scope().settings = data;
 								});
 								Com_Parameter.elAngular.scope().getData(item.fdFileNo);

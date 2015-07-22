@@ -19,7 +19,9 @@ public enum ConfigSetType {
     DISCHARGED_TYPES("outTypes", "LYFS", "离院方式"),
     IN_SICK_Level("inSickLevel", "RYJC", "入院病况等级"),
     IN_SICK_STATES("inSickStates", "RYBQ", "入院病情"),
-    DISCHARGE_STATES("outState", "CYQK", "出院情况");
+    DISCHARGE_STATES("outState", "CYQK", "出院情况"),
+    DISCHARGE_DOCTORS("doctors", "YS", "医生"),
+    DISCHARGE_OPERATIONS("operations", "SSBM", "手术编码");
 
     ConfigSetType(String name, String code, String desc) {
         this.name = name;
