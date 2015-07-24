@@ -5,24 +5,34 @@ package com.s3d.webapps.config.vo;
  */
 public class OperationVO {
 
-    private String id;
+    private String code;
     private String name;
     private String shortcut;
     private Integer grade;
 
-    public OperationVO(String id, String name, String shortcut, Integer grade) {
-        this.id = id;
+    public OperationVO() {
+
+    }
+
+    public OperationVO(String code, String name, String shortcut, Integer grade) {
+        this.code = code;
         this.name = name;
         this.shortcut = shortcut;
         this.grade = grade;
     }
 
-    public String getId() {
-        return id;
+    public OperationVO(String code, String name, Integer grade) {
+        this.code = code;
+        this.name = name;
+        this.grade = grade;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {

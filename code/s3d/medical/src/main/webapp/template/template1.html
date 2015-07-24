@@ -486,10 +486,17 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="i in page.operationHistory">
-                        <td><input type="text" ng-model="i.operateCode"></td>
+                        <td>
+                            <ui-select ng-model="i.operation" style="width: 70px;">
+                                <ui-select-match placeholder="">{{$select.selected.code}}</ui-select-match>
+                                <ui-select-choices repeat="o in settings.operations | filter: $select.search track by o.shortcut">
+                                    <span ng-bind-html="o.code"></span>
+                                </ui-select-choices>
+                            </ui-select>
+                        </td>
                         <td><input type="text" ng-model="i.date"></td>
-                        <td><input type="text" ng-model="i.grade"></td>
-                        <td><input type="text" ng-model="i.operationName"></td>
+                        <td><input type="text" ng-model="i.operation.grade"></td>
+                        <td><input type="text" ng-model="i.operation.name"></td>
                         <td><input type="text" ng-model="i.operator"></td>
                         <td><input type="text" ng-model="i.firstAssistant"></td>
                         <td><input type="text" ng-model="i.secondAssistant"></td>

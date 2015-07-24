@@ -248,10 +248,10 @@ public class MedicalRecordHomePageConvertor {
             for(int i=0; i<operationVOs.size(); i++){
                 OperationHistoryVO itemVO = operationVOs.get(i);
                 Operation operation = new Operation();
-                operation.fill(itemVO.getOperateCode(),
+                operation.fill(itemVO.getOperation().getCode(),
                         itemVO.getDate(),
-                        itemVO.getGrade(),
-                        itemVO.getOperationName(),
+                        itemVO.getOperation().getGrade() + "",
+                        itemVO.getOperation().getName(),
                         itemVO.getOperator(),
                         itemVO.getFirstAssistant(),
                         itemVO.getSecondAssistant(),

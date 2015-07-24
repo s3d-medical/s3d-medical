@@ -1,6 +1,7 @@
 package com.s3d.webapps.medicalrecord.vo.homepage;
 
 import com.s3d.tech.utils.DateUtils;
+import com.s3d.webapps.config.vo.OperationVO;
 import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.operation.Operation;
 
 /**
@@ -8,10 +9,8 @@ import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.operation
  * @date 2015/5/17.
  */
 public class OperationHistoryVO {
-    private String operateCode;
+    private OperationVO operation;
     private String date;
-    private String grade;
-    private String operationName;
     private String operator;
     private String firstAssistant;
     private String secondAssistant;
@@ -19,30 +18,29 @@ public class OperationHistoryVO {
     private String anaesthesiaType;
     private String anaesthetist;
 
-    public OperationHistoryVO() {
+    public  OperationHistoryVO () {
 
     }
 
+    public OperationHistoryVO(OperationVO operation, String date, String operator, String firstAssistant, String secondAssistant, String anaesthesiaType, String anaesthetist) {
+        this.operation = operation;
+        this.date = date;
+        this.operator = operator;
+        this.firstAssistant = firstAssistant;
+        this.secondAssistant = secondAssistant;
+        this.anaesthesiaType = anaesthesiaType;
+        this.anaesthetist = anaesthetist;
+    }
+
     public OperationHistoryVO(Operation operation) {
-        this.operateCode = operation.getCode();
+        this.operation = new OperationVO(operation.getCode(), operation.getName(), Integer.parseInt(operation.getLevel()));
         this.date = DateUtils.convertToStrDate(operation.getOperatedDate());
-        this.grade = operation.getLevel();
-        this.operationName = operation.getName();
         this.operator = operation.getMajorOperator();
         this.firstAssistant = operation.getAssistant1();
         this.secondAssistant = operation.getAssistant2();
         this.cutHealGrade = operation.getHealedInGrade();
         this.anaesthesiaType = operation.getAnesthesiaType();
         this.anaesthetist = operation.getAnesthesiaDoctor();
-
-
-    }
-    public String getOperateCode() {
-        return operateCode;
-    }
-
-    public void setOperateCode(String operateCode) {
-        this.operateCode = operateCode;
     }
 
     public String getDate() {
@@ -51,22 +49,6 @@ public class OperationHistoryVO {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
-    }
-
-    public String getOperationName() {
-        return operationName;
-    }
-
-    public void setOperationName(String operationName) {
-        this.operationName = operationName;
     }
 
     public String getOperator() {
@@ -117,4 +99,11 @@ public class OperationHistoryVO {
         this.anaesthetist = anaesthetist;
     }
 
+    public OperationVO getOperation() {
+        return operation;
+    }
+
+    public void setOperation(OperationVO operation) {
+        this.operation = operation;
+    }
 }
