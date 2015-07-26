@@ -114,6 +114,7 @@
     .sy table input[type='text'] {
         width: 100%;
         padding: 0;
+        text-align: center;
     }
     .sy .out-diagnosis .selectator.single {
         width: 100% !important;
@@ -242,7 +243,7 @@
         </div>
         <div>
             <span>现住址
-                <ui-select ng-model="page.addressState" style="width: 70px;">
+                <ui-select ng-model="page.addressState" style="width: 70px; margin-left: 12px;">
                     <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
                     <ui-select-choices repeat="i.id as i in settings.locations | filter: $select.search | provinceFilter track by i.id">
                         <span ng-bind-html="i.name"></span>
@@ -267,7 +268,7 @@
                 <!--<input ng-model="page.addressDistrict" type="text">-->
                 县
             </span>
-            <span style="margin-left: 90px;">电话<input ng-model="page.addressPhone" type="text" class="width-120"></span>
+            <span style="margin-left: 78px;">电话<input ng-model="page.addressPhone" type="text" class="width-120"></span>
             <span class="ml-10">邮编<input ng-model="page.addressPostcode" type="text"></span>
         </div>
         <div>
@@ -418,9 +419,9 @@
         </div>
         <div>
             <span>科主任
-                <single-select collection="settings.doctors" ng-model="page.director" style="width: 90px;"></single-select>
+                <single-select collection="settings.doctors" ng-model="page.director" style="width: 90px; margin-left: 12px;"></single-select>
             </span>
-            <span style="margin-left: 22px;">主任（副主任）医师
+            <span style="margin-left: 10px;">主任（副主任）医师
                 <single-select collection="settings.doctors" ng-model="page.deputyDirector" style="width: 90px;"></single-select>
             </span>
             <span style="margin-left: 22px;">主治医师
@@ -468,19 +469,19 @@
             <table>
                 <thead>
                     <tr>
-                        <td rowspan="2" class="width-70">手术及操作编码</td>
-                        <td rowspan="2" class="width-70">手术及操作日期</td>
-                        <td rowspan="2" class="width-60">手术级别</td>
-                        <td rowspan="2" class="width-120">手术及操作名称</td>
+                        <td rowspan="2" style="width: 70px;">手术及操作编码</td>
+                        <td rowspan="2" style="width: 80px;">手术及操作日期</td>
+                        <td rowspan="2" style="width: 50px;">手术级别</td>
+                        <td rowspan="2" style="width: 120px;">手术及操作名称</td>
                         <td colspan="3">手术及操作医师</td>
-                        <td rowspan="2" class="width-60">切口愈合等级</td>
+                        <td rowspan="2" style="width: 60px;">切口愈合等级</td>
                         <td rowspan="2">麻醉方式</td>
                         <td rowspan="2">麻醉医师</td>
                     </tr>
                     <tr>
-                        <td class="width-70">术者</td>
-                        <td class="width-70">Ⅰ助</td>
-                        <td class="width-70">Ⅱ助</td>
+                        <td style="width: 70px;">术者</td>
+                        <td style="width: 70px;">Ⅰ助</td>
+                        <td style="width: 70px;">Ⅱ助</td>
                     </tr>
 
                 </thead>
@@ -494,15 +495,30 @@
                                 </ui-select-choices>
                             </ui-select>
                         </td>
-                        <td><input type="text" ng-model="i.date"></td>
+                        <td>
+                            <format-date-input fd="i.date"></format-date-input>
+                            <!--<input type="text" ng-model="i.date">-->
+                        </td>
                         <td><input type="text" ng-model="i.operation.grade"></td>
                         <td><input type="text" ng-model="i.operation.name"></td>
-                        <td><input type="text" ng-model="i.operator"></td>
-                        <td><input type="text" ng-model="i.firstAssistant"></td>
-                        <td><input type="text" ng-model="i.secondAssistant"></td>
+                        <td>
+                            <single-select collection="settings.doctors" ng-model="i.operator" style="width: 70px;"></single-select>
+                            <!--<input type="text" ng-model="i.operator">-->
+                        </td>
+                        <td>
+                            <single-select collection="settings.doctors" ng-model="i.firstAssistant" style="width: 70px;"></single-select>
+                            <!--<input type="text" ng-model="i.firstAssistant">-->
+                        </td>
+                        <td>
+                            <single-select collection="settings.doctors" ng-model="i.secondAssistant" style="width: 70px;"></single-select>
+                            <!--<input type="text" ng-model="i.secondAssistant">-->
+                        </td>
                         <td><input type="text" ng-model="i.cutHealGrade"></td>
                         <td><input type="text" ng-model="i.anaesthesiaType"></td>
-                        <td><input type="text" ng-model="i.anaesthetist"></td>
+                        <td>
+                            <single-select collection="settings.doctors" ng-model="i.anaesthetist" style="width: 60px;"></single-select>
+                            <!--<input type="text" ng-model="i.anaesthetist">-->
+                        </td>
                     </tr>
                 </tbody>
             </table>

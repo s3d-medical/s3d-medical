@@ -38,7 +38,7 @@
                 return;
             }
             /*console.log($scope.page);
-             return;*/
+            return;*/
             // todo use angular.toJson to convert page object instead of JSON.stringify because of useless characters created by angular automatic
             //console.log(angular.toJson($scope.page));
             $.ajax({
