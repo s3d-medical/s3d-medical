@@ -18,7 +18,6 @@ public class ListSlicer<T> {
         this.sliceSize = sliceSize;
         this.sliceData(dataSrc);
     }
-
     private int sliceData(List<T> dataSrc) {
         if (dataSrc != null && dataSrc.size() > 0) {
             List<T> oneSlice = new ArrayList<T>();
