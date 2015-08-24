@@ -48,6 +48,7 @@ public class DemoDaoIml extends BaseMongoDaoImpl implements DemoDao {
         return null;
     }
 
+
     /**
      * result will be returned in Document format.
      *
