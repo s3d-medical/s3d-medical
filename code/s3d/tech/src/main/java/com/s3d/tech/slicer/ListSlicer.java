@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Wind.Chen on 2015/6/19.
+ * @author  Wind.Chen
+ * @since 2015/6/19.
  */
-
 public class ListSlicer<T> {
     private int sliceTotalCount = 0;
     private Map<Integer, List<T>> slicesInMap = new HashMap<Integer, List<T>>();

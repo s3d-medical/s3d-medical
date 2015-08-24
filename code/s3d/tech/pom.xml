@@ -7,7 +7,6 @@
         <artifactId>s3d</artifactId>
         <version>1.0</version>
     </parent>
-    <!--define model -->
     <modelVersion>4.0.0</modelVersion>
     <artifactId>tech</artifactId>
     <name>tech</name>
