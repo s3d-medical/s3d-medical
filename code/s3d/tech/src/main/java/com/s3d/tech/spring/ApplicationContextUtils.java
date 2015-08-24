@@ -1,4 +1,4 @@
-package com.s3d.tech.utils;
+package com.s3d.tech.spring;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

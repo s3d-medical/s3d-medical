@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.core.Authentication;
 
-import com.s3d.webapps.framework.spring.SpringContextHolder;
+import com.s3d.tech.spring.SpringContextHolder;
 import com.s3d.webapps.sys.acl.role.service.SecurityMetadataSourceExtend;
 import com.s3d.webapps.sys.security.WebAppUserHolder;
 import com.s3d.webapps.sys.security.persistence.BaseSecurityElement;

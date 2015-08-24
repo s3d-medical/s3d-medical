@@ -1,5 +1,6 @@
 package com.s3d.tech.utils;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -8,7 +9,7 @@ import java.net.URI;
 /**
  * URL Utilities
  *
- * @author James Ye
+ * @author wind.chen
  */
 public final class URLUtils {
 
@@ -51,6 +52,37 @@ public final class URLUtils {
         return "";
     }
 
+    public static String getUrlWithoutParam(String url){
+        if(StringUtils.isEmpty(url)){
+            return "";
+        }
+        // remove ?
+        return StringUtils.substringBefore(url, "?");
+    }
+
+    /**
+     * get .jpg, .css, .jsp, gif etc.
+     * www.sohu.com/ddd/test.jpg?p=1&p2=uu   .jpg is return.
+     * @param src
+     * @return
+     */
+    public static String getSuffixOfUrl(String src){
+        return getLastPartOfUrl(src, ".");
+    }
+
+    public static String getLastPathOfUrl(String src){
+        return getLastPartOfUrl(src, "/");
+    }
+
+    private static String getLastPartOfUrl(String src, String separator){
+        String url = getUrlWithoutParam(src);
+        String suffix = StringUtils.substringAfterLast(url,separator);
+        if(StringUtils.isEmpty(suffix)){
+            return separator;
+        }else{
+            return separator + suffix;
+        }
+    }
     private final static Log log = LogFactory.getLog(URLUtils.class);
 
 }

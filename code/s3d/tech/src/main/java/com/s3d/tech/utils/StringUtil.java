@@ -1,11 +1,12 @@
 package com.s3d.tech.utils;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ *
+ */
 public final class StringUtil
 {
   private static String SEPARATOR = ",";
@@ -81,7 +82,18 @@ public final class StringUtil
 	  Pattern pattern=Pattern.compile("[0-9]*");
 	  return pattern.matcher(str).matches();
   }
-  
+  public static Set<String> stringToSet(String src){
+      Set<String> set = new HashSet<String>();
+      if(src != null){
+          String[] values = src.split(",");
+          if(values != null){
+              for(String value : values){
+                  set.add(value);
+              }
+          }
+      }
+      return set;
+  }
   
   /**
    * change list to string ,
@@ -162,7 +174,5 @@ public final class StringUtil
 
         return html;
     }
-
-
 }
 

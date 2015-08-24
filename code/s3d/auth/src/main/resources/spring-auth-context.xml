@@ -25,17 +25,10 @@
 		<property name="locations" value="classpath*:/config.properties" />
 	</bean>
    -->
-	<context:property-placeholder location="classpath*:/config.properties"/>
 
+    <import resource="classpath*:spring-auth-transaction.xml"/>
+    <import resource="classpath*:spring-auth-beans-def.xml"/>
+    <import resource="classpath*:spring-auth-security.xml"/>
 
-
-    <import resource="classpath*:spring-app-transaction.xml"/>
-    <import resource="classpath*:spring-app-beans-def.xml"/>
-    <import resource="classpath*:spring-app-security.xml"/>
-
-
-
-	<bean id="springContextHolder" class="com.s3d.tech.spring.SpringContextHolder" />
-	<bean id="childOfAnnotationsProcessor" class="com.s3d.webapps.framework.spring.annotation.ChildOfBeanFactoryPostProcessor" />
-    <bean id="resourceOfAnnotationsProcessor" class="com.s3d.webapps.framework.spring.annotation.ResourceOfBeanFactoryPostProcessor" />
+    <bean id="springContextHolder" class="com.s3d.tech.spring.SpringContextHolder" />
 </beans> 

@@ -1,4 +1,4 @@
-package com.s3d.webapps.util;
+package com.s3d.tech.utils;
 
 public class RequestUtils
 {

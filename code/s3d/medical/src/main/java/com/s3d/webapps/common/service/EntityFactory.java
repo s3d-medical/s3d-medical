@@ -2,7 +2,7 @@ package com.s3d.webapps.common.service;
 
 import org.springframework.util.Assert;
 
-import com.s3d.webapps.framework.spring.SpringContextHolder;
+import com.s3d.tech.spring.SpringContextHolder;
 
 public class EntityFactory {
 	

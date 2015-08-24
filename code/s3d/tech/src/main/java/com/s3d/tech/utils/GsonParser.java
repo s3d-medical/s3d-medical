@@ -1,19 +1,18 @@
 package com.s3d.tech.utils;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 /**
- * con
- *
- * @author wind.chen
+ * Use gson
+ * @author Wind.chen
+ * @date 2014-08-06
  */
-public class JsonParser {
-    static Gson gson  = new GsonBuilder().serializeNulls().create();;
+public class GsonParser {
+    static Gson gson = new Gson();
 
     public static <T> String parseListToJson(List<T> objList) {
         String json = gson.toJson(objList);

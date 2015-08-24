@@ -1,4 +1,4 @@
-package com.s3d.webapps.framework.spring;
+package com.s3d.tech.spring;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

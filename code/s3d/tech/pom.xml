@@ -12,5 +12,7 @@
     <artifactId>tech</artifactId>
     <name>tech</name>
     <packaging>jar</packaging>
-
+    <build>
+        <finalName>tech</finalName>
+    </build>
 </project>
