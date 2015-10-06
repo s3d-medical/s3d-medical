@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author  Wind.Chen
- * @since 2015/6/19.
+ * Created by Wind.Chen on 2015/6/19.
  */
+
 public class ListSlicer<T> {
     private int sliceTotalCount = 0;
     private Map<Integer, List<T>> slicesInMap = new HashMap<Integer, List<T>>();
@@ -18,6 +18,7 @@ public class ListSlicer<T> {
         this.sliceSize = sliceSize;
         this.sliceData(dataSrc);
     }
+
     private int sliceData(List<T> dataSrc) {
         if (dataSrc != null && dataSrc.size() > 0) {
             List<T> oneSlice = new ArrayList<T>();
@@ -37,7 +38,6 @@ public class ListSlicer<T> {
                 slicesInMap.put(sliceTotalCount, oneSlice);
             }
         }
-
         return sliceTotalCount;
     }
 

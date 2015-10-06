@@ -25,10 +25,17 @@
 		<property name="locations" value="classpath*:/config.properties" />
 	</bean>
    -->
+<!--
 	<context:property-placeholder location="classpath*:/config.properties"/>
+-->
 
+    <bean id="placeholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="locations" value="classpath*:/config.properties" />
+    </bean>
 
-
+    <import resource="classpath*:app-context-mongodb-datasource.xml"/>
     <import resource="classpath*:spring-app-transaction.xml"/>
     <import resource="classpath*:spring-app-beans-def.xml"/>
     <import resource="classpath*:spring-app-security.xml"/>
