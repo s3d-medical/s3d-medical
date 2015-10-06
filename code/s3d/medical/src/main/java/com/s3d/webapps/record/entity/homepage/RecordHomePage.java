@@ -1,5 +1,9 @@
 package com.s3d.webapps.record.entity.homepage;
 
+import com.s3d.tech.mongo.OId;
+import org.bson.types.ObjectId;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +12,9 @@ import java.util.List;
  * @author wind.chen
  * @date 2015/5/15.
  */
-public class RecordHomePage {
+public class RecordHomePage implements Serializable {
+    private OId _id = new OId();
+
     private String businessKey;
     /**
      * 首页基本信息
@@ -115,5 +121,13 @@ public class RecordHomePage {
 
     public void setBusinessKey(String businessKey) {
         this.businessKey = businessKey;
+    }
+
+    public OId get_id() {
+        return _id;
+    }
+
+    public void set_id(OId _id) {
+        this._id = _id;
     }
 }

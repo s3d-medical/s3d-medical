@@ -46,11 +46,17 @@ public class RecordHomePageServiceImpl implements RecordHomePageService {
     }
 
     @Override
-    public void saveOrUpdate(RecordHomePage homePage) {
+    public void insertOrReplace(RecordHomePage homePage) {
         if(homePage == null){
             return ;
         }
-        this.recordHomePageDao.saveOrUpdate(homePage);
+        RecordHomePage old = this.recordHomePageDao.getByBusinessKey(homePage.getBusinessKey());
+        if(old == null){
+            this.recordHomePageDao.insertOne(homePage);
+        }else{
+            homePage.set_id(old.get_id());
+            this.recordHomePageDao.replaceOne(homePage);
+        }
     }
 
     @Autowired

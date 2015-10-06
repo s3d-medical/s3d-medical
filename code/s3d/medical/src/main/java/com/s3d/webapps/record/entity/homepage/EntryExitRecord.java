@@ -4,11 +4,13 @@ import com.s3d.tech.utils.DateUtils;
 import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.entryexit.RegisterAdmission;
 import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.entryexit.RegisterDischarge;
 
+import java.io.Serializable;
+
 /**
  * @author  Administrator
  * @date 2015/5/17.
  */
-public class EntryExitRecord {
+public class EntryExitRecord  implements Serializable {
     // enter hospital.
     private String inType;
     private Integer inYear;

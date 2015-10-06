@@ -3,6 +3,7 @@ package com.s3d.webapps.record.entity.homepage;
 import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.expense.ExpenseInvoice;
 import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.expense.ExpenseItem;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @author  wind.chen
  * @date2015/5/17.
  */
-public class ExpenseRecord {
+public class ExpenseRecord  implements Serializable {
     // total fee
     private BigDecimal expenseTotal;
     private BigDecimal expensePersonal;

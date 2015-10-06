@@ -27,9 +27,21 @@ public class RecordHomePageDaoImpl extends BaseMongoDaoImpl implements RecordHom
     }
 
     @Override
-    public void saveOrUpdate(RecordHomePage homePage) {
+    public void insertOne(RecordHomePage homePage) {
+        if(homePage == null){
+            return ;
+        }
+        this.insertOneByObject(this.getCollectionName(), homePage);
+    }
+
+    @Override
+    public void replaceOne(RecordHomePage homePage) {
+        if(homePage == null){
+            return ;
+        }
         Bson query = eq("businessKey", homePage.getBusinessKey());
-        this.findOneAndUpdate(this.getCollectionName(), query, homePage);
+        Document newOne = Document.parse(JacksonParser.convertToJSONString(homePage));
+        this.getCollection(this.getCollectionName()).replaceOne(query, newOne);
     }
 
     @Override

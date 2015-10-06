@@ -5,6 +5,7 @@ import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.diagnosis
 import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.diagnosis.DiagnosisExternalReason;
 import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.diagnosis.DiagnosisPathology;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @author wind.chen
  * @date 2015/5/17.
  */
-public class DiagnosisRecord {
+public class DiagnosisRecord  implements Serializable {
     // clinic diagnosis
     private String outpatientDiagnosis;
 

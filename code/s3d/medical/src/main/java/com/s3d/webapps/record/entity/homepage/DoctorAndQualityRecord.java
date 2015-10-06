@@ -4,13 +4,14 @@ import com.s3d.tech.utils.DateUtils;
 import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.doctor.DoctorInCharge;
 import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.quality.QualityControlInfo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author wind.chen
  * @date 2015/5/17.
  */
-public class DoctorAndQualityRecord {
+public class DoctorAndQualityRecord  implements Serializable {
     private String director;
     private String deputyDirector;
     private String attendingDoctor;

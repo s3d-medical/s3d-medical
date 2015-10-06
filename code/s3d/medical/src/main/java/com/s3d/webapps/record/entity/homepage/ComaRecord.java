@@ -2,12 +2,14 @@ package com.s3d.webapps.record.entity.homepage;
 
 import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.coma.ComaInfo;
 
+import java.io.Serializable;
+
 /**
  * 脑损伤患者昏迷时间
  * @author wind.chen
  * @date 2015/5/17.
  */
-public class ComaRecord {
+public class ComaRecord  implements Serializable {
     private Integer comaDayBeforeHospital;
     private Integer comaHourBeforeHospital;
     private Integer comaMinuteBeforeHospital;

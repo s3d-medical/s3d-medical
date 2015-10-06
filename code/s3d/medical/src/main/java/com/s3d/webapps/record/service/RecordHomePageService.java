@@ -9,7 +9,7 @@ import com.s3d.webapps.record.entity.homepage.RecordHomePage;
 
 public interface RecordHomePageService {
 
-    public void saveOrUpdate(RecordHomePage homePageVO);
+    public void insertOrReplace(RecordHomePage homePageVO);
 
     public RecordHomePage getByBusinessKey(String businessKey);
 

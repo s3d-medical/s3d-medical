@@ -38,7 +38,4 @@ public interface BaseMongoDao {
     Document findOneInDocument(String collectionName, Bson query);
 
     <T> T findOneInObject(String collection, Class<T> givenClass, Bson query);
-
-    Document findOneAndUpdate(String collectionName,Bson query, Object givenDoc);
-
 }

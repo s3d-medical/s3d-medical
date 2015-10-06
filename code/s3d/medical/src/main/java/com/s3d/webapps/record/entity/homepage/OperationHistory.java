@@ -4,12 +4,14 @@ import com.s3d.tech.utils.DateUtils;
 import com.s3d.webapps.config.vo.OperationVO;
 import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.operation.Operation;
 
+import java.io.Serializable;
+
 /**
  * 手术列表
  * @author wind.chen
  * @date 2015/5/17.
  */
-public class OperationHistory {
+public class OperationHistory  implements Serializable {
     private String date;
     private String operator;
     private String firstAssistant;

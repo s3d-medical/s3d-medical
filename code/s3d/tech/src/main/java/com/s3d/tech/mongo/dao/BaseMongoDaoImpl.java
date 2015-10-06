@@ -189,20 +189,6 @@ public abstract class BaseMongoDaoImpl implements BaseMongoDao {
         return JacksonParser.convertFromJSONString(doc, givenClass);
     }
 
-    // find and update.
-    @Override
-    public Document findOneAndUpdate(String collectionName, Bson query, Object givenDoc) {
-        if (givenDoc == null) {
-            return null;
-        }
-        MongoCollection<Document> collection = this.getCollection(collectionName);
-        String json = JacksonParser.convertToJSONString(givenDoc);
-        Bson newDoc = Document.parse(json);
-
-        Document oldOneDoc = collection.findOneAndUpdate(query, newDoc);
-        return oldOneDoc;
-    }
-
     // --------------------count --------------
     public long count(String collectionName, Bson query) {
         MongoCollection<Document> collection = this.getCollection(collectionName);

@@ -3,11 +3,13 @@ package com.s3d.webapps.record.entity.homepage;
 import com.s3d.tech.utils.DateUtils;
 import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.patient.*;
 
+import java.io.Serializable;
+
 /**
  * @author  wind.chen
  * @date 2015/5/17.
  */
-public class PatientInfo {
+public class PatientInfo implements Serializable {
     private String name;
     private String sex;
     private Integer birthdayYear;

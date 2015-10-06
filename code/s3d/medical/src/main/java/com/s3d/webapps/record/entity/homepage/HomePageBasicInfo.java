@@ -1,11 +1,13 @@
 package com.s3d.webapps.record.entity.homepage;
 
+import java.io.Serializable;
+
 /**
  * 首页基本信息
  * @author wind.chen
  * @date 2015/5/18.
  */
-public class HomePageBasicInfo {
+public class HomePageBasicInfo  implements Serializable {
     private String payType;
     private String healthCard;
     private Integer hospitalizedTimes = 0;
