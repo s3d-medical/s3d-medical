@@ -43,61 +43,6 @@ public class RecordHomePage {
     public RecordHomePage() {
     }
 
-    public PatientInfo readPatientInfoVO() {
-        return patientInfo;
-    }
-
-    public void fillInPatientInfoVO(PatientInfo patientInfo) {
-        this.patientInfo = patientInfo;
-    }
-
-    public EntryExitRecord readEntryExitRecordVO() {
-        return entryExitRecord;
-    }
-
-    public void fillInEntryExitRecordVO(EntryExitRecord entryExitRecord) {
-        this.entryExitRecord = entryExitRecord;
-    }
-
-    public DiagnosisRecord readDiagnosisRecordVO() {
-        return diagnosisRecord;
-    }
-
-    public void fillInDiagnosisRecordVO(DiagnosisRecord diagnosisRecord) {
-        this.diagnosisRecord = diagnosisRecord;
-    }
-
-    public DoctorAndQualityRecord readDoctorRecordVO() {
-        return doctorAndQualityRecord;
-    }
-
-    public void fillInDoctorRecordVO(DoctorAndQualityRecord doctorAndQualityRecord) {
-        this.doctorAndQualityRecord = doctorAndQualityRecord;
-    }
-
-    public ComaRecord readComaRecordVO() {
-        return comaRecord;
-    }
-
-    public void fillInComaRecordVO(ComaRecord comaRecord) {
-        this.comaRecord = comaRecord;
-    }
-
-    public ExpenseRecord readExpenseRecordVO() {
-        return expenseRecord;
-    }
-
-    public void fillInExpenseRecordVO(ExpenseRecord expenseRecord) {
-        this.expenseRecord = expenseRecord;
-    }
-
-    public void fillHomePageBasicInfoVO(HomePageBasicInfo homePageBasicInfo){
-        this.homePageBasicInfo = homePageBasicInfo;
-    }
-    public HomePageBasicInfo readHomePageBasicInfoVO(){
-       return  this.homePageBasicInfo;
-    }
-
    //-----------------------------------------setter getter ------------------------
 
     public String getBusinessKey() {

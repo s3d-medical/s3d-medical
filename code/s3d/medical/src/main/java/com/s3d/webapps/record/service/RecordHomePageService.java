@@ -9,8 +9,14 @@ import com.s3d.webapps.record.entity.homepage.RecordHomePage;
 
 public interface RecordHomePageService {
 
-    public void saveOrUpdateHomePage(RecordHomePage homePageVO);
+    public void saveOrUpdate(RecordHomePage homePageVO);
 
-    public RecordHomePage getHomePageByBusinessKey(String businessKey);
+    public RecordHomePage getByBusinessKey(String businessKey);
 
+    /**
+     * Get one RecordHomePage , if there is no one, just create new empty and return.
+     * @param businessKey
+     * @return
+     */
+    public RecordHomePage getWithEmptyOne(String businessKey);
 }

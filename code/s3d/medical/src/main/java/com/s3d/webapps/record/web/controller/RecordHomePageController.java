@@ -37,7 +37,7 @@ public class RecordHomePageController {
     @RequestMapping(value = "/homepages/{seq}", method = RequestMethod.GET)
     public Model getMedicalRecordHomePageData(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable String seq) {
         try {
-            RecordHomePage homePageVO = this.recordHomePageService.getHomePageByBusinessKey(seq);
+            RecordHomePage homePageVO = this.recordHomePageService.getByBusinessKey(seq);
             model.addAttribute("data", homePageVO);
             return model;
         } catch (Exception ex) {
@@ -52,7 +52,7 @@ public class RecordHomePageController {
         // do something.
         try {
             if (medicalRecordHomePage != null) {
-                this.recordHomePageService.saveOrUpdateHomePage(medicalRecordHomePage);
+                this.recordHomePageService.saveOrUpdate(medicalRecordHomePage);
                 model.addAttribute("result", "ok");
                 return model;
             }
