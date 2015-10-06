@@ -13,12 +13,7 @@ public class DischargeDiagnosis implements Serializable{
     private String inSickState;
 
     public DischargeDiagnosis() {
-    }
 
-    public DischargeDiagnosis(String diagnosis, List<String> sickCodes, String inSickState) {
-        this.diagnosis = diagnosis;
-        this.sickCodes = sickCodes;
-        this.inSickState = inSickState;
     }
 
     public String getDiagnosis() {
@@ -44,4 +39,5 @@ public class DischargeDiagnosis implements Serializable{
     public void setInSickState(String inSickState) {
         this.inSickState = inSickState;
     }
+
 }

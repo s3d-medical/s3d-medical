@@ -19,15 +19,6 @@ public class ComaRecord {
 
     }
 
-    public void fill(ComaInfo comaInfo) {
-        this.comaDayBeforeHospital = comaInfo.getDaysBeforeAdmission();
-        this.comaHourBeforeHospital = comaInfo.getHoursBeforeAdmission();
-        this.comaMinuteBeforeHospital = comaInfo.getMinutesBeforeAdmission();
-        this.comaDayAfterHospital = comaInfo.getDaysInHospital();
-        this.comaHourAfterHospital = comaInfo.getHoursInHospital();
-        this.comaMinuteAfterHospital = comaInfo.getMinutesInHospital();
-    }
-
     public Integer getComaDayBeforeHospital() {
         return comaDayBeforeHospital;
     }
@@ -75,4 +66,5 @@ public class ComaRecord {
     public void setComaMinuteAfterHospital(Integer comaMinuteAfterHospital) {
         this.comaMinuteAfterHospital = comaMinuteAfterHospital;
     }
+
 }

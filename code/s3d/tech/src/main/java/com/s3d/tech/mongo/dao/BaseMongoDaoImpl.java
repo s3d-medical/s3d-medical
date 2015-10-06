@@ -186,9 +186,6 @@ public abstract class BaseMongoDaoImpl implements BaseMongoDao {
     @Override
     public <T> T findOneInObject(String collectionName, Class<T> givenClass, Bson query) {
         String doc = this.findOneInJson(collectionName, query);
-        if (StringUtils.isEmpty(doc)) {
-            return null;
-        }
         return JacksonParser.convertFromJSONString(doc, givenClass);
     }
 

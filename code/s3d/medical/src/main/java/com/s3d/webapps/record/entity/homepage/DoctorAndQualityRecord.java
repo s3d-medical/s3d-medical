@@ -159,4 +159,5 @@ public class DoctorAndQualityRecord {
     public void setQualityDay(Integer qualityDay) {
         this.qualityDay = qualityDay;
     }
+
 }

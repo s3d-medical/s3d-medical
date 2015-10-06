@@ -37,7 +37,7 @@ public class RecordHomePageController {
     @RequestMapping(value = "/homepages/{seq}", method = RequestMethod.GET)
     public Model getMedicalRecordHomePageData(HttpServletRequest request, HttpServletResponse response, Model model, @PathVariable String seq) {
         try {
-            RecordHomePage homePageVO = this.recordHomePageService.getByBusinessKey(seq);
+            RecordHomePage homePageVO = this.recordHomePageService.getWithEmptyOne(seq);
             model.addAttribute("data", homePageVO);
             return model;
         } catch (Exception ex) {
@@ -48,16 +48,19 @@ public class RecordHomePageController {
     }
 
     @RequestMapping(value = "/homepages", method = RequestMethod.POST)
-    public Model saveMedicalRecordHomePageData(HttpServletRequest request, HttpServletResponse response, Model model, @RequestBody RecordHomePage medicalRecordHomePage) {
+    public Model saveMedicalRecordHomePageData(HttpServletRequest request, HttpServletResponse response, Model model, @RequestBody RecordHomePage recordHomePage) {
         // do something.
         try {
-            if (medicalRecordHomePage != null) {
-                this.recordHomePageService.saveOrUpdate(medicalRecordHomePage);
+            if (recordHomePage != null) {
+                recordHomePage = new RecordHomePage();
+                recordHomePage.setBusinessKey("8160");
+
+                this.recordHomePageService.saveOrUpdate(recordHomePage);
                 model.addAttribute("result", "ok");
                 return model;
             }
         } catch (Exception ex) {
-            logger.error("Failed to save MedicalRecordHomePage", ex);
+            logger.error("Failed to save RecordHomePage", ex);
         }
         model.addAttribute("result", "fail");
         return model;

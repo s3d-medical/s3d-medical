@@ -34,6 +34,7 @@ public class RecordHomePageServiceImpl implements RecordHomePageService {
         }
         return homePage;
     }
+
     private RecordHomePage buildEmptyOne() {
         RecordHomePage recordHomePage = new RecordHomePage();
         List<OperationHistory> operationHistories = new ArrayList<OperationHistory>();

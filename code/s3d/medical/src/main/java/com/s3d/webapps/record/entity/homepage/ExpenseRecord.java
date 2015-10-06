@@ -57,40 +57,6 @@ public class ExpenseRecord {
 
     }
 
-    public void fill(ExpenseInvoice invoice){
-        this.expenseTotal = invoice.getTotalAmount();
-        this.expensePersonal = invoice.getSelfPayingAmount();
-        List<ExpenseItem> items = invoice.getExpenseItems();
-        this.expenseNormalMedicalService = items.get(0).getAmount();
-        this.expenseNormalCureOperating = items.get(1).getAmount();
-        this.expenseNormalNurse = items.get(2).getAmount();
-        this.expenseNormalOther = items.get(3).getAmount();
-        this.expenseDiagnosisPathology = items.get(4).getAmount();
-        this.expenseDiagnosisLab = items.get(5).getAmount();
-        this.expenseDiagnosisImaging = items.get(6).getAmount();
-        this.expenseDiagnosisClinical = items.get(7).getAmount();
-        this.expenseCureNonOperation = items.get(8).getAmount();
-        this.expenseCureClinicalPhysics = items.get(9).getAmount();
-        this.expenseCureOperationCure = items.get(10).getAmount();
-        this.expenseCureAnaesthesia = items.get(11).getAmount();
-        this.expenseCureOperation = items.get(12).getAmount();
-        this.expenseRecovery = items.get(13).getAmount();
-        this.expenseChineseMedicineCure = items.get(14).getAmount();
-        this.expenseWesternMedicineMedication = items.get(15).getAmount();
-        this.expenseWesternMedicineAntibiosisMedication = items.get(16).getAmount();
-        this.expenseChineseMedicinePatentDrag = items.get(17).getAmount();
-        this.expenseChineseMedicineHerb = items.get(18).getAmount();
-        this.expenseBlood = items.get(19).getAmount();
-        this.expenseBloodAlbumin = items.get(20).getAmount();
-        this.expenseBloodGlobulin = items.get(21).getAmount();
-        this.expenseBloodCoagulationFactor = items.get(22).getAmount();
-        this.expenseBloodCellFactor = items.get(23).getAmount();
-        this.expenseConsumptionExamine = items.get(24).getAmount();
-        this.expenseConsumptionCure = items.get(25).getAmount();
-        this.expenseConsumptionOperation = items.get(26).getAmount();
-        this.expenseOther = items.get(27).getAmount();
-    }
-
     public BigDecimal getExpenseTotal() {
         return expenseTotal;
     }
@@ -330,4 +296,5 @@ public class ExpenseRecord {
     public void setExpenseOther(BigDecimal expenseOther) {
         this.expenseOther = expenseOther;
     }
+
 }

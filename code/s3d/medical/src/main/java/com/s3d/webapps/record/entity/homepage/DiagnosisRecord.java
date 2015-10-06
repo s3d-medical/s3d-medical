@@ -16,6 +16,7 @@ import java.util.List;
 public class DiagnosisRecord {
     // clinic diagnosis
     private String outpatientDiagnosis;
+
     private List<String> outpatientSickCodes;
 
     // discharge diagnosis. list.
@@ -96,4 +97,5 @@ public class DiagnosisRecord {
     public void setPathologySickCodes(List<String> pathologySickCodes) {
         this.pathologySickCodes = pathologySickCodes;
     }
+
 }

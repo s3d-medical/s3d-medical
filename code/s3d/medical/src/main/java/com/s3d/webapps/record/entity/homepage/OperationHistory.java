@@ -10,7 +10,6 @@ import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.operation
  * @date 2015/5/17.
  */
 public class OperationHistory {
-    private OperationVO operation;
     private String date;
     private String operator;
     private String firstAssistant;
@@ -21,27 +20,6 @@ public class OperationHistory {
 
     public OperationHistory() {
 
-    }
-
-    public OperationHistory(OperationVO operation, String date, String operator, String firstAssistant, String secondAssistant, String anaesthesiaType, String anaesthetist) {
-        this.operation = operation;
-        this.date = date;
-        this.operator = operator;
-        this.firstAssistant = firstAssistant;
-        this.secondAssistant = secondAssistant;
-        this.anaesthesiaType = anaesthesiaType;
-        this.anaesthetist = anaesthetist;
-    }
-
-    public OperationHistory(Operation operation) {
-        this.operation = new OperationVO(operation.getCode(), operation.getName(), Integer.parseInt(operation.getLevel()));
-        this.date = DateUtils.convertToStrDate(operation.getOperatedDate());
-        this.operator = operation.getMajorOperator();
-        this.firstAssistant = operation.getAssistant1();
-        this.secondAssistant = operation.getAssistant2();
-        this.cutHealGrade = operation.getHealedInGrade();
-        this.anaesthesiaType = operation.getAnesthesiaType();
-        this.anaesthetist = operation.getAnesthesiaDoctor();
     }
 
     public String getDate() {
@@ -100,11 +78,5 @@ public class OperationHistory {
         this.anaesthetist = anaesthetist;
     }
 
-    public OperationVO getOperation() {
-        return operation;
-    }
 
-    public void setOperation(OperationVO operation) {
-        this.operation = operation;
-    }
 }

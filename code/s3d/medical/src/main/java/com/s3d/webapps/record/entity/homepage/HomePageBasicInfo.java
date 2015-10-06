@@ -6,7 +6,6 @@ package com.s3d.webapps.record.entity.homepage;
  * @date 2015/5/18.
  */
 public class HomePageBasicInfo {
-    private String businessKey;
     private String payType;
     private String healthCard;
     private Integer hospitalizedTimes = 0;
@@ -24,28 +23,6 @@ public class HomePageBasicInfo {
     private String rh;
 
     public HomePageBasicInfo() {
-    }
-
-    public void fill(com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.homepagebasic.HomePageBasicInfo basicInfo) {
-        this.businessKey = basicInfo.getBusinessKey();
-        this.payType = basicInfo.getPaymentType();
-        this.healthCard = basicInfo.getHealthCardNo();
-        this.hospitalizedTimes = basicInfo.getHospitalizedTimes();
-        this.trackNo = basicInfo.getSeqNo();
-        this.changeDepartment = basicInfo.getDepartChanges();
-        this.medicalAllergy = basicInfo.getIfDrugAllergy();
-        this.allergicMedication = basicInfo.getAllergyDrug();
-        this.autopsy = basicInfo.getIfAutopsy();
-        this.bloodType = basicInfo.getBloodType();
-        this.rh = basicInfo.getIfRH();
-    }
-
-    public String getBusinessKey() {
-        return businessKey;
-    }
-
-    public void setBusinessKey(String businessKey) {
-        this.businessKey = businessKey;
     }
 
     public String getPayType() {
@@ -127,4 +104,6 @@ public class HomePageBasicInfo {
     public void setRh(String rh) {
         this.rh = rh;
     }
+
+
 }

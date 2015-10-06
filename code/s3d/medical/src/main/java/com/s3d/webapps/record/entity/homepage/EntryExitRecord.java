@@ -34,41 +34,7 @@ public class EntryExitRecord {
     private String returnPurpose;
 
     public EntryExitRecord() {
-    }
 
-    public void fill(RegisterAdmission registerAdmission, RegisterDischarge registerDischarge) {
-        this.fillRegisterAdmission(registerAdmission);
-        this.fillRegisterDischarge(registerDischarge);
-    }
-
-    private void fillRegisterAdmission(RegisterAdmission registerAdmission) {
-        if (registerAdmission == null) {
-            return;
-        }
-        this.inType = registerAdmission.getApproach();
-        this.inYear = DateUtils.getYear(registerAdmission.getRegisteredTime());
-        this.inMonth = DateUtils.getMonth(registerAdmission.getRegisteredTime());
-        this.inDay = DateUtils.getDayInMonth(registerAdmission.getRegisteredTime());
-        this.inHour = DateUtils.getHourMinute(registerAdmission.getRegisteredTime());
-        this.inDepartment = registerAdmission.getDepart();
-        this.inSickroom = registerAdmission.getSickRoomNo();
-    }
-
-    private void fillRegisterDischarge(RegisterDischarge registerDischarge) {
-        if (registerDischarge == null) {
-            return;
-        }
-        this.outYear = DateUtils.getYear(registerDischarge.getRegisteredTime());
-        this.outMonth = DateUtils.getMonth(registerDischarge.getRegisteredTime());
-        this.outDay = DateUtils.getDayInMonth(registerDischarge.getRegisteredTime());
-        this.outHour = DateUtils.getHourMinute(registerDischarge.getRegisteredTime());
-        this.outDepartment = registerDischarge.getDepart();
-        this.outSickroom = registerDischarge.getSickRoomNo();
-        this.daysInHospital = registerDischarge.getTotalDays();
-        this.outType = registerDischarge.getDischargeType();
-        this.acceptOrganization = registerDischarge.getAcceptingAgencyName();
-        this.willReturn = registerDischarge.getHasReadmissionPlan();
-        this.returnPurpose = registerDischarge.getReadmissionGoal();
     }
 
     public String getInType() {
@@ -214,4 +180,5 @@ public class EntryExitRecord {
     public void setOutHour(String outHour) {
         this.outHour = outHour;
     }
+
 }
