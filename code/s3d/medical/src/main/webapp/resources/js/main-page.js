@@ -11,14 +11,22 @@
         // test data
         $scope.settings = null;
         var defaultPageData = {
-            "payType": 1,
-            "sex": 1,
-            "medicalAllergy": 1,
-            "autopsy": 1,
-            "bloodType": 1,
-            "rh": 1,
-            "caseQuality": 1,
-            "willReturn": 1
+            "homePageBasicInfo": {
+                "payType": 1,
+                "medicalAllergy": 1,
+                "autopsy": 1,
+                "bloodType": 1,
+                "rh": 1
+            },
+            "patientInfo": {
+                "sex": 1
+            },
+            "doctorAndQualityRecord": {
+                "caseQuality": 1
+            },
+            "entryExitRecord": {
+                "willReturn": 1
+            }
         };
 
         $scope.getData = function (fdFileNo) {
