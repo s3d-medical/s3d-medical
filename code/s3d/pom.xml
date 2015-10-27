@@ -14,7 +14,8 @@
         <module>medical</module>
         <module>db-script</module>
         <module>tech</module>
-        <module>auth</module>
+        <module>auth-core</module>
+        <module>authweb</module>
     </modules>
 
     <dependencies>

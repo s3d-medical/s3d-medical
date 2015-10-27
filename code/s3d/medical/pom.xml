@@ -18,12 +18,12 @@
         <dependency>
             <groupId>com.s3d</groupId>
             <artifactId>tech</artifactId>
-            <version>1.0</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.s3d</groupId>
             <artifactId>db-script</artifactId>
-            <version>1.0</version>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>

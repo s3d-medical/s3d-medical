@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:comp/env/jdbc/medicaldb"/>
+    </bean>
+
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="hibernateProperties">
+            <props>
+                <!--<prop key="hibernate.hbm2ddl.auto">validate</prop>-->
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="use_sql_comments">false</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>
+            </props>
+        </property>
+        <!-- mappingDirectoryLocations and packagesToScan can be used together.-->
+<!--        <property name="mappingDirectoryLocations">
+            <list>
+                <value>classpath:/hbm</value>
+            </list>
+        </property>-->
+        <property name="packagesToScan">
+            <list>
+                <value>com.s3d.auth.entity</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- 定义事务拦截器bean -->
+    <bean id="transactionInterceptor"
+          class="org.springframework.transaction.interceptor.TransactionInterceptor">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="add*">PROPAGATION_REQUIRED</prop>
+                <prop key="create*">PROPAGATION_REQUIRED</prop>
+                <prop key="insert*">PROPAGATION_REQUIRED</prop>
+                <prop key="copy*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="scan*">PROPAGATION_REQUIRED</prop>
+                <prop key="init*">PROPAGATION_REQUIRED</prop>
+                <prop key="clone*">PROPAGATION_REQUIRED</prop>
+                <prop key="genarate*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 定义BeanNameAutoProxyCreator-->
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames">
+            <!-- 所有名字以DAO,Service结尾的bean,将由该"bean后处理器"为其创建事务代理;实际上应该在业务层进行事务管理,这里只是举一个简单例子 -->
+            <value>*Service</value>
+        </property>
+        <!--  下面定义BeanNameAutoProxyCreator所需的事务拦截器-->
+        <property name="interceptorNames">
+            <list>
+                <!-- 可以增加其他的拦截器 -->
+                <value>transactionInterceptor</value>
+            </list>
+        </property>
+    </bean>
+</beans> 
