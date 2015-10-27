@@ -24,5 +24,10 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.s3d</groupId>
+            <artifactId>tech</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
