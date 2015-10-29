@@ -4,11 +4,11 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 
 <tiles-definitions>
-    <definition name="loginPage"   template="/WEB-INF/page/authenticate/login.jsp">
+    <definition name="loginPage"   template="/WEB-INF/page/auth/authenticate/login.jsp">
     </definition>
-    <definition name="homePage"   template="/WEB-INF/page/homePage.jsp">
+    <definition name="homePage"   template="/WEB-INF/page/auth/homePage.jsp">
     </definition>
-    <definition name="userListPage"   template="/WEB-INF/page/usermaintain/userList.jsp">
+    <definition name="userListPage"   template="/WEB-INF/page/auth/user/userList.jsp">
 	</definition>
 
 </tiles-definitions>
