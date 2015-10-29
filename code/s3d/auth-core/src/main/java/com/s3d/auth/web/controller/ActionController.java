@@ -16,18 +16,23 @@ import java.util.List;
 @Controller
 public class ActionController {
 
-    @RequestMapping(value = "/add" , method = RequestMethod.POST)
+
+    @RequestMapping(value = "/action" , method = RequestMethod.POST)
     public void add(HttpServletRequest request, final Model model){
 
     }
 
-    @RequestMapping(value = "/operations/{operationId}" , method = RequestMethod.POST)
-    public void delete(HttpServletRequest request, final Model model,
-                       @PathVariable("operationId") Integer operationId){
+    @RequestMapping(value = "/action/{actionId}" , method = RequestMethod.GET)
+    public void get(HttpServletRequest request, final Model model){
 
     }
 
-    public void update(){
+    @RequestMapping(value = "/action/{actionId}" , method = RequestMethod.POST)
+    public void update(HttpServletRequest request, final Model model, @PathVariable("actionId") Integer operationId){
+
+    }
+    @RequestMapping(value = "/actions" , method = RequestMethod.GET)
+    public void getList(HttpServletRequest request, final Model model){
 
     }
 
