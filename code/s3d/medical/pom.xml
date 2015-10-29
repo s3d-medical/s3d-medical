@@ -14,7 +14,6 @@
     <packaging>war</packaging>
 
     <dependencies>
-
         <dependency>
             <groupId>com.s3d</groupId>
             <artifactId>tech</artifactId>
@@ -25,6 +24,10 @@
             <artifactId>db-script</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.s3d</groupId>
+            <artifactId>record-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

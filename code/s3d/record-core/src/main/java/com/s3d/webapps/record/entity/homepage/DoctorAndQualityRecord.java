@@ -1,11 +1,6 @@
 package com.s3d.webapps.record.entity.homepage;
 
-import com.s3d.tech.utils.DateUtils;
-import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.doctor.DoctorInCharge;
-import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.quality.QualityControlInfo;
-
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author wind.chen
@@ -29,24 +24,6 @@ public class DoctorAndQualityRecord  implements Serializable {
     private Integer qualityDay;
 
     public DoctorAndQualityRecord() {
-    }
-
-    public void fill(List<DoctorInCharge> doctorInChargeList, QualityControlInfo qualityControlInfo) {
-        this.director = doctorInChargeList.get(0).getDoctor();
-        this.deputyDirector = doctorInChargeList.get(1).getDoctor();
-        this.attendingDoctor = doctorInChargeList.get(2).getDoctor();
-        this.residentDoctor = doctorInChargeList.get(3).getDoctor();
-        this.primaryNurse = doctorInChargeList.get(4).getDoctor();
-        this.refresherDoctor = doctorInChargeList.get(5).getDoctor();
-        this.intern = doctorInChargeList.get(6).getDoctor();
-        this.coder = doctorInChargeList.get(7).getDoctor();
-
-        this.caseQuality = qualityControlInfo.getCaseQuality();
-        this.qualityDoctor = qualityControlInfo.getQualityDoctor();
-        this.qualityNurse = qualityControlInfo.getQualityNurse();
-        this.qualityYear = DateUtils.getYear(qualityControlInfo.getQualityDate());
-        this.qualityMonth = DateUtils.getMonth(qualityControlInfo.getQualityDate());
-        this.qualityDay = DateUtils.getDayInMonth(qualityControlInfo.getQualityDate());
     }
 
     public String getDirector() {

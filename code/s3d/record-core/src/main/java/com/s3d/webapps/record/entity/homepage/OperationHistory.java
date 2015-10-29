@@ -1,9 +1,5 @@
 package com.s3d.webapps.record.entity.homepage;
 
-import com.s3d.tech.utils.DateUtils;
-import com.s3d.webapps.config.vo.OperationVO;
-import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.operation.Operation;
-
 import java.io.Serializable;
 
 /**

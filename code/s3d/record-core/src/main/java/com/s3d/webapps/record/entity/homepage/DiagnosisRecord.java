@@ -1,20 +1,14 @@
 package com.s3d.webapps.record.entity.homepage;
 
-import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.diagnosis.DiagnosisClinic;
-import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.diagnosis.DiagnosisDischarge;
-import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.diagnosis.DiagnosisExternalReason;
-import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.diagnosis.DiagnosisPathology;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author wind.chen
  * @date 2015/5/17.
  */
-public class DiagnosisRecord  implements Serializable {
+public class DiagnosisRecord implements Serializable {
     // clinic diagnosis
     private String outpatientDiagnosis;
 

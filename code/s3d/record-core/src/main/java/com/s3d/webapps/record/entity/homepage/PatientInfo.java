@@ -1,8 +1,5 @@
 package com.s3d.webapps.record.entity.homepage;
 
-import com.s3d.tech.utils.DateUtils;
-import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.patient.*;
-
 import java.io.Serializable;
 
 /**

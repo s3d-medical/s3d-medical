@@ -13,4 +13,8 @@
     <artifactId>db-script</artifactId>
     <packaging>jar</packaging>
     <name>db scripts</name>
+
+    <build>
+        <finalName>db-script</finalName>
+    </build>
 </project>

@@ -1,8 +1,5 @@
 package com.s3d.webapps.record.entity.homepage;
 
-import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.expense.ExpenseInvoice;
-import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.expense.ExpenseItem;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
