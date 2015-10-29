@@ -15,8 +15,9 @@
         <module>db-script</module>
         <module>tech</module>
         <module>auth-core</module>
-        <module>authweb</module>
-        <module>hostpital</module>
+        <module>auth</module>
+        <module>hospital</module>
+        <module>record-core</module>
     </modules>
 
     <dependencies>

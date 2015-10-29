@@ -1,0 +1,64 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<subclass
+		discriminator-value="8"
+		name="com.s3d.webapps.da.customer.persistence.DaCustomerLabel"
+		extends="com.s3d.webapps.da.customer.persistence.DaCustomerHospital">
+		<join
+			table="da_customer_label">
+			<key
+				column="fd_id"></key>
+			
+			<property
+				name="fdName"
+				column="fd_name"
+				update="true"
+				insert="true"
+				length="200"
+				not-null="true" />
+				
+			<property
+				name="fdCreateTime"
+				column="fd_create_time"
+				update="true"
+				insert="true"
+				not-null="false" />
+	
+			<property
+				name="fdFileCount"
+				column="fd_file_count"
+				update="true"
+				insert="true"
+				length="10"
+				not-null="false" />
+	
+			<property
+				name="fdFrom"
+				column="fd_from"
+				update="true"
+				insert="true"
+				length="10"
+				not-null="false" />
+	
+			<property
+				name="fdTo"
+				column="fd_to"
+				update="true"
+				insert="true"
+				length="10"
+				not-null="false" />
+	
+			<property
+				name="fdStatus"
+				column="fd_status"
+				update="true"
+				insert="true"
+				length="4"
+				not-null="true" />
+		</join>
+	</subclass>
+</hibernate-mapping>

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<subclass
+		discriminator-value="2"
+		name="com.s3d.webapps.sys.security.persistence.User"
+		extends="com.s3d.webapps.sys.security.persistence.BaseSecurityElement">
+		<join
+			table="hr_auth_users">
+			<key
+				column="user_id"></key>
+			<property
+				name="fdLoginName"
+				column="username"
+				update="true"
+				insert="true"
+				length="200"
+				not-null="false" />
+	
+			<property
+				name="fdPassword"
+				column="user_password"
+				update="true"
+				insert="true"
+				length="254"
+				not-null="false" />
+	
+			<property
+				name="fdEmail"
+				column="user_email"
+				update="true"
+				insert="true"
+				length="255"
+				not-null="false" />
+			
+			<property
+				name="fdGender"
+				column="gender"
+				update="true"
+				insert="true"
+				length="2"
+				not-null="false" />	
+							
+			<property
+				name="fdPhone"
+				column="user_phone"
+				update="true"
+				insert="true"
+				length="32"
+				not-null="false" />
+				
+			<property
+				name="fdIsActived"
+				column="user_active"
+				update="true"
+				insert="true"
+				length="1"
+				not-null="false" />
+		</join>
+	</subclass>
+</hibernate-mapping>
