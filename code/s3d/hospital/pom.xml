@@ -17,8 +17,23 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.s3d</groupId>
+            <artifactId>tech</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.s3d</groupId>
+            <artifactId>auth-core</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.s3d</groupId>
+            <artifactId>record-core</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <build>
-        <finalName>hospitalweb</finalName>
+        <finalName>hospital</finalName>
     </build>
 </project>
