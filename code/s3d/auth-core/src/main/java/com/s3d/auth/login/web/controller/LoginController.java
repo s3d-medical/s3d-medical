@@ -1,0 +1,58 @@
+package com.s3d.auth.login.web.controller;
+
+
+import com.s3d.auth.login.service.AuthenticationService;
+import com.s3d.auth.login.vo.LoginParam;
+import com.s3d.auth.login.vo.LoginUserVO;
+import com.s3d.tech.spring.SpringControllerHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * @author wind.chen
+ * @since 2015/7/19.
+ */
+@Controller
+public class LoginController {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
+        return "loginPage";
+    }
+
+    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    public String login(HttpServletRequest request, HttpServletResponse response,
+                        Model model, LoginParam loginParam) {
+        // check logic
+        if (loginParam == null || loginParam.getPassword() == null || loginParam.getUserName() == null) {
+            return SpringControllerHelper.redirect("login?failed=Invalid user name and password.", null);
+        }
+
+        boolean ifSuccess = authenticationService.authenticateUser(loginParam.getUserName(),
+                loginParam.getPassword());
+        if (!ifSuccess) {
+            return SpringControllerHelper.redirect("login?auth=Invalid user name and password", null);
+        }
+        LoginUserVO loginUserVO = this.authenticationService.findUser(loginParam.getUserName());
+        request.getSession().setAttribute("endUserId", loginUserVO.getUserBasicInfoVO().getUserId());
+       // Cookie c = new Cookie(cookiename,isEmpty(pageCount)?deFault:pageCount.trim());
+        //response.addCookie();
+       return "homePage";
+    }
+
+    public String logout(){
+        return "";
+    }
+
+    @Autowired
+    public void setAuthenticationService(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
+
+    private AuthenticationService authenticationService;
+}

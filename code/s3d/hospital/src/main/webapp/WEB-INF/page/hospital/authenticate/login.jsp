@@ -11,6 +11,7 @@
     <title></title>
 </head>
 <body>
+hospital login page.
 
 <form action="<%=request.getContextPath()%>/authenticate" method="post">
    User Name:  <input id="userName" name="userName" type="text" value=""/>

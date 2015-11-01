@@ -25,9 +25,9 @@
 		<property name="locations" value="classpath*:/config.properties" />
 	</bean>
    -->
-    <import resource="classpath*:auth-app-context-db-transaction.xml"/>
-    <import resource="classpath*:auth-app-context-defined-beans.xml"/>
-    <import resource="classpath*:auth-app-context-security.xml"/>
+    <import resource="classpath*:context/auth-app-context-db-transaction.xml"/>
+    <import resource="classpath*:context/auth-app-context-defined-beans.xml"/>
+    <import resource="classpath*:context/auth-app-context-security.xml"/>
     <import resource="classpath*:app-context-mongodb-datasource.xml"/>
 
     <!-- global context holder ApplicationContextAware -->

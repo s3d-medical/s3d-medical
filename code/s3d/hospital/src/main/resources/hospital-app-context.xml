@@ -25,9 +25,9 @@
 		<property name="locations" value="classpath*:/config.properties" />
 	</bean>
    -->
-    <import resource="classpath*:hospital-app-context-db-transaction.xml"/>
-    <import resource="classpath*:hospital-app-context-defined-beans.xml"/>
-    <import resource="classpath*:hospital-app-context-security.xml"/>
+    <import resource="classpath*:context/hospital-app-context-db-transaction.xml"/>
+    <import resource="classpath*:context/hospital-app-context-defined-beans.xml"/>
+    <import resource="classpath*:context/hospital-app-context-security.xml"/>
     <import resource="classpath*:app-context-mongodb-datasource.xml"/>
 
     <!-- global context holder ApplicationContextAware -->

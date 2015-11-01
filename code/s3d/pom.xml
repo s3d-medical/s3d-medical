@@ -18,6 +18,7 @@
         <module>auth</module>
         <module>hospital</module>
         <module>record-core</module>
+        <module>acl-core</module>
     </modules>
 
     <dependencies>

@@ -11,7 +11,10 @@
 
     <!-- 1. scan controllers in packages  -->
     <context:annotation-config/>
-    <context:component-scan base-package="com.s3d.auth.web.controller"  use-default-filters="false">
+    <context:component-scan base-package="com.s3d.auth.login.web.controller"  use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <context:component-scan base-package="com.s3d.auth.acl.web.controller"  use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
