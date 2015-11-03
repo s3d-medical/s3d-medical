@@ -1,7 +1,5 @@
 package com.s3d.auth.acl.entity;
 
-import com.sun.javafx.beans.IDProperty;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
