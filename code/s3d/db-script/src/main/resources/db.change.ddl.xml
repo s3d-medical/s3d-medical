@@ -41,4 +41,8 @@
         <sqlFile path="scripts/2015-07-21_1_create_da_config_operation_table.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
     </changeSet>
+    <changeSet id="10" author="wind" context="production">
+        <sqlFile path="scripts/2015-11-03_0_initialize_auth_tables.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
 </databaseChangeLog>

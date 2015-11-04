@@ -25,14 +25,14 @@ public class Role implements Serializable {
     @Column(name = "desc")
     private String desc;
 
-    @Column(name="state")
+    @Column(name = "state")
     private Boolean state;
 
     // action set.
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="auth_role_action",
-            joinColumns = @JoinColumn(name="auth_role_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name="auth_action_id", referencedColumnName = "id")
+    @JoinTable(name = "auth_role_action",
+            joinColumns = @JoinColumn(name = "auth_role_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "auth_action_id", referencedColumnName = "id")
     )
     private Set<Action> actions = new HashSet<Action>();
 

@@ -11,32 +11,32 @@ import java.util.Set;
  * @date 2015/11/1 14:23
  */
 @Entity
-@Table(name="auth_user")
+@Table(name = "auth_user")
 public class User {
     @Id
     @GeneratedValue
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name="login_name")
+    @Column(name = "login_name")
     private String loginName;
 
-    @Column(name="password")
+    @Column(name = "password")
     private String pwd;
 
-    @Column(name="registered_time")
+    @Column(name = "registered_time")
     private Date registerTime;
 
-    @Column(name="last_login_time")
+    @Column(name = "last_login_time")
     private Date lastLoginTime;
 
-    @Column(name="state")
+    @Column(name = "state")
     private Boolean state;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="auth_user_role",
-        joinColumns = @JoinColumn(name="auth_user_id",referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name="auth_role_id", referencedColumnName = "id")
+    @JoinTable(name = "auth_user_role",
+            joinColumns = @JoinColumn(name = "auth_user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "auth_role_id", referencedColumnName = "id")
     )
     private Set<Role> roles = new HashSet<Role>();
 
@@ -95,4 +95,5 @@ public class User {
     public void setState(Boolean state) {
         this.state = state;
     }
+
 }

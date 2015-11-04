@@ -18,10 +18,15 @@
         <module>auth</module>
         <module>hospital</module>
         <module>record-core</module>
-        <module>acl-core</module>
     </modules>
 
     <dependencies>
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.12.1.GA</version>
+        </dependency>
+
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>

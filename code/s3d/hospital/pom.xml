@@ -6,7 +6,7 @@
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>hospitalweb</artifactId>
+    <artifactId>hospital</artifactId>
     <packaging>war</packaging>
     <name>hospitalweb Maven Webapp</name>
     <url>http://maven.apache.org</url>
@@ -20,17 +20,17 @@
         <dependency>
             <groupId>com.s3d</groupId>
             <artifactId>tech</artifactId>
-            <version>1.0</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.s3d</groupId>
             <artifactId>auth-core</artifactId>
-            <version>1.0</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.s3d</groupId>
             <artifactId>record-core</artifactId>
-            <version>1.0</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <build>
