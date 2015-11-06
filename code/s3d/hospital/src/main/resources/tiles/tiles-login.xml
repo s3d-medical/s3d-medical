@@ -5,9 +5,9 @@
 
 <tiles-definitions>
     <!-- define login page -->
-    <definition name="loginPage"   template="/WEB-INF/page/hospital/authenticate/login.jsp">
+    <definition name="loginPage"   template="/WEB-INF/jsp/login.jsp">
     </definition>
-    <definition name="homePage"   template="/WEB-INF/page/hospital/homePage.jsp">
+    <definition name="homePage"   template="/WEB-INF/jsp/homePage.jsp">
     </definition>
 
 </tiles-definitions>

@@ -17,7 +17,7 @@ hospital login page.
    User Name:  <input id="userName" name="userName" type="text" value=""/>
    Password:   <input id="password" name="password" type="password" value=""/>
 
-   <button type="submit" name="loginIn" title="Sign In"></button>
+   <button type="submit" name="loginIn" title="Sign In">Sign In</button>
 </form>
 </body>
 </html>
