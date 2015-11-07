@@ -44,6 +44,8 @@
 <script src="scripts/controllers/system/departments.controller.js"></script>
 <script src="scripts/controllers/system/department.controller.js"></script>
 <script src="scripts/controllers/system/employee.controller.js"></script>
+<script src="scripts/controllers/system/roles.controller.js"></script>
+<script src="scripts/controllers/system/role.controller.js"></script>
 
 <%@ include file="views/home.jsp"%>
 <%@ include file="views/main.jsp"%>
@@ -51,6 +53,8 @@
 <%@ include file="views/system/departments.jsp"%>
 <%@ include file="views/system/department.jsp"%>
 <%@ include file="views/system/employee.jsp"%>
+<%@ include file="views/system/roles.jsp"%>
+<%@ include file="views/system/role.jsp"%>
 
 </body>
 </html>

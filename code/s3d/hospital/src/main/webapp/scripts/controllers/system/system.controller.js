@@ -71,7 +71,7 @@
                         },
                         {
                             text: '角色分配',
-                            href: '#system',
+                            href: '#system/roles',
                             nodes: [
                                 {
                                     text: '员工授权查询',
@@ -102,7 +102,7 @@
 
         function _formatData(data) {
             for (var i in data) {
-                data[i].href = '#system/departments/' + data[i].id + '/list';
+                data[i].href = '#system/departments/' + data[i].id + '/departments';
                 if (data[i].nodes && data[i].nodes.length) {
                     _formatData(data[i].nodes);
                 }

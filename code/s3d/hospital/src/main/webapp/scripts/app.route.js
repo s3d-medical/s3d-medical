@@ -25,7 +25,7 @@
                 controller: 'SystemCtrl as sm'
             })
             .state('main.system.departments', {
-                url: '/departments/:departmentId/list',
+                url: '/departments/:departmentId/:type',
                 templateUrl: 'viewDepartments',
                 controller: 'DepartmentsCtrl as ds'
             })
@@ -39,41 +39,16 @@
                 templateUrl: 'viewEmployee',
                 controller: 'EmployeeCtrl as ec'
             })
-            /*.state('main.userManage', {
-                url: '/user-manage',
-                templateUrl: 'views/system/user-manage.html',
-                controller: 'UserManageCtrl as um'
+            .state('main.system.roles', {
+                url: '/roles',
+                templateUrl: 'viewRoles',
+                controller: 'RolesCtrl as rs'
             })
-            .state('main.addUser', {
-                url: '/add-user',
-                templateUrl: 'views/system/add-user.html',
-                controller: 'AddUserCtrl as au'
+            .state('main.system.role', {
+                url: '/roles/:roleId',
+                templateUrl: 'viewRole',
+                controller: 'RoleCtrl as rc'
             })
-            .state('main.departmentManage', {
-                url: '/department-manage',
-                templateUrl: 'views/system/departments.jsp',
-                controller: 'DepartmentManageCtrl as dm'
-            })
-            .state('main.roleManage', {
-                url: '/role-manage',
-                templateUrl: 'views/system/role-manage.html',
-                controller: 'RoleManageCtrl as rm'
-            })
-            .state('main.addRole', {
-                url: '/add-role',
-                templateUrl: 'views/system/add-role.html',
-                controller: 'AddRoleCtrl as ar'
-            })
-            .state('main.permissionManage', {
-                url: '/permission-manage',
-                templateUrl: 'views/system/permission-manage.html',
-                controller: 'PermissionManageCtrl as pm'
-            })
-            .state('main.addPermission', {
-                url: '/add-permission',
-                templateUrl: 'views/system/add-permission.html',
-                controller: 'AddPermissionCtrl as ap'
-            })*/
 
         ;
         $urlRouterProvider.otherwise('home');

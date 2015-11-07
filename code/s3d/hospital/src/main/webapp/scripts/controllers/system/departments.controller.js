@@ -4,17 +4,17 @@
     angular.module('cms')
         .controller('DepartmentsCtrl', DepartmentsCtrl);
 
-    DepartmentsCtrl.$inject = [];
+    DepartmentsCtrl.$inject = ['$stateParams'];
 
-    function DepartmentsCtrl () {
+    function DepartmentsCtrl ($stateParams) {
         var vm = this;
         vm.cfg = {
-            type: 'departments',
+            parentId: 0,
+            type: '',
             count: 0,
             pageSize: 10,
             pageNum: 1,
             pages: []
-
         };
 
         vm.changeType = changeType;
@@ -23,6 +23,8 @@
         init();
 
         function init () {
+            vm.cfg.parentId = $stateParams.departmentId;
+            vm.cfg.type = $stateParams.type;
             loadPageData();
         }
 
