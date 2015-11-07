@@ -1,6 +1,7 @@
 package com.s3d.auth.login.web.controller;
 
 
+import com.s3d.auth.login.constants.LoginConstants;
 import com.s3d.auth.login.service.AuthenticationService;
 import com.s3d.auth.login.vo.LoginParam;
 import com.s3d.auth.login.vo.LoginUserVO;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,16 +34,16 @@ public class LoginController {
         if (loginParam == null || loginParam.getPassword() == null || loginParam.getUserName() == null) {
             return SpringControllerHelper.redirect("login?failed=Invalid user name and password.", null);
         }
-
+        // authenticate it.
         boolean ifSuccess = authenticationService.authenticateUser(loginParam.getUserName(),
                 loginParam.getPassword());
         if (!ifSuccess) {
             return SpringControllerHelper.redirect("login?auth=Invalid user name and password", null);
         }
-        LoginUserVO loginUserVO = this.authenticationService.findUser(loginParam.getUserName());
-        request.getSession().setAttribute("endUserId", loginUserVO.getUserBasicInfoVO().getUserId());
-       // Cookie c = new Cookie(cookiename,isEmpty(pageCount)?deFault:pageCount.trim());
-        //response.addCookie();
+        // set session and cookie.
+        request.getSession().setAttribute(LoginConstants.USER_ACCOUNT, loginParam.getUserName());
+        Cookie cookie = new Cookie(LoginConstants.USER_ACCOUNT, loginParam.getUserName());
+        response.addCookie(cookie);
        return "homePage";
     }
 

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 1. scan controllers in packages  -->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.s3d.auth.login.web.controller"  use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <context:component-scan base-package="com.s3d.auth.acl.web.controller"  use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- url mapping -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+    </bean>
+    <bean id="utf8StringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="jacksonMessageConverter"
+          class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jacksonMessageConverter"/>
+                <ref bean="utf8StringHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 3. view resolver  -->
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <!--  enable .json suffix, paramter ? format in url. -->
+        <property name="favorPathExtension" value="true"/>
+        <property name="favorParameter" value="false"/>
+        <!-- this needs client set header accept:"application/json" or others -->
+        <property name="ignoreAcceptHeader" value="false"/>
+        <!-- it's valid for accept:*/* , null accept will exception. -->
+        <property name="defaultContentType" value="application/json"/>
+
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/json"/>
+            </map>
+        </property>
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>
+            </list>
+        </property>
+        <property name="order" value="1"/>
+    </bean>
+
+    <!-- handle by tiles.  order = 2. -->
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>classpath*:/tiles/*</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="order" value="2"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
+    </bean>
+
+    <!-- handle file in /WEB-INF/page , if you missed in tiles , this resolver will handle it. please make sure subfolder is given in returned path "authenticate/login/"-->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="order" value="3"/>
+        <property name="prefix" value="/WEB-INF/page/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- CommonsMultipartResolver -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="1024000000"></property>
+    </bean>
+
+    <!-- 3. Handle exception. -->
+    <bean id="exceptionResolver"
+          class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+            </props>
+        </property>
+        <!-- defaultError.jsp -->
+        <property name="defaultErrorView">
+            <value>WEB-INF/page/error/defaultError</value>
+        </property>
+    </bean>
+
+    <mvc:resources mapping="/js/**" location="/WEB-INF/resources/js/" order="0"/>
+    <mvc:resources mapping="/css/**" location="/WEB-INF/resources/css/" order="0"/>
+    <mvc:resources mapping="/pic/**" location="/WEB-INF/resources/pic/" order="0"/>
+
+</beans> 

@@ -1,5 +1,6 @@
 package com.s3d.auth.login.web.filter;
 
+import com.s3d.auth.login.constants.LoginConstants;
 import com.s3d.tech.utils.StringUtil;
 import com.s3d.tech.utils.URLUtils;
 
@@ -19,6 +20,7 @@ public class CheckAuthenticationFilter implements Filter {
     private String loginUrl;
     private Set<String> allowUrlSet = new HashSet<String>();
     private Set<String> resourceSuffixSet = new HashSet<String>();
+    private String homePageUrl="homePage";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -33,20 +35,23 @@ public class CheckAuthenticationFilter implements Filter {
         // check is omitted url, if no check session.
         HttpServletRequest httpServletRequest = (HttpServletRequest)request;
         HttpServletResponse  httpServletResponse = (HttpServletResponse)response;
+        // Has been authenticated.
         if(!hasAuthenticated(httpServletRequest)){
+            // need authenticated.
             if(isNeedAuthenticate(httpServletRequest)){
                 httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + this.loginUrl);
                 return;
             }
         }
+        // check if root path , if yes , nacat
         chain.doFilter(request, response);
     }
 
     private boolean hasAuthenticated(HttpServletRequest httpServletRequest){
         // check authentication
         HttpSession session = httpServletRequest.getSession();
-        Integer userId = (Integer)session.getAttribute("endUserId");
-        if(userId == null){
+        String userAccount = (String)session.getAttribute(LoginConstants.USER_ACCOUNT);
+        if(userAccount == null){
             return false;
         }
         return true;
