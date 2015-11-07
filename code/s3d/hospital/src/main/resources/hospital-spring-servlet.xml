@@ -111,8 +111,9 @@
     <mvc:resources mapping="/scripts/**" location="scripts/" order="0"/>
     <mvc:resources mapping="/styles/**" location="styles/" order="0"/>
     <mvc:resources mapping="/vendor/**" location="vendor/" order="0"/>
-    <!--<mvc:resources mapping="/js/**" location="/WEB-INF/resources/js/" order="0"/>
+
+    <mvc:resources mapping="/js/**" location="/WEB-INF/resources/js/" order="0"/>
     <mvc:resources mapping="/css/**" location="/WEB-INF/resources/css/" order="0"/>
-    <mvc:resources mapping="/pic/**" location="/WEB-INF/resources/pic/" order="0"/>-->
+    <mvc:resources mapping="/pic/**" location="/WEB-INF/resources/pic/" order="0"/>
 
 </beans> 
