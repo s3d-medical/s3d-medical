@@ -27,6 +27,11 @@ public class LoginController {
         return "loginPage";
     }
 
+    @RequestMapping(value = "/homePage", method = RequestMethod.GET)
+    public String showHomePage(HttpServletRequest request, HttpServletResponse response, Model model) {
+        return "homePage";
+    }
+
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public String login(HttpServletRequest request, HttpServletResponse response,
                         Model model, LoginParam loginParam) {
@@ -44,7 +49,7 @@ public class LoginController {
         request.getSession().setAttribute(LoginConstants.USER_ACCOUNT, loginParam.getUserName());
         Cookie cookie = new Cookie(LoginConstants.USER_ACCOUNT, loginParam.getUserName());
         response.addCookie(cookie);
-       return "homePage";
+       return SpringControllerHelper.redirect("homePage", null);
     }
 
     public String logout(){
