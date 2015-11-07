@@ -37,6 +37,10 @@
             <param-value>/login</param-value>
         </init-param>
         <init-param>
+            <param-name>homePageUrl</param-name>
+            <param-value>/homePage</param-value>
+        </init-param>
+        <init-param>
             <param-name>ignoreUrls</param-name>
             <param-value>/authenticate,/login,/loginPage</param-value>
         </init-param>

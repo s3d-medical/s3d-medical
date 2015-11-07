@@ -27,24 +27,48 @@ public class CheckAuthenticationFilter implements Filter {
         this.allowUrlSet.addAll(StringUtil.stringToSet(filterConfig.getInitParameter("ignoreUrls")));
         this.loginUrl = filterConfig.getInitParameter("loginUrl");
         this.resourceSuffixSet.addAll(StringUtil.stringToSet(filterConfig.getInitParameter("resourceSuffix")));
+        this.homePageUrl = filterConfig.getInitParameter("homePageUrl");
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
         // check is omitted url, if no check session.
-        HttpServletRequest httpServletRequest = (HttpServletRequest)request;
-        HttpServletResponse  httpServletResponse = (HttpServletResponse)response;
+        HttpServletRequest req = (HttpServletRequest)request;
+        HttpServletResponse  res = (HttpServletResponse)response;
+        // check if root path
+        if(isRoot(req)){
+            this.toHomePage(req, res);
+            return;
+        }
         // Has been authenticated.
-        if(!hasAuthenticated(httpServletRequest)){
+        if(!hasAuthenticated(req)){
             // need authenticated.
-            if(isNeedAuthenticate(httpServletRequest)){
-                httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + this.loginUrl);
+            if(isNeedAuthenticate(req)){
+                this.toLoginPage(req, res);
                 return;
             }
         }
-        // check if root path , if yes , nacat
+
         chain.doFilter(request, response);
+    }
+
+    private boolean isRoot( HttpServletRequest req){
+        String uri=  req.getRequestURI();
+        String endPath = URLUtils.getLastPathOfUrl(uri);
+        if("/".equals(endPath)){
+            return true;
+        }
+        return false;
+    }
+
+    private void toHomePage(HttpServletRequest request, HttpServletResponse  response) throws IOException {
+        String uri = request.getRequestURI();
+        response.sendRedirect(uri + this.homePageUrl.replaceFirst("/", ""));
+    }
+
+    private void toLoginPage(HttpServletRequest request, HttpServletResponse  response) throws IOException {
+        response.sendRedirect(request.getContextPath() + this.loginUrl);
     }
 
     private boolean hasAuthenticated(HttpServletRequest httpServletRequest){
