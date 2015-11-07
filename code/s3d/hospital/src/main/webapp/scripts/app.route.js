@@ -49,6 +49,16 @@
                 templateUrl: 'viewRole',
                 controller: 'RoleCtrl as rc'
             })
+            .state('main.system.users', {
+                url: '/users',
+                templateUrl: 'viewUserRole',
+                controller: 'UserRoleCtrl as ur'
+            })
+            .state('main.system.userRole', {
+                url: '/users/:userId/roles',
+                templateUrl: 'viewUserRole',
+                controller: 'UserRoleCtrl as ur'
+            })
 
         ;
         $urlRouterProvider.otherwise('home');

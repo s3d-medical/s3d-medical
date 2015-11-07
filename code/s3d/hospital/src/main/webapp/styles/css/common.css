@@ -3,6 +3,9 @@ body {
     height: 100%;
     font-family: 微软雅黑;
 }
+label {
+    font-weight: normal;
+}
 /* style blue */
 .style-blue .login .content {
     background-color: #003D8D;
@@ -31,6 +34,9 @@ body {
 .style-blue .nav-pills>li.active>a:focus,
 .style-blue .nav-pills>li.active>a:hover {
     background-color: #003D8D;
+}
+.style-blue .theme-color {
+    color: #003D8D;
 }
 /* style green */
 .style-green .login .content {
@@ -65,7 +71,13 @@ body {
 .style-green .nav-pills>li.active>a:hover {
     background-color: #6FBA2C;
 }
+.style-green .theme-color {
+    color: #6FBA2C;
+}
 /* common */
 .bg {
     background: url("../images/body_bg.jpg");
+}
+li {
+    list-style: none;
 }

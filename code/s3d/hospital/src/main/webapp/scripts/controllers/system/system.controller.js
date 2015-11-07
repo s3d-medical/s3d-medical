@@ -97,7 +97,7 @@
         }
 
         function _selectNode (event, data) {
-            console.log(data);
+            //console.log(data);
         }
 
         function _formatData(data) {
