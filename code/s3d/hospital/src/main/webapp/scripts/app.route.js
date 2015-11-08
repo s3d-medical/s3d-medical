@@ -49,15 +49,15 @@
                 templateUrl: 'viewRole',
                 controller: 'RoleCtrl as rc'
             })
-            .state('main.system.users', {
-                url: '/users',
-                templateUrl: 'viewUserRole',
-                controller: 'UserRoleCtrl as ur'
+            .state('main.system.userRoles', {
+                url: '/user-roles',
+                templateUrl: 'viewUserRoles',
+                controller: 'UserRolesCtrl as ur'
             })
-            .state('main.system.userRole', {
-                url: '/users/:userId/roles',
-                templateUrl: 'viewUserRole',
-                controller: 'UserRoleCtrl as ur'
+            .state('main.system.permissions', {
+                url: '/permissions',
+                templateUrl: 'viewPermissions',
+                controller: 'PermissionsCtrl as ps'
             })
 
         ;

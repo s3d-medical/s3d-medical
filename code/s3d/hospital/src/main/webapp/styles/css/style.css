@@ -216,3 +216,16 @@
 .role .permission-wrap i {
     cursor: pointer;
 }
+/* user role */
+.user-role .user-name {
+    display: inline-block;
+    width: 85%;
+}
+.user-role .search {
+    margin-right: 0;
+    margin-left: 5px;
+}
+/* permissions */
+.permissions table {
+    width:480px;
+}

@@ -35,12 +35,12 @@
                 <div class="panel panel-default" ng-repeat="c in rc.permissionCategories">
                     <div class="panel-heading">
                         <i class="glyphicon" ng-class="{'glyphicon glyphicon-plus': !c.expanded, 'glyphicon glyphicon-minus': c.expanded}" ng-click="c.expanded = !c.expanded"></i>
-                        <span ng-bind="c.name + ' (' + 0 + '/' + c.permissions.length + ')'"></span>
+                        <span ng-bind="c.text + ' (' + 0 + '/' + c.nodes.length + ')'"></span>
                         <label><input type="checkbox">全选</label>
                     </div>
                     <ul ng-show="c.expanded">
-                        <li class="col-md-4" ng-repeat="p in c.permissions">
-                            <label><input type="checkbox">{{p.name}}</label>
+                        <li class="col-md-4" ng-repeat="p in c.nodes">
+                            <label><input type="checkbox">{{p.text}}</label>
                         </li>
                     </ul>
                 </div>

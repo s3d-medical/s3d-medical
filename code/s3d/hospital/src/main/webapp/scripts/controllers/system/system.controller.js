@@ -75,11 +75,11 @@
                             nodes: [
                                 {
                                     text: '员工授权查询',
-                                    href: ''
+                                    href: '#system/user-roles'
                                 },
                                 {
                                     text: '角色授权查询',
-                                    href: ''
+                                    href: '#system/permissions'
                                 }
                             ]
                         }

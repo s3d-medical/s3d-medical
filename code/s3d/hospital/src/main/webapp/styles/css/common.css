@@ -81,3 +81,6 @@ label {
 li {
     list-style: none;
 }
+.vertical-middle {
+    vertical-align: middle !important;
+}

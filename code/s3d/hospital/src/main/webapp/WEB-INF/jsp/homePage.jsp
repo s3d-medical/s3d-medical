@@ -46,7 +46,8 @@
 <script src="scripts/controllers/system/employee.controller.js"></script>
 <script src="scripts/controllers/system/roles.controller.js"></script>
 <script src="scripts/controllers/system/role.controller.js"></script>
-<script src="scripts/controllers/system/user.role.controller.js"></script>
+<script src="scripts/controllers/system/user.roles.controller.js"></script>
+<script src="scripts/controllers/system/permissions.controller.js"></script>
 
 <%@ include file="views/home.jsp"%>
 <%@ include file="views/main.jsp"%>
@@ -56,7 +57,8 @@
 <%@ include file="views/system/employee.jsp"%>
 <%@ include file="views/system/roles.jsp"%>
 <%@ include file="views/system/role.jsp"%>
-<%@ include file="views/system/user-role.jsp"%>
+<%@ include file="views/system/user-roles.jsp"%>
+<%@ include file="views/system/permissions.jsp"%>
 
 </body>
 </html>

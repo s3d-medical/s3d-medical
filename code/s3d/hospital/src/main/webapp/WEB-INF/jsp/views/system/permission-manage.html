@@ -1,0 +1,24 @@
+<div class="permission-manage">
+    <div class="panel-body">
+        <input type="text" class="form-control">
+        <button type="button" class="btn btn-primary">查询</button>
+        <button type="button" class="btn btn-primary pull-right" ui-sref="main.addPermission">添加权限</button>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <td><b>权限</b></td>
+                <td><b>操作</b></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="i in pm.permissions">
+                <td ng-bind="i.name"></td>
+                <td>
+                    <i class="glyphicon glyphicon-pencil"></i>
+                    <i class="glyphicon glyphicon-remove-circle"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,24 @@
+<div class="role-manage">
+    <div class="panel-body">
+        <input type="text" class="form-control">
+        <button type="button" class="btn btn-primary">查询</button>
+        <button type="button" class="btn btn-primary pull-right" ui-sref="main.addRole">添加角色</button>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>角色</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="i in rm.roles">
+            <td ng-bind="i.name"></td>
+            <td>
+                <i class="glyphicon glyphicon-pencil"></i>
+                <i class="glyphicon glyphicon-remove-circle"></i>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

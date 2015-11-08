@@ -1,55 +1,25 @@
-﻿(function () {
+(function () {
     'use strict';
 
     angular.module('cms')
-        .controller('RoleCtrl', RoleCtrl);
+        .controller('PermissionsCtrl', PermissionsCtrl);
 
-    RoleCtrl.$inject = ['$stateParams'];
+    PermissionsCtrl.$inject = ['$scope'];
 
-    function RoleCtrl ($stateParams) {
+    function PermissionsCtrl ($scope) {
         var vm = this;
-        vm.role = {};
-        vm.permissionCategories = [];
+        vm.permissions = [];
+        vm.permission = {};
 
         init();
 
         function init () {
             initData();
+            initTree();
         }
 
         function initData () {
-            vm.roleId = $stateParams.roleId;
-            var resp1 = {
-                role: {
-                    id: 1,
-                    name: '督办发布员',
-                    categoryId: 1,
-                    users: [
-                        {id: 1, name: '张悦'},
-                        {id: 2, name: '李阳'},
-                        {id: 3, name: '张国庆'},
-                        {id: 4, name: '王萌'},
-                        {id: 5, name: '刘德华'},
-                        {id: 6, name: '张学友'},
-                        {id: 7, name: '谢霆锋'},
-                        {id: 8, name: '吴彦祖'},
-                        {id: 9, name: '李连杰'},
-                        {id: 10, name: '吴奇隆'},
-                        {id: 11, name: '张国庆'},
-                        {id: 12, name: '王萌'},
-                        {id: 13, name: '刘德华'},
-                        {id: 14, name: '张学友'},
-                        {id: 15, name: '谢霆锋'},
-                        {id: 16, name: '吴彦祖'},
-                        {id: 17, name: '李连杰'},
-                        {id: 18, name: '吴奇隆'}
-                    ],
-                    permissions: [1,2,3,4,5],
-                    remark: '督办',
-                    creator: '管理员'
-                }
-            };
-            var resp2 = {
+            var resp = {
                 permissionCategories: [
                     {
                         id: 1,
@@ -97,12 +67,46 @@
                     }
                 ]
             };
-            vm.role = resp1.role;
-            vm.permissionCategories = resp2.permissionCategories;
-            for (var i in vm.permissionCategories) {
-                vm.permissionCategories[i].expanded = true;
+            vm.permissionCategories = _formatData(resp.permissionCategories);
+        }
+
+        function initTree () {
+            $('#permissionTree').treeview({
+                data: vm.permissionCategories,
+                enableLinks: true,
+                onNodeSelected: _selectNode
+            });
+        }
+
+        function _selectNode (event, data) {
+            if (data && data.hasOwnProperty('parentId')) {
+                $scope.$apply(function () {
+                    var permissionId = data.id;
+                    var resp = {
+                        "permission": {
+                            "text": '督办_默认权限',
+                            "remark": '访问督办模块的基本信息',
+                            "roles": ["角色1", "角色2"],
+                            "departments": ["部门1", "部门2"]
+                        }
+                    };
+                    vm.permission = resp.permission;
+                })
+            } else {
+                $scope.$apply(function () {
+                    vm.permission = {};
+                })
             }
         }
 
+        function _formatData(data) {
+            for (var i in data) {
+                data[i].href = '#system/permissions';
+                if (data[i].nodes && data[i].nodes.length) {
+                    _formatData(data[i].nodes);
+                }
+            }
+            return data;
+        }
     }
 })();

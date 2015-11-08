@@ -2,11 +2,11 @@
     'use strict';
 
     angular.module('cms')
-        .controller('UserUserRoleCtrl', UserRoleCtrl);
+        .controller('UserRolesCtrl', UserRolesCtrl);
 
-    UserRoleCtrl.$inject = ['$stateParams'];
+    UserRolesCtrl.$inject = ['$stateParams'];
 
-    function UserRoleCtrl ($stateParams) {
+    function UserRolesCtrl ($stateParams) {
         var vm = this;
         vm.user = {};
 
@@ -21,58 +21,68 @@
             var resp = {
                 user: {
                     id: 1,
-                    name: '周志德',
+                    text: '周志德',
                     permissionCategories: [
                         {
                             id: 1,
-                            name: '督办',
-                            permissions: [
+                            text: '督办',
+                            nodes: [
                                 {
                                     id: 1,
-                                    name: '督办_默认权限'
+                                    text: '督办_默认权限'
                                 },
                                 {
                                     id: 2,
-                                    name: '督办_后台配置'
+                                    text: '督办_后台配置'
                                 },
                                 {
                                     id: 3,
-                                    name: '权限机制_文档搜索配置'
+                                    text: '权限机制_文档搜索配置'
                                 },
                                 {
                                     id: 4,
-                                    name: '督办_阅读权限'
+                                    text: '督办_阅读权限'
                                 }
                             ]
                         },
                         {
                             id: 2,
-                            name: '权限管理',
-                            permissions: [
+                            text: '权限管理',
+                            nodes: [
                                 {
                                     id: 5,
-                                    name: '督办_默认权限'
+                                    text: '督办_默认权限'
                                 },
                                 {
                                     id: 6,
-                                    name: '督办_后台配置'
+                                    text: '督办_后台配置'
                                 },
                                 {
                                     id: 7,
-                                    name: '权限机制_文档搜索配置'
+                                    text: '权限机制_文档搜索配置'
                                 },
                                 {
                                     id: 8,
-                                    name: '督办_阅读权限'
+                                    text: '督办_阅读权限'
                                 }
                             ]
                         }
                     ],
-                    "departments": ["", "", ""],
+                    "departments": ["长江证券"],
                     "remark": '备注'
                 }
             };
-            vm.user = resp.user;
+            vm.user = _formatData(resp.user);
+
+        }
+
+        function _formatData (user) {
+            if (user && user.permissionCategories) {
+                for (var i in user.permissionCategories) {
+                    user.permissionCategories[i].expanded = true;
+                }
+            }
+            return user;
         }
 
     }
