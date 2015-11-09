@@ -4,9 +4,9 @@
     angular.module('cms')
         .controller('SystemCtrl', SystemCtrl);
 
-    SystemCtrl.$inject = ['$rootScope'];
+    SystemCtrl.$inject = ['$rootScope', 'dataService'];
 
-    function SystemCtrl ($rootScope) {
+    function SystemCtrl ($rootScope, dataService) {
         var vm = this;
 
         init();
@@ -14,7 +14,6 @@
         function init () {
             initBreadcrumb();
             initData();
-            initTree();
         }
 
         function initBreadcrumb () {
@@ -25,67 +24,64 @@
         }
 
         function initData () {
-            // todo get department list from server
-            var departments = [
-                {id: 1, text: '长江证券1'},
-                {id: 2, text: '长江证券2', nodes: [{id: 5, text: '长江证券111', nodes: [{id: 6, text: '长江证券22222222222222222'}, {id: 7, text: '长江证券222'}]}, {id: 8, text: '长江证券111'}]},
-                {id: 3, text: '长江证券3'},
-                {id: 4, text: '长江证券4', nodes: [{id: 6, text: '长江证券555'}, {id: 7, text: '666'}]}
-            ];
-            departments = _formatData(departments);
-            $rootScope.menus = [
-                {
-                    text: '组织架构与账号管理',
-                    href: '#system',
-                    state: {
-                        expanded: false
-                    },
-                    nodes: [
+            dataService.get('departments.json')
+                .then(function (resp) {
+                    var departments = _formatData(resp.departments);
+                    $rootScope.menus = [
                         {
-                            text: '层级架构',
+                            text: '组织架构与账号管理',
                             href: '#system',
-                            nodes: departments
-                        },
-                        {
-                            text: '常用群组',
-                            href: '#system'
-                            //nodes: []
-                        },
-                        {
-                            text: '所有架构',
-                            href: '#system'
-                            //nodes: []
-                        }
-                    ]
-                },
-                {
-                    text: '权限管理',
-                    href: '#system',
-                    state: {
-                        expanded: false
-                    },
-                    nodes: [
-                        {
-                            text: '导入系统权限',
-                            href: '#system'
-                        },
-                        {
-                            text: '角色分配',
-                            href: '#system/roles',
+                            state: {
+                                expanded: false
+                            },
                             nodes: [
                                 {
-                                    text: '员工授权查询',
-                                    href: '#system/user-roles'
+                                    text: '层级架构',
+                                    href: '#system',
+                                    nodes: departments
                                 },
                                 {
-                                    text: '角色授权查询',
-                                    href: '#system/permissions'
+                                    text: '常用群组',
+                                    href: '#system'
+                                    //nodes: []
+                                },
+                                {
+                                    text: '所有架构',
+                                    href: '#system'
+                                    //nodes: []
+                                }
+                            ]
+                        },
+                        {
+                            text: '权限管理',
+                            href: '#system',
+                            state: {
+                                expanded: false
+                            },
+                            nodes: [
+                                {
+                                    text: '导入系统权限',
+                                    href: '#system'
+                                },
+                                {
+                                    text: '角色分配',
+                                    href: '#system/roles',
+                                    nodes: [
+                                        {
+                                            text: '员工授权查询',
+                                            href: '#system/user-roles'
+                                        },
+                                        {
+                                            text: '角色授权查询',
+                                            href: '#system/permissions'
+                                        }
+                                    ]
                                 }
                             ]
                         }
-                    ]
-                }
-            ];
+                    ];
+                    initTree();
+                });
         }
 
         function initTree () {

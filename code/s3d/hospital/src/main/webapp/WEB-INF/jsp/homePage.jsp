@@ -82,8 +82,6 @@
 <script src="scripts/controllers/main.controller.js"></script>
 <script src="scripts/controllers/system/system.controller.js"></script>
 <script src="scripts/controllers/system/departments.controller.js"></script>
-<%--<script src="scripts/controllers/system/department.controller.js"></script>--%>
-<script src="scripts/controllers/system/user.controller.js"></script>
 <script src="scripts/controllers/system/roles.controller.js"></script>
 <script src="scripts/controllers/system/role.controller.js"></script>
 <script src="scripts/controllers/system/user.roles.controller.js"></script>
@@ -94,6 +92,8 @@
 <script src="scripts/directives/cms.view.user.directive.js"></script>
 <script src="scripts/directives/cms.edit.user.directive.js"></script>
 <script src="scripts/directives/cms.reset.password.directive.js"></script>
+
+<script src="scripts/utils/constants.js"></script>
 
 <script src="scripts/services/data.service.js"></script>
 <script src="scripts/services/local.data.service.js"></script>

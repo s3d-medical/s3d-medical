@@ -25,7 +25,6 @@
         }
 
         function loadPageData (pageNum) {
-            console.log(pageNum);
             // todo get data from server
             var resp = {
                 count: 100,

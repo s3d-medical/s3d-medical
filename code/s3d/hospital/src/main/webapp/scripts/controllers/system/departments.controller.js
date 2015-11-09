@@ -21,6 +21,7 @@
 
         vm.changeType = changeType;
         vm.loadPageData = loadPageData;
+        vm.refresh = refresh;
         vm.viewItem = viewItem;
         vm.editItem = editItem;
         vm.resetPassword = resetPassword;
@@ -30,17 +31,26 @@
         function init () {
             vm.cfg.parentId = $stateParams.departmentId;
             vm.cfg.type = $stateParams.type;
-            loadPageData();
+            loadPageData(1);
         }
 
         function changeType (type) {
             vm.cfg.type = type;
-            vm.cfg.pageNum = 1;
+            loadPageData(1);
+        }
+
+        function refresh () {
             loadPageData(vm.cfg.pageNum);
         }
 
         function loadPageData (pageNum) {
-            console.log(pageNum);
+            if (pageNum < 1) {
+                vm.cfg.pageNum = 1;
+            } else if (vm.cfg.pages.length > 0 && pageNum > vm.cfg.pages.length) {
+                vm.cfg.pageNum = vm.cfg.pages.length
+            } else {
+                vm.cfg.pageNum = pageNum;
+            }
             // todo get data from server
             var resp = {
                 count: 100,

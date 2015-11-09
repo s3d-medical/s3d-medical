@@ -3,9 +3,9 @@
     angular.module('cms')
         .service('dataService', dataService);
 
-    dataService.$inject = ['$http', '$q', '$log', 'serviceUrl'];
+    dataService.$inject = ['$http', '$q', '$log', 'serverUrl'];
 
-    function dataService ($http, $q, $log, serviceUrl) {
+    function dataService ($http, $q, $log, serverUrl) {
         this.get = get;
         this.post = post;
         this.put = put;
@@ -32,7 +32,7 @@
 
         function request (requestType, api, requestData, header) {
             var d = $q.defer();
-            var url = serviceUrl + api;
+            var url = serverUrl + api;
              showLoading();
             if (header) {
                 $http.defaults.headers.common = header;
@@ -54,10 +54,10 @@
             var httpArray = [];
             if(_.isArray(urls)) {
                 angular.forEach(urls, function(url) {
-                    this.push($http.get(serviceUrl + url));
+                    this.push($http.get(serverUrl + url));
                 }, httpArray);
             } else {
-                httpArray.push($http.get(serviceUrl + urls));
+                httpArray.push($http.get(serverUrl + urls));
             }
             return requests(httpArray);
         }

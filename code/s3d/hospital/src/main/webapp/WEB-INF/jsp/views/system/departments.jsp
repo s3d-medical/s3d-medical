@@ -54,13 +54,13 @@
         </table>
         <ul class="pagination">
             <li>
-                <span aria-hidden="true">&laquo;</span>
+                <span aria-hidden="true" ng-click="ds.loadPageData(ds.cfg.pageNum - 1)">&laquo;</span>
             </li>
             <li ng-repeat="p in ds.cfg.pages" ng-class="{'active': ds.cfg.pageNum == p}" ng-click="ds.loadPageData(p)">
                 <span ng-bind="p"></span>
             </li>
             <li>
-                <span aria-hidden="true">&raquo;</span>
+                <span aria-hidden="true" ng-click="ds.loadPageData(ds.cfg.pageNum + 1)">&raquo;</span>
             </li>
         </ul>
         <div>
@@ -68,7 +68,7 @@
             <span>&nbsp;&nbsp;每页</span>
             <b><input type="text" class="page-size" ng-model="ds.cfg.pageSize"></b>
             <span>条&nbsp;&nbsp;</span>
-            <button type="button" class="btn btn-primary">刷新</button>
+            <button type="button" class="btn btn-primary" ng-click="ds.refresh()">刷新</button>
         </div>
         <cms-view-department on-edit="ds.editItem()"></cms-view-department>
         <cms-edit-department></cms-edit-department>
