@@ -1,11 +1,11 @@
 ﻿<script type="text/ng-template" id="viewDepartments">
     <div class="departments">
         <ul class="nav nav-tabs">
-            <li role="presentation" ng-class="{'active': ds.cfg.type == 'departments'}" ui-sref="main.system.departments({departmentId: ds.cfg.parentId, type: 'departments'})"><a>部门</a></li>
-            <li role="presentation" ng-class="{'active': ds.cfg.type == 'users'}" ui-sref="main.system.departments({departmentId: ds.cfg.parentId, type: 'users'})"><a>员工</a></li>
+            <li role="presentation" ng-class="{'active': ds.cfg.type == 'departments'}" ng-click="ds.changeType('departments')"><a>部门</a></li>
+            <li role="presentation" ng-class="{'active': ds.cfg.type == 'users'}" ng-click="ds.changeType('users')"><a>员工</a></li>
             <li class="pull-right">
-                <button type="button" class="btn btn-primary">新建{{ds.cfg.type == 'departments' ? '部门' : '员工'}}</button>
-                <button type="button" class="btn btn-danger">删除</button>
+                <button type="button" class="btn btn-primary" ng-click="ds.createItem()">新建{{ds.cfg.type == 'departments' ? '部门' : '员工'}}</button>
+                <button type="button" class="btn btn-danger" ng-click="ds.deleteItems()">删除</button>
             </li>
         </ul>
         <table ng-if="ds.cfg.type == 'departments'" class="table table-bordered table-striped">

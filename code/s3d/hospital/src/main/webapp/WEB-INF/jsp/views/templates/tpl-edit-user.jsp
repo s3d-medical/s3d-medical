@@ -82,7 +82,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" ng-click="save()">保存</button>
-                    <button type="submit" class="btn btn-default" ng-click="cancel()">取消</button>
+                    <button type="submit" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">取消</button>
                 </div>
             </div>
         </div>
