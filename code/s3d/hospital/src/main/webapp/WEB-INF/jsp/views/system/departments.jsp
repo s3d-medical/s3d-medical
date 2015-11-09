@@ -41,7 +41,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="i in ds.users" ui-sref="main.system.user({userId: i.id})">
+            <tr ng-repeat="i in ds.users" ng-click="ds.viewItem(i.id)">
                 <td><input type="checkbox"></td>
                 <td ng-bind="i.order"></td>
                 <td ng-bind="i.department"></td>
@@ -66,11 +66,14 @@
         <div>
             <span>共&nbsp;<b>{{ds.cfg.count}}</b>&nbsp;条</span>
             <span>&nbsp;&nbsp;每页</span>
-            <b><input type="text" ng-model="ds.cfg.pageSize"></b>
+            <b><input type="text" class="page-size" ng-model="ds.cfg.pageSize"></b>
             <span>条&nbsp;&nbsp;</span>
             <button type="button" class="btn btn-primary">刷新</button>
         </div>
         <cms-view-department on-edit="ds.editItem()"></cms-view-department>
         <cms-edit-department></cms-edit-department>
+        <cms-view-user on-edit="ds.editItem()" on-reset-password="ds.resetPassword()"></cms-view-user>
+        <cms-edit-user></cms-edit-user>
+        <cms-reset-password></cms-reset-password>
     </div>
 </script>

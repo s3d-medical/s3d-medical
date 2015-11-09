@@ -82,7 +82,7 @@
 <script src="scripts/controllers/main.controller.js"></script>
 <script src="scripts/controllers/system/system.controller.js"></script>
 <script src="scripts/controllers/system/departments.controller.js"></script>
-<script src="scripts/controllers/system/department.controller.js"></script>
+<%--<script src="scripts/controllers/system/department.controller.js"></script>--%>
 <script src="scripts/controllers/system/user.controller.js"></script>
 <script src="scripts/controllers/system/roles.controller.js"></script>
 <script src="scripts/controllers/system/role.controller.js"></script>
@@ -91,6 +91,9 @@
 
 <script src="scripts/directives/cms.view.department.directive.js"></script>
 <script src="scripts/directives/cms.edit.department.directive.js"></script>
+<script src="scripts/directives/cms.view.user.directive.js"></script>
+<script src="scripts/directives/cms.edit.user.directive.js"></script>
+<script src="scripts/directives/cms.reset.password.directive.js"></script>
 
 <script src="scripts/services/data.service.js"></script>
 <script src="scripts/services/local.data.service.js"></script>
@@ -99,8 +102,6 @@
 <%@ include file="views/main.jsp"%>
 <%@ include file="views/system/system.jsp"%>
 <%@ include file="views/system/departments.jsp"%>
-<%@ include file="views/templates/tpl-edit-department.jsp"%>
-<%@ include file="views/system/user.jsp"%>
 <%@ include file="views/system/roles.jsp"%>
 <%@ include file="views/system/role.jsp"%>
 <%@ include file="views/system/user-roles.jsp"%>
@@ -108,6 +109,9 @@
 
 <%@ include file="views/templates/tpl-view-department.jsp"%>
 <%@ include file="views/templates/tpl-edit-department.jsp"%>
+<%@ include file="views/templates/tpl-view-user.jsp"%>
+<%@ include file="views/templates/tpl-edit-user.jsp"%>
+<%@ include file="views/templates/tpl-reset-password.jsp"%>
 
 </body>
 </html>

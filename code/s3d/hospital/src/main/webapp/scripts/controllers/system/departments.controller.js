@@ -23,6 +23,7 @@
         vm.loadPageData = loadPageData;
         vm.viewItem = viewItem;
         vm.editItem = editItem;
+        vm.resetPassword = resetPassword;
 
         init();
 
@@ -91,7 +92,22 @@
                 };
                 $scope.$broadcast('ViewDepartment.Open', {department: vm.selectedDepartment});
             } else if (vm.cfg.type == 'users') {
-
+                vm.selectedUser = {
+                    "id": 1,
+                    "realName": "高欢",
+                    "code": "123",
+                    "departmentId": 1,
+                    "departmentName" : "部门2",
+                    "email": "xx@xx.com",
+                    "phone": "1234565",
+                    "tel": "2323424",
+                    "userName": "host1",
+                    "languageId": 2,
+                    "language": "",
+                    "key": "111111111",
+                    "remark": "说明"
+                };
+                $scope.$broadcast('ViewUser.Open', {user: vm.selectedUser});
             }
 
         }
@@ -100,8 +116,12 @@
             if (vm.cfg.type == 'departments') {
                 $scope.$broadcast('EditDepartment.Open', {department: vm.selectedDepartment});
             } else if (vm.cfg.type == 'users') {
-
+                $scope.$broadcast('EditUser.Open', {user: vm.selectedUser});
             }
+        }
+
+        function resetPassword () {
+            $scope.$broadcast('ResetPassword.Open', {userId: vm.selectedUser.id});
         }
     }
 })();

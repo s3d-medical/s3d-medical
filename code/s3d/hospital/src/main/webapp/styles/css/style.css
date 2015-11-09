@@ -100,7 +100,7 @@
     margin-right: 20px;
 }
 /* departments */
-.departments input[type="text"] {
+.departments .page-size {
     border: none;
     border-bottom: solid 1px #aaa;
     width: 30px;

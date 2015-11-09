@@ -1,53 +1,66 @@
-﻿<script type="text/ng-template" id="tplEditDepartment">
+﻿<script type="text/ng-template" id="tplEditUser">
     <div class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title normal-weight text-center">部门编辑</h3>
+                    <h3 class="modal-title normal-weight text-center">员工编辑</h3>
                 </div>
                 <div class="modal-body small">
                     <div class="row">
                         <div class="col-xs-2">
-                            <span>部门名称</span>
+                            <span>姓名</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="email" class="form-control" placeholder="部门名称">
-                        </div>
-                        <div class="col-xs-2">
-                            <span>导入数据对应值</span>
-                        </div>
-                        <div class="col-xs-4">
-                            <input type="email" class="form-control" placeholder="导入数据对应值">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-2">
-                            <span>上级部门</span>
-                        </div>
-                        <div class="col-xs-4">
-                            <input type="email" class="form-control" placeholder="上级部门">
+                            <input type="text" class="form-control" placeholder="姓名">
                         </div>
                         <div class="col-xs-2">
                             <span>编号</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="email" class="form-control" placeholder="编号">
+                            <input type="text" class="form-control" placeholder="编号">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-2">
-                            <span>排序号</span>
+                            <span>所在部门</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="email" class="form-control" placeholder="排序号">
+                            <input type="email" class="form-control" placeholder="所在部门">
                         </div>
                         <div class="col-xs-2">
-                            <span>是否有效</span>
+                            <span>邮件地址</span>
                         </div>
                         <div class="col-xs-4">
-                            <label><input type="radio" name="active">是</label>
-                            <label><input type="radio" name="active">否</label>
+                            <input type="email" class="form-control" placeholder="邮件地址">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <span>手机号码</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" placeholder="手机号码">
+                        </div>
+                        <div class="col-xs-2">
+                            <span>办公电话</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" placeholder="办公电话">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <span>登录名</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" placeholder="登录名">
+                        </div>
+                        <div class="col-xs-2">
+                            <span>默认语言</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <select class="form-control"></select>
                         </div>
                     </div>
                     <div class="row">
@@ -56,6 +69,14 @@
                         </div>
                         <div class="col-xs-10">
                             <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <span>导入数据对应值</span>
+                        </div>
+                        <div class="col-xs-10">
+                            <input type="text" class="form-control" placeholder="导入数据对应值">
                         </div>
                     </div>
                 </div>

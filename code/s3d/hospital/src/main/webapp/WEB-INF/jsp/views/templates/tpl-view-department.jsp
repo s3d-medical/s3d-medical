@@ -1,5 +1,5 @@
 ﻿<script type="text/ng-template" id="tplViewDepartment">
-    <div class="department modal fade">
+    <div class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

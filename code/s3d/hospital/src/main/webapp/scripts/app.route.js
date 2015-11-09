@@ -29,16 +29,6 @@
                 templateUrl: 'viewDepartments',
                 controller: 'DepartmentsCtrl as ds'
             })
-            /*.state('main.system.department', {
-                url: '/departments/:departmentId',
-                templateUrl: 'viewDepartment',
-                controller: 'DepartmentCtrl as dc'
-            })*/
-            .state('main.system.user', {
-                url: '/users/:userId',
-                templateUrl: 'viewUser',
-                controller: 'UserCtrl as ec'
-            })
             .state('main.system.roles', {
                 url: '/roles',
                 templateUrl: 'viewRoles',

@@ -1,15 +1,15 @@
-﻿(function () {
+(function () {
     'use strict';
 
     angular.module('cms')
-        .directive('cmsEditDepartment', cmsEditDepartment);
+        .directive('cmsEditUser', cmsEditUser);
 
-    cmsEditDepartment.$inject = [];
+    cmsEditUser.$inject = [];
 
-    function cmsEditDepartment () {
+    function cmsEditUser () {
         return {
             restrict: 'AE',
-            templateUrl: 'tplEditDepartment',
+            templateUrl: 'tplEditUser',
             replace: true,
             scope: {
 
@@ -18,11 +18,10 @@
 
                 scope.save = save;
                 scope.cancel = cancel;
-                scope.$on('EditDepartment.Open', open);
+                scope.$on('EditUser.Open', open);
 
                 function open (event, data) {
-                    console.log(data);
-                    scope.department = data.department;
+                    scope.user = data.user;
                     element.modal({backdrop: 'static'});
                 }
 
@@ -33,8 +32,11 @@
                 function cancel () {
                     // todo
                 }
+
+                function _onClose (e) {
+                    $rootScope.$broadcast('Modal.Close');
+                }
             }
         }
-
     }
 })();
