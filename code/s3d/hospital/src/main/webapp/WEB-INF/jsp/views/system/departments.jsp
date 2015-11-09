@@ -1,15 +1,12 @@
 ﻿<script type="text/ng-template" id="viewDepartments">
     <div class="departments">
         <ul class="nav nav-tabs">
-            <%--<li role="presentation" ng-class="{'active': ds.cfg.type == 'departments'}" ng-click="ds.changeType('departments')"><a>部门</a></li>
-            <li role="presentation" ng-class="{'active': ds.cfg.type == 'employees'}" ng-click="ds.changeType('employees')"><a>员工</a></li>--%>
             <li role="presentation" ng-class="{'active': ds.cfg.type == 'departments'}" ui-sref="main.system.departments({departmentId: ds.cfg.parentId, type: 'departments'})"><a>部门</a></li>
-            <li role="presentation" ng-class="{'active': ds.cfg.type == 'employees'}" ui-sref="main.system.departments({departmentId: ds.cfg.parentId, type: 'employees'})"><a>员工</a></li>
+            <li role="presentation" ng-class="{'active': ds.cfg.type == 'users'}" ui-sref="main.system.departments({departmentId: ds.cfg.parentId, type: 'users'})"><a>员工</a></li>
             <li class="pull-right">
                 <button type="button" class="btn btn-primary">新建{{ds.cfg.type == 'departments' ? '部门' : '员工'}}</button>
                 <button type="button" class="btn btn-danger">删除</button>
             </li>
-            <!--<li class="glyphicon glyphicon-plus" ng-if="ds.cfg.type == 'employees'" ui-sref="main.system.employee"></li>-->
         </ul>
         <table ng-if="ds.cfg.type == 'departments'" class="table table-bordered table-striped">
             <thead>
@@ -22,7 +19,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="i in ds.departments" ui-sref="main.system.department({departmentId: i.id})">
+            <tr ng-repeat="i in ds.departments" ng-click="ds.viewItem(i.id)">
                 <td><input type="checkbox"></td>
                 <td ng-bind="i.order"></td>
                 <td ng-bind="i.parent"></td>
@@ -31,7 +28,7 @@
             </tr>
             </tbody>
         </table>
-        <table ng-if="ds.cfg.type == 'employees'" class="table table-bordered table-striped">
+        <table ng-if="ds.cfg.type == 'users'" class="table table-bordered table-striped">
             <thead>
             <tr>
                 <td><input type="checkbox"></td>
@@ -44,7 +41,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="i in ds.employees" ui-sref="main.system.employee({employeeId: i.id})">
+            <tr ng-repeat="i in ds.users" ui-sref="main.system.user({userId: i.id})">
                 <td><input type="checkbox"></td>
                 <td ng-bind="i.order"></td>
                 <td ng-bind="i.department"></td>
@@ -73,5 +70,7 @@
             <span>条&nbsp;&nbsp;</span>
             <button type="button" class="btn btn-primary">刷新</button>
         </div>
+        <cms-view-department on-edit="ds.editItem()"></cms-view-department>
+        <cms-edit-department></cms-edit-department>
     </div>
 </script>

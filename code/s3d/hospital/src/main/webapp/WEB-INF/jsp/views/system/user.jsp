@@ -1,4 +1,4 @@
-﻿<script type="text/ng-template" id="viewEmployee">
+﻿<script type="text/ng-template" id="viewUser">
     <div class="department">
         <h4>员工编辑</h4>
         <div class="row">

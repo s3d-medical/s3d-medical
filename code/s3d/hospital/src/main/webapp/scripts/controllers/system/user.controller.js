@@ -2,13 +2,13 @@
     'use strict';
 
     angular.module('cms')
-        .controller('DepartmentCtrl', DepartmentCtrl);
+        .controller('UserCtrl', UserCtrl);
 
-    DepartmentCtrl.$inject = ['$state', '$stateParams'];
+    UserCtrl.$inject = ['$state', '$stateParams'];
 
-    function DepartmentCtrl ($state, $stateParams) {
+    function UserCtrl ($state, $stateParams) {
         var vm = this;
-        vm.department = {
+        vm.user = {
 
         };
 
@@ -17,7 +17,7 @@
         init();
 
         function init () {
-            console.log($stateParams.departmentId);
+            console.log($stateParams.userId);
         }
 
         function cancel () {

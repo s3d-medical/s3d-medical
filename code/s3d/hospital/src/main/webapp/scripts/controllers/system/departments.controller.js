@@ -4,9 +4,9 @@
     angular.module('cms')
         .controller('DepartmentsCtrl', DepartmentsCtrl);
 
-    DepartmentsCtrl.$inject = ['$stateParams'];
+    DepartmentsCtrl.$inject = ['$scope', '$stateParams'];
 
-    function DepartmentsCtrl ($stateParams) {
+    function DepartmentsCtrl ($scope, $stateParams) {
         var vm = this;
         vm.cfg = {
             parentId: 0,
@@ -16,9 +16,13 @@
             pageNum: 1,
             pages: []
         };
+        vm.selectedDepartment = {};
+        vm.selectedUser = {};
 
         vm.changeType = changeType;
         vm.loadPageData = loadPageData;
+        vm.viewItem = viewItem;
+        vm.editItem = editItem;
 
         init();
 
@@ -69,6 +73,34 @@
             vm.cfg.pages = [];
             for (var i = 1; i <= resp.count / vm.cfg.pageSize; i++ ) {
                 vm.cfg.pages.push(i);
+            }
+        }
+
+        function viewItem (id) {
+            // get department or user
+            if (vm.cfg.type == 'departments') {
+                vm.selectedDepartment = {
+                    "id": 1,
+                    "name": "部门2",
+                    "parent": "部门1",
+                    "code": "qsqw",
+                    "key": "121231",
+                    "order": 32,
+                    "active": true,
+                    "remark": "备注"
+                };
+                $scope.$broadcast('ViewDepartment.Open', {department: vm.selectedDepartment});
+            } else if (vm.cfg.type == 'users') {
+
+            }
+
+        }
+
+        function editItem () {
+            if (vm.cfg.type == 'departments') {
+                $scope.$broadcast('EditDepartment.Open', {department: vm.selectedDepartment});
+            } else if (vm.cfg.type == 'users') {
+
             }
         }
     }
