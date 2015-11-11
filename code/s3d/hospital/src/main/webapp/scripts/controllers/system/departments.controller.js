@@ -14,7 +14,7 @@
             count: 0,
             pageSize: 10,
             pageNum: 1,
-            pages: []
+            pages: [1]
         };
         vm.selectedDepartment = {};
         vm.selectedUser = {};
@@ -48,8 +48,10 @@
         function loadPageData (pageNum) {
             if (pageNum < 1) {
                 vm.cfg.pageNum = 1;
+                return;
             } else if (vm.cfg.pages.length > 0 && pageNum > vm.cfg.pages.length) {
                 vm.cfg.pageNum = vm.cfg.pages.length
+                return;
             } else {
                 vm.cfg.pageNum = pageNum;
             }
@@ -62,42 +64,27 @@
                     for (var i = 1; i <= resp.count / vm.cfg.pageSize; i++ ) {
                         vm.cfg.pages.push(i);
                     }
+                    if (vm.cfg.pages.length == 0) {
+                        vm.cfg.pages.push(1);
+                    }
                 });
         }
 
         function viewItem (id) {
             // get department or user
             if (vm.cfg.type == 'departments') {
-                vm.selectedDepartment = {
-                    "id": 1,
-                    "name": "部门2",
-                    "parent": "部门1",
-                    "code": "qsqw",
-                    "key": "121231",
-                    "order": 32,
-                    "active": true,
-                    "remark": "备注"
-                };
-                $scope.$broadcast('ViewDepartment.Open', {department: vm.selectedDepartment});
+                dataService.get('department.json')
+                    .then(function (resp) {
+                        vm.selectedDepartment = resp.department;
+                        $scope.$broadcast('ViewDepartment.Open', {department: vm.selectedDepartment});
+                    });
             } else if (vm.cfg.type == 'users') {
-                vm.selectedUser = {
-                    "id": 1,
-                    "realName": "高欢",
-                    "code": "123",
-                    "departmentId": 1,
-                    "departmentName" : "部门2",
-                    "email": "xx@xx.com",
-                    "phone": "1234565",
-                    "tel": "2323424",
-                    "userName": "host1",
-                    "languageId": 2,
-                    "language": "",
-                    "key": "111111111",
-                    "remark": "说明"
-                };
-                $scope.$broadcast('ViewUser.Open', {user: vm.selectedUser});
+                dataService.get('user.json')
+                    .then(function (resp) {
+                        vm.selectedUser = resp.user;
+                        $scope.$broadcast('ViewUser.Open', {user: vm.selectedUser});
+                    })
             }
-
         }
 
         function editItem () {

@@ -12,13 +12,13 @@
                             <span>部门名称</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="email" class="form-control" placeholder="部门名称">
+                            <input type="text" class="form-control" placeholder="部门名称" ng-model="department.name">
                         </div>
                         <div class="col-xs-2">
                             <span>导入数据对应值</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="email" class="form-control" placeholder="导入数据对应值">
+                            <input type="text" class="form-control" placeholder="导入数据对应值" ng-model="department.key">
                         </div>
                     </div>
                     <div class="row">
@@ -26,13 +26,13 @@
                             <span>上级部门</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="email" class="form-control" placeholder="上级部门">
+                            <input type="text" class="form-control" placeholder="上级部门" ng-model="department.parentId">
                         </div>
                         <div class="col-xs-2">
                             <span>编号</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="email" class="form-control" placeholder="编号">
+                            <input type="text" class="form-control" placeholder="编号" ng-model="department.code">
                         </div>
                     </div>
                     <div class="row">
@@ -40,14 +40,14 @@
                             <span>排序号</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="email" class="form-control" placeholder="排序号">
+                            <input type="text" class="form-control" placeholder="排序号" ng-model="department.order">
                         </div>
                         <div class="col-xs-2">
                             <span>是否有效</span>
                         </div>
                         <div class="col-xs-4">
-                            <label><input type="radio" name="active">是</label>
-                            <label><input type="radio" name="active">否</label>
+                            <label><input type="radio" name="active1" ng-model="department.active" value="1">是</label>
+                            <label><input type="radio" name="active1" ng-model="department.active" value="0">否</label>
                         </div>
                     </div>
                     <div class="row">
@@ -55,7 +55,7 @@
                             <span>备注</span>
                         </div>
                         <div class="col-xs-10">
-                            <textarea class="form-control"></textarea>
+                            <textarea class="form-control" ng-model="department.remark"></textarea>
                         </div>
                     </div>
                 </div>

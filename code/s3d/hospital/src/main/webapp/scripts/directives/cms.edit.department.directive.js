@@ -21,7 +21,6 @@
                 scope.$on('EditDepartment.Open', open);
 
                 function open (event, data) {
-                    console.log(data);
                     scope.department = data.department;
                     element.modal({backdrop: 'static'});
                 }

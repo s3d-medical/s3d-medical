@@ -17,7 +17,7 @@
                         </tr>
                         <tr>
                             <td>所在部门</td>
-                            <td><span ng-bind="user.department"></span></td>
+                            <td><span ng-bind="user.departmentName"></span></td>
                             <td>邮件地址</td>
                             <td><span ng-bind="user.email"></span></td>
                         </tr>

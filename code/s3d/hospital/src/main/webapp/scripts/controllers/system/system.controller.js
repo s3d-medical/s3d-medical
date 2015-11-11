@@ -4,9 +4,9 @@
     angular.module('cms')
         .controller('SystemCtrl', SystemCtrl);
 
-    SystemCtrl.$inject = ['$rootScope', 'dataService'];
+    SystemCtrl.$inject = ['$rootScope', 'dataService', 'localDataService'];
 
-    function SystemCtrl ($rootScope, dataService) {
+    function SystemCtrl ($rootScope, dataService, localDataService) {
         var vm = this;
 
         init();
@@ -27,6 +27,7 @@
             dataService.get('departments.json')
                 .then(function (resp) {
                     var departments = _formatData(resp.departments);
+                    localDataService.setDepartments(departments);
                     $rootScope.menus = [
                         {
                             text: '组织架构与账号管理',

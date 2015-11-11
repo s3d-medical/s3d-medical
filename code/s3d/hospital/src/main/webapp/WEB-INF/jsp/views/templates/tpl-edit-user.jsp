@@ -12,13 +12,13 @@
                             <span>姓名</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="姓名">
+                            <input type="text" class="form-control" placeholder="姓名" ng-model="user.realName">
                         </div>
                         <div class="col-xs-2">
                             <span>编号</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="编号">
+                            <input type="text" class="form-control" placeholder="编号" ng-model="user.code">
                         </div>
                     </div>
                     <div class="row">
@@ -26,13 +26,13 @@
                             <span>所在部门</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="email" class="form-control" placeholder="所在部门">
+                            <input type="text" class="form-control" placeholder="所在部门" ng-model="user.departmentName">
                         </div>
                         <div class="col-xs-2">
                             <span>邮件地址</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="email" class="form-control" placeholder="邮件地址">
+                            <input type="email" class="form-control" placeholder="邮件地址" ng-model="user.email">
                         </div>
                     </div>
                     <div class="row">
@@ -40,13 +40,13 @@
                             <span>手机号码</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="手机号码">
+                            <input type="text" class="form-control" placeholder="手机号码" ng-model="user.phone">
                         </div>
                         <div class="col-xs-2">
                             <span>办公电话</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="办公电话">
+                            <input type="text" class="form-control" placeholder="办公电话" ng-model="user.tel">
                         </div>
                     </div>
                     <div class="row">
@@ -54,7 +54,7 @@
                             <span>登录名</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="登录名">
+                            <input type="text" class="form-control" placeholder="登录名" ng-model="user.userName">
                         </div>
                         <div class="col-xs-2">
                             <span>默认语言</span>
@@ -68,7 +68,7 @@
                             <span>备注</span>
                         </div>
                         <div class="col-xs-10">
-                            <textarea class="form-control"></textarea>
+                            <textarea class="form-control" ng-model="user.remark"></textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -76,7 +76,7 @@
                             <span>导入数据对应值</span>
                         </div>
                         <div class="col-xs-10">
-                            <input type="text" class="form-control" placeholder="导入数据对应值">
+                            <input type="text" class="form-control" placeholder="导入数据对应值" ng-model="user.key">
                         </div>
                     </div>
                 </div>
