@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @since 2015/7/19.
  */
 public class UserBasicInfoVO implements Serializable {
+    private static final long serialVersionUID = 6578526809587873686L;
     private Integer userId;
     private String name;
     private String sex;

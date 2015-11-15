@@ -47,7 +47,7 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <!-- 定义事务拦截器bean -->
+    <!-- 启用事务， 通过bean的名称 + method名称， 定义事务拦截器bean -->
     <bean id="transactionInterceptor"
           class="org.springframework.transaction.interceptor.TransactionInterceptor">
         <property name="transactionManager" ref="transactionManager"/>
@@ -83,4 +83,8 @@
             </list>
         </property>
     </bean>
+
+    <!-- 启用注解事务 @Transactional -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"></tx:annotation-driven>
+
 </beans> 

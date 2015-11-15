@@ -1,5 +1,6 @@
 package com.s3d.auth.acl.vo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,8 @@ import java.util.List;
  * @desc com.s3d.auth.acl.vo
  * @date 2015/11/1 18:51
  */
-public class ActionQueryVO {
+public class ActionQueryVO implements Serializable {
+    private static final long serialVersionUID = -221188226440741729L;
     private List<Integer> actionIds = new ArrayList<Integer>();
 
     public List<Integer> getActionIds() {

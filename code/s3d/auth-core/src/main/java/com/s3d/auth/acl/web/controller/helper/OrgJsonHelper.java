@@ -1,7 +1,7 @@
 package com.s3d.auth.acl.web.controller.helper;
 
 import com.s3d.auth.acl.entity.Org;
-import com.s3d.auth.acl.vo.OrgExtVO;
+import com.s3d.auth.acl.vo.OrgVO;
 import com.s3d.tech.slicer.PageResult;
 import com.s3d.tech.utils.JacksonParser;
 
@@ -16,34 +16,22 @@ import java.util.*;
  */
 public class OrgJsonHelper {
     /**
-     * convert to this format
-     * {
-     * "count": 100,
-     * "departments":[{
-     * "id": 1,
-     * "text": "当前点击的机构名称",
-     * "parent": "父机构名称",
-     * "order": 1,
-     * "remark": ""
-     * }]
-     * }
-     *
      * @param pageResult
      * @return
      */
-    public static String toJsonForGetDirectChildrenPage(PageResult<OrgExtVO> pageResult) {
+    public static String toJsonForGetDirectChildrenPage(PageResult<OrgVO> pageResult) {
         Map map = new HashMap();
         map.put("count", pageResult.getTotalRecords());
 
         List<Map> departments = new ArrayList<Map>();
-        List<OrgExtVO> orgList = pageResult.getResults();
+        List<OrgVO> orgList = pageResult.getResults();
         for (int i = 0; i < orgList.size(); i++) {
-            OrgExtVO org = orgList.get(i);
+            OrgVO org = orgList.get(i);
             Map oneOrg = new HashMap();
             oneOrg.put("id", org.getId());
             oneOrg.put("text", org.getName());
             oneOrg.put("parent", org.getParentName());
-            oneOrg.put("order", org.getOrder());
+            oneOrg.put("order", 0);
             oneOrg.put("remark", org.getRemark());
             departments.add(oneOrg);
         }

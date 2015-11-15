@@ -49,5 +49,13 @@
         <sqlFile path="scripts/2015-11-07_0_mod_org.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
     </changeSet>
+    <changeSet id="12" author="wind" context="production">
+        <sqlFile path="scripts/2015-11-15_0_mod_org.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
+    <changeSet id="13" author="wind" context="production">
+        <sqlFile path="scripts/2015-11-15_1_mod_org_parent_null.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
 
 </databaseChangeLog>

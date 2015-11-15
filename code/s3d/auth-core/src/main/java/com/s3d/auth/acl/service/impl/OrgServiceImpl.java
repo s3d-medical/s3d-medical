@@ -3,7 +3,6 @@ package com.s3d.auth.acl.service.impl;
 import com.s3d.auth.acl.dao.OrgDao;
 import com.s3d.auth.acl.entity.Org;
 import com.s3d.auth.acl.service.OrgService;
-import com.s3d.auth.acl.vo.OrgExtVO;
 import com.s3d.auth.acl.vo.OrgVO;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
@@ -39,7 +38,6 @@ public class OrgServiceImpl implements OrgService {
     }
 
     private void save(OrgVO orgVO) {
-        //String name,String code,  String desc, Integer status, Org parent
         Org org = new Org(orgVO.getName(), orgVO.getCode(), orgVO.getRemark(), Org.STATUS_VALID);
         if (orgVO.getParentId() != null) {
             Org parent = this.orgDao.get(orgVO.getParentId());
@@ -64,17 +62,16 @@ public class OrgServiceImpl implements OrgService {
     private void checkOrg(OrgVO orgVO) {
         // check basically
         Assert.isTrue(orgVO != null, "Saved org can not be null.");
-        Assert.isTrue(!StringUtils.isEmpty(orgVO.getCode()), "Org code can not be null");
-        Assert.isTrue(!StringUtils.isEmpty(orgVO.getName()), "Org name can not be null");
+        Assert.isTrue(!StringUtils.isEmpty(orgVO.getCode()), "Org code can not be empty");
+        Assert.isTrue(!StringUtils.isEmpty(orgVO.getName()), "Org name can not be empty");
+
         // check code is duplicated.
         Org extOrg = orgDao.getOrgByCode(orgVO.getCode());
         if (extOrg != null) {
             if (orgVO.getId() != null && !orgVO.getId().equals(extOrg.getId())) {
                 StringBuilder error = new StringBuilder();
-                error.append("Org code has been used by other org")
-                        .append(",org id: ").append(extOrg.getId())
-                        .append(", org code: ").append(extOrg.getCode())
-                        .append(", org name:").append(extOrg.getName());
+                error.append("Org code has been used by other org").append(",org id: ").append(extOrg.getId())
+                        .append(", org code: ").append(extOrg.getCode()) .append(", org name:").append(extOrg.getName());
                 throw new RuntimeException(error.toString());
             }
         }
@@ -103,24 +100,25 @@ public class OrgServiceImpl implements OrgService {
 
     @Transactional(readOnly = true)
     @Override
-    public PageResult<OrgExtVO> getDirectChildrenPage(Integer orgId, PageParam pageParam) {
+    public PageResult<OrgVO> getDirectChildrenPage(Integer orgId, PageParam pageParam) {
         if (orgId == null || pageParam.isValid() == false) {
             throw new RuntimeException("Org id or parameters form pagination is wrong.");
         }
         Long count = this.orgDao.getDirectChildrenCount(orgId, pageParam);
-        List<OrgExtVO> orgExtVOs = new ArrayList<OrgExtVO>();
+        List<OrgVO> orgExtVOs = new ArrayList<OrgVO>();
         if(count != null && count > 0){
             List<Org> orgList = this.orgDao.getDirectChildren(orgId, pageParam);
             if (orgList != null && orgList.size() > 0) {
                 for (int i = 0; i < orgList.size(); i++) {
                     Org org = orgList.get(i);
-                    OrgExtVO orgExtVO = new OrgExtVO(org.getId(), org.getName(), org.getCode(),
-                            org.getDesc(), org.getStatus(), org.getParentId(), org.getParentName(), pageParam.getStartNo() + i);
+                    //Integer id,  String code, String name, Boolean active, String remark, Integer order, Integer parentId, String parentName
+                    OrgVO orgExtVO = new OrgVO(org.getId(), org.getCode(), org.getName(),
+                            org.getStatus(), org.getDesc(), 0, org.getParentId(), org.getParentName());
                     orgExtVOs.add(orgExtVO);
                 }
             }
         }
-        PageResult<OrgExtVO> pageResult = new PageResult(count, orgExtVOs, pageParam.getPageSize(), pageParam.getPageNo());
+        PageResult<OrgVO> pageResult = new PageResult(count, orgExtVOs, pageParam.getPageSize(), pageParam.getPageNo());
         return pageResult;
     }
 

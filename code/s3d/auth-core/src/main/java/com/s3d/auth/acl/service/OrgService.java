@@ -1,7 +1,6 @@
 package com.s3d.auth.acl.service;
 
 import com.s3d.auth.acl.entity.Org;
-import com.s3d.auth.acl.vo.OrgExtVO;
 import com.s3d.auth.acl.vo.OrgVO;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
@@ -32,6 +31,6 @@ public interface OrgService {
      */
     public List<Org> getAllOrgs();
 
-    public PageResult<OrgExtVO> getDirectChildrenPage(Integer orgId, PageParam pageParam);
+    public PageResult<OrgVO> getDirectChildrenPage(Integer orgId, PageParam pageParam);
 
 }

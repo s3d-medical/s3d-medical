@@ -27,7 +27,7 @@ public class Org {
     @Column(name="name")
     private String name;
 
-    @Column(name="desc")
+    @Column(name="remark")
     private String desc;
 
     @Column(name="code")
@@ -35,6 +35,9 @@ public class Org {
 
     @Column(name="status")
     private Boolean status;
+
+    @Column(name="pos")
+    private Integer order;
 
     @ManyToOne(cascade = CascadeType.ALL, optional = true)
     @JoinColumn(name = "auth_parent_org_id", referencedColumnName = "id")
@@ -118,6 +121,14 @@ public class Org {
         this.status = status;
     }
 
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
     public void addChild(Org child){
         if(child == null){
             return ;
@@ -140,4 +151,5 @@ public class Org {
         }
         return null;
     }
+
 }

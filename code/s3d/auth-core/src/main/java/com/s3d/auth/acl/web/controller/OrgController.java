@@ -2,7 +2,6 @@ package com.s3d.auth.acl.web.controller;
 
 import com.s3d.auth.acl.entity.Org;
 import com.s3d.auth.acl.service.OrgService;
-import com.s3d.auth.acl.vo.OrgExtVO;
 import com.s3d.auth.acl.vo.OrgVO;
 import com.s3d.auth.acl.web.controller.helper.OrgJsonHelper;
 import com.s3d.auth.acl.web.controller.helper.ResultHelper;
@@ -56,7 +55,7 @@ public class OrgController {
     public String querySubOrgs(HttpServletRequest request, HttpServletResponse response, @PathVariable(value = "orgId") Integer orgId,
                                @RequestParam(value = "pageNo") Integer pageNo,
                                @RequestParam(value = "pageSize") Integer pageSize) {
-        PageResult<OrgExtVO> pageResult = new PageResult<OrgExtVO>(0L, null, pageSize, pageNo);
+        PageResult<OrgVO> pageResult = new PageResult<OrgVO>(0L, null, pageSize, pageNo);
         try {
             pageResult = this.orgService.getDirectChildrenPage(orgId, new PageParam(pageNo, pageSize));
         } catch (Exception e) {

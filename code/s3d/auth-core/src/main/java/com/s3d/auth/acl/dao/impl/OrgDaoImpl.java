@@ -23,7 +23,7 @@ public class OrgDaoImpl extends HibernateDao<Org, Integer> implements OrgDao {
     @Override
     public Org getOrgByCode(String code) {
         StringBuilder hql = new StringBuilder();
-        hql.append("from Org t where t.code = :code");
+        hql.append("from Org where code = :code");
         Query query = this.getSession().createQuery(hql.toString());
         query.setString("code", code);
         List<Org> orgList = query.list();

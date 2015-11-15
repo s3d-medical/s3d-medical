@@ -5,6 +5,7 @@ import com.s3d.tech.utils.StringUtil;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +14,8 @@ import java.util.Set;
  * @desc com.s3d.auth.acl.vo
  * @date 2015/11/1 18:51
  */
-public class ActionVO {
+public class ActionVO implements Serializable{
+    private static final long serialVersionUID = -6858457890951321431L;
     private Integer id;
     private String actionName;
     private String moduleNo;
