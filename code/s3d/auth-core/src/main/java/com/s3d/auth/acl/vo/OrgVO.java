@@ -1,20 +1,32 @@
 package com.s3d.auth.acl.vo;
 
+import java.io.Serializable;
+
 /**
  * @author Administrator
  * @desc com.s3d.auth.acl.vo
  * @date 2015/11/7 14:44
  */
-public class OrgVO {
+public class OrgVO implements Serializable{
     private Integer id;
     private String name;
     private Integer parentId;
     private String code;
-    private String key;
-    private Integer sort;
-    private Boolean active;
     private String remark;
-    private Integer status;
+    private Boolean active;
+
+    public OrgVO() {
+
+    }
+
+    public OrgVO(Integer id, String name, String code, String remark, Boolean active, Integer parentId) {
+        this.id = id;
+        this.name = name;
+        this.parentId = parentId;
+        this.code = code;
+        this.remark = remark;
+        this.active = active;
+    }
 
     public Integer getId() {
         return id;
@@ -48,21 +60,6 @@ public class OrgVO {
         this.code = code;
     }
 
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
 
     public Boolean getActive() {
         return active;
@@ -79,4 +76,5 @@ public class OrgVO {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
 }

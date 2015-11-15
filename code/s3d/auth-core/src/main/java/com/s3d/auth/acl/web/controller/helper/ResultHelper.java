@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
  * @author wind.chen
  * @date 2015/5/18.
  */
-public class ControllerHelper {
+public class ResultHelper {
     private AuthResultStatus code;
     private AuthResultErrorMsg error;
 

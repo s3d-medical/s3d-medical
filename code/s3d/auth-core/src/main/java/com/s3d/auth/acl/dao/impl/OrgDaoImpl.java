@@ -4,7 +4,10 @@ import com.s3d.auth.acl.dao.ActionDao;
 import com.s3d.auth.acl.dao.OrgDao;
 import com.s3d.auth.acl.entity.Action;
 import com.s3d.auth.acl.entity.Org;
+import com.s3d.auth.acl.vo.OrgVO;
 import com.s3d.tech.data.dao.hibernate.HibernateDao;
+import com.s3d.tech.slicer.PageParam;
+import com.s3d.tech.slicer.PageResult;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
@@ -28,5 +31,33 @@ public class OrgDaoImpl extends HibernateDao<Org, Integer> implements OrgDao {
             return orgList.get(0);
         }
         return null;
+    }
+
+    @Override
+    public List<Org> getAllOrgs() {
+        StringBuilder hql = new StringBuilder();
+        hql.append("from Org t where t.parent = null");
+        Query query = this.getSession().createQuery(hql.toString());
+        return query.list();
+    }
+
+    @Override
+    public List<Org> getDirectChildren(Integer orgId, PageParam pageParam) {
+        StringBuilder hql = new StringBuilder();
+        hql.append("from Org t where t.parent.id = :parentId ");
+        Query query = this.getSession().createQuery(hql.toString());
+        query.setInteger("parentId", orgId);
+        query.setFirstResult(pageParam.getStartNo());
+        query.setMaxResults(pageParam.getPageSize());
+        return query.list();
+    }
+
+    @Override
+    public Long getDirectChildrenCount(Integer orgId, PageParam pageParam) {
+        StringBuilder hql = new StringBuilder();
+        hql.append("select count(t.id) as totalCount Org t where t.parent.id = :parentId ");
+        Query query = this.getSession().createQuery(hql.toString());
+        query.setInteger("parentId", orgId);
+        return (Long)query.uniqueResult();
     }
 }

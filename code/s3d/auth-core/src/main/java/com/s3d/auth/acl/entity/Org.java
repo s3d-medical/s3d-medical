@@ -1,6 +1,12 @@
 package com.s3d.auth.acl.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Administrator
@@ -10,6 +16,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "auth_org")
 public class Org {
+    public static final boolean STATUS_VALID = true;
+    public static final boolean STATUS_INVALID=false;
+
     @Id
     @GeneratedValue
     @Column(name="id")
@@ -25,9 +34,33 @@ public class Org {
     private String code;
 
     @Column(name="status")
-    private Integer status;
+    private Boolean status;
 
+    @ManyToOne(cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "auth_parent_org_id", referencedColumnName = "id")
     private Org parent;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true, mappedBy = "parent")
+    @Fetch(FetchMode.SUBSELECT)
+    @OrderBy(value = "id asc")
+    private Set<Org> children = new HashSet<Org>();
+
+    public Org() {
+    }
+
+    /**
+     *
+     * @param name
+     * @param code
+     * @param desc
+     * @param status
+     */
+    public Org(String name,String code,  String desc, Boolean status) {
+        this.name = name;
+        this.desc = desc;
+        this.code = code;
+        this.status = status;
+    }
 
     public Integer getId() {
         return id;
@@ -69,11 +102,42 @@ public class Org {
         this.code = code;
     }
 
-    public Integer getStatus() {
+    public Set<Org> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Set<Org> children) {
+        this.children = children;
+    }
+
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public void addChild(Org child){
+        if(child == null){
+            return ;
+        }
+        this.getChildren().add(child);
+    }
+
+    @Transient
+    public Integer getParentId(){
+        if(this.getParent() != null){
+            return this.getParent().getId();
+        }
+        return null;
+    }
+
+    @Transient
+    public String getParentName(){
+        if(this.getParent() != null){
+            return this.getParent().getParentName();
+        }
+        return null;
     }
 }

@@ -1,6 +1,12 @@
 package com.s3d.auth.acl.service;
 
+import com.s3d.auth.acl.entity.Org;
+import com.s3d.auth.acl.vo.OrgExtVO;
 import com.s3d.auth.acl.vo.OrgVO;
+import com.s3d.tech.slicer.PageParam;
+import com.s3d.tech.slicer.PageResult;
+
+import java.util.List;
 
 /**
  * @author zhigang.chen
@@ -12,12 +18,20 @@ public interface OrgService {
      * add or update an org.
      * @param orgVO
      */
-    public void saveOrUpdateOrg(OrgVO orgVO);
+    public void saveOrUpdate(OrgVO orgVO);
 
     /**
      * delete an org
      * @param orgId
      */
     public void deleteOrg(Integer orgId);
+
+    /**
+     * Get all orgnizations.
+     * @return
+     */
+    public List<Org> getAllOrgs();
+
+    public PageResult<OrgExtVO> getDirectChildrenPage(Integer orgId, PageParam pageParam);
 
 }
