@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wind.chen
@@ -30,10 +31,10 @@ public class OrgController {
     private OrgService orgService;
 
     @RequestMapping(value = "/departments", method = RequestMethod.GET)
-    public String getAllOrgs(HttpServletRequest request, HttpServletResponse response, final Model model){
-        List<Org> allOrgs = this.orgService.getAllOrgs();
-        String json = OrgJsonHelper.toJsonForGetAllOrgs(allOrgs);
-        return json;
+    @ResponseBody
+    public List<Map> getAllOrgs(HttpServletRequest request, HttpServletResponse response, final Model model){
+        List<Org> orgList = this.orgService.getAllOrgs();
+       return  OrgJsonHelper.toMapForGetAllOrgs(orgList);
     }
 
     // add or edit org.
@@ -43,7 +44,7 @@ public class OrgController {
             orgService.saveOrUpdate(orgVO);
             ResultHelper.createSuccessResult(model);
         } catch (Exception e) {
-            logger.error("Failed to add or save org. ", e);
+            logger.error("Failed to add or save org.", e);
             ResultHelper.createFailResult(model, "error", e.getMessage());
         }
         return model;

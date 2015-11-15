@@ -41,6 +41,7 @@ public class OrgVO implements Serializable{
         this.remark = remark;
         this.active = active;
         this.order = order;
+        this.parentName = parentName;
     }
 
     public Integer getId() {
@@ -106,6 +107,5 @@ public class OrgVO implements Serializable{
     public void setParentName(String parentName) {
         this.parentName = parentName;
     }
-
 
 }

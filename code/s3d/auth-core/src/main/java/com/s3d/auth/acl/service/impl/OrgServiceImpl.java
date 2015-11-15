@@ -56,6 +56,11 @@ public class OrgServiceImpl implements OrgService {
         } else {
             org.setParent(null);
         }
+        org.setCode(orgVO.getCode());
+        org.setDesc(orgVO.getRemark());
+        org.setName(orgVO.getName());
+        org.setOrder(orgVO.getOrder());
+        org.setStatus(orgVO.getActive());
         this.orgDao.saveOrUpdate(org);
     }
 
@@ -111,7 +116,6 @@ public class OrgServiceImpl implements OrgService {
             if (orgList != null && orgList.size() > 0) {
                 for (int i = 0; i < orgList.size(); i++) {
                     Org org = orgList.get(i);
-                    //Integer id,  String code, String name, Boolean active, String remark, Integer order, Integer parentId, String parentName
                     OrgVO orgExtVO = new OrgVO(org.getId(), org.getCode(), org.getName(),
                             org.getStatus(), org.getDesc(), 0, org.getParentId(), org.getParentName());
                     orgExtVOs.add(orgExtVO);

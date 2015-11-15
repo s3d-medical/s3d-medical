@@ -44,18 +44,19 @@ public class OrgJsonHelper {
      * @param orgs
      * @return
      */
-    public static String toJsonForGetAllOrgs(List<Org> orgs) {
+    public static List<Map> toMapForGetAllOrgs(List<Org> orgs) {
         List<Map> orgMaps = new ArrayList<Map>();
         if (orgs != null && orgs.size() > 0) {
             for(Org org : orgs){
-                Map oneOrgMap = toMapForOneOrg(org);
+                Map oneOrgMap = handleOneOrg(org);
                 orgMaps.add(oneOrgMap);
             }
         }
-        return JacksonParser.convertToJSONString(orgMaps);
+      //  return JacksonParser.convertToJSONString(orgMaps);
+        return orgMaps;
     }
 
-    private static Map toMapForOneOrg(Org org) {
+    private static Map handleOneOrg(Org org) {
         if (org != null) {
             Map orgMap = new HashMap();
             orgMap.put("id", org.getId());
@@ -63,11 +64,12 @@ public class OrgJsonHelper {
             List<Map> nodes = new ArrayList<Map>();
             if (org.getChildren() != null && org.getChildren().size() > 0) {
                 for (Org child : org.getChildren()) {
-                    Map childMap = toMapForOneOrg(child);
+                    Map childMap = handleOneOrg(child);
                     nodes.add(childMap);
                 }
             }
             orgMap.put("nodes", nodes);
+            return orgMap;
         }
         return null;
     }
