@@ -29,16 +29,6 @@
                 templateUrl: 'viewDepartments',
                 controller: 'DepartmentsCtrl as ds'
             })
-            .state('main.system.department', {
-                url: '/departments/:departmentId',
-                templateUrl: 'viewDepartment',
-                controller: 'DepartmentCtrl as dc'
-            })
-            .state('main.system.employee', {
-                url: '/employees/:employeeId',
-                templateUrl: 'viewEmployee',
-                controller: 'EmployeeCtrl as ec'
-            })
             .state('main.system.roles', {
                 url: '/roles',
                 templateUrl: 'viewRoles',
@@ -48,6 +38,16 @@
                 url: '/roles/:roleId',
                 templateUrl: 'viewRole',
                 controller: 'RoleCtrl as rc'
+            })
+            .state('main.system.userRoles', {
+                url: '/user-roles',
+                templateUrl: 'viewUserRoles',
+                controller: 'UserRolesCtrl as ur'
+            })
+            .state('main.system.permissions', {
+                url: '/permissions',
+                templateUrl: 'viewPermissions',
+                controller: 'PermissionsCtrl as ps'
             })
 
         ;

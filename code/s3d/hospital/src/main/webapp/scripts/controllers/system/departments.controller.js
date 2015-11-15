@@ -4,9 +4,9 @@
     angular.module('cms')
         .controller('DepartmentsCtrl', DepartmentsCtrl);
 
-    DepartmentsCtrl.$inject = ['$stateParams'];
+    DepartmentsCtrl.$inject = ['$scope', '$stateParams', 'dataService'];
 
-    function DepartmentsCtrl ($stateParams) {
+    function DepartmentsCtrl ($scope, $stateParams, dataService) {
         var vm = this;
         vm.cfg = {
             parentId: 0,
@@ -14,62 +14,101 @@
             count: 0,
             pageSize: 10,
             pageNum: 1,
-            pages: []
+            pages: [1]
         };
+        vm.selectedDepartment = {};
+        vm.selectedUser = {};
 
         vm.changeType = changeType;
         vm.loadPageData = loadPageData;
+        vm.refresh = refresh;
+        vm.viewItem = viewItem;
+        vm.editItem = editItem;
+        vm.createItem = createItem;
+        vm.deleteItems = deleteItems;
+        vm.resetPassword = resetPassword;
 
         init();
 
         function init () {
             vm.cfg.parentId = $stateParams.departmentId;
             vm.cfg.type = $stateParams.type;
-            loadPageData();
+            loadPageData(1);
         }
 
         function changeType (type) {
             vm.cfg.type = type;
-            vm.cfg.pageNum = 1;
+            loadPageData(1);
+        }
+
+        function refresh () {
             loadPageData(vm.cfg.pageNum);
         }
 
         function loadPageData (pageNum) {
-            console.log(pageNum);
-            // todo get data from server
-            var resp = {
-                count: 100,
-                /*result: [
-                    {id: 1, order: 3, text: '1111', parent: '11111', remark: '11111'},
-                    {id: 1, order: 3, text: '1111', parent: '11111', remark: '11111'},
-                    {id: 1, order: 3, text: '1111', parent: '11111', remark: '11111'},
-                    {id: 1, order: 3, text: '1111', parent: '11111', remark: '11111'},
-                    {id: 1, order: 3, text: '1111', parent: '11111', remark: '11111'},
-                    {id: 1, order: 3, text: '1111', parent: '11111', remark: '11111'},
-                    {id: 1, order: 3, text: '1111', parent: '11111', remark: '11111'},
-                    {id: 1, order: 3, text: '1111', parent: '11111', remark: '11111'},
-                    {id: 1, order: 3, text: '1111', parent: '11111', remark: '11111'},
-                    {id: 1, order: 3, text: '1111', parent: '11111', remark: '11111'}
-                ],*/
-                result: [
-                    {id: 1, order: 3, realName: '1111', userName: '11111', department: '11111', email: '1111', phone: '11111'},
-                    {id: 1, order: 3, realName: '1111', userName: '11111', department: '11111', email: '1111', phone: '11111'},
-                    {id: 1, order: 3, realName: '1111', userName: '11111', department: '11111', email: '1111', phone: '11111'},
-                    {id: 1, order: 3, realName: '1111', userName: '11111', department: '11111', email: '1111', phone: '11111'},
-                    {id: 1, order: 3, realName: '1111', userName: '11111', department: '11111', email: '1111', phone: '11111'},
-                    {id: 1, order: 3, realName: '1111', userName: '11111', department: '11111', email: '1111', phone: '11111'},
-                    {id: 1, order: 3, realName: '1111', userName: '11111', department: '11111', email: '1111', phone: '11111'},
-                    {id: 1, order: 3, realName: '1111', userName: '11111', department: '11111', email: '1111', phone: '11111'},
-                    {id: 1, order: 3, realName: '1111', userName: '11111', department: '11111', email: '1111', phone: '11111'},
-                    {id: 1, order: 3, realName: '1111', userName: '11111', department: '11111', email: '1111', phone: '11111'}
-                ]
-            };
-            vm[vm.cfg.type] = resp.result;
-            vm.cfg.count = resp.count;
-            vm.cfg.pages = [];
-            for (var i = 1; i <= resp.count / vm.cfg.pageSize; i++ ) {
-                vm.cfg.pages.push(i);
+            if (pageNum < 1) {
+                vm.cfg.pageNum = 1;
+                return;
+            } else if (vm.cfg.pages.length > 0 && pageNum > vm.cfg.pages.length) {
+                vm.cfg.pageNum = vm.cfg.pages.length
+                return;
+            } else {
+                vm.cfg.pageNum = pageNum;
             }
+            // todo just for test
+            dataService.get(vm.cfg.type + vm.cfg.pageNum + '.json')
+                .then(function (resp) {
+                    vm[vm.cfg.type] = resp.result;
+                    vm.cfg.count = resp.count;
+                    vm.cfg.pages = [];
+                    for (var i = 1; i <= resp.count / vm.cfg.pageSize; i++ ) {
+                        vm.cfg.pages.push(i);
+                    }
+                    if (vm.cfg.pages.length == 0) {
+                        vm.cfg.pages.push(1);
+                    }
+                });
+        }
+
+        function viewItem (id) {
+            // get department or user
+            if (vm.cfg.type == 'departments') {
+                dataService.get('department.json')
+                    .then(function (resp) {
+                        vm.selectedDepartment = resp.department;
+                        $scope.$broadcast('ViewDepartment.Open', {department: vm.selectedDepartment});
+                    });
+            } else if (vm.cfg.type == 'users') {
+                dataService.get('user.json')
+                    .then(function (resp) {
+                        vm.selectedUser = resp.user;
+                        $scope.$broadcast('ViewUser.Open', {user: vm.selectedUser});
+                    })
+            }
+        }
+
+        function editItem () {
+            if (vm.cfg.type == 'departments') {
+                $scope.$broadcast('EditDepartment.Open', {department: vm.selectedDepartment});
+            } else if (vm.cfg.type == 'users') {
+                $scope.$broadcast('EditUser.Open', {user: vm.selectedUser});
+            }
+        }
+
+        function createItem () {
+            if (vm.cfg.type == 'departments') {
+                $scope.$broadcast('EditDepartment.Open', {department: {}});
+            } else if (vm.cfg.type == 'users') {
+                $scope.$broadcast('EditUser.Open', {user: {}});
+            }
+        }
+
+        function deleteItems () {
+
+        }
+
+        function resetPassword () {
+            $scope.$broadcast('ResetPassword.Open', {userId: vm.selectedUser.id});
         }
     }
 })();
