@@ -3,7 +3,7 @@ package com.s3d.auth.acl.web.controller;
 import com.s3d.auth.acl.entity.Org;
 import com.s3d.auth.acl.service.OrgService;
 import com.s3d.auth.acl.vo.OrgVO;
-import com.s3d.auth.acl.web.controller.helper.OrgJsonHelper;
+import com.s3d.auth.acl.web.controller.helper.OrgConvertorHelper;
 import com.s3d.auth.acl.web.controller.helper.ResultHelper;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
@@ -34,7 +34,7 @@ public class OrgController {
     @ResponseBody
     public List<Map> getAllOrgs(HttpServletRequest request, HttpServletResponse response, final Model model){
         List<Org> orgList = this.orgService.getAllOrgs();
-       return  OrgJsonHelper.toMapForGetAllOrgs(orgList);
+       return OrgConvertorHelper.toMapForGetAllOrgs(orgList);
     }
 
     // add or edit org.
@@ -62,6 +62,6 @@ public class OrgController {
         } catch (Exception e) {
             logger.error("Failed to query sub organizations. ", e);
         }
-        return OrgJsonHelper.toJsonForGetDirectChildrenPage(pageResult);
+        return OrgConvertorHelper.toJsonForGetDirectChildrenPage(pageResult);
     }
 }

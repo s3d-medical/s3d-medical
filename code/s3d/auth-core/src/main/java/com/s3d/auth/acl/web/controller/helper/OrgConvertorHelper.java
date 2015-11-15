@@ -14,7 +14,7 @@ import java.util.*;
  * @desc com.s3d.auth.acl.service.impl.jsonConvertor
  * @date 2015/11/8 15:05
  */
-public class OrgJsonHelper {
+public class OrgConvertorHelper {
     /**
      * @param pageResult
      * @return
@@ -52,7 +52,6 @@ public class OrgJsonHelper {
                 orgMaps.add(oneOrgMap);
             }
         }
-      //  return JacksonParser.convertToJSONString(orgMaps);
         return orgMaps;
     }
 
