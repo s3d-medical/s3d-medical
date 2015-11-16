@@ -3,7 +3,7 @@ package com.s3d.auth.acl.web.controller;
 import com.s3d.auth.acl.entity.Org;
 import com.s3d.auth.acl.service.OrgService;
 import com.s3d.auth.acl.vo.OrgVO;
-import com.s3d.auth.acl.web.controller.helper.OrgConvertorHelper;
+import com.s3d.auth.acl.web.controller.helper.OrgConvertor;
 import com.s3d.auth.acl.web.controller.helper.ResultHelper;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
@@ -34,7 +34,7 @@ public class OrgController {
     @ResponseBody
     public List<Map> getAllOrgs(HttpServletRequest request, HttpServletResponse response, final Model model){
         List<Org> orgList = this.orgService.getAllOrgs();
-       return OrgConvertorHelper.toMapForGetAllOrgs(orgList);
+       return OrgConvertor.toMapForGetAllOrgs(orgList);
     }
 
     // add or edit org.
@@ -51,17 +51,17 @@ public class OrgController {
     }
 
     // query sub orgs by page.
-    @RequestMapping(value = "/departments/${orgId}/departments?page=${pageNo}&pageSize=${pageSize}")
-    @ResponseBody
-    public String querySubOrgs(HttpServletRequest request, HttpServletResponse response, @PathVariable(value = "orgId") Integer orgId,
-                               @RequestParam(value = "pageNo") Integer pageNo,
-                               @RequestParam(value = "pageSize") Integer pageSize) {
+    @RequestMapping(value = "/departments/{orgId}/departments?page={pageNo}&pageSize={pageSize}", method = RequestMethod.GET)
+    public Map querySubOrgs(HttpServletRequest request, HttpServletResponse response,
+                            @PathVariable(value = "orgId") Integer orgId,
+                               @RequestParam(value = "pageNo", defaultValue = "0" ) Integer pageNo,
+                               @RequestParam(value = "pageSize", defaultValue="10") Integer pageSize) {
         PageResult<OrgVO> pageResult = new PageResult<OrgVO>(0L, null, pageSize, pageNo);
         try {
             pageResult = this.orgService.getDirectChildrenPage(orgId, new PageParam(pageNo, pageSize));
         } catch (Exception e) {
             logger.error("Failed to query sub organizations. ", e);
         }
-        return OrgConvertorHelper.toJsonForGetDirectChildrenPage(pageResult);
+        return OrgConvertor.toMapForQuerySubOrgs(pageResult);
     }
 }

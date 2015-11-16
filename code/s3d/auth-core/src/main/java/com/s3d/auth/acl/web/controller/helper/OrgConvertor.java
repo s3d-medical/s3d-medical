@@ -14,12 +14,13 @@ import java.util.*;
  * @desc com.s3d.auth.acl.service.impl.jsonConvertor
  * @date 2015/11/8 15:05
  */
-public class OrgConvertorHelper {
+public class OrgConvertor {
+
     /**
      * @param pageResult
      * @return
      */
-    public static String toJsonForGetDirectChildrenPage(PageResult<OrgVO> pageResult) {
+    public static Map toMapForQuerySubOrgs(PageResult<OrgVO> pageResult) {
         Map map = new HashMap();
         map.put("count", pageResult.getTotalRecords());
 
@@ -35,9 +36,8 @@ public class OrgConvertorHelper {
             oneOrg.put("remark", org.getRemark());
             departments.add(oneOrg);
         }
-
         map.put("departments", departments);
-        return JacksonParser.convertToJSONString(map);
+       return map;
     }
 
     /**
