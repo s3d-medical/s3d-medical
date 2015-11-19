@@ -25,8 +25,9 @@
                         <div class="col-xs-2">
                             <span>上级部门</span>
                         </div>
-                        <div class="col-xs-4">
-                            <input type="text" class="form-control" placeholder="上级部门" ng-model="department.parentId">
+                        <div class="department-wrap col-xs-4">
+                            <input type="text" class="form-control" placeholder="上级部门" ng-model="parentDepartment.text" readonly>
+                            <button type="button" class="btn btn-primary" ng-click="chooseParentDepartment()">选择</button>
                         </div>
                         <div class="col-xs-2">
                             <span>编号</span>
@@ -65,5 +66,6 @@
                 </div>
             </div>
         </div>
+        <cms-select-department on-save="changeParentDepartment(departmentId)"></cms-select-department>
     </div>
 </script>

@@ -10,14 +10,14 @@
                     <table class="pull-left table table-bordered table-striped">
                         <tbody>
                         <tr>
-                            <td>姓名</td>
+                            <td>部门名称</td>
                             <td><span ng-bind="department.name"></span></td>
                             <td>导入数据对应值</td>
                             <td><span ng-bind="department.key"></span></td>
                         </tr>
                         <tr>
                             <td>上级部门</td>
-                            <td><span ng-bind="department.parent"></span></td>
+                            <td><span ng-bind="parentDepartment.text"></span></td>
                             <td>编号</td>
                             <td><span ng-bind="department.code"></span></td>
                         </tr>

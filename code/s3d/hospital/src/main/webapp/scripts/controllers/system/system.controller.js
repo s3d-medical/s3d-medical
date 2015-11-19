@@ -26,8 +26,8 @@
         function initData () {
             dataService.get('departments.json')
                 .then(function (resp) {
+                    localDataService.setDepartments(_.cloneDeep(resp.departments));
                     var departments = _formatData(resp.departments);
-                    localDataService.setDepartments(departments);
                     $rootScope.menus = [
                         {
                             text: '组织架构与账号管理',

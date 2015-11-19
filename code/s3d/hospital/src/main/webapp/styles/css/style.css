@@ -96,9 +96,9 @@
     margin-left: 0;
 }
 /* system manage */
-.system .btn {
+/*.system .btn {
     margin-right: 20px;
-}
+}*/
 /* departments */
 .departments .page-size {
     border: none;
@@ -114,6 +114,10 @@
 .edit-department h4 {
     text-align: center;
     margin-bottom: 20px;
+}
+.department-wrap input[type="text"] {
+    display: inline-block;
+    width: 65%;
 }
 /* roles */
 .roles .nav-tabs {
@@ -160,4 +164,29 @@
 /* permissions */
 .permissions table {
     width:480px;
+}
+/* select department */
+.select-department .menu {
+    max-height: 395px;
+    overflow-y: auto;
+}
+.select-department .search-wrap {
+    width: 370px;
+}
+.select-department .search-wrap ul {
+    padding: 0;
+    border: solid 1px #ccc;
+    height: 320px;
+    overflow: auto;
+}
+.select-department .search-wrap ul li {
+    padding: 5px;
+}
+.select-department .search-wrap .input-search {
+    width: 84%;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.select-department .search-wrap .btn {
+    margin-top: -4px;
 }

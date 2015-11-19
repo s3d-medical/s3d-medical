@@ -38,6 +38,9 @@ label {
 .style-blue .theme-color {
     color: #003D8D;
 }
+.style-blue .theme-bg-color {
+    background-color: #286090;
+}
 /* style green */
 .style-green .login .content {
     background-color: #6FBA2C;
@@ -73,6 +76,9 @@ label {
 }
 .style-green .theme-color {
     color: #6FBA2C;
+}
+.style-green .theme-bg-color {
+    background-color: #449d44;
 }
 /* common */
 .bg {
