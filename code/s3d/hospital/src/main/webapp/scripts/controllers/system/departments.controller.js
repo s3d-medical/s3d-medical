@@ -14,12 +14,15 @@
             count: 0,
             pageSize: 10,
             pageNum: 1,
-            pages: [1]
+            pages: [1],
+            checkAll: false
         };
         vm.selectedDepartment = {};
         vm.selectedUser = {};
 
         vm.changeType = changeType;
+        vm.checkAllItems = checkAllItems;
+        vm.checkItem = checkItem;
         vm.loadPageData = loadPageData;
         vm.refresh = refresh;
         vm.viewItem = viewItem;
@@ -38,7 +41,26 @@
 
         function changeType (type) {
             vm.cfg.type = type;
+            vm.cfg.checkAll = false;
             loadPageData(1);
+        }
+
+        function checkAllItems (event) {
+            _.map(vm[vm.cfg.type], function (item) {
+                item.checked = event.target.checked;
+            });
+        }
+
+        function checkItem (event) {
+            event.stopPropagation();
+            var count = _.countBy(vm[vm.cfg.type], function (item) {
+                return item.checked == true;
+            });
+            if (count.true == vm[vm.cfg.type].length) {
+                vm.cfg.checkAll = true;
+            } else {
+                vm.cfg.checkAll = false;
+            }
         }
 
         function refresh () {
@@ -59,6 +81,9 @@
             dataService.get(vm.cfg.type + vm.cfg.pageNum + '.json')
                 .then(function (resp) {
                     vm[vm.cfg.type] = resp.result;
+                    _.map(vm[vm.cfg.type], function (item) {
+                        item.checked = false;
+                    });
                     vm.cfg.count = resp.count;
                     vm.cfg.pages = [];
                     for (var i = 1; i <= resp.count / vm.cfg.pageSize; i++ ) {

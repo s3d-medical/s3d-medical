@@ -110,6 +110,10 @@
 .departments tr {
     cursor: pointer;
 }
+.departments table tr td:first-child {
+    width: 59px;
+    text-align: center;
+}
 /* department */
 .edit-department h4 {
     text-align: center;
