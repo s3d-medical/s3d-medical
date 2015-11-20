@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary ok" ng-click="save()">确定</button>
+                    <button type="button" class="btn btn-primary ok" ng-disabled="selectedId == 0" ng-click="save()">确定</button>
                     <button type="button" class="btn btn-default ok" ng-click="close()">取消</button>
                 </div>
             </div>

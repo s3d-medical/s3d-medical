@@ -4,9 +4,9 @@
     angular.module('cms')
         .directive('cmsSelectDepartment', cmsSelectDepartment);
 
-    cmsSelectDepartment.$inject = ['localDataService'];
+    cmsSelectDepartment.$inject = ['$timeout', 'localDataService'];
 
-    function cmsSelectDepartment (localDataService) {
+    function cmsSelectDepartment ($timeout, localDataService) {
         return {
             restrict: 'AE',
             templateUrl: 'tplSelectDepartment',
@@ -30,7 +30,7 @@
 
                     $('.department-list').treeview({
                         data: scope.departments,
-                        enableLinks: true,
+                        enableLinks: false,
                         onNodeSelected: _selectNode
                     });
                     element.modal({backdrop: 'static'});
@@ -59,8 +59,17 @@
                     element.modal('hide');
                 }
 
-                function _selectNode (data) {
-                    console.log(data);
+                function _selectNode (event, data) {
+                    $timeout(function () {
+                        scope.condition = '';
+                        if (data.nodes && data.nodes.length) {
+                            scope.items = data.nodes;
+                            scope.selectedId = scope.items[0].id;
+                        } else {
+                            scope.selectedId = 0;
+                            scope.items = [];
+                        }
+                    });
                 }
 
                 function _searchDepartment (departments) {

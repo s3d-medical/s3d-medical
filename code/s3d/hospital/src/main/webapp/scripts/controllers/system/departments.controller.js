@@ -54,7 +54,7 @@
         function checkItem (event) {
             event.stopPropagation();
             var count = _.countBy(vm[vm.cfg.type], function (item) {
-                return item.checked == true;
+                return item.checked;
             });
             if (count.true == vm[vm.cfg.type].length) {
                 vm.cfg.checkAll = true;
