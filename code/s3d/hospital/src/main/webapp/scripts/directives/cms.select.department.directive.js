@@ -66,8 +66,8 @@
                             scope.items = data.nodes;
                             scope.selectedId = scope.items[0].id;
                         } else {
-                            scope.selectedId = 0;
-                            scope.items = [];
+                            scope.items = [data];
+                            scope.selectedId = data.id;
                         }
                     });
                 }
