@@ -73,7 +73,7 @@
         function initTree () {
             $('#permissionTree').treeview({
                 data: vm.permissionCategories,
-                enableLinks: true,
+                enableLinks: false,
                 onNodeSelected: _selectNode
             });
         }

@@ -8,7 +8,7 @@
                 <button type="button" class="btn btn-danger" ng-click="ds.deleteItems()">删除</button>
             </li>
         </ul>
-        <table ng-if="ds.cfg.type == 'departments'" class="table table-bordered table-striped">
+        <table ng-if="ds.cfg.type == 'departments'" class="tb-departments table table-bordered table-striped">
             <thead>
             <tr>
                 <td><input type="checkbox" ng-model="ds.cfg.checkAll" ng-click="ds.checkAllItems($event)"></td>
@@ -28,7 +28,7 @@
             </tr>
             </tbody>
         </table>
-        <table ng-if="ds.cfg.type == 'users'" class="table table-bordered table-striped">
+        <table ng-if="ds.cfg.type == 'users'" class="tb-users table table-bordered table-striped">
             <thead>
             <tr>
                 <td><input type="checkbox" ng-model="ds.cfg.checkAll" ng-click="ds.checkAllItems($event)"></td>

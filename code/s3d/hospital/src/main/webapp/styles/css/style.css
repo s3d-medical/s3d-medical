@@ -111,8 +111,13 @@
     cursor: pointer;
 }
 .departments table tr td:first-child {
-    width: 59px;
     text-align: center;
+}
+.departments .tb-departments tr td:first-child {
+     width: 59px;
+ }
+.departments .tb-users tr td:first-child {
+    width: 62px;
 }
 /* department */
 .edit-department h4 {

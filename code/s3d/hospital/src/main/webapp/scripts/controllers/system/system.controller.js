@@ -31,50 +31,50 @@
                     $rootScope.menus = [
                         {
                             text: '组织架构与账号管理',
-                            href: '#system',
+                            hash: '#system',
                             state: {
                                 expanded: false
                             },
                             nodes: [
                                 {
                                     text: '层级架构',
-                                    href: '#system',
+                                    hash: '#system',
                                     nodes: departments
                                 },
                                 {
                                     text: '常用群组',
-                                    href: '#system'
+                                    hash: '#system'
                                     //nodes: []
                                 },
                                 {
                                     text: '所有架构',
-                                    href: '#system'
+                                    hash: '#system'
                                     //nodes: []
                                 }
                             ]
                         },
                         {
                             text: '权限管理',
-                            href: '#system',
+                            hash: '#system',
                             state: {
                                 expanded: false
                             },
                             nodes: [
                                 {
                                     text: '导入系统权限',
-                                    href: '#system'
+                                    hash: '#system'
                                 },
                                 {
                                     text: '角色分配',
-                                    href: '#system/roles',
+                                    hash: '#system/roles',
                                     nodes: [
                                         {
                                             text: '员工授权查询',
-                                            href: '#system/user-roles'
+                                            hash: '#system/user-roles'
                                         },
                                         {
                                             text: '角色授权查询',
-                                            href: '#system/permissions'
+                                            hash: '#system/permissions'
                                         }
                                     ]
                                 }
@@ -88,18 +88,20 @@
         function initTree () {
             $('#menu').treeview({
                 data: $rootScope.menus,
-                enableLinks: true,
+                enableLinks: false,
                 onNodeSelected: _selectNode
             });
         }
 
         function _selectNode (event, data) {
-            //console.log(data);
+            if (data.hash) {
+                location.href = data.hash;
+            }
         }
 
         function _formatData(data) {
             for (var i in data) {
-                data[i].href = '#system/departments/' + data[i].id + '/departments';
+                data[i].hash = '#system/departments/' + data[i].id + '/departments';
                 if (data[i].nodes && data[i].nodes.length) {
                     _formatData(data[i].nodes);
                 }
