@@ -32,7 +32,7 @@ public class OrgConvertor {
             oneOrg.put("id", org.getId());
             oneOrg.put("text", org.getName());
             oneOrg.put("parent", org.getParentName());
-            oneOrg.put("order", 0);
+            oneOrg.put("order", org.getOrder());
             oneOrg.put("remark", org.getRemark());
             departments.add(oneOrg);
         }

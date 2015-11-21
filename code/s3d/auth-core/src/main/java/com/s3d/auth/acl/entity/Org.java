@@ -147,7 +147,7 @@ public class Org {
     @Transient
     public String getParentName(){
         if(this.getParent() != null){
-            return this.getParent().getParentName();
+            return this.getParent().getName();
         }
         return null;
     }

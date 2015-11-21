@@ -37,6 +37,10 @@ public class PageParam {
 		return (this.pageNo -1) * this.pageSize;
 	}
 
+    public int  calOrder(int curPosInPage){
+        return getStartNo() + curPosInPage;
+    }
+
 	/**
 	 * @return the pageNo
 	 */
