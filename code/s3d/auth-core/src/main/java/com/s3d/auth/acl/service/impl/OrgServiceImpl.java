@@ -118,6 +118,7 @@ public class OrgServiceImpl implements OrgService {
                     Org org = orgList.get(i);
                     OrgVO orgExtVO = new OrgVO(org.getId(), org.getCode(), org.getName(),
                             org.getStatus(), org.getDesc(), 0, org.getParentId(), org.getParentName());
+                    orgExtVO.setOrder(pageParam.calOrder(i+1));
                     orgExtVOs.add(orgExtVO);
                 }
             }

@@ -51,10 +51,11 @@ public class OrgController {
     }
 
     // query sub orgs by page.
-    @RequestMapping(value = "/departments/{orgId}/departments?page={pageNo}&pageSize={pageSize}", method = RequestMethod.GET)
+    @RequestMapping(value = "/departments/{orgId}/departments", method = RequestMethod.GET)
+    @ResponseBody
     public Map querySubOrgs(HttpServletRequest request, HttpServletResponse response,
                             @PathVariable(value = "orgId") Integer orgId,
-                               @RequestParam(value = "pageNo", defaultValue = "0" ) Integer pageNo,
+                               @RequestParam(value = "page", defaultValue = "0" ) Integer pageNo,
                                @RequestParam(value = "pageSize", defaultValue="10") Integer pageSize) {
         PageResult<OrgVO> pageResult = new PageResult<OrgVO>(0L, null, pageSize, pageNo);
         try {

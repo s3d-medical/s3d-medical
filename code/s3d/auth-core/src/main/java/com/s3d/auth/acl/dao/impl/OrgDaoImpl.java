@@ -55,7 +55,7 @@ public class OrgDaoImpl extends HibernateDao<Org, Integer> implements OrgDao {
     @Override
     public Long getDirectChildrenCount(Integer orgId, PageParam pageParam) {
         StringBuilder hql = new StringBuilder();
-        hql.append("select count(t.id) as totalCount Org t where t.parent.id = :parentId ");
+        hql.append("select count(t.id) as totalCount from Org t where t.parent.id = :parentId ");
         Query query = this.getSession().createQuery(hql.toString());
         query.setInteger("parentId", orgId);
         return (Long)query.uniqueResult();
