@@ -4,9 +4,9 @@
     angular.module('cms')
         .directive('cmsViewDepartment', cmsViewDepartment);
 
-    cmsViewDepartment.$inject = [];
+    cmsViewDepartment.$inject = ['departmentUtils'];
 
-    function cmsViewDepartment () {
+    function cmsViewDepartment (departmentUtils) {
         return {
             restrict: 'AE',
             templateUrl: 'tplViewDepartment',
@@ -20,8 +20,8 @@
                 scope.$on('ViewDepartment.Open', open);
 
                 function open (event, data) {
-                    console.log(data);
                     scope.department = data.department;
+                    scope.parentDepartment = departmentUtils.getDepartmentById(scope.department.parentId);
                     element.modal({backdrop: 'static'});
                 }
 

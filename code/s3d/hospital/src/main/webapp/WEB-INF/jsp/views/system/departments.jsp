@@ -11,7 +11,7 @@
         <table ng-if="ds.cfg.type == 'departments'" class="table table-bordered table-striped">
             <thead>
             <tr>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" ng-model="ds.cfg.checkAll" ng-click="ds.checkAllItems($event)"></td>
                 <td><b>排序号</b></td>
                 <td><b>上级部门</b></td>
                 <td><b>部门名称</b></td>
@@ -20,7 +20,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="i in ds.departments" ng-click="ds.viewItem(i.id)">
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" ng-model="i.checked" ng-click="ds.checkItem($event)"></td>
                 <td ng-bind="i.order"></td>
                 <td ng-bind="i.parent"></td>
                 <td ng-bind="i.text"></td>
@@ -31,7 +31,7 @@
         <table ng-if="ds.cfg.type == 'users'" class="table table-bordered table-striped">
             <thead>
             <tr>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" ng-model="ds.cfg.checkAll" ng-click="ds.checkAllItems($event)"></td>
                 <td><b>排序号</b></td>
                 <td><b>所在部门</b></td>
                 <td><b>姓名</b></td>
@@ -42,7 +42,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="i in ds.users" ng-click="ds.viewItem(i.id)">
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" ng-model="i.checked" ng-click="ds.checkItem($event)"></td>
                 <td ng-bind="i.order"></td>
                 <td ng-bind="i.department"></td>
                 <td ng-bind="i.realName"></td>
