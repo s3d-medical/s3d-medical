@@ -14,7 +14,7 @@
 
     function run ($rootScope, $state) {
         $rootScope.options = {
-            style: 'blue',
+            themeClass: '',
             currentState: '',
             breadcrumbs: []
         };

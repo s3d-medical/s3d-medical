@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="styles/css/style.css">
     <script src="vendor/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body ng-controller="RootCtrl as rt" ng-class="{'style-blue': options.style == 'blue', 'style-green': options.style == 'green', 'bg': options.currentState == 'home'}">
+<%--<body ng-controller="RootCtrl as rt" ng-class="{'style-blue': options.style == 'blue', 'style-green': options.style == 'green', 'bg': options.currentState == 'home'}">--%>
+<body ng-controller="RootCtrl as rt" ng-class="[options.themeClass, options.currentState == 'home' ? 'bg' : '']">
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -64,6 +65,7 @@
         fullScreenSpinner.stop();
     }
     showLoading();
+    // todo just for test
     hideLoading();
 </script>
 

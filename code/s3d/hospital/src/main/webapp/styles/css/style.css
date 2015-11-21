@@ -32,6 +32,9 @@
 .main {
     height: 100%;
 }
+.main .header {
+    overflow: hidden;
+}
 .content {
     width: 770px;
     min-height: 80%;
@@ -73,7 +76,7 @@
     display: inline-block;
 }
 .home .btn-group1 {
-    margin: 30px 0 15px;
+    margin: 10px 0 15px;
 }
 .home .btn-group1 button {
     margin-left: 4px;
@@ -94,6 +97,9 @@
 .home .btn-group2 button:first-child,
 .home .btn-group3 button:first-child {
     margin-left: 0;
+}
+.home .theme-wrap {
+    padding-right: 236px;
 }
 /* system manage */
 /*.system .btn {

@@ -6,6 +6,24 @@ body {
 label {
     font-weight: normal;
 }
+.bg-blue {
+    background-color: #286090;
+}
+.bg-green {
+    background-color: #449d44;
+}
+.theme-wrap {
+    text-align: right;
+    margin: 0;
+}
+.theme-wrap li {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    margin-left: 5px;
+    cursor: pointer;
+    border-radius: 50%;
+}
 /* style blue */
 .style-blue .login .content {
     background-color: #003D8D;
@@ -27,15 +45,14 @@ label {
     background-color: #286090;
     border-color: #204d74;
 }
-.style-blue .glyphicon {
-    color: #003D8D;
-}
 .style-blue .nav-pills>li.active>a,
 .style-blue .nav-pills>li.active>a:focus,
 .style-blue .nav-pills>li.active>a:hover {
     background-color: #003D8D;
 }
-.style-blue .theme-color {
+.style-blue .theme-color,
+.style-blue .glyphicon,
+.style-blue a {
     color: #003D8D;
 }
 .style-blue .theme-bg-color {
@@ -66,15 +83,14 @@ label {
     background-color: #449d44;
     border-color: #398439;
 }
-.style-green .glyphicon {
-    color: #6FBA2C;
-}
 .style-green .nav-pills>li.active>a,
 .style-green .nav-pills>li.active>a:focus,
 .style-green .nav-pills>li.active>a:hover {
     background-color: #6FBA2C;
 }
-.style-green .theme-color {
+.style-green .theme-color,
+.style-green .glyphicon,
+.style-green a {
     color: #6FBA2C;
 }
 .style-green .theme-bg-color {

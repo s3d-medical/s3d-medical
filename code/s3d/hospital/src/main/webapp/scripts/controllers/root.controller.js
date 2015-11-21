@@ -4,9 +4,14 @@
     angular.module('cms')
         .controller('RootCtrl', RootCtrl);
 
-    RootCtrl.$inject = [];
+    RootCtrl.$inject = ['$rootScope'];
 
-    function RootCtrl () {
+    function RootCtrl ($rootScope) {
 
+        init();
+
+        function init () {
+            $rootScope.options.themeClass = localStorage.getItem('themeClass') || 'style-blue';
+        }
     }
 })();

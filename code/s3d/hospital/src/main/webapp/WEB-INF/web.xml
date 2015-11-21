@@ -46,7 +46,7 @@
         </init-param>
         <init-param>
             <param-name>resourceSuffix</param-name>
-            <param-value>.jpg,.css,.js</param-value>
+            <param-value>.css,.js,.png,.jpg,.ttf,.woff,.woff2</param-value>
         </init-param>
 
     </filter>

@@ -4,10 +4,13 @@
     angular.module('cms')
         .controller('HomeCtrl', HomeCtrl);
 
-    HomeCtrl.$inject = [];
+    HomeCtrl.$inject = ['$rootScope', '$timeout'];
 
-    function HomeCtrl () {
+    function HomeCtrl ($rootScope, $timeout) {
         var vm = this;
+
+        vm.changeSearchType = changeSearchType;
+        vm.changeTheme = changeTheme;
 
         init();
 
@@ -36,10 +39,15 @@
             hideLoading();
         }
 
-        vm.changeSearchType = changeSearchType;
-
         function changeSearchType (searchType) {
             vm.searchType = searchType;
+        }
+
+        function changeTheme (themeClass) {
+            if ($rootScope.options.themeClass != themeClass) {
+                $rootScope.options.themeClass = themeClass;
+                localStorage.setItem('themeClass', themeClass);
+            }
         }
     }
 })();
