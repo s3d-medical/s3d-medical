@@ -22,9 +22,10 @@
                 <span>用户指派</span>
             </div>
             <div class="col-xs-10 theme-color">
-                <ul>
-                    <li ng-repeat="u in rc.role.users">{{u.name}}</li>
+                <ul class="col-sm-11">
+                    <li ng-repeat="u in rc.role.users">{{u.realName}}</li>
                 </ul>
+                <span class="col-sm-1" ng-click="rc.openSelectUser()"></span>
             </div>
         </div>
         <div class="permission-wrap row">
@@ -38,7 +39,7 @@
                         <span ng-bind="c.text + ' (' + 0 + '/' + c.nodes.length + ')'"></span>
                         <label><input type="checkbox">全选</label>
                     </div>
-                    <ul ng-show="c.expanded">
+                    <ul class="permission-list" ng-show="c.expanded">
                         <li class="col-md-4" ng-repeat="p in c.nodes">
                             <label><input type="checkbox">{{p.text}}</label>
                         </li>
@@ -66,5 +67,6 @@
             <button type="submit" class="btn btn-primary">保存</button>
             <button type="submit" class="btn btn-default" ng-click="dc.cancel()">取消</button>
         </div>
+        <cms-select-user on-save="changeUsers(users)"></cms-select-user>
     </div>
 </script>

@@ -28,7 +28,7 @@
                                 <i class="glyphicon" ng-class="{'glyphicon glyphicon-plus': !c.expanded, 'glyphicon glyphicon-minus': c.expanded}" ng-click="c.expanded = !c.expanded"></i>
                                 <span ng-bind="c.text"></span>
                             </div>
-                            <ul ng-show="c.expanded">
+                            <ul class="permission-list" ng-show="c.expanded">
                                 <li class="col-md-4" ng-repeat="p in c.nodes">
                                     <label><input type="checkbox">{{p.text}}</label>
                                 </li>

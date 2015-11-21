@@ -140,23 +140,33 @@
     border-bottom: none;
 }
 /* role */
-.role ul {
+.role .permission-list {
     padding: 10px;
     overflow: hidden;
 }
-.role ul li {
+.role .permission-list li {
     float: left;
 }
 .role .user-wrap ul {
     border: solid 1px #ccc;
+    padding: 10px;
 }
-.role ul li {
+.role .permission-list li {
     text-decoration: underline;
     cursor: pointer;
     padding: 0 5px;
 }
 .role .user-wrap ul li {
+    float: left;
     margin-right: 5px;
+}
+.role .user-wrap .col-sm-1 {
+    border: solid 1px #ccc;
+    border-left: none;
+    height: 62px;
+    background: url("../images/add-user.png") no-repeat 10px;
+    background-size: 60%;
+    cursor: pointer;
 }
 .role .permission-wrap .panel-heading {
     padding: 5px 15px;
@@ -204,4 +214,20 @@
 }
 .select-department .search-wrap .btn {
     margin-top: -4px;
+}
+/* select user */
+.select-user .modal-dialog {
+    width: 800px;
+}
+.select-user .search-wrap {
+    width: 610px;
+}
+.select-user .search-wrap ul {
+    width: 250px;
+    display: inline-block;
+}
+.select-user ul.btn-wrap {
+    width: 100px;
+    text-align: center;
+    padding: 115px 0;
 }

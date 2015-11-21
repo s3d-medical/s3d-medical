@@ -95,6 +95,7 @@
 <script src="scripts/directives/cms.edit.user.directive.js"></script>
 <script src="scripts/directives/cms.reset.password.directive.js"></script>
 <script src="scripts/directives/cms.select.department.directive.js"></script>
+<script src="scripts/directives/cms.select.user.directive.js"></script>
 
 <script src="scripts/utils/constants.js"></script>
 <script src="scripts/utils/department.utils.js"></script>
@@ -117,6 +118,7 @@
 <%@ include file="views/templates/tpl-edit-user.jsp"%>
 <%@ include file="views/templates/tpl-reset-password.jsp"%>
 <%@ include file="views/templates/tpl-select-department.jsp"%>
+<%@ include file="views/templates/tpl-select-user.jsp"%>
 
 </body>
 </html>

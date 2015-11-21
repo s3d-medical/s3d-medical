@@ -4,12 +4,14 @@
     angular.module('cms')
         .controller('RoleCtrl', RoleCtrl);
 
-    RoleCtrl.$inject = ['$stateParams'];
+    RoleCtrl.$inject = ['$scope', '$stateParams'];
 
-    function RoleCtrl ($stateParams) {
+    function RoleCtrl ($scope, $stateParams) {
         var vm = this;
         vm.role = {};
         vm.permissionCategories = [];
+
+        vm.openSelectUser = openSelectUser;
 
         init();
 
@@ -25,24 +27,24 @@
                     name: '督办发布员',
                     categoryId: 1,
                     users: [
-                        {id: 1, name: '张悦'},
-                        {id: 2, name: '李阳'},
-                        {id: 3, name: '张国庆'},
-                        {id: 4, name: '王萌'},
-                        {id: 5, name: '刘德华'},
-                        {id: 6, name: '张学友'},
-                        {id: 7, name: '谢霆锋'},
-                        {id: 8, name: '吴彦祖'},
-                        {id: 9, name: '李连杰'},
-                        {id: 10, name: '吴奇隆'},
-                        {id: 11, name: '张国庆'},
-                        {id: 12, name: '王萌'},
-                        {id: 13, name: '刘德华'},
-                        {id: 14, name: '张学友'},
-                        {id: 15, name: '谢霆锋'},
-                        {id: 16, name: '吴彦祖'},
-                        {id: 17, name: '李连杰'},
-                        {id: 18, name: '吴奇隆'}
+                        {id: 1, realName: '张悦'},
+                        {id: 2, realName: '李阳'},
+                        {id: 3, realName: '张国庆'},
+                        {id: 4, realName: '王萌'},
+                        {id: 5, realName: '刘德华'},
+                        {id: 6, realName: '张学友'},
+                        {id: 7, realName: '谢霆锋'},
+                        {id: 8, realName: '吴彦祖'},
+                        {id: 9, realName: '李连杰'},
+                        {id: 10, realName: '吴奇隆'},
+                        {id: 11, realName: '张国庆'},
+                        {id: 12, realName: '王萌'},
+                        {id: 13, realName: '刘德华'},
+                        {id: 14, realName: '张学友'},
+                        {id: 15, realName: '谢霆锋'},
+                        {id: 16, realName: '吴彦祖'},
+                        {id: 17, realName: '李连杰'},
+                        {id: 18, realName: '吴奇隆'}
                     ],
                     permissions: [1,2,3,4,5],
                     remark: '督办',
@@ -102,6 +104,10 @@
             for (var i in vm.permissionCategories) {
                 vm.permissionCategories[i].expanded = true;
             }
+        }
+
+        function openSelectUser () {
+            $scope.$broadcast('SelectUser.Open', {selectedUsers: vm.role.users});
         }
 
     }

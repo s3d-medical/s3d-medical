@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title normal-weight text-center">员工</h3>
+                    <h4 class="modal-title normal-weight text-center">员工</h4>
                 </div>
                 <div class="modal-body small">
                     <table class="pull-left table table-bordered table-striped">
