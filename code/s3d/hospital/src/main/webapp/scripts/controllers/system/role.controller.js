@@ -12,6 +12,7 @@
         vm.permissionCategories = [];
 
         vm.openSelectUser = openSelectUser;
+        vm.changeUsers = changeUsers;
 
         init();
 
@@ -108,6 +109,10 @@
 
         function openSelectUser () {
             $scope.$broadcast('SelectUser.Open', {targetUsers: angular.copy(vm.role.users)});
+        }
+
+        function changeUsers (users) {
+            vm.role.users = users;
         }
 
     }

@@ -65,8 +65,8 @@
         </div>
         <div class="text-center">
             <button type="submit" class="btn btn-primary">保存</button>
-            <button type="submit" class="btn btn-default" ng-click="dc.cancel()">取消</button>
+            <button type="submit" class="btn btn-default" ng-click="rc.cancel()">取消</button>
         </div>
-        <cms-select-user on-save="changeUsers(users)"></cms-select-user>
+        <cms-select-user on-save="rc.changeUsers(users)"></cms-select-user>
     </div>
 </script>
