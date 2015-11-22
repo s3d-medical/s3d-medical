@@ -147,9 +147,19 @@
 .role .permission-list li {
     float: left;
 }
-.role .user-wrap ul {
+.role .user-wrap {
     border: solid 1px #ccc;
+    overflow: hidden;
+    display: table;
+    width: 100%;
+}
+.role .user-wrap ul {
+    border-right: solid 1px #ccc;
     padding: 10px;
+    float: initial;
+    margin-bottom: 0;
+    overflow: hidden;
+    width: 100%;
 }
 .role .permission-list li {
     text-decoration: underline;
@@ -161,12 +171,12 @@
     margin-right: 5px;
 }
 .role .user-wrap .col-sm-1 {
-    border: solid 1px #ccc;
-    border-left: none;
-    height: 62px;
     background: url("../images/add-user.png") no-repeat 10px;
     background-size: 60%;
     cursor: pointer;
+    display: table-cell;
+    vertical-align: middle;
+    float: initial;
 }
 .role .permission-wrap .panel-heading {
     padding: 5px 15px;

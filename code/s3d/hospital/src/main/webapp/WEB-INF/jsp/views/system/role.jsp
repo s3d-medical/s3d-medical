@@ -17,15 +17,17 @@
                 </select>
             </div>
         </div>
-        <div class="user-wrap row">
+        <div class="row">
             <div class="col-xs-2">
                 <span>用户指派</span>
             </div>
             <div class="col-xs-10 theme-color">
-                <ul class="col-sm-11">
-                    <li ng-repeat="u in rc.role.users">{{u.realName}}</li>
-                </ul>
-                <span class="col-sm-1" ng-click="rc.openSelectUser()"></span>
+                <div class="user-wrap">
+                    <ul class="col-sm-11">
+                        <li ng-repeat="u in rc.role.users">{{u.realName}}</li>
+                    </ul>
+                    <span class="col-sm-1" ng-click="rc.openSelectUser()"></span>
+                </div>
             </div>
         </div>
         <div class="permission-wrap row">
