@@ -1,8 +1,9 @@
 package com.s3d.auth.login.service.impl;
 
+import com.s3d.auth.acl.vo.UserVO;
 import com.s3d.auth.login.service.AuthenticationService;
 import com.s3d.auth.login.vo.LoginUserVO;
-import com.s3d.auth.acl.vo.UserBasicInfoVO;
+import com.s3d.auth.login.vo.param.ResetPwdVO;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,10 +27,15 @@ public class AuthenticationServiceIml implements AuthenticationService {
     @Override
     public LoginUserVO findUser(String userAccount) {
         LoginUserVO loginUserVO = new LoginUserVO();
-        UserBasicInfoVO basicInfoVO = new UserBasicInfoVO();
-        basicInfoVO.setUserId(1);
-        basicInfoVO.setEmail("chenzhigang9848@sohu.com");
-        loginUserVO.setUserBasicInfoVO(basicInfoVO);
+
         return loginUserVO;
+    }
+
+    @Override
+    public boolean resetPassword(ResetPwdVO resetPwdVO) {
+        // find user.
+
+        // compare password.
+        return false;
     }
 }

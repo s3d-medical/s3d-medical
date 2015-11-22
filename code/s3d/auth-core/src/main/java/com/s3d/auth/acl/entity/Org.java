@@ -39,7 +39,7 @@ public class Org {
     @Column(name="pos")
     private Integer order;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = true)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "auth_parent_org_id", referencedColumnName = "id")
     private Org parent;
 

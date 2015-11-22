@@ -1,7 +1,7 @@
 package com.s3d.auth.login.vo;
 
 import com.s3d.auth.acl.vo.RoleVO;
-import com.s3d.auth.acl.vo.UserBasicInfoVO;
+import com.s3d.auth.acl.vo.UserVO;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,15 +13,15 @@ import java.util.List;
 public class LoginUserVO implements Serializable {
     private String expiredDateTime;
     private String createDateTime;
-    private UserBasicInfoVO userBasicInfoVO;
+    private UserVO userVO;
     private List<RoleVO> roleVOs;
 
-    public UserBasicInfoVO getUserBasicInfoVO() {
-        return userBasicInfoVO;
+    public UserVO getUserVO() {
+        return userVO;
     }
 
-    public void setUserBasicInfoVO(UserBasicInfoVO userBasicInfoVO) {
-        this.userBasicInfoVO = userBasicInfoVO;
+    public void setUserVO(UserVO userVO) {
+        this.userVO = userVO;
     }
 
     public String getCreateDateTime() {

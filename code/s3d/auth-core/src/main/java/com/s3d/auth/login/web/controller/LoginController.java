@@ -4,11 +4,12 @@ package com.s3d.auth.login.web.controller;
 import com.s3d.auth.login.constants.LoginConstants;
 import com.s3d.auth.login.service.AuthenticationService;
 import com.s3d.auth.login.vo.LoginParam;
-import com.s3d.auth.login.vo.LoginUserVO;
+import com.s3d.auth.login.vo.param.ResetPwdVO;
 import com.s3d.tech.spring.SpringControllerHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -53,6 +54,18 @@ public class LoginController {
     }
 
     public String logout(){
+        return "";
+    }
+
+    /**
+     * reset password.
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public String resetPwd(HttpServletRequest request, HttpServletResponse response, @RequestBody ResetPwdVO resetPwdVO){
+        //this.authenticationService.resetPassword();
         return "";
     }
 

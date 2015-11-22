@@ -31,6 +31,7 @@ public class ActionController {
     public void update(HttpServletRequest request, final Model model, @PathVariable("actionId") Integer operationId){
 
     }
+
     @RequestMapping(value = "/actions" , method = RequestMethod.GET)
     public void getList(HttpServletRequest request, final Model model){
 
