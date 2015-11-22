@@ -107,7 +107,7 @@
         }
 
         function openSelectUser () {
-            $scope.$broadcast('SelectUser.Open', {selectedUsers: vm.role.users});
+            $scope.$broadcast('SelectUser.Open', {targetUsers: angular.copy(vm.role.users)});
         }
 
     }

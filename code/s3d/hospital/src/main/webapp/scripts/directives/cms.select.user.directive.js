@@ -16,10 +16,12 @@
             },
             link: function (scope, element, attrs) {
                 scope.search = search;
-                scope.clickUser = clickUser;
-                scope.clickSelectedUser = clickSelectedUser;
+                scope.clickSourceUser = clickSourceUser;
+                scope.clickTargetUser = clickTargetUser;
                 scope.addUser = addUser;
                 scope.removeUser = removeUser;
+                scope.addAllUsers = addAllUsers;
+                scope.removeAllUsers = removeAllUsers;
                 scope.save = save;
                 scope.close = close;
 
@@ -27,10 +29,10 @@
 
                 function open (event, data) {
                     scope.departments = localDataService.getDepartments();
-                    scope.users = [];
-                    scope.selectedUsers = data.selectedUsers;
-                    scope.user = {};
-                    scope.selectedUser = {};
+                    scope.sourceUsers = [];
+                    scope.targetUsers = data.targetUsers;
+                    scope.selectedSourceUsers = [];
+                    scope.selectedTargetUsers = [];
                     scope.condition = '';
 
                     $('.user-list').treeview({
@@ -58,36 +60,78 @@
                             ]
                         };
 
-                        scope.users = resp.users;
+                        scope.sourceUsers = resp.users;
                     }
                 }
 
-                function clickUser (user) {
-                    scope.user = user;
+                function clickSourceUser (event, user) {
+                    var $el = $(event.currentTarget);
+                    if ($el.hasClass('theme-bg-color')) {
+                        _.remove(scope.selectedSourceUsers, function (item) {
+                            return item.id == user.id;
+                        });
+                        $el.removeClass('theme-bg-color');
+                    } else {
+                        scope.selectedSourceUsers.push(user);
+                        $el.addClass('theme-bg-color');
+                    }
                 }
 
-                function clickSelectedUser (user) {
-                    scope.selectedUser = user;
+                function clickTargetUser (event, user) {
+                    var $el = $(event.currentTarget);
+                    if ($el.hasClass('theme-bg-color')) {
+                        _.remove(scope.selectedTargetUsers, function (item) {
+                            return item.id == user.id;
+                        });
+                        $el.removeClass('theme-bg-color');
+                    } else {
+                        scope.selectedTargetUsers.push(user);
+                        $el.addClass('theme-bg-color');
+                    }
                 }
 
                 function addUser () {
-                    scope.selectedUsers.push(scope.user);
-                    _.remove(scope.users, function (item) {
-                        return item.id == scope.user.id;
-                    });
-                    scope.user = {};
+                    if (scope.selectedSourceUsers.length) {
+                        for (var i in scope.selectedSourceUsers) {
+                            scope.targetUsers.push(scope.selectedSourceUsers[i]);
+                            _.remove(scope.sourceUsers, function (item) {
+                                return item.id == scope.selectedSourceUsers[i].id;
+                            })
+                        }
+                        scope.selectedSourceUsers.length = 0;
+                    }
                 }
 
                 function removeUser () {
-                    scope.users.push(scope.selectedUser);
-                    _.remove(scope.selectedUsers, function (item) {
-                        return item.id == scope.selectedUser.id;
-                    });
-                    scope.selectedUser = {};
+                    if (scope.selectedTargetUsers.length) {
+                        for (var i in scope.selectedTargetUsers) {
+                            scope.sourceUsers.push(scope.selectedTargetUsers[i]);
+                            _.remove(scope.targetUsers, function (item) {
+                                return item.id == scope.selectedTargetUsers[i].id;
+                            })
+                        }
+                        scope.selectedTargetUsers.length = 0;
+                    }
+                }
+
+                function addAllUsers () {
+                    for (var i in scope.sourceUsers) {
+                        scope.targetUsers.push(scope.sourceUsers[i]);
+                    }
+                    scope.sourceUsers.length = 0;
+                    scope.selectedSourceUsers.length = 0;
+                }
+
+                function removeAllUsers () {
+                    for (var i in scope.targetUsers) {
+                        scope.sourceUsers.push(scope.targetUsers[i]);
+                    }
+                    scope.targetUsers.length = 0;
+                    scope.selectedTargetUsers.length = 0;
                 }
 
                 function save () {
-                    scope.onSave({users: scope.selectedUsers});
+                    scope.onSave({users: scope.targetUsers});
                     close();
                 }
 
@@ -112,7 +156,7 @@
                     };
 
                     $timeout(function () {
-                        scope.users = resp.users;
+                        scope.sourceUsers = resp.users;
                     });
                 }
             }

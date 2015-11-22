@@ -14,14 +14,16 @@
                             <button type="button" class="btn btn-primary" ng-click="search()">查询</button>
                         </div>
                         <ul>
-                            <li ng-repeat="u in users" ng-class="{'theme-bg-color': u.id == user.id}" ng-click="clickUser(u)">{{::u.realName}}</li>
+                            <li ng-repeat="u in sourceUsers" ng-click="clickSourceUser($event, u)">{{::u.realName}}</li>
                         </ul>
                         <ul class="btn-wrap">
-                            <li><button type="button" class="btn btn-primary" ng-disabled="!user.id" ng-click="addUser()">=></button></li>
-                            <li><button type="button" class="btn btn-primary" ng-disabled="!selectedUser.id" ng-click="removeUser()"><=</button></li>
+                            <li><button type="button" class="btn btn-primary" ng-disabled="!selectedSourceUsers.length" ng-click="addUser()">添加-></button></li>
+                            <li><button type="button" class="btn btn-primary" ng-disabled="!selectedTargetUsers.length" ng-click="removeUser()"><-删除</button></li>
+                            <li><button type="button" class="btn btn-primary" ng-disabled="!sourceUsers.length" ng-click="addAllUsers()">全部添加-></button></li>
+                            <li><button type="button" class="btn btn-primary" ng-disabled="!targetUsers.length" ng-click="removeAllUsers()"><-全部删除</button></li>
                         </ul>
                         <ul>
-                            <li ng-repeat="u in selectedUsers" ng-class="{'theme-bg-color': u.id == selectedUser.id}" ng-click="clickSelectedUser(u)">{{::u.realName}}</li>
+                            <li ng-repeat="u in targetUsers" ng-click="clickTargetUser($event, u)">{{::u.realName}}</li>
                         </ul>
                     </div>
                 </div>
