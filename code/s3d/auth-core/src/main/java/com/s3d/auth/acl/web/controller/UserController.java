@@ -30,7 +30,7 @@ public class UserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private UserService userService;
 
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/search", method = RequestMethod.POST)
     public Model getUserList(HttpServletRequest request, final Model model, @RequestBody QueryUserParam queryUserParam) {
         // find user list and set model.
         List<User> users = this.userService.getUsers(queryUserParam);
@@ -46,7 +46,7 @@ public class UserController {
         }
         return model;
     }
-    @RequestMapping(value="/departments/{orgId}/departments/users", method = RequestMethod.GET)
+    @RequestMapping(value="/departments/{orgId}/users", method = RequestMethod.GET)
     @ResponseBody
     public Map getUsersOfOrg(HttpServletRequest request,  @PathVariable(value = "orgId") Integer orgId,
                                @RequestParam(value = "page", defaultValue="0") Integer page,
@@ -63,7 +63,7 @@ public class UserController {
         }
         Map map = new HashMap();
         map.put("count", result.getTotalRecords());
-        map.put("users", userVOList);
+        map.put("result", userVOList);
         return map;
     }
 

@@ -24,7 +24,7 @@
 
                 function open (event, data) {
                     scope.department = data.department;
-                    scope.parentDepartment = departmentUtils.getDepartmentById(scope.department.id);
+                    scope.parentDepartment = departmentUtils.getDepartmentById(scope.department.parentId);
                     element.modal({backdrop: 'static'});
                 }
 

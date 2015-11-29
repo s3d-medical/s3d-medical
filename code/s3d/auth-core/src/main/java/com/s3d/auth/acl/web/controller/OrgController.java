@@ -65,4 +65,10 @@ public class OrgController {
         }
         return OrgConvertor.toMapForQuerySubOrgs(pageResult);
     }
+
+    @RequestMapping(value = "/departments/{departmentId}")
+    public Model getDepartment(HttpServletRequest request, final Model model, @PathVariable Integer departmentId) {
+        model.addAttribute("department", orgService.getOrgVOById(departmentId));
+        return model;
+    }
 }

@@ -33,7 +33,7 @@
                             <span>邮件地址</span>
                         </div>
                         <div class="col-xs-4">
-                            <input type="email" class="form-control" placeholder="邮件地址" ng-model="user.email">
+                            <input type="text" class="form-control" placeholder="邮件地址" ng-model="user.email">
                         </div>
                     </div>
                     <div class="row">

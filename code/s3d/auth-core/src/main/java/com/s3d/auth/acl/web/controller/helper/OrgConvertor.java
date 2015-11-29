@@ -35,7 +35,7 @@ public class OrgConvertor {
             oneOrg.put("remark", org.getRemark());
             departments.add(oneOrg);
         }
-        map.put("departments", departments);
+        map.put("result", departments);
        return map;
     }
 

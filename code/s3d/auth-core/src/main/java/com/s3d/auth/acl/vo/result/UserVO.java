@@ -102,6 +102,14 @@ public class UserVO implements Serializable {
         this.departmentId = departmentId;
     }
 
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
     public String getPhone() {
         return phone;
     }

@@ -56,4 +56,9 @@ public class OrgDaoImpl extends HibernateDao<Org, Integer> implements OrgDao {
         query.setInteger("parentId", orgId);
         return (Long)query.uniqueResult();
     }
+
+    @Override
+    public Org getDepartmentById(Integer departmentId) {
+        return get(departmentId);
+    }
 }

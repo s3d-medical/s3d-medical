@@ -77,9 +77,9 @@
             } else {
                 vm.cfg.pageNum = pageNum;
             }
-            dataService.get('departments/' + vm.cfg.parentId + '/departments?page=' + vm.cfg.pageNum + '&pageSize=' + vm.cfg.pageSize)
+            dataService.get('departments/' + vm.cfg.parentId + '/' + vm.cfg.type + '?page=' + vm.cfg.pageNum + '&pageSize=' + vm.cfg.pageSize)
                 .then(function (resp) {
-                    vm[vm.cfg.type] = resp.departments;
+                    vm[vm.cfg.type] = resp.result;
                     _.map(vm[vm.cfg.type], function (item) {
                         item.checked = false;
                     });
@@ -101,13 +101,13 @@
         function viewItem (id) {
             // get department or user
             if (vm.cfg.type == 'departments') {
-                dataService.get('department.json')
+                dataService.get('departments/' + id)
                     .then(function (resp) {
                         vm.selectedDepartment = resp.department;
                         $scope.$broadcast('ViewDepartment.Open', {department: vm.selectedDepartment});
                     });
             } else if (vm.cfg.type == 'users') {
-                dataService.get('user.json')
+                dataService.get('users/' + id)
                     .then(function (resp) {
                         vm.selectedUser = resp.user;
                         $scope.$broadcast('ViewUser.Open', {user: vm.selectedUser});
@@ -125,9 +125,9 @@
 
         function createItem () {
             if (vm.cfg.type == 'departments') {
-                $scope.$broadcast('EditDepartment.Open', {department: {id: -1}});
+                $scope.$broadcast('EditDepartment.Open', {department: {id: -1, parentId: $stateParams.departmentId}});
             } else if (vm.cfg.type == 'users') {
-                $scope.$broadcast('EditUser.Open', {user: {}});
+                $scope.$broadcast('EditUser.Open', {user: {id: -1, departmentId: $stateParams.departmentId}});
             }
         }
 
