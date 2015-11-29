@@ -29,7 +29,8 @@ label {
     background-color: #003D8D;
     background-image: url("../images/logo_bg1.png");
 }
-.style-blue .btn-primary {
+.style-blue .btn-primary,
+.style-blue .pagination>.active>a, .style-blue  .pagination>.active>a:focus, .style-blue  .pagination>.active>a:hover, .style-blue  .pagination>.active>span, .style-blue  .pagination>.active>span:focus, .style-blue  .pagination>.active>span:hover {
     color: #fff;
     background-color: #337ab7;
     border-color: #2e6da4;
@@ -67,7 +68,8 @@ label {
     background-color: #6FBA2C;
     border-color: #6FBA2C;
 }
-.style-green .btn-primary {
+.style-green .btn-primary,
+.style-green .pagination>.active>a, .style-green  .pagination>.active>a:focus, .style-green  .pagination>.active>a:hover, .style-green  .pagination>.active>span, .style-green  .pagination>.active>span:focus, .style-green  .pagination>.active>span:hover {
     color: #fff;
     background-color: #5cb85c;
     border-color: #4cae4c;

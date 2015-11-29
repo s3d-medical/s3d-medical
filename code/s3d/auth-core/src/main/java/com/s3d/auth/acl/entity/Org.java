@@ -33,6 +33,9 @@ public class Org {
     @Column(name="code")
     private String code;
 
+    @Column(name="key")
+    private String key;
+
     @Column(name="status")
     private Boolean status;
 
@@ -58,10 +61,11 @@ public class Org {
      * @param desc
      * @param status
      */
-    public Org(String name,String code,  String desc, Boolean status) {
+    public Org(String name, String code, String key, String desc, Boolean status) {
         this.name = name;
         this.desc = desc;
         this.code = code;
+        this.key = key;
         this.status = status;
     }
 
@@ -103,6 +107,14 @@ public class Org {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public Set<Org> getChildren() {

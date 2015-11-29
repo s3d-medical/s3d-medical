@@ -47,8 +47,8 @@
                             <span>是否有效</span>
                         </div>
                         <div class="col-xs-4">
-                            <label><input type="radio" name="active1" ng-model="department.active" value="1">是</label>
-                            <label><input type="radio" name="active1" ng-model="department.active" value="0">否</label>
+                            <label><input type="radio" name="active1" ng-model="department.active" value="true">是</label>
+                            <label><input type="radio" name="active1" ng-model="department.active" value="false">否</label>
                         </div>
                     </div>
                     <div class="row">

@@ -72,21 +72,24 @@
                 vm.cfg.pageNum = 1;
                 return;
             } else if (vm.cfg.pages.length > 0 && pageNum > vm.cfg.pages.length) {
-                vm.cfg.pageNum = vm.cfg.pages.length
+                vm.cfg.pageNum = vm.cfg.pages.length;
                 return;
             } else {
                 vm.cfg.pageNum = pageNum;
             }
-            // todo just for test
-            dataService.get(vm.cfg.type + vm.cfg.pageNum + '.json')
+            dataService.get('departments/' + vm.cfg.parentId + '/departments?page=' + vm.cfg.pageNum + '&pageSize=' + vm.cfg.pageSize)
                 .then(function (resp) {
-                    vm[vm.cfg.type] = resp.result;
+                    vm[vm.cfg.type] = resp.departments;
                     _.map(vm[vm.cfg.type], function (item) {
                         item.checked = false;
                     });
                     vm.cfg.count = resp.count;
                     vm.cfg.pages = [];
-                    for (var i = 1; i <= resp.count / vm.cfg.pageSize; i++ ) {
+                    var pageCount = resp.count / vm.cfg.pageSize;
+                    if (resp.count % vm.cfg.pageSize) {
+                        pageCount++;
+                    }
+                    for (var i = 1; i <= pageCount; i++ ) {
                         vm.cfg.pages.push(i);
                     }
                     if (vm.cfg.pages.length == 0) {
@@ -122,7 +125,7 @@
 
         function createItem () {
             if (vm.cfg.type == 'departments') {
-                $scope.$broadcast('EditDepartment.Open', {department: {}});
+                $scope.$broadcast('EditDepartment.Open', {department: {id: -1}});
             } else if (vm.cfg.type == 'users') {
                 $scope.$broadcast('EditUser.Open', {user: {}});
             }

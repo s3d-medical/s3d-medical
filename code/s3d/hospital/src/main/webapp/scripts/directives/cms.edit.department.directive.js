@@ -4,9 +4,9 @@
     angular.module('cms')
         .directive('cmsEditDepartment', cmsEditDepartment);
 
-    cmsEditDepartment.$inject = ['departmentUtils'];
+    cmsEditDepartment.$inject = ['departmentUtils', 'dataService'];
 
-    function cmsEditDepartment (departmentUtils) {
+    function cmsEditDepartment (departmentUtils, dataService) {
         return {
             restrict: 'AE',
             templateUrl: 'tplEditDepartment',
@@ -38,12 +38,14 @@
                 }
 
                 function save () {
-                    // todo
+                    dataService.post('departments', scope.department)
+                        .then(function (resp) {
+                            console.log(resp);
+                        });
                     element.modal('hide');
                 }
 
                 function cancel () {
-                    // todo
                     element.modal('hide');
                 }
             }

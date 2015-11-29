@@ -24,10 +24,11 @@
         }
 
         function initData () {
-            dataService.get('departments.json')
+            dataService.get('departments')
                 .then(function (resp) {
-                    localDataService.setDepartments(_.cloneDeep(resp.departments));
-                    var departments = _formatData(resp.departments);
+                    _cleanEmptyNodes(resp);
+                    localDataService.setDepartments(_.cloneDeep(resp));
+                    var departments = _formatData(resp);
                     $rootScope.menus = [
                         {
                             text: '组织架构与账号管理',
@@ -99,7 +100,18 @@
             }
         }
 
-        function _formatData(data) {
+        function _cleanEmptyNodes (data) {
+            for (var i in data) {
+                //data[i] && data[i].nodes && !data[i].nodes.length && (delete data[i].nodes);
+                if (data[i] && data[i].nodes && data[i].nodes.length) {
+                    _cleanEmptyNodes(data[i].nodes);
+                } else {
+                    delete data[i].nodes;
+                }
+            }
+        }
+
+        function _formatData (data) {
             for (var i in data) {
                 data[i].hash = '#system/departments/' + data[i].id + '/departments';
                 if (data[i].nodes && data[i].nodes.length) {
