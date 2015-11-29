@@ -38,7 +38,7 @@ public class OrgServiceImpl implements OrgService {
     }
 
     private void save(OrgVO orgVO) {
-        Org org = new Org(orgVO.getName(), orgVO.getCode(), orgVO.getRemark(), Org.STATUS_VALID);
+        Org org = new Org(orgVO.getName(), orgVO.getCode(), orgVO.getKey(), orgVO.getRemark(), Org.STATUS_VALID);
         if (orgVO.getParentId() != null) {
             Org parent = this.orgDao.get(orgVO.getParentId());
             org.setParent(parent);
@@ -57,6 +57,7 @@ public class OrgServiceImpl implements OrgService {
             org.setParent(null);
         }
         org.setCode(orgVO.getCode());
+        org.setKey(orgVO.getKey());
         org.setDesc(orgVO.getRemark());
         org.setName(orgVO.getName());
         org.setOrder(orgVO.getOrder());
@@ -116,7 +117,7 @@ public class OrgServiceImpl implements OrgService {
             if (orgList != null && orgList.size() > 0) {
                 for (int i = 0; i < orgList.size(); i++) {
                     Org org = orgList.get(i);
-                    OrgVO orgExtVO = new OrgVO(org.getId(), org.getCode(), org.getName(),
+                    OrgVO orgExtVO = new OrgVO(org.getId(), org.getCode(), org.getKey(), org.getName(),
                             org.getStatus(), org.getDesc(), 0, org.getParentId(), org.getParentName());
                     orgExtVO.setOrder(pageParam.calOrder(i+1));
                     orgExtVOs.add(orgExtVO);

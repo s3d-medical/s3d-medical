@@ -12,7 +12,7 @@
      */
     function initConstants () {
         //service Url
-        serverUrl = 'scripts/mock/';
+        serverUrl = '/hospital/';
         //serverUrl = 'http://lingchao.wicp.net';
 
     }

@@ -13,6 +13,7 @@ public class OrgVO implements Serializable{
     private String name;
     private Integer parentId;
     private String code;
+    private String key;
     private String remark;
     private Integer active;
     private Integer order;
@@ -33,12 +34,12 @@ public class OrgVO implements Serializable{
      * @param parentId
      * @param parentName
      */
-    public OrgVO(Integer id,  String code, String name, Integer active, String remark,
-                 Integer order, Integer parentId, String parentName) {
+    public OrgVO(Integer id,  String code, String key, String name, Integer active, String remark, Integer order, Integer parentId, String parentName) {
         this.id = id;
         this.name = name;
         this.parentId = parentId;
         this.code = code;
+        this.key = key;
         this.remark = remark;
         this.active = active;
         this.order = order;
@@ -91,6 +92,14 @@ public class OrgVO implements Serializable{
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public Integer getOrder() {
