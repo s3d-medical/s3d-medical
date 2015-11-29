@@ -2,8 +2,8 @@ package com.s3d.auth.acl.web.controller;
 
 import com.s3d.auth.acl.entity.User;
 import com.s3d.auth.acl.service.UserService;
-import com.s3d.auth.acl.vo.param.QueryUserVO;
-import com.s3d.auth.acl.vo.param.UserIdList;
+import com.s3d.auth.acl.vo.param.QueryUserParam;
+import com.s3d.auth.acl.vo.param.UserIdListParam;
 import com.s3d.auth.acl.vo.result.UserVO;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
@@ -31,9 +31,9 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public Model getUserList(HttpServletRequest request, final Model model, @RequestBody QueryUserVO queryUserVO) {
+    public Model getUserList(HttpServletRequest request, final Model model, @RequestBody QueryUserParam queryUserParam) {
         // find user list and set model.
-        List<User> users = this.userService.getUsers(queryUserVO);
+        List<User> users = this.userService.getUsers(queryUserParam);
         // to json.
         List<Map> jsonUsers = new ArrayList<Map>();
         if(users != null && users.size() >0){
@@ -102,11 +102,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.DELETE)
-    public Model delete(HttpServletRequest request, final Model model, @RequestBody UserIdList userIdList) {
-        if (userIdList == null || userIdList.getUserIds() == null || userIdList.getUserIds().size() == 0) {
+    public Model delete(HttpServletRequest request, final Model model, @RequestBody UserIdListParam userIdListParam) {
+        if (userIdListParam == null || userIdListParam.getUserIds() == null || userIdListParam.getUserIds().size() == 0) {
             model.addAttribute("status", "failure");
         } else {
-            this.userService.delete(userIdList.getUserIds());
+            this.userService.delete(userIdListParam.getUserIds());
             model.addAttribute("status", "succeed");
         }
         return model;

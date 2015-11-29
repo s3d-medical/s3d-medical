@@ -5,7 +5,7 @@ import com.s3d.auth.acl.dao.UserDao;
 import com.s3d.auth.acl.entity.Org;
 import com.s3d.auth.acl.entity.User;
 import com.s3d.auth.acl.service.UserService;
-import com.s3d.auth.acl.vo.param.QueryUserVO;
+import com.s3d.auth.acl.vo.param.QueryUserParam;
 import com.s3d.auth.acl.vo.result.UserVO;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
@@ -65,10 +65,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUsers(QueryUserVO queryUserVO) {
-        Assert.isTrue(queryUserVO != null , "Query user parameter can not be null.");
-        String fullName = queryUserVO.getRealName();
-        Integer orgId = queryUserVO.getDepartmentId();
+    public List<User> getUsers(QueryUserParam queryUserParam) {
+        Assert.isTrue(queryUserParam != null , "Query user parameter can not be null.");
+        String fullName = queryUserParam.getRealName();
+        Integer orgId = queryUserParam.getDepartmentId();
         if(StringUtils.isEmpty(fullName) && orgId == null){
             throw new RuntimeException("User name and organization id can not be null together.");
         }

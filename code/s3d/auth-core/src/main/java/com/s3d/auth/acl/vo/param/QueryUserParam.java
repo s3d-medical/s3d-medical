@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @desc com.s3d.auth.acl.vo
  * @date 2015/11/22 19:15
  */
-public class QueryUserVO implements Serializable{
+public class QueryUserParam implements Serializable{
     private String realName;
     private Integer departmentId;
 

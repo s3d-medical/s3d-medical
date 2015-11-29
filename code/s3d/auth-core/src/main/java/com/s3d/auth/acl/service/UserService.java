@@ -1,7 +1,7 @@
 package com.s3d.auth.acl.service;
 
 import com.s3d.auth.acl.entity.User;
-import com.s3d.auth.acl.vo.param.QueryUserVO;
+import com.s3d.auth.acl.vo.param.QueryUserParam;
 import com.s3d.auth.acl.vo.result.UserVO;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
@@ -27,7 +27,7 @@ public interface UserService {
      * query user by user full name and org id.
      * @return
      */
-    public List<User> getUsers(QueryUserVO queryUserVO);
+    public List<User> getUsers(QueryUserParam queryUserParam);
 
     public PageResult<User> getUsers(Integer orgId, PageParam pageParam);
 
