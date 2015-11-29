@@ -61,5 +61,9 @@
         <sqlFile path="scripts/2015-11-22_0_modify_user.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
     </changeSet>
+    <changeSet id="15" author="gary" context="production">
+        <sqlFile path="scripts/2015-11-28_0_modify_org.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
 
 </databaseChangeLog>

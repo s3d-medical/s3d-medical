@@ -1,6 +1,5 @@
 package com.s3d.auth.login.service.impl;
 
-import com.s3d.auth.acl.vo.UserVO;
 import com.s3d.auth.login.service.AuthenticationService;
 import com.s3d.auth.login.vo.LoginUserVO;
 import com.s3d.auth.login.vo.param.ResetPwdVO;

@@ -1,7 +1,7 @@
 package com.s3d.auth.acl.service;
 
 import com.s3d.auth.acl.entity.Action;
-import com.s3d.auth.acl.vo.ActionVO;
+import com.s3d.auth.acl.vo.result.ActionVO;
 
 import java.util.List;
 

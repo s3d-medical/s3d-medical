@@ -2,9 +2,9 @@ package com.s3d.auth.acl.web.controller;
 
 import com.s3d.auth.acl.entity.User;
 import com.s3d.auth.acl.service.UserService;
-import com.s3d.auth.acl.vo.QueryUserVO;
-import com.s3d.auth.acl.vo.UserIdList;
-import com.s3d.auth.acl.vo.UserVO;
+import com.s3d.auth.acl.vo.param.QueryUserVO;
+import com.s3d.auth.acl.vo.param.UserIdList;
+import com.s3d.auth.acl.vo.result.UserVO;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
 import org.slf4j.Logger;

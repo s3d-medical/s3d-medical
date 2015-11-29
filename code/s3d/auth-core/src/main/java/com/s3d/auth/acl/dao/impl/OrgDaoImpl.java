@@ -1,13 +1,9 @@
 package com.s3d.auth.acl.dao.impl;
 
-import com.s3d.auth.acl.dao.ActionDao;
 import com.s3d.auth.acl.dao.OrgDao;
-import com.s3d.auth.acl.entity.Action;
 import com.s3d.auth.acl.entity.Org;
-import com.s3d.auth.acl.vo.OrgVO;
 import com.s3d.tech.data.dao.hibernate.HibernateDao;
 import com.s3d.tech.slicer.PageParam;
-import com.s3d.tech.slicer.PageResult;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,7 @@
-package com.s3d.auth.acl.vo;
+package com.s3d.auth.acl.vo.result;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.s3d.auth.acl.vo.result.ActionVO;
+
 import java.io.Serializable;
 import java.util.List;
 

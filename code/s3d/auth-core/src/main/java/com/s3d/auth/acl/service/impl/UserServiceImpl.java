@@ -5,8 +5,8 @@ import com.s3d.auth.acl.dao.UserDao;
 import com.s3d.auth.acl.entity.Org;
 import com.s3d.auth.acl.entity.User;
 import com.s3d.auth.acl.service.UserService;
-import com.s3d.auth.acl.vo.QueryUserVO;
-import com.s3d.auth.acl.vo.UserVO;
+import com.s3d.auth.acl.vo.param.QueryUserVO;
+import com.s3d.auth.acl.vo.result.UserVO;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

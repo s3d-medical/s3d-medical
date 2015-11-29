@@ -1,7 +1,6 @@
 package com.s3d.auth.acl.service;
 
-import com.s3d.auth.acl.vo.ActionVO;
-import com.s3d.auth.acl.vo.RoleVO;
+import com.s3d.auth.acl.vo.result.RoleVO;
 
 /**
  * @author Administrator
