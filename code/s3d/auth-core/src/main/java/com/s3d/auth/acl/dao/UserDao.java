@@ -2,6 +2,7 @@ package com.s3d.auth.acl.dao;
 
 import com.s3d.auth.acl.entity.User;
 import com.s3d.tech.data.dao.GenericDao;
+import com.s3d.tech.slicer.PageParam;
 
 import java.util.List;
 
@@ -20,9 +21,25 @@ public interface UserDao extends GenericDao<User, Integer> {
 
     /**
      * query user by user full name and org id.
+     * @param orgId
      * @param fullName
+     * @return
+     */
+    public List<User> getUsers(Integer orgId, String fullName);
+
+    /**
+     * get users in this given org.
+     * @param orgId
+     * @param pageParam
+     * @return
+     */
+    public List<User> getUsers(Integer orgId, PageParam pageParam);
+
+    /**
+     * find user count in given org.
      * @param orgId
      * @return
      */
-    public List<User> getUsers(String fullName, Integer orgId);
+    public Long getUserCountInOrg(Integer orgId);
+
 }

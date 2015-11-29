@@ -18,20 +18,36 @@ public class PageResult<T> {
 
     private Long counter;
 
+    public PageResult() {
+    }
+
+    public PageResult(Long totalRecords, List<T> objects, PageParam queryPageParam){
+        this.init(totalRecords, objects, queryPageParam.getPageSize(), queryPageParam.getPageNo());
+    }
     public PageResult(Long totalRecords, List<T> objects, int pageSize, int pageNo){
+        this.init(totalRecords, objects, pageSize, pageNo);
+	}
+
+    /**
+     *
+     * @param totalRecords
+     * @param objects
+     * @param pageSize
+     * @param pageNo
+     */
+    public void init(Long totalRecords, List<T> objects, int pageSize, int pageNo){
         if(totalRecords != null){
             this.totalRecords = totalRecords;
         }
-		this.pageNo = pageNo;
-		this.pageSize = pageSize;
+        this.pageNo = pageNo;
+        this.pageSize = pageSize;
         if(pageSize <0){
             this.pageSize = 20;
         }
         if(objects != null && objects.size() > 0){
             this.results.addAll(objects);
         }
-	}
-
+    }
 	public Long getTotalRecords() {
 		if(totalRecords == null) {
 			return 0L;

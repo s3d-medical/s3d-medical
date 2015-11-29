@@ -28,7 +28,7 @@ public class Action implements Serializable {
     private String pageNo;
 
     @Column(name="state")
-    private Boolean state;
+    private Integer state;
 
     @ManyToMany(mappedBy = "actions", cascade = CascadeType.ALL)
     private Set<Role> roles = new HashSet<Role>();
@@ -36,7 +36,7 @@ public class Action implements Serializable {
     public Action() {
     }
 
-    public Action(Integer id, String actionName, String moduleNo, String pageNo, boolean state) {
+    public Action(Integer id, String actionName, String moduleNo, String pageNo, Integer state) {
         this.id = id;
         this.pageNo = pageNo;
         this.actionName = actionName;
@@ -84,11 +84,11 @@ public class Action implements Serializable {
         this.moduleNo = moduleNo;
     }
 
-    public Boolean getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(Boolean state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 }

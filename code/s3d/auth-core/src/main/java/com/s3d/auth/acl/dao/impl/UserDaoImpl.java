@@ -2,8 +2,8 @@ package com.s3d.auth.acl.dao.impl;
 
 import com.s3d.auth.acl.dao.UserDao;
 import com.s3d.auth.acl.entity.User;
-import com.s3d.tech.data.dao.hibernate.CommonDao;
 import com.s3d.tech.data.dao.hibernate.HibernateDao;
+import com.s3d.tech.slicer.PageParam;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -70,7 +70,7 @@ public class UserDaoImpl extends HibernateDao<User, Integer> implements UserDao 
     }
 
     @Override
-    public List<User> getUsers(String fullName, Integer orgId) {
+    public List<User> getUsers( Integer orgId, String fullName) {
         StringBuilder hql = new StringBuilder();
         Map param = new HashMap();
         hql.append("from User as u where 1=1 ");
@@ -83,6 +83,40 @@ public class UserDaoImpl extends HibernateDao<User, Integer> implements UserDao 
             param.put("orgId", orgId);
         }
         Query query = this.createQuery(hql.toString(), param);
+        List<User> userList = query.list();
+        return userList;
+    }
+
+    @Override
+    public Long getUserCountInOrg(Integer orgId) {
+        if (orgId == null) {
+            return null;
+        }
+        StringBuilder hql = new StringBuilder();
+        Map param = new HashMap();
+        hql.append("select count(u.id) from User as u where 1=1 ");
+        hql.append(" and u.org.id = :orgId");
+        param.put("orgId", orgId);
+
+        Query query = this.createQuery(hql.toString(), param);
+        Long count = (Long)query.uniqueResult();
+        return count;
+    }
+
+    @Override
+    public List<User> getUsers(Integer orgId, PageParam pageParam) {
+        if (orgId == null) {
+            return null;
+        }
+        StringBuilder hql = new StringBuilder();
+        Map param = new HashMap();
+        hql.append("from User as u where 1=1 ");
+        hql.append(" and u.org.id = :orgId");
+        param.put("orgId", orgId);
+
+        Query query = this.createQuery(hql.toString(), param);
+        query.setFirstResult(pageParam.getStartNo());
+        query.setMaxResults(pageParam.getPageSize());
         List<User> userList = query.list();
         return userList;
     }

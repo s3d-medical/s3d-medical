@@ -25,6 +25,7 @@ public class UserVO implements Serializable {
     private Integer languageId;
     private String key;
     private String remark;
+    private Integer order;
 
     public UserVO(User user) {
         this.id = user.getId();

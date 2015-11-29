@@ -7,12 +7,15 @@ import com.s3d.auth.acl.entity.User;
 import com.s3d.auth.acl.service.UserService;
 import com.s3d.auth.acl.vo.QueryUserVO;
 import com.s3d.auth.acl.vo.UserVO;
+import com.s3d.tech.slicer.PageParam;
+import com.s3d.tech.slicer.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +30,6 @@ public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
     private OrgDao orgDao;
-
 
     @Override
     public void saveOrUpdate(UserVO userVO) {
@@ -71,7 +73,21 @@ public class UserServiceImpl implements UserService {
         if(StringUtils.isEmpty(fullName) && orgId == null){
             throw new RuntimeException("User name and organization id can not be null together.");
         }
-        return this.userDao.getUsers(fullName, orgId);
+        return this.userDao.getUsers(orgId, fullName);
+    }
+
+    @Override
+    public PageResult<User> getUsers(Integer orgId, PageParam pageParam) {
+        Long count = this.userDao.getUserCountInOrg(orgId);
+
+        PageResult<User> result = new PageResult<User>();
+        if(count != null && count > 0){
+            List<User> userList = this.userDao.getUsers(orgId, pageParam);
+            result.init(count, userList, pageParam.getPageSize(), pageParam.getPageNo());
+        }else{
+            result.init(count, null, pageParam.getPageSize(), pageParam.getPageNo());
+        }
+        return result;
     }
 
     private void checkBeforeSaveOrUpdate(UserVO userVO) {
@@ -146,10 +162,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
-    }
-
-    public OrgDao getOrgDao() {
-        return orgDao;
     }
 
     @Autowired

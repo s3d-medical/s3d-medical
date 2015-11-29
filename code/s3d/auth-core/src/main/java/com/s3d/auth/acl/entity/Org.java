@@ -16,8 +16,8 @@ import java.util.Set;
 @Entity
 @Table(name = "auth_org")
 public class Org {
-    public static final boolean STATUS_VALID = true;
-    public static final boolean STATUS_INVALID=false;
+    public static final Integer STATUS_VALID = 1;
+    public static final Integer STATUS_INVALID=0;
 
     @Id
     @GeneratedValue
@@ -34,7 +34,7 @@ public class Org {
     private String code;
 
     @Column(name="status")
-    private Boolean status;
+    private Integer status;
 
     @Column(name="pos")
     private Integer order;
@@ -58,7 +58,7 @@ public class Org {
      * @param desc
      * @param status
      */
-    public Org(String name,String code,  String desc, Boolean status) {
+    public Org(String name,String code,  String desc, Integer status) {
         this.name = name;
         this.desc = desc;
         this.code = code;
@@ -113,11 +113,11 @@ public class Org {
         this.children = children;
     }
 
-    public Boolean getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

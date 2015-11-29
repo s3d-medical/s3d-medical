@@ -3,6 +3,8 @@ package com.s3d.auth.acl.service;
 import com.s3d.auth.acl.entity.User;
 import com.s3d.auth.acl.vo.QueryUserVO;
 import com.s3d.auth.acl.vo.UserVO;
+import com.s3d.tech.slicer.PageParam;
+import com.s3d.tech.slicer.PageResult;
 
 import java.util.List;
 
@@ -26,6 +28,8 @@ public interface UserService {
      * @return
      */
     public List<User> getUsers(QueryUserVO queryUserVO);
+
+    public PageResult<User> getUsers(Integer orgId, PageParam pageParam);
 
     /**
      * check an email has been used. if yes , check if the userId == id of the found user.

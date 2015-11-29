@@ -5,18 +5,16 @@ import com.s3d.auth.acl.service.UserService;
 import com.s3d.auth.acl.vo.QueryUserVO;
 import com.s3d.auth.acl.vo.UserIdList;
 import com.s3d.auth.acl.vo.UserVO;
+import com.s3d.tech.slicer.PageParam;
+import com.s3d.tech.slicer.PageResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-import javax.mail.Flags;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +45,26 @@ public class UserController {
             }
         }
         return model;
+    }
+    @RequestMapping(value="/departments/{orgId}/departments/users", method = RequestMethod.GET)
+    @ResponseBody
+    public Map getUsersOfOrg(HttpServletRequest request,  @PathVariable(value = "orgId") Integer orgId,
+                               @RequestParam(value = "page", defaultValue="0") Integer page,
+                               @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
+        PageParam pageParam = new PageParam(page, pageSize);
+        PageResult<User> result = this.userService.getUsers(orgId, pageParam);
+        List<UserVO> userVOList = new ArrayList<UserVO>();
+        List<User> userList = result.getResults();
+        if(userList != null && userList.size() > 0){
+            for(User user : userList){
+                UserVO userVO = new UserVO(user);
+                userVOList.add(userVO);
+            }
+        }
+        Map map = new HashMap();
+        map.put("count", result.getTotalRecords());
+        map.put("users", userVOList);
+        return map;
     }
 
     @RequestMapping(value = "/users/{userId}")

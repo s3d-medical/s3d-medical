@@ -10,7 +10,9 @@ import java.io.Serializable;
 public class ResetPwdVO implements Serializable {
 
     private static final long serialVersionUID = 206560331098451772L;
+
     private Integer userId;
+
     private String password;
 
     public Integer getUserId() {

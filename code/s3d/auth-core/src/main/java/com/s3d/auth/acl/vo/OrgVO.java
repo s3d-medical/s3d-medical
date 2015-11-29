@@ -14,7 +14,7 @@ public class OrgVO implements Serializable{
     private Integer parentId;
     private String code;
     private String remark;
-    private Boolean active;
+    private Integer active;
     private Integer order;
     private String parentName;
 
@@ -33,7 +33,8 @@ public class OrgVO implements Serializable{
      * @param parentId
      * @param parentName
      */
-    public OrgVO(Integer id,  String code, String name, Boolean active, String remark, Integer order, Integer parentId, String parentName) {
+    public OrgVO(Integer id,  String code, String name, Integer active, String remark,
+                 Integer order, Integer parentId, String parentName) {
         this.id = id;
         this.name = name;
         this.parentId = parentId;
@@ -68,11 +69,11 @@ public class OrgVO implements Serializable{
         this.parentId = parentId;
     }
 
-    public Boolean getActive() {
+    public Integer getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(Integer active) {
         this.active = active;
     }
 

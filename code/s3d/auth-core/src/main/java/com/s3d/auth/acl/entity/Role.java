@@ -26,7 +26,7 @@ public class Role implements Serializable {
     private String desc;
 
     @Column(name = "state")
-    private Boolean state;
+    private Integer state;
 
     // action set.
     @ManyToMany(cascade = CascadeType.ALL)
@@ -42,7 +42,7 @@ public class Role implements Serializable {
     public Role() {
     }
 
-    public Role(String id, String name, String desc, boolean state) {
+    public Role(String id, String name, String desc, Integer state) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -89,11 +89,11 @@ public class Role implements Serializable {
         this.users = users;
     }
 
-    public Boolean getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(Boolean state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 }

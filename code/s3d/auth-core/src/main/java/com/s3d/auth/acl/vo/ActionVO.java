@@ -20,7 +20,7 @@ public class ActionVO implements Serializable{
     private String actionName;
     private String moduleNo;
     private String pageNo;
-    private Boolean state;
+    private Integer state;
 
     public Integer getId() {
         return id;
@@ -54,11 +54,11 @@ public class ActionVO implements Serializable{
         this.pageNo = pageNo;
     }
 
-    public Boolean getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(Boolean state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 }
