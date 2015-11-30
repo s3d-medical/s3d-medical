@@ -4,9 +4,9 @@
     angular.module('cms')
         .controller('DepartmentsCtrl', DepartmentsCtrl);
 
-    DepartmentsCtrl.$inject = ['$scope', '$stateParams', 'dataService'];
+    DepartmentsCtrl.$inject = ['$rootScope', '$scope', '$stateParams', 'dataService'];
 
-    function DepartmentsCtrl ($scope, $stateParams, dataService) {
+    function DepartmentsCtrl ($rootScope, $scope, $stateParams, dataService) {
         var vm = this;
         vm.cfg = {
             parentId: 0,
@@ -132,7 +132,24 @@
         }
 
         function deleteItems () {
+            var ids = [];
+            for (var i in vm[vm.cfg.type]) {
+                if (vm[vm.cfg.type][i].checked) {
+                    ids.push(vm[vm.cfg.type][i].id);
+                }
+            }
+            if (!ids.length) {
+                $rootScope.$broadcast('Confirm.Open', {
+                    type: 'alert',
+                    title: '提醒',
+                    text: '请至少选择一条记录。'
+                });
+                return;
+            }
+            dataService.del(vm.cfg.type, {userIdListParam: ids})
+                .then(function (resp) {
 
+                })
         }
 
         function resetPassword () {

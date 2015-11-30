@@ -241,3 +241,15 @@
     text-align: center;
     padding: 75px 0;
 }
+/* confirm popup window */
+.confirm .modal-dialog,
+.alert .modal-dialog {
+    width: 360px;
+}
+.confirm .text {
+    margin-top: 10px;
+}
+.confirm .modal-footer,
+.alert .modal-footer {
+    border-top: none;
+}

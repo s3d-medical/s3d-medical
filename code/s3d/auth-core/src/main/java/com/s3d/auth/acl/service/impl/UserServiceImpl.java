@@ -95,8 +95,8 @@ public class UserServiceImpl implements UserService {
         Assert.isTrue(!StringUtils.isEmpty(userVO.getCode()), "User code can not be null.");
         Assert.isTrue(!StringUtils.isEmpty(userVO.getEmail()), "User email can not be null");
         Assert.isTrue(this.existSameCode(userVO.getId(), userVO.getCode()) == false, "User code has been existing.");
-        Assert.isTrue(this.existSameEmail(userVO.getId(), userVO.getEmail()), "User email has been existing.");
-        Assert.isTrue(this.existSameUserName(userVO.getId(), userVO.getUserName()), "User name has been existing.");
+        Assert.isTrue(this.existSameEmail(userVO.getId(), userVO.getEmail()) == false, "User email has been existing.");
+        Assert.isTrue(this.existSameUserName(userVO.getId(), userVO.getUserName()) == false, "User name has been existing.");
     }
 
     @Override

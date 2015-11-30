@@ -71,4 +71,11 @@ public class OrgController {
         model.addAttribute("department", orgService.getOrgVOById(departmentId));
         return model;
     }
+
+    @RequestMapping(value = "/departments", method = RequestMethod.DELETE)
+    public Model deleteDepartments(HttpServletRequest request, final Model model, @PathVariable Integer[] ids) {
+        // todo
+        model.addAttribute("status", "succeed");
+        return model;
+    }
 }
