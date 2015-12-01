@@ -40,7 +40,7 @@
         <div>
             <span>共&nbsp;<b>{{rs.cfg.count}}</b>&nbsp;条</span>
             <span>&nbsp;&nbsp;每页</span>
-            <b><input type="text" ng-model="rs.cfg.pageSize"></b>
+            <b><input type="text" class="page-size" ng-model="rs.cfg.pageSize"></b>
             <span>条&nbsp;&nbsp;</span>
             <button type="button" class="btn btn-primary">刷新</button>
         </div>

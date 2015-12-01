@@ -40,9 +40,9 @@
                 function save () {
                     dataService.post('departments', scope.department)
                         .then(function (resp) {
-                            console.log(resp);
+                            scope.$emit('Departments.Refresh');
+                            element.modal('hide');
                         });
-                    element.modal('hide');
                 }
 
                 function cancel () {

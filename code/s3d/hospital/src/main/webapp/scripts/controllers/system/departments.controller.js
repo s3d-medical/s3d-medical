@@ -31,13 +31,12 @@
         vm.deleteItems = deleteItems;
         vm.resetPassword = resetPassword;
 
-        init();
-
-        function init () {
+        !function init () {
             vm.cfg.parentId = $stateParams.departmentId;
             vm.cfg.type = $stateParams.type;
             loadPageData(1);
-        }
+            $scope.$on('Departments.Refresh', refresh);
+        }();
 
         function changeType (type) {
             vm.cfg.type = type;
@@ -148,7 +147,7 @@
             }
             dataService.del(vm.cfg.type, {ids: ids})
                 .then(function (resp) {
-
+                    refresh();
                 })
         }
 

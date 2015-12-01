@@ -41,12 +41,12 @@
                     console.log(scope.user);
                     dataService.post('users', scope.user)
                         .then(function (resp) {
+                            scope.$emit('Departments.Refresh');
                             element.modal('hide');
                         });
                 }
 
                 function cancel () {
-                    // todo
                     element.modal('hide');
                 }
 
