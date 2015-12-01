@@ -23,4 +23,6 @@ public interface OrgDao extends GenericDao<Org,Integer> {
 
     public Org getDepartmentById(Integer departmentId);
 
+    public void deleteOrgs(List<Integer> ids);
+
 }

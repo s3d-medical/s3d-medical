@@ -139,6 +139,12 @@ public class OrgServiceImpl implements OrgService {
         return vo;
     }
 
+    @Transactional
+    @Override
+    public void deleteOrgs(List<Integer> ids) {
+        orgDao.deleteOrgs(ids);
+    }
+
     @Resource
     public void setOrgDao(OrgDao orgDao) {
         this.orgDao = orgDao;

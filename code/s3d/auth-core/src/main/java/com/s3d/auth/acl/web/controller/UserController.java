@@ -3,7 +3,7 @@ package com.s3d.auth.acl.web.controller;
 import com.s3d.auth.acl.entity.User;
 import com.s3d.auth.acl.service.UserService;
 import com.s3d.auth.acl.vo.param.QueryUserParam;
-import com.s3d.auth.acl.vo.param.UserIdListParam;
+import com.s3d.auth.acl.vo.param.IdListParam;
 import com.s3d.auth.acl.vo.result.UserVO;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
@@ -102,11 +102,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.DELETE)
-    public Model delete(HttpServletRequest request, final Model model, @RequestBody UserIdListParam userIdListParam) {
-        if (userIdListParam == null || userIdListParam.getUserIds() == null || userIdListParam.getUserIds().size() == 0) {
+    public Model delete(HttpServletRequest request, final Model model, @RequestBody IdListParam idListParam) {
+        if (idListParam == null || idListParam.getIds() == null || idListParam.getIds().size() == 0) {
             model.addAttribute("status", "failure");
         } else {
-            this.userService.delete(userIdListParam.getUserIds());
+            this.userService.delete(idListParam.getIds());
             model.addAttribute("status", "succeed");
         }
         return model;

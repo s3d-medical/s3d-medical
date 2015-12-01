@@ -14,6 +14,10 @@
         this.gets = gets;
         this.requests = requests;
 
+        !function init () {
+            $http.defaults.headers.delete = {"Content-Type": "application/json;charset=utf-8"};
+        }();
+
         function get (api, header) {
             return request('GET', api, '', header);
         }
@@ -26,8 +30,8 @@
             return request('PUT', api, requestData, header);
         }
 
-        function del (api, header) {
-            return request('DELETE', api, '', header);
+        function del (api, requestData, header) {
+            return request('DELETE', api, requestData, header);
         }
 
         function request (requestType, api, requestData, header) {

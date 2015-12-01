@@ -42,4 +42,6 @@ public interface UserDao extends GenericDao<User, Integer> {
      */
     public Long getUserCountInOrg(Integer orgId);
 
+    public void deleteUsers(List<Integer> ids);
+
 }

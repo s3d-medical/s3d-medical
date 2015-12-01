@@ -40,4 +40,6 @@ public interface OrgService {
      */
     public OrgVO getOrgVOById(Integer departmentId);
 
+    public void deleteOrgs(List<Integer> ids);
+
 }

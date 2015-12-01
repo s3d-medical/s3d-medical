@@ -153,9 +153,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(List<Integer> ids) {
         Assert.isTrue((ids != null && ids.size() >0), "Given id list can not be empty.");
-        for (Integer id : ids){
+        userDao.deleteUsers(ids);
+        /*for (Integer id : ids){
             this.userDao.delete(id);
-        }
+        }*/
     }
 
     @Autowired

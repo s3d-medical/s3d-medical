@@ -146,7 +146,7 @@
                 });
                 return;
             }
-            dataService.del(vm.cfg.type, {userIdListParam: ids})
+            dataService.del(vm.cfg.type, {ids: ids})
                 .then(function (resp) {
 
                 })
