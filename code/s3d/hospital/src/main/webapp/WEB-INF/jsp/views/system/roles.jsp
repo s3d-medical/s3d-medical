@@ -2,7 +2,7 @@
     <div class="roles">
         <ul class="nav nav-tabs">
             <li class="pull-right">
-                <button type="button" class="btn btn-primary">新建</button>
+                <button type="button" class="btn btn-primary" ui-sref="main.system.role({roleId: -1})">新建</button>
                 <button type="button" class="btn btn-danger">删除</button>
             </li>
         </ul>

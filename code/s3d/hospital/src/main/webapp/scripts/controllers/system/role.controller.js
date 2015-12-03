@@ -22,6 +22,7 @@
 
         function initData () {
             vm.roleId = $stateParams.roleId;
+            console.log(vm.roleId);
             var resp1 = {
                 role: {
                     id: 1,
@@ -100,10 +101,12 @@
                     }
                 ]
             };
-            vm.role = resp1.role;
-            vm.permissionCategories = resp2.permissionCategories;
-            for (var i in vm.permissionCategories) {
-                vm.permissionCategories[i].expanded = true;
+            if (vm.roleId > 0) {
+                vm.role = resp1.role;
+                vm.permissionCategories = resp2.permissionCategories;
+                for (var i in vm.permissionCategories) {
+                    vm.permissionCategories[i].expanded = true;
+                }
             }
         }
 

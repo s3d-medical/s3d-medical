@@ -160,6 +160,7 @@
     margin-bottom: 0;
     overflow: hidden;
     width: 100%;
+    min-height: 40px;
 }
 .role .permission-list li {
     text-decoration: underline;
