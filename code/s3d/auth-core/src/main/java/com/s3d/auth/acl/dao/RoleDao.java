@@ -16,4 +16,6 @@ public interface RoleDao extends GenericDao<Role,Integer> {
 
     List<Role> getRoles(PageParam pageParam);
 
+    void deleteRoles(List<Integer> ids);
+
 }

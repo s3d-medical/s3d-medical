@@ -5,6 +5,7 @@ import com.s3d.auth.acl.entity.Action;
 import com.s3d.auth.acl.entity.Role;
 import com.s3d.auth.acl.service.ActionService;
 import com.s3d.auth.acl.service.RoleService;
+import com.s3d.auth.acl.vo.param.IdListParam;
 import com.s3d.auth.acl.vo.result.ActionVO;
 import com.s3d.auth.acl.vo.result.PageRoleVO;
 import com.s3d.auth.acl.vo.result.RoleVO;
@@ -79,6 +80,11 @@ public class RoleServiceImpl implements RoleService {
         }
         PageResult<PageRoleVO> pageResult = new PageResult<PageRoleVO>(count, roleVOs, pageParam.getPageSize(), pageParam.getPageNo());
         return pageResult;
+    }
+
+    @Override
+    public void deleteRoles(IdListParam idListParam) {
+        roleDao.deleteRoles(idListParam.getIds());
     }
 
     @Autowired

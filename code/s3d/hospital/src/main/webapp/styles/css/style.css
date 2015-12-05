@@ -116,7 +116,8 @@
 .departments tr {
     cursor: pointer;
 }
-.departments table tr td:first-child {
+.departments table tr td:first-child,
+.roles table tr td:first-child {
     text-align: center;
 }
 .departments .tb-departments tr td:first-child {
@@ -231,10 +232,10 @@
     width: 800px;
 }
 .select-user .search-wrap {
-    width: 610px;
+    width: 570px;
 }
 .select-user .search-wrap ul {
-    width: 238px;
+    width: 218px;
     display: inline-block;
 }
 .select-user ul.btn-wrap {

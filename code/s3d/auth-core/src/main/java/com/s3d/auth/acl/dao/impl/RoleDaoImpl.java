@@ -5,7 +5,11 @@ import com.s3d.auth.acl.entity.Role;
 import com.s3d.tech.data.dao.hibernate.CommonDao;
 import com.s3d.tech.data.dao.hibernate.HibernateDao;
 import com.s3d.tech.slicer.PageParam;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
@@ -30,8 +34,18 @@ public class RoleDaoImpl extends HibernateDao<Role, Integer> implements RoleDao 
         StringBuilder hql = new StringBuilder();
         hql.append("from Role where state != 2");
         Query query = this.createQuery(hql.toString());
-        query.setFirstResult(pageParam.getPageNo());
+        query.setFirstResult(pageParam.getStartNo());
         query.setMaxResults(pageParam.getPageSize());
         return (List<Role>)query.list();
+    }
+
+    @Override
+    public void deleteRoles(List<Integer> ids) {
+        StringBuilder hql = new StringBuilder();
+        Map params = new HashMap();
+        hql.append("update Role set state = 2 where id in (:ids)");
+        params.put("ids", ids);
+        Query query = this.createQuery(hql.toString(), params);
+        query.executeUpdate();
     }
 }
