@@ -1,6 +1,9 @@
 package com.s3d.auth.acl.service;
 
+import com.s3d.auth.acl.vo.result.PageRoleVO;
 import com.s3d.auth.acl.vo.result.RoleVO;
+import com.s3d.tech.slicer.PageParam;
+import com.s3d.tech.slicer.PageResult;
 
 /**
  * @author Administrator
@@ -9,4 +12,6 @@ import com.s3d.auth.acl.vo.result.RoleVO;
  */
 public interface RoleService {
     public void saveOrUpdate(RoleVO roleVO);
+
+    PageResult<PageRoleVO> getRoles(PageParam pageParam);
 }

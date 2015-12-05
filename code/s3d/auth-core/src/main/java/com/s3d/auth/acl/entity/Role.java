@@ -2,7 +2,6 @@ package com.s3d.auth.acl.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +16,7 @@ public class Role implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private String id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -42,18 +41,18 @@ public class Role implements Serializable {
     public Role() {
     }
 
-    public Role(String id, String name, String desc, Integer state) {
+    public Role(Integer id, String name, String desc, Integer state) {
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.state = state;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
