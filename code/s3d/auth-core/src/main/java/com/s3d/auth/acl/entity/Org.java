@@ -33,7 +33,7 @@ public class Org {
     @Column(name="code")
     private String code;
 
-    @Column(name="key")
+    @Column(name="`key`")
     private String key;
 
     @Column(name="status")

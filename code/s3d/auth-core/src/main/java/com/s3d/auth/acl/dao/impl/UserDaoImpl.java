@@ -64,6 +64,7 @@ public class UserDaoImpl extends HibernateDao<User, Integer> implements UserDao 
             hql.append(" and u.email = :email");
             param.put("email", email);
         }
+        hql.append(" and u.state != 2");
         Query query = this.createQuery(hql.toString(), param);
         List<User> userList = query.list();
         return userList;
@@ -82,6 +83,7 @@ public class UserDaoImpl extends HibernateDao<User, Integer> implements UserDao 
             hql.append(" and u.org.id = :orgId");
             param.put("orgId", orgId);
         }
+        hql.append(" and u.state != 2");
         Query query = this.createQuery(hql.toString(), param);
         List<User> userList = query.list();
         return userList;
@@ -96,11 +98,22 @@ public class UserDaoImpl extends HibernateDao<User, Integer> implements UserDao 
         Map param = new HashMap();
         hql.append("select count(u.id) from User as u where 1=1 ");
         hql.append(" and u.org.id = :orgId");
+        hql.append(" and u.state != 2");
         param.put("orgId", orgId);
 
         Query query = this.createQuery(hql.toString(), param);
         Long count = (Long)query.uniqueResult();
         return count;
+    }
+
+    @Override
+    public void deleteUsers(List<Integer> ids) {
+        StringBuilder hql = new StringBuilder();
+        Map param = new HashMap();
+        hql.append("update User set state = 2 where id in (:ids)");
+        param.put("ids", ids);
+        Query query = this.createQuery(hql.toString(), param);
+        query.executeUpdate();
     }
 
     @Override
@@ -112,6 +125,7 @@ public class UserDaoImpl extends HibernateDao<User, Integer> implements UserDao 
         Map param = new HashMap();
         hql.append("from User as u where 1=1 ");
         hql.append(" and u.org.id = :orgId");
+        hql.append(" and u.state != 2");
         param.put("orgId", orgId);
 
         Query query = this.createQuery(hql.toString(), param);

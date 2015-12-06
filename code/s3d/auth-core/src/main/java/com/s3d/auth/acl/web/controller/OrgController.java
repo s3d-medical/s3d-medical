@@ -2,6 +2,7 @@ package com.s3d.auth.acl.web.controller;
 
 import com.s3d.auth.acl.entity.Org;
 import com.s3d.auth.acl.service.OrgService;
+import com.s3d.auth.acl.vo.param.IdListParam;
 import com.s3d.auth.acl.vo.result.OrgVO;
 import com.s3d.auth.acl.web.controller.helper.OrgConvertor;
 import com.s3d.auth.acl.web.controller.helper.ResultHelper;
@@ -64,5 +65,22 @@ public class OrgController {
             logger.error("Failed to query sub organizations. ", e);
         }
         return OrgConvertor.toMapForQuerySubOrgs(pageResult);
+    }
+
+    @RequestMapping(value = "/departments/{departmentId}")
+    public Model getDepartment(HttpServletRequest request, final Model model, @PathVariable Integer departmentId) {
+        model.addAttribute("department", orgService.getOrgVOById(departmentId));
+        return model;
+    }
+
+    @RequestMapping(value = "/departments", method = RequestMethod.DELETE)
+    public Model deleteDepartments(HttpServletRequest request, final Model model, @RequestBody IdListParam idListParam) {
+        if (null == idListParam || null == idListParam.getIds() || idListParam.getIds().size() == 0) {
+            model.addAttribute("status", "failure");
+        } else {
+            this.orgService.deleteOrgs(idListParam.getIds());
+            model.addAttribute("status", "succeed");
+        }
+        return model;
     }
 }

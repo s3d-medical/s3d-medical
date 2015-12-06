@@ -24,7 +24,7 @@
 
                 function open (event, data) {
                     scope.department = data.department;
-                    scope.parentDepartment = departmentUtils.getDepartmentById(scope.department.id);
+                    scope.parentDepartment = departmentUtils.getDepartmentById(scope.department.parentId);
                     element.modal({backdrop: 'static'});
                 }
 
@@ -40,9 +40,9 @@
                 function save () {
                     dataService.post('departments', scope.department)
                         .then(function (resp) {
-                            console.log(resp);
+                            scope.$emit('Departments.Refresh');
+                            element.modal('hide');
                         });
-                    element.modal('hide');
                 }
 
                 function cancel () {

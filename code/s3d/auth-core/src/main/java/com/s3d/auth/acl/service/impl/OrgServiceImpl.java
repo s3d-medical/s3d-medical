@@ -128,6 +128,23 @@ public class OrgServiceImpl implements OrgService {
         return pageResult;
     }
 
+    @Transactional
+    @Override
+    public OrgVO getOrgVOById(Integer departmentId) {
+        OrgVO vo = null;
+        Org org = orgDao.get(departmentId);
+        if (org != null) {
+            vo = new OrgVO(org.getId(),org.getCode(), org.getKey(), org.getName(), org.getStatus(), org.getDesc(), org.getOrder(), org.getParentId(), org.getParentName());
+        }
+        return vo;
+    }
+
+    @Transactional
+    @Override
+    public void deleteOrgs(List<Integer> ids) {
+        orgDao.deleteOrgs(ids);
+    }
+
     @Resource
     public void setOrgDao(OrgDao orgDao) {
         this.orgDao = orgDao;

@@ -4,9 +4,9 @@
     angular.module('cms')
         .controller('DepartmentsCtrl', DepartmentsCtrl);
 
-    DepartmentsCtrl.$inject = ['$scope', '$stateParams', 'dataService'];
+    DepartmentsCtrl.$inject = ['$rootScope', '$scope', '$stateParams', 'dataService'];
 
-    function DepartmentsCtrl ($scope, $stateParams, dataService) {
+    function DepartmentsCtrl ($rootScope, $scope, $stateParams, dataService) {
         var vm = this;
         vm.cfg = {
             parentId: 0,
@@ -31,13 +31,12 @@
         vm.deleteItems = deleteItems;
         vm.resetPassword = resetPassword;
 
-        init();
-
-        function init () {
+        !function init () {
             vm.cfg.parentId = $stateParams.departmentId;
             vm.cfg.type = $stateParams.type;
             loadPageData(1);
-        }
+            $scope.$on('Departments.Refresh', refresh);
+        }();
 
         function changeType (type) {
             vm.cfg.type = type;
@@ -77,9 +76,9 @@
             } else {
                 vm.cfg.pageNum = pageNum;
             }
-            dataService.get('departments/' + vm.cfg.parentId + '/departments?page=' + vm.cfg.pageNum + '&pageSize=' + vm.cfg.pageSize)
+            dataService.get('departments/' + vm.cfg.parentId + '/' + vm.cfg.type + '?page=' + vm.cfg.pageNum + '&pageSize=' + vm.cfg.pageSize)
                 .then(function (resp) {
-                    vm[vm.cfg.type] = resp.departments;
+                    vm[vm.cfg.type] = resp.result;
                     _.map(vm[vm.cfg.type], function (item) {
                         item.checked = false;
                     });
@@ -101,13 +100,13 @@
         function viewItem (id) {
             // get department or user
             if (vm.cfg.type == 'departments') {
-                dataService.get('department.json')
+                dataService.get('departments/' + id)
                     .then(function (resp) {
                         vm.selectedDepartment = resp.department;
                         $scope.$broadcast('ViewDepartment.Open', {department: vm.selectedDepartment});
                     });
             } else if (vm.cfg.type == 'users') {
-                dataService.get('user.json')
+                dataService.get('users/' + id)
                     .then(function (resp) {
                         vm.selectedUser = resp.user;
                         $scope.$broadcast('ViewUser.Open', {user: vm.selectedUser});
@@ -125,14 +124,31 @@
 
         function createItem () {
             if (vm.cfg.type == 'departments') {
-                $scope.$broadcast('EditDepartment.Open', {department: {id: -1}});
+                $scope.$broadcast('EditDepartment.Open', {department: {id: -1, parentId: $stateParams.departmentId}});
             } else if (vm.cfg.type == 'users') {
-                $scope.$broadcast('EditUser.Open', {user: {}});
+                $scope.$broadcast('EditUser.Open', {user: {id: -1, departmentId: $stateParams.departmentId}});
             }
         }
 
         function deleteItems () {
-
+            var ids = [];
+            for (var i in vm[vm.cfg.type]) {
+                if (vm[vm.cfg.type][i].checked) {
+                    ids.push(vm[vm.cfg.type][i].id);
+                }
+            }
+            if (!ids.length) {
+                $rootScope.$broadcast('Confirm.Open', {
+                    type: 'alert',
+                    title: '提醒',
+                    text: '请至少选择一条记录。'
+                });
+                return;
+            }
+            dataService.del(vm.cfg.type, {ids: ids})
+                .then(function (resp) {
+                    refresh();
+                })
         }
 
         function resetPassword () {

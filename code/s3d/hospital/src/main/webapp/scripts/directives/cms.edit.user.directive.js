@@ -4,9 +4,9 @@
     angular.module('cms')
         .directive('cmsEditUser', cmsEditUser);
 
-    cmsEditUser.$inject = ['$timeout', 'departmentUtils'];
+    cmsEditUser.$inject = ['dataService', 'departmentUtils'];
 
-    function cmsEditUser ($timeout, departmentUtils) {
+    function cmsEditUser (dataService, departmentUtils) {
         return {
             restrict: 'AE',
             templateUrl: 'tplEditUser',
@@ -38,12 +38,15 @@
                 }
 
                 function save () {
-                    // todo
-                    element.modal('hide');
+                    console.log(scope.user);
+                    dataService.post('users', scope.user)
+                        .then(function (resp) {
+                            scope.$emit('Departments.Refresh');
+                            element.modal('hide');
+                        });
                 }
 
                 function cancel () {
-                    // todo
                     element.modal('hide');
                 }
 

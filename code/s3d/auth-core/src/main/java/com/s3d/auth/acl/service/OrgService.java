@@ -33,4 +33,13 @@ public interface OrgService {
 
     public PageResult<OrgVO> getDirectChildrenPage(Integer orgId, PageParam pageParam);
 
+    /**
+     * Get department by id
+     * @param departmentId
+     * @return
+     */
+    public OrgVO getOrgVOById(Integer departmentId);
+
+    public void deleteOrgs(List<Integer> ids);
+
 }

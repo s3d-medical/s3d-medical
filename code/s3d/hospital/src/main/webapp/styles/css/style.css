@@ -106,7 +106,7 @@
     margin-right: 20px;
 }*/
 /* departments */
-.departments .page-size {
+.page-size {
     border: none;
     border-bottom: solid 1px #aaa;
     width: 30px;
@@ -240,4 +240,16 @@
     width: 124px;
     text-align: center;
     padding: 75px 0;
+}
+/* confirm popup window */
+.confirm .modal-dialog,
+.alert .modal-dialog {
+    width: 360px;
+}
+.confirm .text {
+    margin-top: 10px;
+}
+.confirm .modal-footer,
+.alert .modal-footer {
+    border-top: none;
 }

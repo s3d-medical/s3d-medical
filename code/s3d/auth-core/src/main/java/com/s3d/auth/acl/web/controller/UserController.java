@@ -3,7 +3,7 @@ package com.s3d.auth.acl.web.controller;
 import com.s3d.auth.acl.entity.User;
 import com.s3d.auth.acl.service.UserService;
 import com.s3d.auth.acl.vo.param.QueryUserParam;
-import com.s3d.auth.acl.vo.param.UserIdListParam;
+import com.s3d.auth.acl.vo.param.IdListParam;
 import com.s3d.auth.acl.vo.result.UserVO;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
@@ -30,7 +30,7 @@ public class UserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private UserService userService;
 
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/search", method = RequestMethod.POST)
     public Model getUserList(HttpServletRequest request, final Model model, @RequestBody QueryUserParam queryUserParam) {
         // find user list and set model.
         List<User> users = this.userService.getUsers(queryUserParam);
@@ -46,7 +46,7 @@ public class UserController {
         }
         return model;
     }
-    @RequestMapping(value="/departments/{orgId}/departments/users", method = RequestMethod.GET)
+    @RequestMapping(value="/departments/{orgId}/users", method = RequestMethod.GET)
     @ResponseBody
     public Map getUsersOfOrg(HttpServletRequest request,  @PathVariable(value = "orgId") Integer orgId,
                                @RequestParam(value = "page", defaultValue="0") Integer page,
@@ -63,7 +63,7 @@ public class UserController {
         }
         Map map = new HashMap();
         map.put("count", result.getTotalRecords());
-        map.put("users", userVOList);
+        map.put("result", userVOList);
         return map;
     }
 
@@ -102,11 +102,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.DELETE)
-    public Model delete(HttpServletRequest request, final Model model, @RequestBody UserIdListParam userIdListParam) {
-        if (userIdListParam == null || userIdListParam.getUserIds() == null || userIdListParam.getUserIds().size() == 0) {
+    public Model delete(HttpServletRequest request, final Model model, @RequestBody IdListParam idListParam) {
+        if (idListParam == null || idListParam.getIds() == null || idListParam.getIds().size() == 0) {
             model.addAttribute("status", "failure");
         } else {
-            this.userService.delete(userIdListParam.getUserIds());
+            this.userService.delete(idListParam.getIds());
             model.addAttribute("status", "succeed");
         }
         return model;

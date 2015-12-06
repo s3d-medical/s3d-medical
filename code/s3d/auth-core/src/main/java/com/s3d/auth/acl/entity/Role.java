@@ -39,6 +39,10 @@ public class Role implements Serializable {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "roles")
     private Set<User> users = new HashSet<User>();
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private RoleCategory cate;
+
     public Role() {
     }
 

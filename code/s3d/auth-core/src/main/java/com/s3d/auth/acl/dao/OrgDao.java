@@ -21,4 +21,8 @@ public interface OrgDao extends GenericDao<Org,Integer> {
 
     public Long getDirectChildrenCount(Integer orgId, PageParam pageParam);
 
+    public Org getDepartmentById(Integer departmentId);
+
+    public void deleteOrgs(List<Integer> ids);
+
 }
