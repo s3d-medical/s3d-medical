@@ -35,9 +35,12 @@
                 controller: 'RolesCtrl as rs'
             })
             .state('main.system.role', {
-                url: '/roles/:roleId',
+                url: '/role',
                 templateUrl: 'viewRole',
-                controller: 'RoleCtrl as rc'
+                controller: 'RoleCtrl as rc',
+                params: {
+                    roleId: -1
+                }
             })
             .state('main.system.userRoles', {
                 url: '/user-roles',

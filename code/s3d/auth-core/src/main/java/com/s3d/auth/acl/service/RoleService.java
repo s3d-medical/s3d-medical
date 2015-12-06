@@ -1,6 +1,10 @@
 package com.s3d.auth.acl.service;
 
+import com.s3d.auth.acl.vo.param.IdListParam;
+import com.s3d.auth.acl.vo.result.PageRoleVO;
 import com.s3d.auth.acl.vo.result.RoleVO;
+import com.s3d.tech.slicer.PageParam;
+import com.s3d.tech.slicer.PageResult;
 
 /**
  * @author Administrator
@@ -8,5 +12,9 @@ import com.s3d.auth.acl.vo.result.RoleVO;
  * @date 2015/11/1 17:53
  */
 public interface RoleService {
-    public void saveOrUpdate(RoleVO roleVO);
+    void saveOrUpdate(RoleVO roleVO);
+
+    PageResult<PageRoleVO> getRoles(PageParam pageParam);
+
+    void deleteRoles(IdListParam idListParam);
 }

@@ -5,8 +5,12 @@ import com.s3d.auth.acl.entity.Action;
 import com.s3d.auth.acl.entity.Role;
 import com.s3d.auth.acl.service.ActionService;
 import com.s3d.auth.acl.service.RoleService;
+import com.s3d.auth.acl.vo.param.IdListParam;
 import com.s3d.auth.acl.vo.result.ActionVO;
+import com.s3d.auth.acl.vo.result.PageRoleVO;
 import com.s3d.auth.acl.vo.result.RoleVO;
+import com.s3d.tech.slicer.PageParam;
+import com.s3d.tech.slicer.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +59,32 @@ public class RoleServiceImpl implements RoleService {
         // load actions.
 
         this.roleDao.saveOrUpdate(role);
+    }
+
+    @Override
+    public PageResult<PageRoleVO> getRoles(PageParam pageParam) {
+        if (pageParam.isValid() == false) {
+            throw new RuntimeException("Parameters form pagination is wrong.");
+        }
+        Long count = roleDao.getRolesCount(pageParam);
+        List<PageRoleVO> roleVOs = new ArrayList<PageRoleVO>();
+        if (null != count && count > 0) {
+            List<Role> roles = roleDao.getRoles(pageParam);
+            if (null != roles && roles.size() > 0) {
+                for (int i = 0; i < roles.size(); i++) {
+                    Role role = roles.get(i);
+                    PageRoleVO vo = new PageRoleVO(role.getId(), role.getName(), role.getDesc(), "", "");
+                    roleVOs.add(vo);
+                }
+            }
+        }
+        PageResult<PageRoleVO> pageResult = new PageResult<PageRoleVO>(count, roleVOs, pageParam.getPageSize(), pageParam.getPageNo());
+        return pageResult;
+    }
+
+    @Override
+    public void deleteRoles(IdListParam idListParam) {
+        roleDao.deleteRoles(idListParam.getIds());
     }
 
     @Autowired

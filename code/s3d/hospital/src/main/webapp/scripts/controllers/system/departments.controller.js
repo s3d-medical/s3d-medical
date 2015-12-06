@@ -1,4 +1,4 @@
-﻿(function () {
+﻿﻿(function () {
     'use strict';
 
     angular.module('cms')
@@ -145,10 +145,18 @@
                 });
                 return;
             }
-            dataService.del(vm.cfg.type, {ids: ids})
-                .then(function (resp) {
-                    refresh();
-                })
+            $rootScope.$broadcast('Confirm.Open', {
+                type: 'confirm',
+                title: '确认',
+                text: '确定要删除所选记录吗？',
+                confirm: function () {
+                    dataService.del(vm.cfg.type, {ids: ids})
+                        .then(function (resp) {
+                            refresh();
+                            vm.cfg.checkAll = false;
+                        })
+                }
+            });
         }
 
         function resetPassword () {

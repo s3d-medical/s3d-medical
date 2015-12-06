@@ -1,15 +1,12 @@
 package com.s3d.auth.acl.vo.result;
 
-import com.s3d.auth.acl.vo.result.ActionVO;
-
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author wind.chen
  * @since 2015/7/19.
  */
-public class RoleVO implements Serializable{
+public class PageRoleVO implements Serializable{
     private static final long serialVersionUID = -3361683703204634757L;
     private Integer id;
 
@@ -17,12 +14,20 @@ public class RoleVO implements Serializable{
 
     private String desc;
 
-    private Integer state;
+    private String category;
 
-    private List<ActionVO> actions;
+    private String creator;
 
-    public RoleVO() {
+    public PageRoleVO() {
 
+    }
+
+    public PageRoleVO(Integer id, String name, String desc, String category, String creator) {
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+        this.category = category;
+        this.creator = creator;
     }
 
     public Integer getId() {
@@ -49,19 +54,19 @@ public class RoleVO implements Serializable{
         this.desc = desc;
     }
 
-    public Integer getState() {
-        return state;
+    public String getCategory() {
+        return category;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public List<ActionVO> getActions() {
-        return actions;
+    public String getCreator() {
+        return creator;
     }
 
-    public void setActions(List<ActionVO> actions) {
-        this.actions = actions;
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }

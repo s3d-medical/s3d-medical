@@ -116,7 +116,8 @@
 .departments tr {
     cursor: pointer;
 }
-.departments table tr td:first-child {
+.departments table tr td:first-child,
+.roles table tr td:first-child {
     text-align: center;
 }
 .departments .tb-departments tr td:first-child {
@@ -160,6 +161,7 @@
     margin-bottom: 0;
     overflow: hidden;
     width: 100%;
+    min-height: 40px;
 }
 .role .permission-list li {
     text-decoration: underline;
@@ -216,6 +218,7 @@
 }
 .select-department .search-wrap ul li {
     padding: 5px;
+    cursor: pointer;
 }
 .select-department .search-wrap .input-search {
     width: 84%;
@@ -230,10 +233,10 @@
     width: 800px;
 }
 .select-user .search-wrap {
-    width: 610px;
+    width: 570px;
 }
 .select-user .search-wrap ul {
-    width: 238px;
+    width: 218px;
     display: inline-block;
 }
 .select-user ul.btn-wrap {

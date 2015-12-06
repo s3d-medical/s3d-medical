@@ -42,7 +42,7 @@ public class OrgDaoImpl extends HibernateDao<Org, Integer> implements OrgDao {
     @Override
     public List<Org> getDirectChildren(Integer orgId, PageParam pageParam) {
         StringBuilder hql = new StringBuilder();
-        hql.append("from Org t where t.parent.id = :parentId and status != 2");
+        hql.append("from Org t where t.parent.id = :parentId and status != 2 order by pos asc");
         Query query = this.getSession().createQuery(hql.toString());
         query.setInteger("parentId", orgId);
         query.setFirstResult(pageParam.getStartNo());
