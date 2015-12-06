@@ -76,8 +76,8 @@ public class UserDaoImpl extends HibernateDao<User, Integer> implements UserDao 
         Map param = new HashMap();
         hql.append("from User as u where 1=1 ");
         if(!StringUtils.isEmpty(fullName)){
-            hql.append(" and u.fullName = :fullName");
-            param.put("fullName", fullName);
+            hql.append(" and u.fullName like :fullName");
+            param.put("fullName", "%" + fullName + "%");
         }
         if(orgId != null){
             hql.append(" and u.org.id = :orgId");

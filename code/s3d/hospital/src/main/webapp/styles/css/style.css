@@ -218,6 +218,7 @@
 }
 .select-department .search-wrap ul li {
     padding: 5px;
+    cursor: pointer;
 }
 .select-department .search-wrap .input-search {
     width: 84%;

@@ -30,7 +30,7 @@
                 function open (event, data) {
                     scope.departments = localDataService.getDepartments();
                     scope.sourceUsers = [];
-                    scope.targetUsers = data.targetUsers;
+                    scope.targetUsers = data.targetUsers || [];
                     scope.selectedSourceUsers = [];
                     scope.selectedTargetUsers = [];
                     scope.condition = '';
@@ -44,8 +44,12 @@
                 }
 
                 function search () {
-                    if (scope.condition) {
-                        var resp = {
+                    if (_.trim(scope.condition)) {
+                        dataService.post('users/search', {realName: _.trim(scope.condition)})
+                            .then(function (resp) {
+                                scope.sourceUsers = resp.result;
+                            });
+                        /*var resp = {
                             users: [
                                 {"id": 11, "realName": "用户11"},
                                 {"id": 12, "realName": "用户12"},
@@ -59,8 +63,7 @@
                                 {"id": 20, "realName": "用户20"}
                             ]
                         };
-
-                        scope.sourceUsers = resp.users;
+                        scope.sourceUsers = resp.users;*/
                     }
                 }
 
@@ -140,7 +143,14 @@
                 }
 
                 function _selectNode (event, data) {
-                    var resp = {
+                    dataService.post('users/search', {departmentId: data.id})
+                    //dataService.get('departments/' + data.id + '/users?page=0&pageSize=0')
+                        .then(function (resp) {
+                            $timeout(function () {
+                                scope.sourceUsers = resp.result;
+                            });
+                        });
+                    /*var resp = {
                         users: [
                             {"id": 1, "realName": "用户1"},
                             {"id": 2, "realName": "用户2"},
@@ -154,10 +164,9 @@
                             {"id": 10, "realName": "用户10"}
                         ]
                     };
-
                     $timeout(function () {
                         scope.sourceUsers = resp.users;
-                    });
+                    });*/
                 }
             }
         }

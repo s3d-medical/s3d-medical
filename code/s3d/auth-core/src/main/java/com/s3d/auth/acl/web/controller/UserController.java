@@ -44,6 +44,7 @@ public class UserController {
                 jsonUsers.add(oneUser);
             }
         }
+        model.addAttribute("result", jsonUsers);
         return model;
     }
     @RequestMapping(value="/departments/{orgId}/users", method = RequestMethod.GET)
