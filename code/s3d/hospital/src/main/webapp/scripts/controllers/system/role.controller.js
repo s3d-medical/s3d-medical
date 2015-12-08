@@ -4,15 +4,19 @@
     angular.module('cms')
         .controller('RoleCtrl', RoleCtrl);
 
-    RoleCtrl.$inject = ['$scope', '$stateParams'];
+    RoleCtrl.$inject = ['$scope', '$state', '$stateParams', 'dataService'];
 
-    function RoleCtrl ($scope, $stateParams) {
+    function RoleCtrl ($scope, $state, $stateParams, dataService) {
         var vm = this;
         vm.role = {};
+        vm.users = [];
         vm.permissionCategories = [];
 
         vm.openSelectUser = openSelectUser;
         vm.changeUsers = changeUsers;
+        vm.checkCategory = checkCategory;
+        vm.checkPermission = checkPermission;
+        vm.save = save;
 
         init();
 
@@ -23,6 +27,7 @@
         function initData () {
             vm.roleId = $stateParams.roleId;
             console.log(vm.roleId);
+            // todo just for test
             var resp1 = {
                 role: {
                     id: 1,
@@ -53,6 +58,7 @@
                     creator: '管理员'
                 }
             };
+            // todo just for test
             var resp2 = {
                 permissionCategories: [
                     {
@@ -101,11 +107,29 @@
                     }
                 ]
             };
+            // todo just for test
             if (vm.roleId > 0) {
                 vm.role = resp1.role;
-                vm.permissionCategories = resp2.permissionCategories;
-                for (var i in vm.permissionCategories) {
-                    vm.permissionCategories[i].expanded = true;
+                vm.users = vm.role.users;
+            }
+            vm.permissionCategories = resp2.permissionCategories;
+            for (var i in vm.permissionCategories) {
+                for (var j in vm.permissionCategories[i].nodes) {
+                    if (vm.role.permissions && ~vm.role.permissions.indexOf(vm.permissionCategories[i].nodes[j].id)) {
+                        vm.permissionCategories[i].nodes[j].checked = true;
+                    } else {
+                        vm.permissionCategories[i].nodes[j].checked = false;
+                    }
+                }
+            }
+            for (var i in vm.permissionCategories) {
+                var pc = vm.permissionCategories[i];
+                pc.expanded = true;
+                var count = _.countBy(pc.nodes, 'checked');
+                if (count.true == pc.nodes.length) {
+                    pc.checked = true;
+                } else {
+                    pc.checked = false;
                 }
             }
         }
@@ -115,7 +139,45 @@
         }
 
         function changeUsers (users) {
-            vm.role.users = users;
+            vm.users = users;
+        }
+
+        function checkCategory (event, category) {
+            for (var i in category.nodes) {
+                category.nodes[i].checked = event.target.checked;
+            }
+        }
+
+        function checkPermission (category) {
+            var count = _.countBy(category.nodes, 'checked');
+            if (count.true == category.nodes.length) {
+                category.checked = true;
+            } else {
+                category.checked = false;
+            }
+        }
+
+        function save () {
+            vm.role.users = [];
+            vm.role.permissions = [];
+            for (var i in vm.users) {
+                vm.role.users.push(vm.users[i].id);
+            }
+            for (var i in vm.permissionCategories) {
+                for (var j in vm.permissionCategories[i].nodes) {
+                    if (vm.permissionCategories[i].nodes[j].checked) {
+                        vm.role.permissions.push(vm.permissionCategories[i].nodes[j].id);
+                    }
+                }
+            }
+            vm.role.id = vm.role.id || -1;
+            delete vm.role.creator;
+            /*console.log(vm.role);
+            $state.go('main.system.roles');*/
+            dataService.post('roles', vm.role)
+                .then(function (resp) {
+                    $state.go('main.system.roles');
+                });
         }
 
     }
