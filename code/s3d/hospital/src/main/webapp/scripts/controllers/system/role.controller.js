@@ -141,11 +141,7 @@
 
         function checkPermission (category) {
             var count = _.countBy(category.nodes, 'checked');
-            if (count.true == category.nodes.length) {
-                category.checked = true;
-            } else {
-                category.checked = false;
-            }
+            category.checked = count.true == category.nodes.length;
         }
 
         function save () {
