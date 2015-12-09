@@ -4,9 +4,9 @@
     angular.module('cms')
         .controller('RoleCtrl', RoleCtrl);
 
-    RoleCtrl.$inject = ['$scope', '$state', '$stateParams', 'dataService'];
+    RoleCtrl.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'dataService'];
 
-    function RoleCtrl ($scope, $state, $stateParams, dataService) {
+    function RoleCtrl ($scope, $rootScope, $state, $stateParams, dataService) {
         var vm = this;
         vm.role = {};
         vm.users = [];
@@ -157,12 +157,37 @@
             });
             vm.role.id = vm.role.id || -1;
             delete vm.role.creator;
+            if (!_validate()) {
+                return;
+            }
             //console.log(vm.role);
             //$state.go('main.system.roles');
             dataService.post('roles', vm.role)
                 .then(function (resp) {
                     $state.go('main.system.roles');
                 });
+        }
+
+        function _validate () {
+            var items = [];
+            if (!vm.role.name) {
+                items.push('角色名');
+            }
+            if (!vm.role.users || !vm.role.users.length) {
+                items.push('指派用户');
+            }
+            if (!vm.role.permissions || !vm.role.permissions.length) {
+                items.push('权限');
+            }
+            if (items.length) {
+                $rootScope.$broadcast('Confirm.Open', {
+                    type: 'alert',
+                    title: '提醒',
+                    text: items.join(',') + '不能为空。'
+                });
+                return false;
+            }
+            return true;
         }
 
     }
