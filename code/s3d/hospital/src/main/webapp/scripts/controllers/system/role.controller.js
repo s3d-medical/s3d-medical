@@ -113,25 +113,16 @@
                 vm.users = vm.role.users;
             }
             vm.permissionCategories = resp2.permissionCategories;
-            for (var i in vm.permissionCategories) {
-                for (var j in vm.permissionCategories[i].nodes) {
-                    if (vm.role.permissions && ~vm.role.permissions.indexOf(vm.permissionCategories[i].nodes[j].id)) {
-                        vm.permissionCategories[i].nodes[j].checked = true;
-                    } else {
-                        vm.permissionCategories[i].nodes[j].checked = false;
-                    }
-                }
-            }
-            for (var i in vm.permissionCategories) {
-                var pc = vm.permissionCategories[i];
-                pc.expanded = true;
-                var count = _.countBy(pc.nodes, 'checked');
-                if (count.true == pc.nodes.length) {
-                    pc.checked = true;
-                } else {
-                    pc.checked = false;
-                }
-            }
+            vm.permissionCategories && vm.permissionCategories.forEach(function (c) {
+                c && c.nodes && c.nodes.forEach(function (n) {
+                    n.checked = vm.role.permissions && (vm.role.permissions.indexOf(n.id) > -1);
+                })
+            });
+            vm.permissionCategories && vm.permissionCategories.forEach(function (item) {
+                item.expanded = true;
+                var count = _.countBy(item.nodes, 'checked');
+                item.checked = count.true == item.nodes.length;
+            });
         }
 
         function openSelectUser () {
@@ -143,9 +134,9 @@
         }
 
         function checkCategory (event, category) {
-            for (var i in category.nodes) {
-                category.nodes[i].checked = event.target.checked;
-            }
+            category.nodes && category.nodes.forEach(function (item) {
+                item.checked = event.target.checked;
+            });
         }
 
         function checkPermission (category) {
@@ -160,20 +151,18 @@
         function save () {
             vm.role.users = [];
             vm.role.permissions = [];
-            for (var i in vm.users) {
-                vm.role.users.push(vm.users[i].id);
-            }
-            for (var i in vm.permissionCategories) {
-                for (var j in vm.permissionCategories[i].nodes) {
-                    if (vm.permissionCategories[i].nodes[j].checked) {
-                        vm.role.permissions.push(vm.permissionCategories[i].nodes[j].id);
-                    }
-                }
-            }
+            vm.users && vm.users.forEach(function (item) {
+                vm.role.users.push(item.id);
+            });
+            vm.permissionCategories && vm.permissionCategories.forEach(function (c) {
+                c.nodes && c.nodes.forEach(function (n) {
+                    n.checked && vm.role.permissions.push(n.id);
+                })
+            });
             vm.role.id = vm.role.id || -1;
             delete vm.role.creator;
-            /*console.log(vm.role);
-            $state.go('main.system.roles');*/
+            //console.log(vm.role);
+            //$state.go('main.system.roles');
             dataService.post('roles', vm.role)
                 .then(function (resp) {
                     $state.go('main.system.roles');
