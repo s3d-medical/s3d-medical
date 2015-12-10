@@ -189,6 +189,9 @@
 .role .permission-wrap i {
     cursor: pointer;
 }
+.role .col-xs-2 {
+    text-align: right;
+}
 /* user role */
 .user-role .user-name {
     display: inline-block;
