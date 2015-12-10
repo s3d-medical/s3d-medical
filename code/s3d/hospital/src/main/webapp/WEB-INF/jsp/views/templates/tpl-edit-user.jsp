@@ -10,7 +10,7 @@
                     <form name="user_form">
                         <div class="row">
                             <div class="col-xs-2">
-                                <span>姓名</span>
+                                <span>姓名<red>*</red></span>
                             </div>
                             <div class="col-xs-4">
                                 <input type="text" class="form-control" placeholder="姓名" ng-model="user.realName" required>
@@ -24,7 +24,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-2">
-                                <span>所在部门</span>
+                                <span>所在部门<red>*</red></span>
                             </div>
                             <div class="department-wrap col-xs-4">
                                 <input type="text" class="form-control" ng-model="parentDepartment.text" readonly required>

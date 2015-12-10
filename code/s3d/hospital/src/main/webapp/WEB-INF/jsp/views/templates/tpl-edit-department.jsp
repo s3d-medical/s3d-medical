@@ -10,7 +10,7 @@
                     <form name="department_form">
                         <div class="row">
                             <div class="col-xs-2">
-                                <span>部门名称</span>
+                                <span>部门名称<red>*</red></span>
                             </div>
                             <div class="col-xs-4">
                                 <input type="text" class="form-control" placeholder="部门名称" ng-model="department.name" required>
@@ -24,7 +24,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-2">
-                                <span>上级部门</span>
+                                <span>上级部门<red>*</red></span>
                             </div>
                             <div class="department-wrap col-xs-4">
                                 <input type="text" class="form-control" ng-model="parentDepartment.text" readonly required>

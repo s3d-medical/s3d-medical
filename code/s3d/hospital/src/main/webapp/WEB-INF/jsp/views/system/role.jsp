@@ -3,7 +3,7 @@
         <h4 class="theme-color text-center">角色分配</h4>
         <div class="row">
             <div class="col-xs-2">
-                <span>角色名</span>
+                <span>角色名<red>*</red></span>
             </div>
             <div class="col-xs-3">
                 <input type="text" class="form-control theme-color" placeholder="角色名" ng-model="rc.role.name">
@@ -19,7 +19,7 @@
         </div>
         <div class="row">
             <div class="col-xs-2">
-                <span>用户指派</span>
+                <span>用户指派<red>*</red></span>
             </div>
             <div class="col-xs-10 theme-color">
                 <div class="user-wrap">
@@ -32,7 +32,7 @@
         </div>
         <div class="permission-wrap row">
             <div class="col-xs-2">
-                <span>权限</span>
+                <span>权限<red>*</red></span>
             </div>
             <div class="col-xs-10">
                 <div class="panel panel-default" ng-repeat="c in rc.permissionCategories">
