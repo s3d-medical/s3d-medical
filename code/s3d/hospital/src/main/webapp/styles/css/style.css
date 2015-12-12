@@ -259,3 +259,18 @@
 .alert .modal-footer {
     border-top: none;
 }
+/* search users modal */
+.search-users .modal-dialog {
+    width: 400px;
+}
+.search-users ul {
+    padding: 0 10px;
+}
+.search-users li {
+    padding: 5px 0;
+    cursor: pointer;
+}
+/*
+.search-users li:hover {
+    background: #eee;
+}*/

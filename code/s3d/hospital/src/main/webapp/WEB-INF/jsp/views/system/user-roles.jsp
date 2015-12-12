@@ -7,7 +7,7 @@
                     <td class="vertical-middle">姓名</td>
                     <td>
                         <input type="text" class="user-name form-control theme-color" placeholder="姓名" ng-model="ur.user.name">
-                        <button type="button" class="search btn btn-primary">查询</button>
+                        <button type="button" class="search btn btn-primary" ng-click="ur.search()">查询</button>
                     </td>
                 </tr>
                 <tr>
@@ -42,5 +42,6 @@
             <button type="submit" class="btn btn-primary">保存</button>
             <button type="submit" class="btn btn-default" ng-click="dc.cancel()">取消</button>
         </div>--%>
+        <cms-search-users users="ur.users" on-choose-user="ur.getUserInfo(userId)"></cms-search-users>
     </div>
 </script>

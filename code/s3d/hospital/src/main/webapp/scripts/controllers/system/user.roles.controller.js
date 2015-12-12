@@ -4,24 +4,26 @@
     angular.module('cms')
         .controller('UserRolesCtrl', UserRolesCtrl);
 
-    UserRolesCtrl.$inject = ['$stateParams'];
+    UserRolesCtrl.$inject = ['$rootScope', '$scope', '$stateParams', 'dataService'];
 
-    function UserRolesCtrl ($stateParams) {
+    function UserRolesCtrl ($rootScope, $scope, $stateParams, dataService) {
         var vm = this;
         vm.user = {};
 
-        init();
+        vm.search = search;
+        vm.getUserInfo = getUserInfo;
 
-        function init () {
+        !function init () {
             initData();
-        }
+        }();
 
         function initData () {
             vm.userId = $stateParams.userId;
+            // todo just for test
             var resp = {
                 user: {
                     id: 1,
-                    text: '周志德',
+                    name: '周志德',
                     permissionCategories: [
                         {
                             id: 1,
@@ -73,7 +75,34 @@
                 }
             };
             vm.user = _formatData(resp.user);
+        }
 
+        function search () {
+            if (_.trim(vm.user.name)) {
+                dataService.post('users/search', {realName: _.trim(vm.user.name)})
+                    .then(function (resp) {
+                        if (resp.result && resp.result.length > 1) {
+                            vm.users = resp.result;
+                            $scope.$broadcast('SearchUsers.Open');
+                        } else if (resp.result && resp.result.length == 1) {
+                            getUserInfo(resp.result[0].id);
+                        }
+                    })
+            } else {
+                $rootScope.$broadcast('Confirm.Open', {
+                    type: 'alert',
+                    title: '警告',
+                    text: '请输入用户名'
+                })
+            }
+
+        }
+
+        function getUserInfo (userId) {
+            dataService.get('users/' + userId + '/roles')
+                .then(function (resp) {
+                    vm.user = resp;
+                })
         }
 
         function _formatData (user) {

@@ -99,6 +99,7 @@
 <script src="scripts/directives/cms.select.department.directive.js"></script>
 <script src="scripts/directives/cms.select.user.directive.js"></script>
 <script src="scripts/directives/cms.confirm.directive.js"></script>
+<script src="scripts/directives/cms.search.users.directive.js"></script>
 
 <script src="scripts/utils/constants.js"></script>
 <script src="scripts/utils/department.utils.js"></script>
@@ -123,6 +124,7 @@
 <%@ include file="views/templates/tpl-select-department.jsp"%>
 <%@ include file="views/templates/tpl-select-user.jsp"%>
 <%@ include file="views/templates/tpl-confirm.jsp"%>
+<%@ include file="views/templates/tpl-search-users.jsp"%>
 
 </body>
 </html>
