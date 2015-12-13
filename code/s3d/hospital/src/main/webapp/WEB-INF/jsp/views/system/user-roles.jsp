@@ -30,7 +30,7 @@
                             </div>
                             <ul class="permission-list" ng-show="c.expanded">
                                 <li class="col-md-4" ng-repeat="p in c.nodes">
-                                    <label><input type="checkbox">{{p.text}}</label>
+                                    <label>{{::p.text}}</label>
                                 </li>
                             </ul>
                         </div>
