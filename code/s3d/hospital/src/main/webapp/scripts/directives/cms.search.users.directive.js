@@ -29,6 +29,7 @@
                 function onConfirm () {
                     scope.onChooseUser({userId: scope.user.id});
                     scope.user = undefined;
+                    _onClose();
                 }
 
                 function onCancel() {
@@ -41,7 +42,8 @@
                 }
 
                 function _onClose (e) {
-                    $rootScope.$broadcast('Modal.Close');
+                    element.modal('hide');
+                    //$rootScope.$broadcast('Modal.Close');
                 }
             }
         }

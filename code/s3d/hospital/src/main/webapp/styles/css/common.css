@@ -56,7 +56,8 @@ label {
 .style-blue a {
     color: #003D8D;
 }
-.style-blue .theme-bg-color {
+.style-blue .theme-bg-color,
+.style-blue .theme-bg-color:hover {
     background-color: #286090;
 }
 /* style green */
@@ -95,7 +96,8 @@ label {
 .style-green a {
     color: #6FBA2C;
 }
-.style-green .theme-bg-color {
+.style-green .theme-bg-color,
+.style-green .theme-bg-color:hover {
     background-color: #449d44;
 }
 /* common */
