@@ -1,6 +1,4 @@
-package com.s3d.auth.acl.vo.result;
-
-import com.s3d.auth.acl.vo.result.ActionVO;
+package com.s3d.auth.acl.vo;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,7 +17,9 @@ public class RoleVO implements Serializable{
 
     private Integer state;
 
-    private List<ActionVO> actions;
+    private List<ActionVO> permissions;
+
+    private List<UserVO> users;
 
     public RoleVO() {
 
@@ -57,11 +57,19 @@ public class RoleVO implements Serializable{
         this.state = state;
     }
 
-    public List<ActionVO> getActions() {
-        return actions;
+    public List<ActionVO> getPermissions() {
+        return permissions;
     }
 
-    public void setActions(List<ActionVO> actions) {
-        this.actions = actions;
+    public void setPermissions(List<ActionVO> permissions) {
+        this.permissions = permissions;
+    }
+
+    public List<UserVO> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserVO> users) {
+        this.users = users;
     }
 }

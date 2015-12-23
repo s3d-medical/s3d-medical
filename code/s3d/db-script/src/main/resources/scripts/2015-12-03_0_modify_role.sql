@@ -10,3 +10,6 @@ CREATE TABLE `auth_role_category` (
   `desc` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+ ALTER TABLE `auth_role`
+CHANGE COLUMN `creator` `creator_id`  int(11) NULL DEFAULT NULL AFTER `state`;

@@ -1,6 +1,7 @@
 package com.s3d.auth.login.web.filter;
 
 import com.s3d.auth.login.constants.LoginConstants;
+import com.s3d.tech.utils.RequestUtils;
 import com.s3d.tech.utils.StringUtil;
 import com.s3d.tech.utils.URLUtils;
 
@@ -73,8 +74,7 @@ public class CheckAuthenticationFilter implements Filter {
 
     private boolean hasAuthenticated(HttpServletRequest httpServletRequest){
         // check authentication
-        HttpSession session = httpServletRequest.getSession();
-        String userAccount = (String)session.getAttribute(LoginConstants.USER_ACCOUNT);
+        Integer userAccount = RequestUtils.getCurrentUserId(httpServletRequest);
         if(userAccount == null){
             return false;
         }

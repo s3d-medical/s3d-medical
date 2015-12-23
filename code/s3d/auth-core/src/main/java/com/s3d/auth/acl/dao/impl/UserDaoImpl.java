@@ -6,6 +6,7 @@ import com.s3d.tech.data.dao.hibernate.HibernateDao;
 import com.s3d.tech.slicer.PageParam;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
@@ -133,6 +134,14 @@ public class UserDaoImpl extends HibernateDao<User, Integer> implements UserDao 
         query.setMaxResults(pageParam.getPageSize());
         List<User> userList = query.list();
         return userList;
+    }
+
+    @Override
+    public List<User> getUsersByIds(List<Integer> userIds) {
+        if(CollectionUtils.isEmpty(userIds)){
+            return null;
+        }
+       return this.getByIds(userIds);
     }
 
 }

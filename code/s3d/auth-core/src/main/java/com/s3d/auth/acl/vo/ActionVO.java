@@ -1,4 +1,4 @@
-package com.s3d.auth.acl.vo.result;
+package com.s3d.auth.acl.vo;
 
 import com.s3d.auth.acl.entity.Role;
 import com.s3d.tech.utils.StringUtil;

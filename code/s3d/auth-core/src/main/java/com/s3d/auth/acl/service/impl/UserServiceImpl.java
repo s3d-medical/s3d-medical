@@ -6,17 +6,19 @@ import com.s3d.auth.acl.entity.Org;
 import com.s3d.auth.acl.entity.User;
 import com.s3d.auth.acl.service.UserService;
 import com.s3d.auth.acl.vo.param.QueryUserParam;
-import com.s3d.auth.acl.vo.result.UserVO;
+import com.s3d.auth.acl.vo.UserVO;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Administrator
@@ -28,6 +30,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
+
     private OrgDao orgDao;
 
     @Override
@@ -65,6 +68,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getById(String id) {
+        if(StringUtils.isEmpty(id)){
+            return null;
+        }
+        return  this.getById(Integer.parseInt(id));
+    }
+
+    @Override
     public List<User> getUsers(QueryUserParam queryUserParam) {
         Assert.isTrue(queryUserParam != null , "Query user parameter can not be null.");
         String fullName = queryUserParam.getRealName();
@@ -87,6 +98,23 @@ public class UserServiceImpl implements UserService {
             result.init(count, null, pageParam.getPageSize(), pageParam.getPageNo());
         }
         return result;
+    }
+
+    @Override
+    public List<User> getUsersByIds(List<Integer> userIds) {
+        if(CollectionUtils.isEmpty(userIds)){
+            return null;
+        }
+       return  this.userDao.getUsersByIds(userIds);
+    }
+
+    @Override
+    public Set<User> getUserSetByIds(List<Integer> userIds) {
+        if(userIds == null || userIds.size() ==0){
+            return null;
+        }
+
+        return null;
     }
 
     private void checkBeforeSaveOrUpdate(UserVO userVO) {

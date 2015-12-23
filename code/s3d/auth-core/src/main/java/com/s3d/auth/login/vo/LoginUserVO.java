@@ -1,7 +1,7 @@
 package com.s3d.auth.login.vo;
 
-import com.s3d.auth.acl.vo.result.RoleVO;
-import com.s3d.auth.acl.vo.result.UserVO;
+import com.s3d.auth.acl.vo.RoleVO;
+import com.s3d.auth.acl.vo.UserVO;
 
 import java.io.Serializable;
 import java.util.List;

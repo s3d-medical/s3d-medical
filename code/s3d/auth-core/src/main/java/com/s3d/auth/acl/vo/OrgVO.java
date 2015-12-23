@@ -1,4 +1,4 @@
-package com.s3d.auth.acl.vo.result;
+package com.s3d.auth.acl.vo;
 
 import java.io.Serializable;
 

@@ -1,7 +1,10 @@
 package com.s3d.auth.acl.entity;
 
+import org.springframework.util.StringUtils;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +30,10 @@ public class Role implements Serializable {
     @Column(name = "state")
     private Integer state;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="creator_id", referencedColumnName = "id")
+    private User creator;
+
     // action set.
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "auth_role_action",
@@ -40,18 +47,23 @@ public class Role implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private RoleCategory cate;
+    private RoleCategory category;
 
     public Role() {
     }
 
-    public Role(Integer id, String name, String desc, Integer state) {
-        this.id = id;
+    public Role(String id, String name, String desc, String state) {
+        if(!StringUtils.isEmpty(id)){
+            this.id = Integer.parseInt(id);
+        }
         this.name = name;
         this.desc = desc;
-        this.state = state;
+        if(!StringUtils.isEmpty(state)){
+            this.state = Integer.parseInt(state);
+        }else{
+            this.state = 1;
+        }
     }
-
     public Integer getId() {
         return id;
     }
@@ -99,4 +111,39 @@ public class Role implements Serializable {
     public void setState(Integer state) {
         this.state = state;
     }
+
+    public RoleCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(RoleCategory category) {
+        this.category = category;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public void addedActions(Collection<Action> addedActions){
+        if(this.actions == null){
+            this.actions = new HashSet<Action>();
+        }
+        if(addedActions != null && addedActions.size() > 0 ){
+            this.actions.addAll(addedActions);
+        }
+    }
+
+    public void addUsers(Collection<User> addedUsers){
+        if(this.users == null){
+            this.users = new HashSet<User>();
+        }
+        if(addedUsers != null && addedUsers.size() > 0){
+            this.users.addAll(addedUsers);
+        }
+    }
+
 }

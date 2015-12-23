@@ -3,7 +3,7 @@ package com.s3d.auth.acl.service.impl;
 import com.s3d.auth.acl.dao.ActionDao;
 import com.s3d.auth.acl.entity.Action;
 import com.s3d.auth.acl.service.ActionService;
-import com.s3d.auth.acl.vo.result.ActionVO;
+import com.s3d.auth.acl.vo.ActionVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,8 +33,8 @@ public class ActionServiceImpl implements ActionService{
     }
 
     @Override
-    public List<Action> getActionsByIds(List<Integer> actionIds) {
-        return null;
+    public List<Action> getActByIds(List<Integer> actionIds) {
+       return this.actionDao.getActByIds(actionIds);
     }
 
     @Autowired

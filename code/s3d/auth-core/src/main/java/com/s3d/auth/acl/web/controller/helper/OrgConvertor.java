@@ -1,7 +1,7 @@
 package com.s3d.auth.acl.web.controller.helper;
 
 import com.s3d.auth.acl.entity.Org;
-import com.s3d.auth.acl.vo.result.OrgVO;
+import com.s3d.auth.acl.vo.OrgVO;
 import com.s3d.tech.slicer.PageResult;
 
 import java.util.*;

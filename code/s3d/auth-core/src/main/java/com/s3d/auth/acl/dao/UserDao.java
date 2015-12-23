@@ -35,6 +35,8 @@ public interface UserDao extends GenericDao<User, Integer> {
      */
     public List<User> getUsers(Integer orgId, PageParam pageParam);
 
+    public List<User> getUsersByIds(List<Integer> userIds);
+
     /**
      * find user count in given org.
      * @param orgId
