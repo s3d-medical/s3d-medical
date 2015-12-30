@@ -26,7 +26,7 @@ public interface RoleService {
      * @param roleName
      * @param roleId
      */
-    boolean isDuplicatedRole(String roleName, String roleId);
+    boolean isDuplicatedRole(String roleName, Integer roleId);
 
     Role getById(Integer roleId);
 }

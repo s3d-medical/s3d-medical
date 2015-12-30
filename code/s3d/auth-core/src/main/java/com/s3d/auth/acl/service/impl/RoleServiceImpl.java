@@ -36,10 +36,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void saveOrUpdate(RoleBasicVO roleBasicVO, List<Integer> actionIds, List<Integer> userIds) {
        // check.
-        Assert.isTrue(roleBasicVO != null, "Role can not be null.");
-        Assert.isTrue(StringUtils.isEmpty(roleBasicVO.getName()), "Role name is not null");
-        Assert.isTrue(StringUtils.isEmpty(roleBasicVO.getState()), "Role state is not null");
-        Assert.isTrue(StringUtils.isEmpty(roleBasicVO.getCreateId()), "Creator Id of the role can not be null.");
+//        Assert.isTrue(roleBasicVO != null, "Role can not be null.");
+//        Assert.isTrue(StringUtils.isEmpty(roleBasicVO.getName()), "Role name is not null");
+//        Assert.isTrue(StringUtils.isEmpty(roleBasicVO.getState()), "Role state is not null");
+//        Assert.isTrue(StringUtils.isEmpty(roleBasicVO.getCreateId()), "Creator Id of the role can not be null.");
         boolean ifDuplicated = this.isDuplicatedRole(roleBasicVO.getName(), roleBasicVO.getId());
         if(ifDuplicated){
             throw new RuntimeException("Role name is duplicated with others.");
@@ -47,7 +47,7 @@ public class RoleServiceImpl implements RoleService {
         // create and save
         Role role = null;
         if(roleBasicVO.getId() != null){
-            role = this.roleDao.get(Integer.parseInt(roleBasicVO.getId()));
+            role = this.roleDao.get(roleBasicVO.getId());
         }else{
             role = new Role(roleBasicVO.getId(), roleBasicVO.getName(), roleBasicVO.getRemark(), roleBasicVO.getState());
         }
@@ -96,7 +96,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public boolean isDuplicatedRole(String roleName, String roleId) {
+    public boolean isDuplicatedRole(String roleName, Integer roleId) {
         if(StringUtils.isEmpty(roleName)){
             return false;
         }
@@ -107,7 +107,7 @@ public class RoleServiceImpl implements RoleService {
                 return true;
             }else{
                 // the role is updated.
-                if(role.getId().equals(Integer.parseInt(roleId))){
+                if(role.getId().equals(roleId)){
                     return false;
                 }else{
                     return true;

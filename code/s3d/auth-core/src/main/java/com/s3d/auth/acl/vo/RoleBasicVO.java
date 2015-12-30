@@ -10,7 +10,7 @@ import java.util.List;
 public class RoleBasicVO implements Serializable{
     private static final long serialVersionUID = -3361683703204634757L;
 
-    private String id;
+    private Integer id;
 
     private String name;
 
@@ -25,7 +25,7 @@ public class RoleBasicVO implements Serializable{
     public RoleBasicVO() {
     }
 
-    public RoleBasicVO(String id, String name, String remark, String state, String categoryId, String createId) {
+    public RoleBasicVO(Integer id, String name, String remark, String state, String categoryId, String createId) {
         this.id = id;
         this.name = name;
         this.remark = remark;
@@ -34,11 +34,11 @@ public class RoleBasicVO implements Serializable{
         this.createId = createId;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

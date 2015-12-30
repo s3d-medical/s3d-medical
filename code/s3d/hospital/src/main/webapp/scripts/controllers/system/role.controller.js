@@ -155,7 +155,7 @@
                     n.checked && vm.role.permissions.push(n.id);
                 })
             });
-            vm.role.id = vm.role.id || -1;
+            vm.role.id = vm.role.id || null;
             delete vm.role.creator;
             if (!_validate()) {
                 return;

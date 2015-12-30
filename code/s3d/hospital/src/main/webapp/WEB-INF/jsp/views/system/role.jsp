@@ -54,7 +54,7 @@
                 <span>描述</span>
             </div>
             <div class="col-xs-10">
-                <textarea class="form-control" ng-model="rc.role.desc"></textarea>
+                <textarea class="form-control" ng-model="rc.role.remark"></textarea>
             </div>
         </div>
         <div class="row">

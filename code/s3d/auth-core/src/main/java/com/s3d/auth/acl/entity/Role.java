@@ -31,7 +31,7 @@ public class Role implements Serializable {
     private Integer state;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="creator_id", referencedColumnName = "id")
+    @JoinColumn(name="creator", referencedColumnName = "id")
     private User creator;
 
     // action set.
@@ -52,9 +52,9 @@ public class Role implements Serializable {
     public Role() {
     }
 
-    public Role(String id, String name, String desc, String state) {
+    public Role(Integer id, String name, String desc, String state) {
         if(!StringUtils.isEmpty(id)){
-            this.id = Integer.parseInt(id);
+            this.id = id;
         }
         this.name = name;
         this.desc = desc;

@@ -58,15 +58,15 @@ public class RoleDaoImpl extends HibernateDao<Role, Integer> implements RoleDao 
         Map paramMap = new HashMap();
         if(queryRole != null){
             if(queryRole.getId() != null){
-                hql.append(" role.id = :id");
+                hql.append("and role.id = :id");
                 paramMap.put("id",queryRole.getId() );
             }
             if(queryRole.getCategoryId() != null){
-                hql.append("role.categoryId =:categoryId");
+                hql.append("and role.categoryId =:categoryId");
                 paramMap.put("categoryId", queryRole.getCategoryId());
             }
             if(queryRole.getName() != null){
-                hql.append("role.name = :name");
+                hql.append("and role.name = :name");
                 paramMap.put("name", queryRole.getName());
             }
         }

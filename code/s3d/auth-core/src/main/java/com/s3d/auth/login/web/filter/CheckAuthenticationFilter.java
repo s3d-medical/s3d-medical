@@ -74,10 +74,10 @@ public class CheckAuthenticationFilter implements Filter {
 
     private boolean hasAuthenticated(HttpServletRequest httpServletRequest){
         // check authentication
-        Integer userAccount = RequestUtils.getCurrentUserId(httpServletRequest);
+        /*Integer userAccount = RequestUtils.getCurrentUserId(httpServletRequest);
         if(userAccount == null){
             return false;
-        }
+        }*/
         return true;
     }
 

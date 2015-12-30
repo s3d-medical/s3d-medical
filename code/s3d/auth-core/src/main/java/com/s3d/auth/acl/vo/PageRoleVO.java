@@ -18,7 +18,7 @@ public class PageRoleVO extends RoleBasicVO implements Serializable{
     }
 
     public PageRoleVO(Integer id, String name, String desc) {
-        this.setId(id.toString());
+        this.setId(id);
         this.setName(name);
         this.setRemark(desc);
     }
