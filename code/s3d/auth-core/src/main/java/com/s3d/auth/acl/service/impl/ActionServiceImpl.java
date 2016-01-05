@@ -1,7 +1,9 @@
 package com.s3d.auth.acl.service.impl;
 
 import com.s3d.auth.acl.dao.ActionDao;
+import com.s3d.auth.acl.dao.ModuleDao;
 import com.s3d.auth.acl.entity.Action;
+import com.s3d.auth.acl.entity.Module;
 import com.s3d.auth.acl.service.ActionService;
 import com.s3d.auth.acl.vo.ActionVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import java.util.List;
 @Transactional
 public class ActionServiceImpl implements ActionService{
     private ActionDao actionDao;
+    private ModuleDao moduleDao;
 
     @Override
     public void saveOrUpdate(ActionVO actionVO) {
@@ -28,7 +31,8 @@ public class ActionServiceImpl implements ActionService{
         Assert.isTrue(StringUtils.isEmpty(actionVO.getActionName()), "Action name is not null");
         Assert.isTrue(StringUtils.isEmpty(actionVO.getState()), "Action state is not null");
         // check if this action no has been defined.
-        Action action = new Action(actionVO.getId(), actionVO.getActionName(), actionVO.getModuleNo(), actionVO.getPageNo(), actionVO.getState());
+        Module module = moduleDao.getCodeModule(Integer.valueOf(actionVO.getModuleNo()));
+        Action action = new Action(actionVO.getId(), actionVO.getActionName(), module, actionVO.getPageNo(), actionVO.getState());
         this.actionDao.saveOrUpdate(action);
     }
 
@@ -40,5 +44,10 @@ public class ActionServiceImpl implements ActionService{
     @Autowired
     public void setActionDao(ActionDao actionDao) {
         this.actionDao = actionDao;
+    }
+
+    @Autowired
+    public void setModuleDao(ModuleDao moduleDao) {
+        this.moduleDao = moduleDao;
     }
 }

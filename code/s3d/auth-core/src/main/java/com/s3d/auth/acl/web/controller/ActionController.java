@@ -1,5 +1,8 @@
 package com.s3d.auth.acl.web.controller;
 
+import com.s3d.auth.acl.entity.Module;
+import com.s3d.auth.acl.service.ModuleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,8 +40,21 @@ public class ActionController {
 
     }
 
+    @RequestMapping(value = "/permission-categories", method = RequestMethod.GET)
+    public void getAllActionCategories(HttpServletRequest request, final Model model) {
+        List<Module> modules = moduleService.getAllActionModules();
+        model.addAttribute("permissionCategories", modules);
+
+    }
+
     public List query(){
         return null;
     }
 
+    private ModuleService moduleService;
+
+    @Autowired
+    public void setModuleService(ModuleService moduleService) {
+        this.moduleService = moduleService;
+    }
 }

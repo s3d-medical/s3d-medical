@@ -21,8 +21,8 @@ public class Action implements Serializable {
     @Column(name = "action_name")
     private String actionName;
 
-    @Column(name = "module_no")
-    private String moduleNo;
+    /*@Column(name = "module_no")
+    private String moduleNo;*/
 
     @Column(name = "page_no")
     private String pageNo;
@@ -33,14 +33,18 @@ public class Action implements Serializable {
     @ManyToMany(mappedBy = "actions", cascade = CascadeType.ALL)
     private Set<Role> roles = new HashSet<Role>();
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "module_no", referencedColumnName = "id")
+    private Module module;
+
     public Action() {
     }
 
-    public Action(Integer id, String actionName, String moduleNo, String pageNo, Integer state) {
+    public Action(Integer id, String actionName, Module module, String pageNo, Integer state) {
         this.id = id;
         this.pageNo = pageNo;
         this.actionName = actionName;
-        this.moduleNo = moduleNo;
+        this.module = module;
         this.state = state;
     }
 
@@ -76,12 +80,12 @@ public class Action implements Serializable {
         this.actionName = actionName;
     }
 
-    public String getModuleNo() {
-        return moduleNo;
+    public Module getModule() {
+        return module;
     }
 
-    public void setModuleNo(String moduleNo) {
-        this.moduleNo = moduleNo;
+    public void setModule(Module module) {
+        this.module = module;
     }
 
     public Integer getState() {
