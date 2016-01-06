@@ -11,7 +11,6 @@ import java.util.List;
 public class RoleAddedVO extends RoleBasicVO implements Serializable{
     private static final long serialVersionUID = -3361683703204634757L;
 
-
     private List<Integer> permissions;
 
     private List<Integer> users;

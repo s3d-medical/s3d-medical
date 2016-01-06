@@ -1,7 +1,8 @@
 package com.s3d.auth.login.service;
 
+import com.s3d.auth.login.vo.param.LoginParam;
 import com.s3d.auth.login.vo.LoginUserVO;
-import com.s3d.auth.login.vo.param.ResetPwdVO;
+import com.s3d.auth.login.vo.param.ResetPwdParam;
 
 /**
  * @author wind.chen
@@ -16,6 +17,8 @@ public interface AuthenticationService {
      */
     boolean authenticateUser(String userAccount, String password);
 
+    LoginUserVO authenticatedUser(LoginParam loginParam);
+
     /**
      * get user info by user account.
      * @param userAccount
@@ -25,9 +28,9 @@ public interface AuthenticationService {
 
     /**
      * reset password.
-     * @param resetPwdVO
+     * @param resetPwdParam
      * @return
      */
-    boolean resetPassword(ResetPwdVO resetPwdVO );
+    boolean resetPassword(ResetPwdParam resetPwdParam);
 
 }

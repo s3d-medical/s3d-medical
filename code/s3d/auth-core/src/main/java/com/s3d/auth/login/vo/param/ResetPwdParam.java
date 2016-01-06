@@ -3,11 +3,11 @@ package com.s3d.auth.login.vo.param;
 import java.io.Serializable;
 
 /**
- * @author Administrator
+ * @author wind.chen
  * @desc com.s3d.auth.login.vo
  * @date 2015/11/22 20:26
  */
-public class ResetPwdVO implements Serializable {
+public class ResetPwdParam implements Serializable {
 
     private static final long serialVersionUID = 206560331098451772L;
 

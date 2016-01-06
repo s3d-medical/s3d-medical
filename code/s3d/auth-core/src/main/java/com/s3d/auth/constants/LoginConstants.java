@@ -1,4 +1,4 @@
-package com.s3d.auth.login.constants;
+package com.s3d.auth.constants;
 
 /**
  * @author zhigang.chen
@@ -7,4 +7,5 @@ package com.s3d.auth.login.constants;
  */
 public class LoginConstants {
     public static  final String USER_ACCOUNT="userAccount";
+    public static  final String USER_ID="userId";
 }
