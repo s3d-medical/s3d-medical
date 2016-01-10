@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * login user.
  * @author wind.chen
  * @since 2015/7/19.
  */
@@ -46,5 +47,12 @@ public class LoginUserVO implements Serializable {
 
     public void setExpiredDateTime(String expiredDateTime) {
         this.expiredDateTime = expiredDateTime;
+    }
+
+    public Integer getUserId(){
+        if(this.userVO == null){
+            return null;
+        }
+        return this.userVO.getId();
     }
 }

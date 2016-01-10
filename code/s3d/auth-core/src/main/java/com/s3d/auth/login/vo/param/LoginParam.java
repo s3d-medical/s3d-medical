@@ -1,4 +1,4 @@
-package com.s3d.auth.login.vo;
+package com.s3d.auth.login.vo.param;
 
 /**
  * @author wind.chen
