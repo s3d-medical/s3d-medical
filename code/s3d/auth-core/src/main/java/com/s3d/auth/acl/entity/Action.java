@@ -33,7 +33,7 @@ public class Action implements Serializable {
     @ManyToMany(mappedBy = "actions", cascade = CascadeType.ALL)
     private Set<Role> roles = new HashSet<Role>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "module_no", referencedColumnName = "id")
     private Module module;
 

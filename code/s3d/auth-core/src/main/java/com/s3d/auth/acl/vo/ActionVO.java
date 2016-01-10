@@ -18,7 +18,7 @@ public class ActionVO implements Serializable{
     private static final long serialVersionUID = -6858457890951321431L;
     private Integer id;
     private String actionName;
-    private String moduleNo;
+    private Integer moduleNo;
     private String pageNo;
     private Integer state;
 
@@ -38,11 +38,11 @@ public class ActionVO implements Serializable{
         this.actionName = actionName;
     }
 
-    public String getModuleNo() {
+    public Integer getModuleNo() {
         return moduleNo;
     }
 
-    public void setModuleNo(String moduleNo) {
+    public void setModuleNo(Integer moduleNo) {
         this.moduleNo = moduleNo;
     }
 

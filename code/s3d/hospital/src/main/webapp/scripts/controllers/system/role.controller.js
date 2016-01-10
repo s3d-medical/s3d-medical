@@ -26,7 +26,6 @@
 
         function initData () {
             vm.roleId = $stateParams.roleId;
-            console.log(vm.roleId);
             // todo just for test
             var resp1 = {
                 role: {
@@ -58,71 +57,24 @@
                     creator: '管理员'
                 }
             };
-            // todo just for test
-            var resp2 = {
-                permissionCategories: [
-                    {
-                        id: 1,
-                        text: '督办',
-                        nodes: [
-                            {
-                                id: 1,
-                                text: '督办_默认权限'
-                            },
-                            {
-                                id: 2,
-                                text: '督办_后台配置'
-                            },
-                            {
-                                id: 3,
-                                text: '权限机制_文档搜索配置'
-                            },
-                            {
-                                id: 4,
-                                text: '督办_阅读权限'
-                            }
-                        ]
-                    },
-                    {
-                        id: 2,
-                        text: '权限管理',
-                        nodes: [
-                            {
-                                id: 5,
-                                text: '督办_默认权限'
-                            },
-                            {
-                                id: 6,
-                                text: '督办_后台配置'
-                            },
-                            {
-                                id: 7,
-                                text: '权限机制_文档搜索配置'
-                            },
-                            {
-                                id: 8,
-                                text: '督办_阅读权限'
-                            }
-                        ]
-                    }
-                ]
-            };
-            // todo just for test
             if (vm.roleId > 0) {
                 vm.role = resp1.role;
                 vm.users = vm.role.users;
             }
-            vm.permissionCategories = resp2.permissionCategories;
-            vm.permissionCategories && vm.permissionCategories.forEach(function (c) {
-                c && c.nodes && c.nodes.forEach(function (n) {
-                    n.checked = vm.role.permissions && (vm.role.permissions.indexOf(n.id) > -1);
-                })
-            });
-            vm.permissionCategories && vm.permissionCategories.forEach(function (item) {
-                item.expanded = true;
-                var count = _.countBy(item.nodes, 'checked');
-                item.checked = count.true == item.nodes.length;
-            });
+            dataService.get('action-categories')
+                .then(function (resp) {
+                    vm.permissionCategories = resp.permissionCategories;
+                    vm.permissionCategories && vm.permissionCategories.forEach(function (c) {
+                        c && c.nodes && c.nodes.forEach(function (n) {
+                            n.checked = vm.role.permissions && (vm.role.permissions.indexOf(n.id) > -1);
+                        })
+                    });
+                    vm.permissionCategories && vm.permissionCategories.forEach(function (item) {
+                        item.expanded = true;
+                        var count = _.countBy(item.nodes, 'checked');
+                        item.checked = count.true == item.nodes.length;
+                    });
+                });
         }
 
         function openSelectUser () {
