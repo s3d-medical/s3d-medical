@@ -1,6 +1,7 @@
 package com.s3d.auth.acl.service;
 
 import com.s3d.auth.acl.entity.User;
+import com.s3d.auth.acl.vo.UserActionsVO;
 import com.s3d.auth.acl.vo.param.QueryUserParam;
 import com.s3d.auth.acl.vo.UserVO;
 import com.s3d.tech.slicer.PageParam;
@@ -59,5 +60,7 @@ public interface UserService {
     public void delete(Integer id);
 
     public void delete(List<Integer> ids);
+
+    UserActionsVO getUserActions(Integer userId);
 
 }

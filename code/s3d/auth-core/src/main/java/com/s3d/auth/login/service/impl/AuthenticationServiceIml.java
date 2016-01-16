@@ -1,10 +1,14 @@
 package com.s3d.auth.login.service.impl;
 
+import com.s3d.auth.acl.dao.UserDao;
+import com.s3d.auth.acl.vo.UserVO;
 import com.s3d.auth.login.service.AuthenticationService;
 import com.s3d.auth.login.vo.param.LoginParam;
 import com.s3d.auth.login.vo.LoginUserVO;
 import com.s3d.auth.login.vo.param.ResetPwdParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 /**
@@ -12,6 +16,7 @@ import org.springframework.util.StringUtils;
  * @since  2015/7/19.
  */
 @Service
+@Transactional
 public class AuthenticationServiceIml implements AuthenticationService {
     @Override
     public boolean authenticateUser(String userKey, String password) {
@@ -38,7 +43,10 @@ public class AuthenticationServiceIml implements AuthenticationService {
         if (!ifSuccess) {
             return null;
         }
-        return null;
+        // todo hardcode login user for test
+        LoginUserVO vo = new LoginUserVO();
+        vo.setUserVO(new UserVO(userDao.get(4)));
+        return vo;
     }
 
     @Override
@@ -54,5 +62,12 @@ public class AuthenticationServiceIml implements AuthenticationService {
 
         // compare password.
         return false;
+    }
+
+    private UserDao userDao;
+
+    @Autowired
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
     }
 }

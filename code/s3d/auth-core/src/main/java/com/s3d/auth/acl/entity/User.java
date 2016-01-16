@@ -61,6 +61,12 @@ public class User {
     @JoinColumn(name = "auth_org_id", referencedColumnName = "id")
     private Org org;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "auth_user_action",
+            joinColumns = {@JoinColumn(name = "auth_user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "auth_action_id")})
+    private Set<Action> actions;
+
     public User() {
     }
 
@@ -211,6 +217,14 @@ public class User {
 
     public void setOrg(Org org) {
         this.org = org;
+    }
+
+    public Set<Action> getActions() {
+        return actions;
+    }
+
+    public void setActions(Set<Action> actions) {
+        this.actions = actions;
     }
 
     @Transient

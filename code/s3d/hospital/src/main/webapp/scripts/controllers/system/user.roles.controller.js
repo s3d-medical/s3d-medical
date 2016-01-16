@@ -43,66 +43,10 @@
         }
 
         function getUserInfo (userId) {
-            // todo just for test
-            var resp = {
-                user: {
-                    id: 1,
-                    name: '周志德',
-                    permissionCategories: [
-                        {
-                            id: 1,
-                            text: '督办',
-                            nodes: [
-                                {
-                                    id: 1,
-                                    text: '督办_默认权限'
-                                },
-                                {
-                                    id: 2,
-                                    text: '督办_后台配置'
-                                },
-                                {
-                                    id: 3,
-                                    text: '权限机制_文档搜索配置'
-                                },
-                                {
-                                    id: 4,
-                                    text: '督办_阅读权限'
-                                }
-                            ]
-                        },
-                        {
-                            id: 2,
-                            text: '权限管理',
-                            nodes: [
-                                {
-                                    id: 5,
-                                    text: '督办_默认权限'
-                                },
-                                {
-                                    id: 6,
-                                    text: '督办_后台配置'
-                                },
-                                {
-                                    id: 7,
-                                    text: '权限机制_文档搜索配置'
-                                },
-                                {
-                                    id: 8,
-                                    text: '督办_阅读权限'
-                                }
-                            ]
-                        }
-                    ],
-                    "departments": ["长江证券"],
-                    "remark": '备注'
-                }
-            };
-            vm.user = _formatData(resp.user);
-            /*dataService.get('users/' + userId + '/roles')
+            dataService.get('users/' + userId + '/actions')
                 .then(function (resp) {
                     vm.user = _formatData(resp.user);
-                })*/
+                })
         }
 
         function _formatData (user) {
