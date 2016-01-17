@@ -1,0 +1,2 @@
+ ALTER TABLE `auth_role`
+CHANGE COLUMN `desc` `remark`  VARCHAR(50) NULL DEFAULT NULL AFTER `name`;

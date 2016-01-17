@@ -69,5 +69,17 @@
         <sqlFile path="scripts/2015-11-29_0_modify_role.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
     </changeSet>
+    <changeSet id="17" author="wind" context="production">
+        <sqlFile path="scripts/2015-12-03_0_modify_role.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
+    <changeSet id="18" author="gary" context="production">
+        <sqlFile path="scripts/2016-01-17_0_modify_role.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
+    <changeSet id="19" author="gary" context="production">
+        <sqlFile path="scripts/2016-01-17_1_modify_role_category.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
 
 </databaseChangeLog>

@@ -20,8 +20,8 @@ public class RoleCategory implements Serializable{
     @Column(name="name")
     private String name;
 
-    @Column(name="desc")
-    private String desc;
+    @Column(name="remark")
+    private String remark;
 
     public RoleCategory() {
     }
@@ -34,12 +34,12 @@ public class RoleCategory implements Serializable{
         this.id = id;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public String getName() {

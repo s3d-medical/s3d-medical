@@ -24,14 +24,14 @@ public class Role implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "`desc`")
+    @Column(name = "remark")
     private String desc;
 
     @Column(name = "state")
     private Integer state;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="creator", referencedColumnName = "id")
+    @JoinColumn(name="creator_id", referencedColumnName = "id")
     private User creator;
 
     // action set.
