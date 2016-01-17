@@ -4,9 +4,9 @@
     angular.module('cms')
         .controller('PermissionsCtrl', PermissionsCtrl);
 
-    PermissionsCtrl.$inject = ['$scope'];
+    PermissionsCtrl.$inject = ['$scope', 'dataService'];
 
-    function PermissionsCtrl ($scope) {
+    function PermissionsCtrl ($scope, dataService) {
         var vm = this;
         vm.permissions = [];
         vm.permission = {};
@@ -15,59 +15,15 @@
 
         function init () {
             initData();
-            initTree();
         }
 
         function initData () {
-            var resp = {
-                permissionCategories: [
-                    {
-                        id: 1,
-                        text: '督办',
-                        nodes: [
-                            {
-                                id: 1,
-                                text: '督办_默认权限'
-                            },
-                            {
-                                id: 2,
-                                text: '督办_后台配置'
-                            },
-                            {
-                                id: 3,
-                                text: '权限机制_文档搜索配置'
-                            },
-                            {
-                                id: 4,
-                                text: '督办_阅读权限'
-                            }
-                        ]
-                    },
-                    {
-                        id: 2,
-                        text: '权限管理',
-                        nodes: [
-                            {
-                                id: 5,
-                                text: '督办_默认权限'
-                            },
-                            {
-                                id: 6,
-                                text: '督办_后台配置'
-                            },
-                            {
-                                id: 7,
-                                text: '权限机制_文档搜索配置'
-                            },
-                            {
-                                id: 8,
-                                text: '督办_阅读权限'
-                            }
-                        ]
-                    }
-                ]
-            };
-            vm.permissionCategories = _formatData(resp.permissionCategories);
+            dataService.get('action-categories')
+                .then(function (resp) {
+                    vm.permissionCategories = _formatData(resp.permissionCategories);
+                    initTree();
+                });
+
         }
 
         function initTree () {
@@ -82,15 +38,10 @@
             if (data && data.hasOwnProperty('parentId')) {
                 $scope.$apply(function () {
                     var permissionId = data.id;
-                    var resp = {
-                        "permission": {
-                            "text": '督办_默认权限',
-                            "remark": '访问督办模块的基本信息',
-                            "roles": ["角色1", "角色2"],
-                            "departments": ["部门1", "部门2"]
-                        }
-                    };
-                    vm.permission = resp.permission;
+                    dataService.get('actions/' + permissionId)
+                        .then(function (resp) {
+                            vm.permission = resp.permission;
+                        });
                 })
             } else {
                 $scope.$apply(function () {

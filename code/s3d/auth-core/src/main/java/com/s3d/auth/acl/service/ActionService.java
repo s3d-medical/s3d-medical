@@ -4,6 +4,7 @@ import com.s3d.auth.acl.entity.Action;
 import com.s3d.auth.acl.vo.ActionVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Administrator
@@ -15,5 +16,7 @@ public interface ActionService {
     public void saveOrUpdate(ActionVO actionVO);
 
     public List<Action> getActByIds(List<Integer> actionIds);
+
+    Map getActionVO(Integer actionId);
 
 }

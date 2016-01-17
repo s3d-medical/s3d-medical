@@ -81,5 +81,9 @@
         <sqlFile path="scripts/2016-01-17_1_modify_role_category.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
     </changeSet>
+    <changeSet id="20" author="gary" context="production">
+        <sqlFile path="scripts/2016-01-17_2_modify_action.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
 
 </databaseChangeLog>

@@ -1,6 +1,7 @@
 package com.s3d.auth.acl.web.controller;
 
 import com.s3d.auth.acl.entity.Module;
+import com.s3d.auth.acl.service.ActionService;
 import com.s3d.auth.acl.service.ModuleService;
 import com.s3d.auth.acl.web.controller.helper.ModuleHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +24,20 @@ import java.util.Map;
 public class ActionController {
 
 
-    @RequestMapping(value = "/action" , method = RequestMethod.POST)
+    @RequestMapping(value = "/actions" , method = RequestMethod.POST)
     public void add(HttpServletRequest request, final Model model){
 
     }
 
-    @RequestMapping(value = "/action/{actionId}" , method = RequestMethod.GET)
-    public void get(HttpServletRequest request, final Model model){
-
+    @RequestMapping(value = "/actions/{actionId}" , method = RequestMethod.GET)
+    @ResponseBody
+    public Model get(HttpServletRequest request, final Model model, @PathVariable("actionId") Integer actionId){
+        model.addAttribute("permission", actionService.getActionVO(actionId));
+        return model;
     }
 
-    @RequestMapping(value = "/action/{actionId}" , method = RequestMethod.POST)
-    public void update(HttpServletRequest request, final Model model, @PathVariable("actionId") Integer operationId){
+    @RequestMapping(value = "/actions/{actionId}" , method = RequestMethod.POST)
+    public void update(HttpServletRequest request, final Model model, @PathVariable("actionId") Integer actionId){
 
     }
 
@@ -57,8 +60,15 @@ public class ActionController {
 
     private ModuleService moduleService;
 
+    private ActionService actionService;
+
     @Autowired
     public void setModuleService(ModuleService moduleService) {
         this.moduleService = moduleService;
+    }
+
+    @Autowired
+    public void setActionService(ActionService actionService) {
+        this.actionService = actionService;
     }
 }
