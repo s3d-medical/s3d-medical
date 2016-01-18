@@ -44,9 +44,10 @@ public class AuthenticationServiceIml implements AuthenticationService {
             return null;
         }
         // todo hardcode login user for test
-        LoginUserVO vo = new LoginUserVO();
+        /*LoginUserVO vo = new LoginUserVO();
         vo.setUserVO(new UserVO(userDao.get(4)));
-        return vo;
+        return vo;*/
+        return null;
     }
 
     @Override
