@@ -18,11 +18,6 @@
             <value>classpath*:/mongodb/city_locations.properties</value>
         </property>
     </bean>-->
-     <bean id="mongodbDatasourceConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="order" value="10"/>
-        <property name="ignoreUnresolvablePlaceholders" value="true" />
-        <property name="locations" value="classpath:mongodb-datasource.properties" />
-    </bean>
 
     <bean name="mongoDataSource" class="com.s3d.tech.mongo.datasource.MongoDataSourceImpl">
         <property name="databaseName" value="${mongodb.datasource.databaseName}"></property>

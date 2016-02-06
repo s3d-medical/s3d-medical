@@ -10,15 +10,6 @@
     http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 	
 
-	 <bean id="propertyConfigurerForRedis" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
-        <property name="order" value="10" />  
-        <property name="ignoreUnresolvablePlaceholders" value="true" />  
-        <property name="locations">  
-          <list>  
-            <value>classpath:redis-config.properties</value>  
-          </list>  
-        </property>  
-    </bean>
 	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		<property name="maxTotal" value="100" />
 		<property name="maxIdle" value="50" />
@@ -53,7 +44,7 @@
 		</constructor-arg>
 	</bean>
 
-	<bean id="redisClient" class="com.garea.cloud.common.cache.redis.RedisClient">
+	<bean id="redisClient" class="com.s3d.tech.cache.RedisClient">
 		<property name="enableRedis" value="${enableRedis}"></property>
 		<property name="shardedJedisPool" ref = "shardedJedisPool"/>
 	</bean>
