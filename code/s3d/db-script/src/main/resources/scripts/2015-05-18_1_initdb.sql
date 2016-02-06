@@ -101,8 +101,7 @@ CREATE TABLE `da_config_set` (
   `fd_shortcut` varchar(10) DEFAULT NULL,
   `fd_exclusive` varchar(36) DEFAULT NULL,
   `fd_status` int(11) NOT NULL,
-  PRIMARY KEY (`fd_id`),
-  KEY `idx_type` (`fd_type`,`fd_code`)
+  PRIMARY KEY (`fd_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
