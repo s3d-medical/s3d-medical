@@ -4,7 +4,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- Table structure for da_config_place
 -- ----------------------------
 DROP TABLE IF EXISTS `da_config_operation`;
-CREATE TABLE medical.da_config_operation (
+CREATE TABLE da_config_operation (
   `id` int NOT NULL AUTO_INCREMENT,
   `code` VARCHAR(36) NOT NULL,
   `name` varchar(128) NOT NULL,

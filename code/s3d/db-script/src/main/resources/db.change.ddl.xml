@@ -65,10 +65,6 @@
         <sqlFile path="scripts/2015-11-28_0_modify_org.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
     </changeSet>
-    <changeSet id="16" author="wind" context="production">
-        <sqlFile path="scripts/2015-11-29_0_modify_role.sql"
-                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
-    </changeSet>
     <changeSet id="17" author="wind" context="production">
         <sqlFile path="scripts/2015-12-03_0_modify_role.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>

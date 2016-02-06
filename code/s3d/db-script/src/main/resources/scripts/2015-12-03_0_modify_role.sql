@@ -13,3 +13,4 @@ CREATE TABLE `auth_role_category` (
 
  ALTER TABLE `auth_role`
 CHANGE COLUMN `creator` `creator_id`  int(11) NULL DEFAULT NULL AFTER `state`;
+
