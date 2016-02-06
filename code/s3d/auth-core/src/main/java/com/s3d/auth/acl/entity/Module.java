@@ -19,6 +19,9 @@ public class Module implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "module")
+    private Set<Action> actions;
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -33,5 +36,13 @@ public class Module implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public Set<Action> getActions() {
+        return actions;
+    }
+
+    public void setActions(Set<Action> actions) {
+        this.actions = actions;
     }
 }

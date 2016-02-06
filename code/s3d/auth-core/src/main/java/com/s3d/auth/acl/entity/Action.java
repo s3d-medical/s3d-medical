@@ -21,6 +21,9 @@ public class Action implements Serializable {
     @Column(name = "action_name")
     private String actionName;
 
+    @Column(name = "remark")
+    private String remark;
+
     /*@Column(name = "module_no")
     private String moduleNo;*/
 
@@ -33,7 +36,12 @@ public class Action implements Serializable {
     @ManyToMany(mappedBy = "actions", cascade = CascadeType.ALL)
     private Set<Role> roles = new HashSet<Role>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "auth_user_action", joinColumns = @JoinColumn(name = "auth_action_id", referencedColumnName = "id"),
+                inverseJoinColumns = @JoinColumn(name = "auth_user_id", referencedColumnName = "id"))
+    private Set<User> users = new HashSet<User>();
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "module_no", referencedColumnName = "id")
     private Module module;
 
@@ -54,6 +62,14 @@ public class Action implements Serializable {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     public String getPageNo() {
@@ -78,6 +94,14 @@ public class Action implements Serializable {
 
     public void setActionName(String actionName) {
         this.actionName = actionName;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public Module getModule() {

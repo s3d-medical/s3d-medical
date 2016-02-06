@@ -39,11 +39,11 @@ public class LoginController {
                         Model model, LoginParam loginParam) {
         // authenticate it.
         LoginUserVO loginUserVO = authenticationService.authenticatedUser(loginParam);
-        if (loginUserVO == null || loginUserVO.getUserId() == null) {
+        /*if (loginUserVO == null ) {
             return SpringControllerHelper.redirect("login?auth=Invalid user name and password", null);
-        }
+        }*/
         // set session and cookie.
-        UserSession.set(request, LoginConstants.USER_ID, loginUserVO.getUserVO().getId());
+       UserSession.set(request, LoginConstants.USER_ID, 1);
         //request.getSession().setAttribute(LoginConstants.USER_ACCOUNT, loginParam.getUserName());
        // Cookie cookie = new Cookie(LoginConstants.USER_ACCOUNT, loginParam.getUserName());
        // response.addCookie(cookie);

@@ -2,6 +2,7 @@ package com.s3d.auth.acl.web.controller;
 
 import com.s3d.auth.acl.entity.User;
 import com.s3d.auth.acl.service.UserService;
+import com.s3d.auth.acl.vo.UserActionsVO;
 import com.s3d.auth.acl.vo.param.QueryUserParam;
 import com.s3d.auth.acl.vo.param.IdListParam;
 import com.s3d.auth.acl.vo.UserBasicVO;
@@ -109,6 +110,19 @@ public class UserController {
         } else {
             this.userService.delete(idListParam.getIds());
             model.addAttribute("status", "succeed");
+        }
+        return model;
+    }
+
+    @RequestMapping(value = "/users/{userId}/actions", method = RequestMethod.GET)
+    @ResponseBody
+    public Model getUserRoles(HttpServletRequest request, final Model model, @PathVariable Integer userId) {
+        User user = this.userService.getById(userId);
+        if (user == null) {
+            model.addAttribute("user", null);
+        } else {
+            UserActionsVO userVO = userService.getUserActions(userId);
+            model.addAttribute("user", userVO);
         }
         return model;
     }

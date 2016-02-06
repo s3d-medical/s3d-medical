@@ -1,6 +1,8 @@
 package com.s3d.auth.acl.web.controller;
 
+import com.s3d.auth.acl.entity.Action;
 import com.s3d.auth.acl.entity.Role;
+import com.s3d.auth.acl.entity.User;
 import com.s3d.auth.acl.service.RoleService;
 import com.s3d.auth.acl.vo.param.IdListParam;
 import com.s3d.auth.acl.vo.PageRoleVO;
@@ -15,7 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -66,25 +70,7 @@ public class RoleController {
     @RequestMapping(value = "/roles/{roleId}", method = RequestMethod.GET)
     @ResponseBody
     public Map getRole(HttpServletRequest request, final Model model, @PathVariable(value = "roleId") Integer roleId) {
-        Role role = roleService.getById(roleId);
-/*        {
-            role: {
-                id: 1,
-                        name: '督办发布员',
-                        categoryId: 1,
-                        users: [
-                                     {id: 1, realName: '张悦'}
-                            ],
-                permissions: [1,2,3,4,5],
-                remark: '督办',
-                        creator: '管理员'
-            }
-        }*/
-        Map result = new HashMap();
-        result.put("id", role.getId());
-        result.put("name", role.getName());
-    /*    if(r)*/
-        result.put("", role.getCategory().getId());
+        Map result = roleService.getRoleById(roleId);
         return result;
     }
 

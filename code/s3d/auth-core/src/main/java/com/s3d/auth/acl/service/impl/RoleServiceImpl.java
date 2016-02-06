@@ -22,7 +22,9 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Administrator
@@ -120,7 +122,32 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role getById(Integer roleId) {
         Role role = this.roleDao.get(roleId);
-        return null;
+        return role;
+    }
+
+    @Override
+    public Map getRoleById(Integer roleId) {
+        Role role = roleDao.get(roleId);
+        Map result = new HashMap();
+        result.put("id", role.getId());
+        result.put("name", role.getName());
+        result.put("categoryId", role.getCategory() == null ? 0 : role.getCategory().getId());
+        result.put("remark", role.getDesc());
+        result.put("creator", role.getCreator() == null ? "" : role.getCreator().getFullName());
+        List<Map> users = new ArrayList<Map>();
+        for (User user : role.getUsers()) {
+            Map userVO = new HashMap();
+            userVO.put("id", user.getId());
+            userVO.put("realName", user.getFullName());
+            users.add(userVO);
+        }
+        result.put("users", users);
+        List<Integer> permissions = new ArrayList<Integer>();
+        for (Action action : role.getActions()) {
+            permissions.add(action.getId());
+        }
+        result.put("permissions", permissions);
+        return result;
     }
 
     //////////////////////////////////////////// setter , getter /////////////////////////////////////

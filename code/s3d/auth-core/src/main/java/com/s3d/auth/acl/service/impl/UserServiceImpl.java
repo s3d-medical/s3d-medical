@@ -1,13 +1,21 @@
 package com.s3d.auth.acl.service.impl;
 
+import com.s3d.auth.acl.dao.ModuleDao;
 import com.s3d.auth.acl.dao.OrgDao;
+import com.s3d.auth.acl.dao.UserActionDao;
 import com.s3d.auth.acl.dao.UserDao;
+import com.s3d.auth.acl.entity.Module;
 import com.s3d.auth.acl.entity.Org;
 import com.s3d.auth.acl.entity.User;
+import com.s3d.auth.acl.entity.UserAction;
 import com.s3d.auth.acl.service.UserService;
 import com.s3d.auth.acl.vo.UserVO;
 import com.s3d.auth.acl.vo.param.QueryUserParam;
 import com.s3d.auth.acl.vo.UserBasicVO;
+import com.s3d.auth.acl.vo.UserActionsVO;
+import com.s3d.auth.acl.vo.param.QueryUserParam;
+import com.s3d.auth.acl.vo.UserVO;
+import com.s3d.auth.acl.web.controller.helper.UserHelper;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +39,9 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
 
     private UserDao userDao;
-
     private OrgDao orgDao;
+    private UserActionDao userActionDao;
+    private ModuleDao moduleDao;
 
     @Override
     public void saveOrUpdate(UserBasicVO userBasicVO) {
@@ -202,6 +211,16 @@ public class UserServiceImpl implements UserService {
         }*/
     }
 
+    @Override
+    public UserActionsVO getUserActions(Integer userId) {
+        User user = userDao.get(userId);
+//        List<UserAction> userActions = userActionDao.getUserActions(userId);
+        // todo format user actions (group by category)
+        List<Module> modules = moduleDao.getAllActionModules();
+        UserActionsVO vo = UserHelper.convertUserRoles(user, modules);
+        return vo;
+    }
+
     @Autowired
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
@@ -210,5 +229,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public void setOrgDao(OrgDao orgDao) {
         this.orgDao = orgDao;
+    }
+
+    @Autowired
+    public void setUserActionDao(UserActionDao userActionDao) {
+        this.userActionDao = userActionDao;
+    }
+
+    @Autowired
+    public void setModuleDao(ModuleDao moduleDao) {
+        this.moduleDao = moduleDao;
     }
 }

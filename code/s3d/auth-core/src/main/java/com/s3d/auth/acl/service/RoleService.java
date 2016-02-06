@@ -8,6 +8,7 @@ import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Administrator
@@ -29,4 +30,6 @@ public interface RoleService {
     boolean isDuplicatedRole(String roleName, Integer roleId);
 
     Role getById(Integer roleId);
+
+    Map getRoleById(Integer roleId);
 }
