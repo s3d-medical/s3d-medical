@@ -6,7 +6,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <changeSet id="1" author="wind" context="production">
-        <sqlFile path="scripts/create_test_table.sql"
+        <sqlFile path="scripts/2015-05-18_1_initdb.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
     </changeSet>
     <changeSet id="2" author="wind" context="production">
