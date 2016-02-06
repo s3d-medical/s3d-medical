@@ -5,8 +5,9 @@ import com.s3d.auth.acl.dao.UserDao;
 import com.s3d.auth.acl.entity.Org;
 import com.s3d.auth.acl.entity.User;
 import com.s3d.auth.acl.service.UserService;
-import com.s3d.auth.acl.vo.param.QueryUserParam;
 import com.s3d.auth.acl.vo.UserVO;
+import com.s3d.auth.acl.vo.param.QueryUserParam;
+import com.s3d.auth.acl.vo.UserBasicVO;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,29 +35,43 @@ public class UserServiceImpl implements UserService {
     private OrgDao orgDao;
 
     @Override
-    public void saveOrUpdate(UserVO userVO) {
-        this.checkBeforeSaveOrUpdate(userVO);
+    public void saveOrUpdate(UserBasicVO userBasicVO) {
+        this.checkBeforeSaveOrUpdate(userBasicVO);
         User user = null;
-        if(userVO.getId() != null && userVO.getId() > 0){
-            user = this.userDao.get(userVO.getId());
+        if(userBasicVO.getId() != null && userBasicVO.getId() > 0){
+            user = this.userDao.get(userBasicVO.getId());
         }else{
             user = new User();
             user.setRegisterTime(new Date());
         }
-        user.setLoginName(userVO.getUserName());
+        user.setLoginName(userBasicVO.getUserName());
         user.setState(1);
-        user.setFullName(userVO.getRealName());
-        user.setCode(userVO.getCode());
-        user.setEmail(userVO.getEmail());
-        user.setPhone(userVO.getPhone());
-        user.setTel(userVO.getTel());
-        user.setKey(userVO.getKey());
-        user.setRemark(userVO.getRemark());
-        user.setLanguageId(userVO.getLanguageId());
-        Integer orgId = userVO.getDepartmentId();
+        user.setFullName(userBasicVO.getRealName());
+        user.setCode(userBasicVO.getCode());
+        user.setEmail(userBasicVO.getEmail());
+        user.setPhone(userBasicVO.getPhone());
+        user.setTel(userBasicVO.getTel());
+        user.setKey(userBasicVO.getKey());
+        user.setRemark(userBasicVO.getRemark());
+        user.setLanguageId(userBasicVO.getLanguageId());
+        Integer orgId = userBasicVO.getDepartmentId();
         Org org = this.orgDao.get(orgId);
         user.setOrg(org);
         this.userDao.saveOrUpdate(user);
+    }
+
+    @Override
+    public UserVO getByLoginNamePwd(String loginName, String pwd) {
+        // get user info
+        User user = this.userDao.getByLoginNamePwd(loginName, pwd);
+        if(user == null){
+            return null;
+        }
+        // get role list
+        
+        // get action list.
+
+        return null;
     }
 
     @Override
@@ -117,14 +132,14 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    private void checkBeforeSaveOrUpdate(UserVO userVO) {
-        Assert.isTrue(userVO != null, "Saved user can not be null.");
-        Assert.isTrue(!StringUtils.isEmpty(userVO.getUserName()), "User name used in login can not be null.");
-        Assert.isTrue(!StringUtils.isEmpty(userVO.getCode()), "User code can not be null.");
-        Assert.isTrue(!StringUtils.isEmpty(userVO.getEmail()), "User email can not be null");
-        Assert.isTrue(this.existSameCode(userVO.getId(), userVO.getCode()) == false, "User code has been existing.");
-        Assert.isTrue(this.existSameEmail(userVO.getId(), userVO.getEmail()) == false, "User email has been existing.");
-        Assert.isTrue(this.existSameUserName(userVO.getId(), userVO.getUserName()) == false, "User name has been existing.");
+    private void checkBeforeSaveOrUpdate(UserBasicVO userBasicVO) {
+        Assert.isTrue(userBasicVO != null, "Saved user can not be null.");
+        Assert.isTrue(!StringUtils.isEmpty(userBasicVO.getUserName()), "User name used in login can not be null.");
+        Assert.isTrue(!StringUtils.isEmpty(userBasicVO.getCode()), "User code can not be null.");
+        Assert.isTrue(!StringUtils.isEmpty(userBasicVO.getEmail()), "User email can not be null");
+        Assert.isTrue(this.existSameCode(userBasicVO.getId(), userBasicVO.getCode()) == false, "User code has been existing.");
+        Assert.isTrue(this.existSameEmail(userBasicVO.getId(), userBasicVO.getEmail()) == false, "User email has been existing.");
+        Assert.isTrue(this.existSameUserName(userBasicVO.getId(), userBasicVO.getUserName()) == false, "User name has been existing.");
     }
 
     @Override

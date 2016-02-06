@@ -1,9 +1,13 @@
 package com.s3d.auth.login.service.impl;
 
+import com.s3d.auth.acl.dao.UserDao;
+import com.s3d.auth.acl.entity.User;
 import com.s3d.auth.login.service.AuthenticationService;
 import com.s3d.auth.login.vo.param.LoginParam;
 import com.s3d.auth.login.vo.LoginUserVO;
 import com.s3d.auth.login.vo.param.ResetPwdParam;
+import com.s3d.tech.encryption.StringEncryptUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -14,31 +18,30 @@ import org.springframework.util.StringUtils;
 @Service
 public class AuthenticationServiceIml implements AuthenticationService {
     @Override
-    public boolean authenticateUser(String userKey, String password) {
-        if(StringUtils.isEmpty(userKey) || StringUtils.isEmpty(password)){
-            return false;
+    public LoginUserVO authenticatedUser(String userLoginName, String password) {
+        if(StringUtils.isEmpty(userLoginName) || StringUtils.isEmpty(password)){
+            return null;
         }
-        if(userKey == null){
-            return true;
+        try {
+            // check from db.  encrypt password
+            String encryptedPwd = StringEncryptUtil.decrypt(password);
+            // load user info.
+           User user = this.userDao.getByLoginNamePwd(userLoginName, encryptedPwd);
+           if(user == null){
+
+           }
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException("用户认证失败", e);
         }
-        if(userKey.equals("chenzhigang")){
-            return true;
-        }
-        return true;
     }
 
     @Override
     public LoginUserVO authenticatedUser(LoginParam loginParam) {
-        // check logic
-        if (loginParam == null) {
-            return null;
-        }
-        // authenticate it.
-        boolean ifSuccess = this.authenticateUser(loginParam.getUserName(), loginParam.getPassword());
-        if (!ifSuccess) {
-            return null;
-        }
-        return null;
+       if(loginParam == null){
+           return null;
+       }
+        return this.authenticatedUser(loginParam.getUserName(), loginParam.getPassword());
     }
 
     @Override
@@ -55,4 +58,8 @@ public class AuthenticationServiceIml implements AuthenticationService {
         // compare password.
         return false;
     }
+
+    @Autowired
+    private UserDao userDao;
+
 }

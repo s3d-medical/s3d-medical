@@ -1,14 +1,10 @@
-package com.s3d.webapps.util.encrypt;
-
-import java.security.SecureRandom;
+package com.s3d.tech.encryption;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
-
-import com.s3d.webapps.util.CommonUtils;
-
+import java.security.SecureRandom;
 
 
 /**
@@ -67,7 +63,7 @@ public final class StringEncryptUtil {
 		cipher.init(Cipher.DECRYPT_MODE, keySpec, sr);
 		return cipher.doFinal(encryptedByte);
 	}
-	
+/*
 	public static void main(String[] args) {
 		String username_id = "石鹏皮皮@126.com_ff8080812f0b663d012f0c95d4990016";
 		try {
@@ -78,5 +74,5 @@ public final class StringEncryptUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 }

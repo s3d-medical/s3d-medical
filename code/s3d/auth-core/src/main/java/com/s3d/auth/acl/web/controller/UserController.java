@@ -4,7 +4,7 @@ import com.s3d.auth.acl.entity.User;
 import com.s3d.auth.acl.service.UserService;
 import com.s3d.auth.acl.vo.param.QueryUserParam;
 import com.s3d.auth.acl.vo.param.IdListParam;
-import com.s3d.auth.acl.vo.UserVO;
+import com.s3d.auth.acl.vo.UserBasicVO;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
 import org.slf4j.Logger;
@@ -54,17 +54,17 @@ public class UserController {
                                @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize){
         PageParam pageParam = new PageParam(page, pageSize);
         PageResult<User> result = this.userService.getUsers(orgId, pageParam);
-        List<UserVO> userVOList = new ArrayList<UserVO>();
+        List<UserBasicVO> userBasicVOList = new ArrayList<UserBasicVO>();
         List<User> userList = result.getResults();
         if(userList != null && userList.size() > 0){
             for(User user : userList){
-                UserVO userVO = new UserVO(user);
-                userVOList.add(userVO);
+                UserBasicVO userBasicVO = new UserBasicVO(user);
+                userBasicVOList.add(userBasicVO);
             }
         }
         Map map = new HashMap();
         map.put("count", result.getTotalRecords());
-        map.put("result", userVOList);
+        map.put("result", userBasicVOList);
         return map;
     }
 
@@ -74,17 +74,17 @@ public class UserController {
         if (user == null) {
             model.addAttribute("user", null);
         } else {
-            UserVO userVO = new UserVO(user);
-            model.addAttribute("user", userVO);
+            UserBasicVO userBasicVO = new UserBasicVO(user);
+            model.addAttribute("user", userBasicVO);
         }
         return model;
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public Model saveOrUpdate(HttpServletRequest request, final Model model, @RequestBody UserVO userVO) {
+    public Model saveOrUpdate(HttpServletRequest request, final Model model, @RequestBody UserBasicVO userBasicVO) {
         String failedMsg;
         try {
-            this.userService.saveOrUpdate(userVO);
+            this.userService.saveOrUpdate(userBasicVO);
             failedMsg = "";
         } catch (Exception ex) {
             logger.error("Save or update user failed.", ex);

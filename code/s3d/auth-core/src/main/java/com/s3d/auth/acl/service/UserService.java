@@ -1,8 +1,9 @@
 package com.s3d.auth.acl.service;
 
 import com.s3d.auth.acl.entity.User;
-import com.s3d.auth.acl.vo.param.QueryUserParam;
 import com.s3d.auth.acl.vo.UserVO;
+import com.s3d.auth.acl.vo.param.QueryUserParam;
+import com.s3d.auth.acl.vo.UserBasicVO;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
 
@@ -16,7 +17,15 @@ import java.util.Set;
  */
 public interface UserService {
 
-    public void saveOrUpdate(UserVO userVO);
+    public void saveOrUpdate(UserBasicVO userBasicVO);
+
+    /**
+     * Get user info with permission.
+     * @param loginName
+     * @param pwd
+     * @return
+     */
+    UserVO getByLoginNamePwd(String loginName, String pwd);
 
     /**
      * get by id.

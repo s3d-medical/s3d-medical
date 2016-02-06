@@ -9,9 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Administrator
@@ -23,7 +21,7 @@ public class UserDaoImpl extends HibernateDao<User, Integer> implements UserDao 
 
     @Override
     public User getByEmail(String email) {
-        List<User> users = this.getUsers(null, null, email);
+        List<User> users = this.getAllUsers(null, null, email, null);
         if(users != null && users.size() > 0){
             return users.get(0);
         }
@@ -32,7 +30,7 @@ public class UserDaoImpl extends HibernateDao<User, Integer> implements UserDao 
 
     @Override
     public User getByCode(String code) {
-        List<User> users = this.getUsers(null, code, null);
+        List<User> users = this.getAllUsers(null, code, null, null);
         if(users != null && users.size() > 0){
             return users.get(0);
         }
@@ -41,15 +39,44 @@ public class UserDaoImpl extends HibernateDao<User, Integer> implements UserDao 
 
     @Override
     public User getByLoginName(String loginName) {
-        List<User> users = this.getUsers(loginName, null, null);
+        List<User> users = this.getAllUsers(loginName, null, null, null);
         if(users != null && users.size() > 0){
             return users.get(0);
         }
         return null;
     }
 
+    @Override
+    public User getByLoginNamePwd(String loginName, String pwd) {
+        List<User> users = this.getAllUsers(loginName, pwd, null, null);
+        if(users != null && users.size() > 0){
+           return users.get(0);
+        }
+        return null;
+    }
 
-    private List<User> getUsers(String loginName, String code, String email){
+    /**
+     *
+     * @param loginName
+     * @param pwd
+     * @param code
+     * @param email
+     * @return
+     */
+    private List<User> getAllUsers(String loginName, String pwd,  String code, String email){
+       return this.getUsers(loginName, pwd, code, email, null);
+    }
+
+    /**
+     *
+     * @param loginName
+     * @param pwd
+     * @param code
+     * @param email
+     * @param states
+     * @return
+     */
+    private List<User> getUsers(String loginName, String pwd,  String code, String email, List<Integer> states){
         StringBuilder hql = new StringBuilder();
         Map param = new HashMap();
         hql.append("from User as u where 1=1 ");
@@ -65,7 +92,14 @@ public class UserDaoImpl extends HibernateDao<User, Integer> implements UserDao 
             hql.append(" and u.email = :email");
             param.put("email", email);
         }
-        hql.append(" and u.state != 2");
+        if(!StringUtils.isEmpty(pwd)){
+            hql.append(" and u.pwd = :pwd");
+            param.put("pwd", pwd);
+        }
+        if(states != null && states.size() > 0){
+            hql.append(" and u.state in ( :states)");
+            param.put("states", states);
+        }
         Query query = this.createQuery(hql.toString(), param);
         List<User> userList = query.list();
         return userList;

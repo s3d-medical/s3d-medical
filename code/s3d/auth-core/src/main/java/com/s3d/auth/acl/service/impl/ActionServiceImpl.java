@@ -5,7 +5,7 @@ import com.s3d.auth.acl.dao.ModuleDao;
 import com.s3d.auth.acl.entity.Action;
 import com.s3d.auth.acl.entity.Module;
 import com.s3d.auth.acl.service.ActionService;
-import com.s3d.auth.acl.vo.ActionVO;
+import com.s3d.auth.acl.vo.ActionBasicVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,13 +26,13 @@ public class ActionServiceImpl implements ActionService{
     private ModuleDao moduleDao;
 
     @Override
-    public void saveOrUpdate(ActionVO actionVO) {
-        Assert.isTrue(actionVO != null, "Action can not be null.");
-        Assert.isTrue(StringUtils.isEmpty(actionVO.getActionName()), "Action name is not null");
-        Assert.isTrue(StringUtils.isEmpty(actionVO.getState()), "Action state is not null");
+    public void saveOrUpdate(ActionBasicVO actionBasicVO) {
+        Assert.isTrue(actionBasicVO != null, "Action can not be null.");
+        Assert.isTrue(StringUtils.isEmpty(actionBasicVO.getActionName()), "Action name is not null");
+        Assert.isTrue(StringUtils.isEmpty(actionBasicVO.getState()), "Action state is not null");
         // check if this action no has been defined.
-        Module module = moduleDao.getCodeModule(Integer.valueOf(actionVO.getModuleNo()));
-        Action action = new Action(actionVO.getId(), actionVO.getActionName(), module, actionVO.getPageNo(), actionVO.getState());
+        Module module = moduleDao.getCodeModule(Integer.valueOf(actionBasicVO.getModuleNo()));
+        Action action = new Action(actionBasicVO.getId(), actionBasicVO.getActionName(), module, actionBasicVO.getPageNo(), actionBasicVO.getState());
         this.actionDao.saveOrUpdate(action);
     }
 

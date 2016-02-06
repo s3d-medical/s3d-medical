@@ -1,7 +1,7 @@
 package com.s3d.auth.acl.service;
 
 import com.s3d.auth.acl.entity.Action;
-import com.s3d.auth.acl.vo.ActionVO;
+import com.s3d.auth.acl.vo.ActionBasicVO;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface ActionService {
 
-    public void saveOrUpdate(ActionVO actionVO);
+    public void saveOrUpdate(ActionBasicVO actionBasicVO);
 
     public List<Action> getActByIds(List<Integer> actionIds);
 

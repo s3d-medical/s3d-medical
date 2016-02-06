@@ -20,6 +20,13 @@ public interface UserDao extends GenericDao<User, Integer> {
     User getByLoginName(String loginName);
 
     /**
+     * get user by login name and pwd.
+     * @param loginName
+     * @param pwd
+     * @return
+     */
+    User getByLoginNamePwd(String loginName, String pwd);
+    /**
      * query user by user full name and org id.
      * @param orgId
      * @param fullName

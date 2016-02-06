@@ -15,7 +15,7 @@ public interface AuthenticationService {
      * @param password
      * @return
      */
-    boolean authenticateUser(String userAccount, String password);
+    LoginUserVO authenticatedUser(String userAccount, String password);
 
     LoginUserVO authenticatedUser(LoginParam loginParam);
 

@@ -61,6 +61,12 @@ public class User {
     @JoinColumn(name = "auth_org_id", referencedColumnName = "id")
     private Org org;
 
+    @ManyToMany()
+    @JoinTable(name = "auth_user_role",
+            joinColumns = @JoinColumn(name = "auth_user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "auth_role_id", referencedColumnName = "id") )
+    private Set<Role> roles = new HashSet<Role>();
+
     public User() {
     }
 
@@ -78,12 +84,6 @@ public class User {
         this.languageId = languageId;
         this.org = org;
     }
-
-    @ManyToMany()
-    @JoinTable(name = "auth_user_role",
-            joinColumns = @JoinColumn(name = "auth_user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "auth_role_id", referencedColumnName = "id") )
-    private Set<Role> roles = new HashSet<Role>();
 
     public Integer getId() {
         return id;
@@ -228,4 +228,5 @@ public class User {
         }
         return null;
     }
+
 }
