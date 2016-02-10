@@ -6,7 +6,7 @@
             <li class="bg-blue" ng-click="hm.changeTheme('style-blue')" title="切换主题"></li>
             <li class="bg-green" ng-click="hm.changeTheme('style-green')" title="切换主题"></li>
         </ul>
-        <div class="btn-group1 form-group text-center">
+        <%--<div class="btn-group1 form-group text-center">
             <button ng-repeat="i in hm.buttons.group1" class="btn" ng-class="{'btn-primary': i.key == hm.searchType, 'btn-default': i.key != hm.searchType}" ng-click="hm.changeSearchType(i.key)">
                 <span ng-bind="i.value"></span>
             </button>
@@ -14,7 +14,8 @@
         <div class="form-group text-center">
             <input type="text" class="search form-control">
             <button class="btn btn-primary">查询</button>
-        </div>
+        </div>--%>
+        <cms-search-cases search-type="hm.searchType" on-search-cases="hm.searchCases()"></cms-search-cases>
         <div class="btn-group2 form-group text-center">
             <button class="btn btn-primary" ng-repeat="i in hm.buttons.group2" ui-sref="{{i.key}}">
                 <span ng-bind="i.value"></span>

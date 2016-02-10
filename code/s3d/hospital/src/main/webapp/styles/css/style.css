@@ -71,16 +71,6 @@
     /*margin-top: 15px;*/
     margin-bottom: 30px;
 }
-.home .search {
-    width: 440px;
-    display: inline-block;
-}
-.home .btn-group1 {
-    margin: 10px 0 15px;
-}
-.home .btn-group1 button {
-    margin-left: 4px;
-}
 .home .btn-group2 button {
     font-size: 20px;
     font-weight: bold;
@@ -99,7 +89,7 @@
     margin-left: 0;
 }
 .home .theme-wrap {
-    padding-right: 236px;
+    padding-right: 250px;
 }
 /* system manage */
 /*.system .btn {
@@ -272,4 +262,19 @@
 }
 .search-users li:hover {
     background: #eee;
+}
+/* search case */
+.search-cases {
+    text-align: center;
+    padding: 10px 0 30px 0;
+}
+.search-cases .search {
+    width: 415px;
+    display: inline-block;
+}
+.search-cases .btn-group {
+    margin: 0 0 15px;
+}
+.search-cases .btn-group button {
+    margin-left: 4px;
 }
