@@ -11,13 +11,13 @@
     <name>s3d medical</name>
 
     <modules>
-        <module>medical</module>
-        <module>db-script</module>
         <module>tech</module>
         <module>auth-core</module>
-        <module>hospital</module>
         <module>record-core</module>
+        <module>db-script</module>
         <module>db-init</module>
+        <module>medical</module>
+        <module>hospital</module>
     </modules>
 
     <dependencies>

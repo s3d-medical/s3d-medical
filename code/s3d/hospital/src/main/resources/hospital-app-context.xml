@@ -26,6 +26,11 @@
 		<property name="locations" value="classpath*:/config.properties" />
 	</bean>
    -->
+    <bean id="mongodbDatasourceConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="10"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="locations" value="classpath:mongodb-datasource.properties" />
+    </bean>
 
     <import resource="classpath*:context/hospital-app-context-db-transaction.xml"/>
     <import resource="classpath*:context/hospital-app-context-defined-beans.xml"/>

@@ -19,4 +19,5 @@ public interface RecordHomePageService {
      * @return
      */
     public RecordHomePage getWithEmptyOne(String businessKey);
+
 }

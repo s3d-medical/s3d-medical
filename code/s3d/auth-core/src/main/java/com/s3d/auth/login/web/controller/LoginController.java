@@ -3,8 +3,8 @@ package com.s3d.auth.login.web.controller;
 
 import com.s3d.auth.constants.LoginConstants;
 import com.s3d.auth.login.service.AuthenticationService;
+import com.s3d.auth.login.vo.LoginAuthUserVO;
 import com.s3d.auth.login.vo.param.LoginParam;
-import com.s3d.auth.login.vo.LoginUserVO;
 import com.s3d.auth.login.vo.param.ResetPwdParam;
 import com.s3d.tech.session.UserSession;
 import com.s3d.tech.spring.SpringControllerHelper;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,18 +39,15 @@ public class LoginController {
     public String login(HttpServletRequest request, HttpServletResponse response,
                         Model model, LoginParam loginParam) {
         // authenticate it.
-        LoginUserVO loginUserVO = authenticationService.authenticatedUser(loginParam);
-        /*if (loginUserVO == null ) {
+        LoginAuthUserVO loginUserVO = authenticationService.authenticatedUser(loginParam);
+        if (loginUserVO == null ) {
             return SpringControllerHelper.redirect("login?auth=Invalid user name and password", null);
-        }*/
+        }
         // set session and cookie.
-       UserSession.set(request, LoginConstants.USER_ID, 1);
-        //request.getSession().setAttribute(LoginConstants.USER_ACCOUNT, loginParam.getUserName());
-       // Cookie cookie = new Cookie(LoginConstants.USER_ACCOUNT, loginParam.getUserName());
-       // response.addCookie(cookie);
+       UserSession.set(request, LoginConstants.USER_ID, loginUserVO.getId());
 
-        // set user authorities (actions)
-
+       //Cookie cookie = new Cookie(LoginConstants.USER_ACCOUNT, loginParam.getUserName());
+       //response.addCookie(cookie);
        return SpringControllerHelper.redirect("homePage", null);
     }
 

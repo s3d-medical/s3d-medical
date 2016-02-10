@@ -7,15 +7,13 @@ import com.s3d.auth.acl.dao.UserDao;
 import com.s3d.auth.acl.entity.Module;
 import com.s3d.auth.acl.entity.Org;
 import com.s3d.auth.acl.entity.User;
-import com.s3d.auth.acl.entity.UserAction;
 import com.s3d.auth.acl.service.UserService;
-import com.s3d.auth.acl.vo.UserVO;
 import com.s3d.auth.acl.vo.param.QueryUserParam;
 import com.s3d.auth.acl.vo.UserBasicVO;
 import com.s3d.auth.acl.vo.UserActionsVO;
-import com.s3d.auth.acl.vo.param.QueryUserParam;
-import com.s3d.auth.acl.vo.UserVO;
 import com.s3d.auth.acl.web.controller.helper.UserHelper;
+import com.s3d.tech.encryption.DesEncryptUtil;
+import com.s3d.tech.encryption.MD5StringUtil;
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.slicer.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,17 +68,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserVO getByLoginNamePwd(String loginName, String pwd) {
-        // get user info
-        User user = this.userDao.getByLoginNamePwd(loginName, pwd);
-        if(user == null){
+    public void saveOrUpdate(User user) {
+        if(user != null){
+            this.userDao.saveOrUpdate(user);
+        }
+    }
+
+    @Override
+    public User getByLoginNamePwd(String loginName, String password) {
+        if(StringUtils.isEmpty(loginName) || StringUtils.isEmpty(password)){
             return null;
         }
-        // get role list
-        
-        // get action list.
-
-        return null;
+        try {
+            // check from db.  encrypt password
+            String encryptedPwd = MD5StringUtil.MD5Encode(password);
+            // load user info.
+            User user = this.userDao.getByLoginNamePwd(loginName, encryptedPwd);
+            return user;
+        } catch (Exception e) {
+            throw new RuntimeException("查找用户出错", e);
+        }
     }
 
     @Override

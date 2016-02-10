@@ -12,8 +12,18 @@ public class ResetPwdParam implements Serializable {
     private static final long serialVersionUID = 206560331098451772L;
 
     private Integer userId;
+    /**
+     * old password
+     */
+    private String oldPassword;
 
-    private String password;
+    private String newPassword;
+
+    private String confirmedPassword;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -23,11 +33,28 @@ public class ResetPwdParam implements Serializable {
         this.userId = userId;
     }
 
-    public String getPassword() {
-        return password;
+    public String getOldPassword() {
+        return oldPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String getConfirmedPassword() {
+        return confirmedPassword;
+    }
+
+    public void setConfirmedPassword(String confirmedPassword) {
+        this.confirmedPassword = confirmedPassword;
+    }
+
 }

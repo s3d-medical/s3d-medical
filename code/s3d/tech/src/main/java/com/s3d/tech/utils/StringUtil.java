@@ -174,5 +174,15 @@ public final class StringUtil
 
         return html;
     }
+
+    public static boolean equals(String src, String des){
+        if(src != null){
+            return src.equals(des);
+        }
+        if(des != null){
+            return des.equals(src);
+        }
+        return false;
+    }
 }
 

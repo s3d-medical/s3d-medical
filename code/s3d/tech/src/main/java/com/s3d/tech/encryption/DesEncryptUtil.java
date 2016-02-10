@@ -10,7 +10,7 @@ import java.security.SecureRandom;
 /**
  * String encrypt util.
  */
-public final class StringEncryptUtil {
+public final class DesEncryptUtil {
 	/**
 	 * 
 	 */

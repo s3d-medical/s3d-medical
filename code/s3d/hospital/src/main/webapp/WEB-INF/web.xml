@@ -55,7 +55,7 @@
     </filter-mapping>
     <filter>
         <filter-name>checkAuthorityFilter</filter-name>
-        <filter-class>com.s3d.auth.login.web.filter.CheckAuthoritynFilter</filter-class>
+        <filter-class>com.s3d.auth.login.web.filter.CheckAuthorityFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>checkAuthorityFilter</filter-name>

@@ -16,7 +16,7 @@ import java.util.Set;
  * @author wind.chen
  * @since 2015/7/19.
  */
-public class CheckAuthoritynFilter implements Filter {
+public class CheckAuthorityFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
