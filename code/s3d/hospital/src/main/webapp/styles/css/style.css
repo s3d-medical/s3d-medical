@@ -36,14 +36,18 @@
     overflow: hidden;
 }
 .content {
-    width: 770px;
+    width: 100%;
     min-height: 80%;
     background-color: #fff;
     border-radius: 5px;
     padding: 20px;
 }
+.main.has-menus .content {
+    width: 770px;
+    min-height: 80%;
+}
 /* common */
-.pagination {
+.pagination ul {
     margin: 10px 0;
 }
 /* tree */
@@ -65,6 +69,43 @@
     white-space: nowrap;
     border-left:none;
     border-right:none;
+}
+.display-table {
+    display: table;
+    width: 100%;
+}
+
+.display-table-row {
+    display: table-row;
+}
+
+.display-table-head {
+    display: table-header-group;
+}
+
+.display-table-body {
+    display: table-row-group;
+}
+
+.display-table-cell {
+    display: table-cell;
+}
+
+.cell-padding {
+    padding: 5px;
+}
+
+.common-table .display-table-head {
+    color: #fff;
+}
+
+.common-table, .common-table .display-table-cell {
+    border: 1px solid #E5E7E8;
+    border-collapse:collapse;
+}
+
+.common-table .display-table-cell {
+    padding: 8px 5px;
 }
 /* home */
 .home .form-group {
@@ -277,4 +318,26 @@
 }
 .search-cases .btn-group button {
     margin-left: 4px;
+}
+.case {
+    overflow: hidden;
+    padding: 10px;
+    cursor: pointer;
+}
+.case:hover {
+    background: #eee;
+}
+.case .title {
+    font-size: 16px;
+    color: #0000ff;
+}
+.case .title > span:not(:first-child),
+.case > .pull-left {
+    margin-left: 15px;
+}
+.case .case-date {
+    margin-left: 0;
+}
+.case .address {
+    clear: left;
 }

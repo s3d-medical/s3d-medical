@@ -19,6 +19,7 @@
                 templateUrl: 'viewMain',
                 controller: 'MainCtrl as mc'
             })
+            // system manage
             .state('main.system', {
                 url: '/system',
                 templateUrl: 'viewSystem',
@@ -51,6 +52,12 @@
                 url: '/permissions',
                 templateUrl: 'viewPermissions',
                 controller: 'PermissionsCtrl as ps'
+            })
+            // search cases
+            .state('main.cases', {
+                url: '/cases',
+                templateUrl: 'viewSearchCases',
+                controller: 'SearchCasesCtrl as sc'
             })
 
         ;
