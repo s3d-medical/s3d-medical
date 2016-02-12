@@ -4,9 +4,9 @@
     angular.module('cms')
         .controller('SearchMedicalRecordCtrl', SearchMedicalRecordCtrl);
 
-    SearchMedicalRecordCtrl.$inject = ['$rootScope', '$scope', 'dataService'];
+    SearchMedicalRecordCtrl.$inject = ['$rootScope', '$scope', '$stateParams',  'dataService'];
 
-    function SearchMedicalRecordCtrl ($rootScope, $scope, dataService) {
+    function SearchMedicalRecordCtrl ($rootScope, $scope, $stateParams, dataService) {
         var vm = this;
         vm.searchCases = searchCases;
         vm.addToFavorite = addToFavorite;
@@ -33,51 +33,9 @@
         }
 
         function initData () {
-            vm.searchType = 'caseNum';
-            vm.medicalRecords = [
-                {
-                    id: '0310442',
-                    name: '患者1',
-                    sex: 1,
-                    age: 50,
-                    sick: '某疾病',
-                    inTime: '2014年12月21日',
-                    outTime: '2015年01月21日',
-                    inDepartment: '神经一科',
-                    outDepartment: '神经二科',
-                    inType: '急诊',
-                    outType: '康复出院',
-                    address: '某某省某某市某某县'
-                },
-                {
-                    id: '0310442',
-                    name: '患者1',
-                    sex: 1,
-                    age: 50,
-                    sick: '某疾病',
-                    inTime: '2014年12月21日',
-                    outTime: '2015年01月21日',
-                    inDepartment: '神经一科',
-                    outDepartment: '神经二科',
-                    inType: '急诊',
-                    outType: '康复出院',
-                    address: '某某省某某市某某县'
-                },
-                {
-                    id: '0310442',
-                    name: '患者1',
-                    sex: 1,
-                    age: 50,
-                    sick: '某疾病',
-                    inTime: '2014年12月21日',
-                    outTime: '2015年01月21日',
-                    inDepartment: '神经一科',
-                    outDepartment: '神经二科',
-                    inType: '急诊',
-                    outType: '康复出院',
-                    address: '某某省某某市某某县'
-                }
-            ];
+            vm.searchType = $stateParams.type;
+            vm.keyword = $stateParams.keyword;
+            loadPageData();
             hideLoading();
         }
 
@@ -94,6 +52,53 @@
         }
 
         function loadPageData () {
+            // todo just for test
+            vm.medicalRecords = [
+                {
+                    id: '0310442',
+                    name: '患者4',
+                    sex: 1,
+                    age: 50,
+                    sick: '某疾病',
+                    inTime: '2014年12月21日',
+                    outTime: '2015年01月21日',
+                    inDepartment: '神经一科',
+                    outDepartment: '神经二科',
+                    inType: '急诊',
+                    outType: '康复出院',
+                    address: '某某省某某市某某县'
+                },
+                {
+                    id: '0310442',
+                    name: '患者5',
+                    sex: 1,
+                    age: 50,
+                    sick: '某疾病',
+                    inTime: '2014年12月21日',
+                    outTime: '2015年01月21日',
+                    inDepartment: '神经一科',
+                    outDepartment: '神经二科',
+                    inType: '急诊',
+                    outType: '康复出院',
+                    address: '某某省某某市某某县'
+                },
+                {
+                    id: '0310442',
+                    name: '患者6',
+                    sex: 1,
+                    age: 50,
+                    sick: '某疾病',
+                    inTime: '2014年12月21日',
+                    outTime: '2015年01月21日',
+                    inDepartment: '神经一科',
+                    outDepartment: '神经二科',
+                    inType: '急诊',
+                    outType: '康复出院',
+                    address: '某某省某某市某某县'
+                }
+            ];
+            return;
+            // todo just for test
             dataService.post('medical-records',
             {
                 searchType: 'id',
@@ -103,50 +108,7 @@
             })
                 .then(function (resp) {
                     // todo just for test
-                    vm.medicalRecords = [
-                        {
-                            id: '0310442',
-                            name: '患者4',
-                            sex: 1,
-                            age: 50,
-                            sick: '某疾病',
-                            inTime: '2014年12月21日',
-                            outTime: '2015年01月21日',
-                            inDepartment: '神经一科',
-                            outDepartment: '神经二科',
-                            inType: '急诊',
-                            outType: '康复出院',
-                            address: '某某省某某市某某县'
-                        },
-                        {
-                            id: '0310442',
-                            name: '患者5',
-                            sex: 1,
-                            age: 50,
-                            sick: '某疾病',
-                            inTime: '2014年12月21日',
-                            outTime: '2015年01月21日',
-                            inDepartment: '神经一科',
-                            outDepartment: '神经二科',
-                            inType: '急诊',
-                            outType: '康复出院',
-                            address: '某某省某某市某某县'
-                        },
-                        {
-                            id: '0310442',
-                            name: '患者6',
-                            sex: 1,
-                            age: 50,
-                            sick: '某疾病',
-                            inTime: '2014年12月21日',
-                            outTime: '2015年01月21日',
-                            inDepartment: '神经一科',
-                            outDepartment: '神经二科',
-                            inType: '急诊',
-                            outType: '康复出院',
-                            address: '某某省某某市某某县'
-                        }
-                    ];
+                    vm.medicalRecords = resp.result;
                     vm.cfg.count = resp.count;
                     vm.cfg.pages = [];
                     var pageCount = resp.count / vm.cfg.pageSize;

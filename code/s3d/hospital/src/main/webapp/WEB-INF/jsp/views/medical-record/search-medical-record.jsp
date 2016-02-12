@@ -1,6 +1,6 @@
 ﻿<script type="text/ng-template" id="viewSearchMedicalRecord">
     <div class="cases">
-        <cms-search-cases></cms-search-cases>
+        <cms-search-cases search-type="smr.searchType" keyword="smr.keyword"></cms-search-cases>
         <div ng-repeat="mr in smr.medicalRecords" class="case">
             <div class="title">
                 <span>{{::'病案号：' + mr.id}}</span>

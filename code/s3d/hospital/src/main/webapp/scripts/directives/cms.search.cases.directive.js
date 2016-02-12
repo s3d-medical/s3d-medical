@@ -2,16 +2,17 @@
     angular.module('cms')
         .directive('cmsSearchCases', cmsSearchCases);
 
-    cmsSearchCases.$inject = ['$rootScope', '$timeout'];
+    cmsSearchCases.$inject = [];
 
-    function cmsSearchCases ($rootScope, $timeout) {
+    function cmsSearchCases () {
         return {
             restrict: 'E',
             templateUrl: 'tplSearchCases',
             replace: true,
             scope: {
                 searchType: '=',
-                onSearchCases: '&'
+                keyword: '=',
+                onSearch: '&'
             },
             link: function (scope, element, attrs) {
 
@@ -36,7 +37,7 @@
 
                 function search () {
                     if (scope.keyword) {
-                        console.log('searching...');
+                        scope.onSearch({type: scope.searchType, keyword: scope.keyword});
                     }
                 }
             }

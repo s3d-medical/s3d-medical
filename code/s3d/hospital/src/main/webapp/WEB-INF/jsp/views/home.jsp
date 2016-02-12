@@ -15,7 +15,7 @@
             <input type="text" class="search form-control">
             <button class="btn btn-primary">查询</button>
         </div>--%>
-        <cms-search-cases search-type="hm.searchType" on-search-cases="hm.searchCases()"></cms-search-cases>
+        <cms-search-cases search-type="hm.searchType" on-search="hm.searchCases(type, keyword)"></cms-search-cases>
         <div class="btn-group2 form-group text-center">
             <button class="btn btn-primary" ng-repeat="i in hm.buttons.group2" ui-sref="{{i.key}}">
                 <span ng-bind="i.value"></span>

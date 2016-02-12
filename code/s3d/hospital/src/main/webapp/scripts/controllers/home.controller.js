@@ -4,9 +4,9 @@
     angular.module('cms')
         .controller('HomeCtrl', HomeCtrl);
 
-    HomeCtrl.$inject = ['$rootScope', '$timeout'];
+    HomeCtrl.$inject = ['$rootScope', '$state'];
 
-    function HomeCtrl ($rootScope, $timeout) {
+    function HomeCtrl ($rootScope, $state) {
         var vm = this;
 
         //vm.changeSearchType = changeSearchType;
@@ -51,8 +51,8 @@
             }
         }
 
-        function searchCases () {
-
+        function searchCases (type, keyword) {
+            $state.go('main.medicalRecords', {type: type, keyword: keyword});
         }
     }
 })();

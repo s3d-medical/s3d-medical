@@ -54,10 +54,14 @@
                 controller: 'PermissionsCtrl as ps'
             })
             // search cases
-            .state('main.medicalRecord', {
+            .state('main.medicalRecords', {
                 url: '/medical-records',
                 templateUrl: 'viewSearchMedicalRecord',
-                controller: 'SearchMedicalRecordCtrl as smr'
+                controller: 'SearchMedicalRecordCtrl as smr',
+                params: {
+                    type: null,
+                    keyword: null
+                }
             })
 
         ;
