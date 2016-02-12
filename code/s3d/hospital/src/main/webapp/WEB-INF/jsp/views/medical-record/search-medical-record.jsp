@@ -27,6 +27,6 @@
             </div>
             <div class="address">{{::'地址：' + mr.address}}</div>
         </div>
-        <cms-pagination cfg="cfg"></cms-pagination>
+        <cms-pagination cfg="cfg" load-page="smr.loadPageData()"></cms-pagination>
     </div>
 </script>

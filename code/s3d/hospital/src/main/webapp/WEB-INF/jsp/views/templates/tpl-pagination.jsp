@@ -2,13 +2,13 @@
     <div>
         <ul class="pagination">
             <li>
-                <span aria-hidden="true">&laquo;</span>
+                <span aria-hidden="true" ng-click="loadPageData(cfg.pageNum - 1)">&laquo;</span>
             </li>
             <li ng-repeat="p in cfg.pages" ng-class="{'active': cfg.pageNum == p}" ng-click="loadPageData(p)">
                 <span ng-bind="p"></span>
             </li>
             <li>
-                <span aria-hidden="true">&raquo;</span>
+                <span aria-hidden="true" ng-click="loadPageData(cfg.pageNum + 1)">&raquo;</span>
             </li>
         </ul>
         <div>
@@ -16,7 +16,7 @@
             <span>&nbsp;&nbsp;每页</span>
             <b><input type="text" class="page-size" ng-model="cfg.pageSize"></b>
             <span>条&nbsp;&nbsp;</span>
-            <button type="button" class="btn btn-primary" ng-click="refresh()">刷新</button>
+            <button type="button" class="btn btn-primary" ng-click="loadPage()">刷新</button>
         </div>
     </div>
 </script>
