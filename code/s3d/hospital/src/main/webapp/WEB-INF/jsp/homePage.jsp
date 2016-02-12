@@ -90,7 +90,7 @@
 <script src="scripts/controllers/system/role.controller.js"></script>
 <script src="scripts/controllers/system/user.roles.controller.js"></script>
 <script src="scripts/controllers/system/permissions.controller.js"></script>
-<script src="scripts/controllers/cases/search.cases.controller.js"></script>
+<script src="scripts/controllers/medical-record/search.medical.record.controller.js"></script>
 
 <script src="scripts/directives/cms.view.department.directive.js"></script>
 <script src="scripts/directives/cms.edit.department.directive.js"></script>
@@ -118,7 +118,7 @@
 <%@ include file="views/system/role.jsp"%>
 <%@ include file="views/system/user-roles.jsp"%>
 <%@ include file="views/system/permissions.jsp"%>
-<%@ include file="views/cases/search-cases.jsp"%>
+<%@ include file="views/medical-record/search-medical-record.jsp"%>
 
 <%@ include file="views/templates/tpl-view-department.jsp"%>
 <%@ include file="views/templates/tpl-edit-department.jsp"%>

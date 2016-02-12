@@ -2,20 +2,22 @@
     'use strict';
 
     angular.module('cms')
-        .controller('SearchCasesCtrl', SearchCasesCtrl);
+        .controller('SearchMedicalRecordCtrl', SearchMedicalRecordCtrl);
 
-    SearchCasesCtrl.$inject = ['$rootScope', '$scope'];
+    SearchMedicalRecordCtrl.$inject = ['$rootScope', '$scope'];
 
-    function SearchCasesCtrl ($rootScope, $scope) {
+    function SearchMedicalRecordCtrl ($rootScope, $scope) {
         var vm = this;
         vm.searchCases = searchCases;
+        vm.addToFavorite = addToFavorite;
+        vm.borrow = borrow;
 
         (function () {
             $scope.cfg = vm.cfg = {
                 count: 0,
                 pageSize: 10,
                 pageNum: 1,
-                pages: [1],
+                pages: [1,2,3,4,5],
                 checkAll: false
             };
             initBreadcrumb();
@@ -31,9 +33,9 @@
 
         function initData () {
             vm.searchType = 'caseNum';
-            vm.cases = [
+            vm.medicalRecords = [
                 {
-                    caseNo: '0310442',
+                    id: '0310442',
                     name: '患者1',
                     sex: 1,
                     age: 50,
@@ -79,6 +81,14 @@
         }
 
         function searchCases () {
+
+        }
+
+        function addToFavorite (medicalRecord) {
+
+        }
+
+        function borrow (medicalRecord) {
 
         }
     }

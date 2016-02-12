@@ -50,6 +50,9 @@
 .pagination ul {
     margin: 10px 0;
 }
+.pagination li span {
+    cursor: pointer;
+}
 /* tree */
 .menu {
     margin-right: 15px;
@@ -142,6 +145,7 @@
     border-bottom: solid 1px #aaa;
     width: 30px;
     text-align: center;
+    outline: none;
 }
 .departments li,
 .departments tr {
@@ -322,13 +326,14 @@
 .case {
     overflow: hidden;
     padding: 10px;
-    cursor: pointer;
+    /*cursor: pointer;*/
+    font-size: 12px;
 }
 .case:hover {
     background: #eee;
 }
 .case .title {
-    font-size: 16px;
+    font-size: 14px;
     color: #0000ff;
 }
 .case .title > span:not(:first-child),
@@ -340,4 +345,11 @@
 }
 .case .address {
     clear: left;
+}
+.case .btn {
+    font-size: 12px;
+    display: none;
+}
+.case:hover .btn {
+    display: inline-block;
 }
