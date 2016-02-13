@@ -83,7 +83,7 @@ public class PictureController extends BaseController<DaCustomerPicture>{
 	@Override
 	protected String getFindPageWhereBlock(HttpServletRequest request) {
 		String whereBlock = null;
-		
+
 		String isshouyeonly = request.getParameter("isshouyeonly");
 		if("1".equals(isshouyeonly)){
 			whereBlock = StringUtil.linkString(whereBlock, " and ", "daCustomerPicture.fdCategory.fdType=1");
@@ -93,8 +93,13 @@ public class PictureController extends BaseController<DaCustomerPicture>{
 		if(StringUtil.isNotNull(labelId)){
 			whereBlock = StringUtil.linkString(whereBlock, " and ", "daCustomerPicture.fdLabel.fdId='"+labelId+"'");
 		}
-		
-		String fdLabelName = request.getParameter("fdLabelName");
+
+		String fdLabelName = "";
+		try {
+			fdLabelName = new String(request.getParameter("fdLabelName").getBytes("ISO8859-1"), "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		if(StringUtil.isNotNull(fdLabelName)){
 			whereBlock = StringUtil.linkString(whereBlock, " and ", "daCustomerPicture.fdLabel.fdName='"+fdLabelName+"'");
 		}
