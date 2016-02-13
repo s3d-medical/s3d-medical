@@ -18,6 +18,11 @@
             <artifactId>tech</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.s3d</groupId>
+            <artifactId>auth-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

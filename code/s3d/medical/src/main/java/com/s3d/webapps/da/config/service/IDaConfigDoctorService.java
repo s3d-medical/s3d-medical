@@ -1,7 +1,6 @@
 package com.s3d.webapps.da.config.service;
 
-import com.s3d.webapps.config.persistence.ConfigDoctor;
-import com.s3d.webapps.config.vo.CodeTableItemVO;
+import com.s3d.webapps.access.config.persistence.ConfigDoctor;
 
 import java.util.List;
 

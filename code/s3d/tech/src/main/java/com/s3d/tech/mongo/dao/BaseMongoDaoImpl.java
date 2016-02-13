@@ -1,11 +1,15 @@
 package com.s3d.tech.mongo.dao;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.Block;
+import com.mongodb.DBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.s3d.tech.mongo.MongoClientUtil;
 import com.s3d.tech.mongo.datasource.MongoDataSource;
 import com.s3d.tech.slicer.ListSlicer;
 
+import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.utils.JacksonParser;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -55,8 +59,8 @@ public abstract class BaseMongoDaoImpl implements BaseMongoDao {
         if (doc == null) {
             return;
         }
-        String json = JacksonParser.convertToJSONString(doc);
-        this.insertOneByJson(collectionName, json);
+        Document document = MongoClientUtil.toDoc(doc);
+        this.insertOneByDocument(collectionName, document);
     }
 
     //------------- insert many by batch ----------------
@@ -90,11 +94,14 @@ public abstract class BaseMongoDaoImpl implements BaseMongoDao {
         if (CollectionUtils.isEmpty(objectsToBeSaved)) {
             return;
         }
-        List<String> docs = new ArrayList<String>();
+        List<Document> docs = new ArrayList<Document>();
         for (Object doc : objectsToBeSaved) {
-            docs.add(JacksonParser.convertToJSONString(doc));
+            Document document = MongoClientUtil.toDoc(doc);
+            if(document != null){
+                docs.add(document);
+            }
         }
-        this.insertManyByJson(collectionName, docs);
+        this.insertManyByDocument(collectionName, docs);
     }
 
     //-------------------------query ---------------------------------
@@ -103,13 +110,13 @@ public abstract class BaseMongoDaoImpl implements BaseMongoDao {
      * result will be returned in Document format.
      *
      * @param collectionName
-     * @param query
+     * @param filter
      * @return
      */
     @Override
-    public List<Document> findManyInDocument(String collectionName, Bson query) {
+    public List<Document> findManyInDocument(String collectionName, Bson filter) {
         MongoCollection<Document> collection = this.getCollection(collectionName);
-        FindIterable<Document> findIterable = collection.find(query);
+        FindIterable<Document> findIterable = collection.find(filter);
         final List<Document> items = new ArrayList<Document>();
         findIterable.forEach(new Block<Document>() {
             @Override
@@ -121,9 +128,9 @@ public abstract class BaseMongoDaoImpl implements BaseMongoDao {
     }
 
     @Override
-    public List<String> findManyInJson(String collectionName, Bson query) {
+    public List<String> findManyInJson(String collectionName, Bson filter) {
         MongoCollection<Document> collection = this.getCollection(collectionName);
-        FindIterable<Document> iterator = collection.find(query);
+        FindIterable<Document> iterator = collection.find(filter);
         final List<String> items = new ArrayList<String>();
         iterator.forEach(new Block<Document>() {
             @Override
@@ -136,25 +143,38 @@ public abstract class BaseMongoDaoImpl implements BaseMongoDao {
     }
 
     @Override
-    public <T> List<T> findManyInObject(String collectionName, final Class<T> givenClass, Bson query) {
+    public <T> List<T> findManyInObject(String collectionName, final Class<T> givenClass, Bson filter) {
+        return  this.findManyInObject(collectionName, givenClass, filter, null);
+    }
+
+    @Override
+    public <T> List<T> findManyInObject(String collectionName, final Class<T> givenClass, Bson filter, PageParam pageParam) {
         MongoCollection<Document> collection = this.getCollection(collectionName);
-        FindIterable<Document> iterable = collection.find(query);
+        FindIterable<Document> iterable = null;
+        if(filter != null){
+            iterable = collection.find(filter);
+        }else{
+            iterable = collection.find();
+        }
+        if(pageParam != null) {
+            iterable =iterable.skip(pageParam.getStartNo()).limit(pageParam.getPageSize());
+        }
         final List<T> items = new ArrayList<T>();
-        iterable.forEach(new Block<Document>() {
-            @Override
-            public void apply(Document document) {
-                String json = document.toJson();
-                T obj = JacksonParser.convertFromJSONString(json, givenClass);
-                items.add(obj);
-            }
-        });
+        if(iterable != null){
+            iterable.forEach(new Block<Document>() {
+                @Override
+                public void apply(Document document) {
+                    items.add(MongoClientUtil.toObj(document, givenClass));
+                }
+            });
+        }
         return items;
     }
 
     @Override
-    public Document findOneInDocument(String collectionName, Bson query) {
+    public Document findOneInDocument(String collectionName, Bson filter) {
         MongoCollection<Document> collection = this.getCollection(collectionName);
-        Document doc = collection.find(query).first();
+        Document doc = collection.find(filter).first();
         return doc;
     }
 
@@ -162,12 +182,12 @@ public abstract class BaseMongoDaoImpl implements BaseMongoDao {
      * find first one.
      *
      * @param collectionName
-     * @param query
+     * @param filter
      * @return
      */
     @Override
-    public String findOneInJson(String collectionName, Bson query) {
-        Document doc = this.findOneInDocument(collectionName, query);
+    public String findOneInJson(String collectionName, Bson filter) {
+        Document doc = this.findOneInDocument(collectionName, filter);
         if (doc == null) {
             return null;
         }
@@ -179,14 +199,34 @@ public abstract class BaseMongoDaoImpl implements BaseMongoDao {
      *
      * @param collectionName
      * @param givenClass
-     * @param query
+     * @param filter
      * @param <T>
      * @return
      */
     @Override
-    public <T> T findOneInObject(String collectionName, Class<T> givenClass, Bson query) {
-        String doc = this.findOneInJson(collectionName, query);
-        return JacksonParser.convertFromJSONString(doc, givenClass);
+    public <T> T findOneInObject(String collectionName, Class<T> givenClass, Bson filter) {
+        Document doc = this.findOneInDocument(collectionName, filter);
+        return MongoClientUtil.toObj(doc, givenClass);
+    }
+
+    @Override
+    public void updateOne(String collectionName, Bson filter, Object newObj) {
+        if (newObj == null) {
+            return;
+        }
+        String newObjInJson = JacksonParser.convertToJSONString(newObj);
+        Document newDoc = Document.parse(newObjInJson);
+        this.getCollection(collectionName).updateOne(filter, new Document("$set", newDoc));
+    }
+
+    @Override
+    public void updateMany(String collectionName, Bson filter, Object newObj) {
+        if (newObj == null) {
+            return;
+        }
+        String newObjInJson = JacksonParser.convertToJSONString(newObj);
+        Document newDoc = Document.parse(newObjInJson);
+        this.getCollection(collectionName).updateMany(filter, new Document("$set", newDoc));
     }
 
     // --------------------count --------------
@@ -195,7 +235,6 @@ public abstract class BaseMongoDaoImpl implements BaseMongoDao {
         long totalCount = collection.count(query);
         return totalCount;
     }
-
 
     // ---------------------------assist methods.----------------
 

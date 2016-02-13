@@ -1,5 +1,8 @@
 package com.s3d.webapps.record.web.controller;
 
+import com.s3d.tech.slicer.PageParam;
+import com.s3d.webapps.record.dto.QRecordAccess;
+import com.s3d.webapps.record.dto.QRecordParam;
 import com.s3d.webapps.record.entity.homepage.RecordHomePage;
 import com.s3d.webapps.record.service.RecordHomePageService;
 import org.slf4j.Logger;
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,6 +65,26 @@ public class RecordHomePageController {
             logger.error("Failed to save RecordHomePage", ex);
         }
         model.addAttribute("result", "fail");
+        return model;
+    }
+
+    @RequestMapping(value = "/userQuery", method = RequestMethod.GET)
+    public Model queryRecordHomePageData(HttpServletRequest request,
+                                               HttpServletResponse response,
+                                               Model model) {
+        QRecordParam qRecordParam = new QRecordParam(1, "007", 1);
+        QRecordAccess access = new QRecordAccess();
+        PageParam page = new PageParam();
+        List<QRecordAccess> accessList = new ArrayList<QRecordAccess>();
+        accessList.add(access);
+        access.setDepartNo("001");
+        access.getSignFields().add("1");
+        access.getSignFields().add("2");
+        access.getSignFields().add("3");
+        access.getSignFields().add("4");
+        access.getSignFields().add("5");
+        List<RecordHomePage> result =  recordHomePageService.queryRecordsByAccess(qRecordParam, accessList, page);
+        model.addAttribute("result", result);
         return model;
     }
 

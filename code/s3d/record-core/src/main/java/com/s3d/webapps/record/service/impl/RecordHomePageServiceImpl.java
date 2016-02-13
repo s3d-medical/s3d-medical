@@ -1,6 +1,9 @@
 package com.s3d.webapps.record.service.impl;
 
+import com.s3d.tech.slicer.PageParam;
 import com.s3d.webapps.record.dao.RecordHomePageDao;
+import com.s3d.webapps.record.dto.QRecordAccess;
+import com.s3d.webapps.record.dto.QRecordParam;
 import com.s3d.webapps.record.entity.homepage.OperationHistory;
 import com.s3d.webapps.record.entity.homepage.RecordHomePage;
 import com.s3d.webapps.record.service.RecordHomePageService;
@@ -33,6 +36,17 @@ public class RecordHomePageServiceImpl implements RecordHomePageService {
             homePage.setBusinessKey(businessKey);
         }
         return homePage;
+    }
+
+    @Override
+    public List<RecordHomePage> queryRecordsByAccess(QRecordParam qRecordParam, List<QRecordAccess> accessList, PageParam pageParam) {
+        if(pageParam == null){
+            return null;
+        }
+        if(accessList == null ){
+            throw new RuntimeException("请指定查找的当前用户权限");
+        }
+       return this.recordHomePageDao.getRecords(qRecordParam, accessList, pageParam);
     }
 
     private RecordHomePage buildEmptyOne() {

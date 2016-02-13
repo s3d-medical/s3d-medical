@@ -7,17 +7,49 @@ import java.io.Serializable;
  * @date 2015/5/17.
  */
 public class DoctorAndQualityRecord  implements Serializable {
+    /**
+     * 科主任
+     */
     private String director;
+    /**
+     * 主任（副主任）医师
+     */
     private String deputyDirector;
+    /**
+     * 主治医师
+     */
     private String attendingDoctor;
+    /**
+     * 住院医师
+     */
     private String residentDoctor;
+    /**
+     * primaryNurse
+     */
     private String primaryNurse;
+    /**
+     * 进修医师
+     */
     private String refresherDoctor;
+    /**
+     * 实习医师
+     */
     private String intern;
+    /**
+     * 编码员
+     */
     private String coder;
-
+    /**
+     * 病案质量
+     */
     private String caseQuality;
+    /**
+     * 质控医师
+     */
     private String qualityDoctor;
+    /**
+     * 质控护士
+     */
     private String qualityNurse;
     private Integer qualityYear;
     private Integer qualityMonth;
