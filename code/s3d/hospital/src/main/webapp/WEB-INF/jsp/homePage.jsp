@@ -90,6 +90,7 @@
 <script src="scripts/controllers/system/role.controller.js"></script>
 <script src="scripts/controllers/system/user.roles.controller.js"></script>
 <script src="scripts/controllers/system/permissions.controller.js"></script>
+<script src="scripts/controllers/medical-record/search.medical.record.controller.js"></script>
 
 <script src="scripts/directives/cms.view.department.directive.js"></script>
 <script src="scripts/directives/cms.edit.department.directive.js"></script>
@@ -101,6 +102,7 @@
 <script src="scripts/directives/cms.confirm.directive.js"></script>
 <script src="scripts/directives/cms.search.users.directive.js"></script>
 <script src="scripts/directives/cms.search.cases.directive.js"></script>
+<script src="scripts/directives/cms.pagination.directive.js"></script>
 
 <script src="scripts/utils/constants.js"></script>
 <script src="scripts/utils/department.utils.js"></script>
@@ -116,6 +118,7 @@
 <%@ include file="views/system/role.jsp"%>
 <%@ include file="views/system/user-roles.jsp"%>
 <%@ include file="views/system/permissions.jsp"%>
+<%@ include file="views/medical-record/search-medical-record.jsp"%>
 
 <%@ include file="views/templates/tpl-view-department.jsp"%>
 <%@ include file="views/templates/tpl-edit-department.jsp"%>
@@ -127,6 +130,7 @@
 <%@ include file="views/templates/tpl-confirm.jsp"%>
 <%@ include file="views/templates/tpl-search-users.jsp"%>
 <%@ include file="views/templates/tpl-search-cases.jsp"%>
+<%@ include file="views/templates/tpl-pagination.jsp"%>
 
 </body>
 </html>

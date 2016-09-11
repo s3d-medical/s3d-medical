@@ -9,12 +9,11 @@
     function SystemCtrl ($rootScope, dataService, localDataService) {
         var vm = this;
 
-        init();
-
-        function init () {
+        (function () {
             initBreadcrumb();
             initData();
-        }
+            $rootScope.hasMenus = true;
+        })();
 
         function initBreadcrumb () {
             $rootScope.breadcrumbs = [
