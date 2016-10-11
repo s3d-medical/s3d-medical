@@ -1,0 +1,12 @@
+{
+  "department": {
+    "id": 1,
+    "name": "部门1",
+    "parentId": 1,
+    "code": "12134",
+    "key": "2131213",
+    "order": 32,
+    "active": 1,
+    "remark": "备注11111"
+  }
+}

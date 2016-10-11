@@ -1,14 +1,12 @@
 package com.s3d.webapps.da.config.service.impl;
 
-import com.s3d.webapps.config.vo.CodeTableItemVO;
 import com.s3d.webapps.da.config.dao.impl.DaConfigDoctorDaoImp;
-import com.s3d.webapps.config.persistence.ConfigDoctor;
+import com.s3d.webapps.access.config.persistence.ConfigDoctor;
 import com.s3d.webapps.da.config.service.IDaConfigDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

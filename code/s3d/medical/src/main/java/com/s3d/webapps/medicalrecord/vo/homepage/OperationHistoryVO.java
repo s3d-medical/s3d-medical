@@ -1,7 +1,7 @@
 package com.s3d.webapps.medicalrecord.vo.homepage;
 
 import com.s3d.tech.utils.DateUtils;
-import com.s3d.webapps.config.vo.OperationVO;
+import com.s3d.webapps.access.config.vo.OperationVO;
 import com.s3d.webapps.medicalrecord.persistence.medicalrecordhomepage.operation.Operation;
 
 /**

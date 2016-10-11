@@ -1,7 +1,7 @@
 package com.s3d.webapps.da.config.dao;
 
 import com.s3d.tech.data.dao.GenericDao;
-import com.s3d.webapps.config.persistence.ConfigOperation;
+import com.s3d.webapps.access.config.persistence.ConfigOperation;
 
 import java.util.List;
 

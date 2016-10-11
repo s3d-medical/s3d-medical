@@ -8,7 +8,10 @@ import org.springframework.util.Assert;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Format Date or Date in string to given timezone Date. Methods are named with prefix formatXXX.

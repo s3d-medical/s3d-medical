@@ -79,7 +79,7 @@ public class PageInfo {
 	}
 
 	/**
-	 * @param objectList
+	 * @param objects
 	 */
 	public void setObjects(List<?> objects) {
 		this.objects = objects;

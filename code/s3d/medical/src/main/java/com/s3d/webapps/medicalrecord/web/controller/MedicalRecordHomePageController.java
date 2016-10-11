@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2015/5/16.
  */
 @Controller
-@RequestMapping("/medicalRecord")
+@RequestMapping("/medicalRecord1")
 public class MedicalRecordHomePageController {
     @RequestMapping(value = "/homepages/show/{seq}", method = RequestMethod.GET)
     public ModelAndView showPage(HttpServletRequest request, HttpServletResponse response, @PathVariable String seq) {

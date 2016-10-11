@@ -1,8 +1,7 @@
 package com.s3d.webapps.da.config.dao;
 
 import com.s3d.tech.data.dao.GenericDao;
-import com.s3d.webapps.config.persistence.ConfigDoctor;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.s3d.webapps.access.config.persistence.ConfigDoctor;
 
 import java.util.List;
 
