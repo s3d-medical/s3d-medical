@@ -1,28 +1,22 @@
 package com.s3d.tech.mongo.dao;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.Block;
-import com.mongodb.DBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.s3d.tech.mongo.MongoClientUtil;
 import com.s3d.tech.mongo.datasource.MongoDataSource;
 import com.s3d.tech.slicer.ListSlicer;
-
 import com.s3d.tech.slicer.PageParam;
 import com.s3d.tech.utils.JacksonParser;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.mongodb.client.model.Filters.eq;
 
 /**
  * @author Wind.Chen

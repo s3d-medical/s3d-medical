@@ -1,7 +1,7 @@
 package com.s3d.tech.encryption;
 
 /**
- *
+ * @author wind.chen
  */
 public class CommonUtils {
 	

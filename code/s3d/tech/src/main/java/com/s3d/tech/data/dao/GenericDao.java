@@ -2,6 +2,7 @@ package com.s3d.tech.data.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 public interface GenericDao<T, ID extends Serializable> {
 
@@ -55,4 +56,11 @@ public interface GenericDao<T, ID extends Serializable> {
      * @param entity entity object
      */
     public void saveOrUpdate(final T entity);
+
+    public Set<T> getSetByIds(List<ID> ids);
+
+    public List<T> getListByIds(List<ID> ids);
+
+    public void saveOrUpdate(final List<T> entities);
+
 }

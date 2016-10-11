@@ -1,0 +1,21 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!--  <appcontext:property-placeholder location="classpath*:/mongodb/city_locations.properties"/>
+  -->
+    <!--    <bean id="propertyConfigurer"
+              class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+            <property name="location">
+                <value>classpath*:/mongodb/city_locations.properties</value>
+            </property>
+        </bean>-->
+
+    <bean name="mongoDataSource" class="com.s3d.tech.mongo.datasource.MongoDataSourceImpl">
+        <property name="databaseName" value="${mongodb.datasource.databaseName}"></property>
+        <property name="mongodbServerURI" value="${mongodb.datasource.serverURI}"/>
+        <property name="batchSize" value="${mongodb.datasource.batchSize}"></property>
+    </bean>
+
+</beans>

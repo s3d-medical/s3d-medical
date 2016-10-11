@@ -6,9 +6,8 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import java.security.SecureRandom;
 
-
 /**
- * String encrypt util.
+ * @author wind.chen
  */
 public final class DesEncryptUtil {
 	/**
@@ -71,7 +70,7 @@ public final class DesEncryptUtil {
 			System.out.println(cookieValue);
 			String value = StringEncryptUtil.decrypt(cookieValue);
 			System.out.println(value);
-		} catch (Exception e) {
+		} catch (exception e) {
 			e.printStackTrace();
 		}
 	}*/

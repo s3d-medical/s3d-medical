@@ -4,6 +4,7 @@ package com.s3d.tech.slicer;
  * wind.chen
  */
 public class PageParam {
+    protected int sortType=0;
 	protected int pageNo = 1;
 	protected int pageSize = 20;  // 这个值请不要修改，当需要特殊设置的时候，自己去重设此值
 	
@@ -68,4 +69,12 @@ public class PageParam {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
+
+    public int getSortType() {
+        return sortType;
+    }
+
+    public void setSortType(int sortType) {
+        this.sortType = sortType;
+    }
 }

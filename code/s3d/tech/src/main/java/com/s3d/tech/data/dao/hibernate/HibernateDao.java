@@ -1,5 +1,6 @@
 package com.s3d.tech.data.dao.hibernate;
 
+import com.s3d.tech.data.dao.GenericDao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.*;
@@ -13,18 +14,16 @@ import org.springframework.util.Assert;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author  wind.chen
- * @date 2015-05-14
+ * @date 2014-05-14
  * @param <T>
  * @param <ID>
  */
 @SuppressWarnings("unchecked")
-public class HibernateDao<T, ID extends Serializable> {
+public class HibernateDao <T, ID extends Serializable> implements GenericDao<T, ID>{
 
 	protected final Log logger = LogFactory.getLog(getClass());
 	protected SessionFactory sessionFactory;
@@ -87,7 +86,7 @@ public class HibernateDao<T, ID extends Serializable> {
 	 * @param entity entity object
 	 * @return saved entity's id
 	 */
-	public ID add(final T entity) {
+	public ID add( T entity) {
 		Assert.notNull(entity, "entity must not be null");
 		ID id = (ID) getSession().save(entity);
 		getSession().flush();
@@ -116,7 +115,15 @@ public class HibernateDao<T, ID extends Serializable> {
 		getSession().flush();
 	}
 
-	/**
+    public void saveOrUpdate(final List<T> entities) {
+        Assert.notNull(entities, "entity must not be null");
+        for(int i =0 ; i< entities.size(); i ++){
+            getSession().saveOrUpdate(entities.get(i));
+        }
+        getSession().flush();
+    }
+
+    /**
 	 * Delete entity
 	 * 
 	 * @param entity entity object
@@ -197,9 +204,23 @@ public class HibernateDao<T, ID extends Serializable> {
 	 * @return entity list
 	 */
 	public List<T> getByIds(List<ID> ids) {
+        if(ids == null || ids.isEmpty()){
+            return new ArrayList<T>(0);
+        }
 		return get(Restrictions.in(getIdName(), ids));
 	}
+    public Set<T> getSetByIds(List<ID> ids){
+        List<T> list = this.getByIds(ids);
+        Set<T> set = new HashSet<T>();
+        if(list != null && !list.isEmpty()){
+            set.addAll(list);
+        }
+        return set;
+    }
 
+    public List<T> getListByIds(List<ID> ids){
+        return this.getByIds(ids);
+    }
 	/**
 	 * Query by HQL
 	 * 

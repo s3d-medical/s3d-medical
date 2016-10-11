@@ -2,8 +2,6 @@ package com.s3d.tech.mongo.datasource;
 
 import com.mongodb.client.MongoDatabase;
 
-import java.util.List;
-
 /**
  * @Aut Wind.Chen on 2015/6/30.
  */

@@ -135,9 +135,9 @@ public final class StringUtil
 	  return connectedStr;
   }
 
-    public static String trimHtmlTag(String source){
+   public static String trimHtmlTag(String source){
         return   source.replaceAll("\\<.*?\\>", "");
-    }
+   }
 
     public static String trimBlanks(String source){
         Pattern p = Pattern.compile("\\*|\t|\r|\n");
