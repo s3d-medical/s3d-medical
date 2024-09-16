@@ -1,7 +1,7 @@
 package com.s3d.webapps.da.config.dao.impl;
 
 import com.s3d.tech.data.dao.hibernate.HibernateDao;
-import com.s3d.webapps.config.persistence.ConfigOperation;
+import com.s3d.webapps.access.config.persistence.ConfigOperation;
 import com.s3d.webapps.da.config.dao.IDaConfigOperationDao;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;

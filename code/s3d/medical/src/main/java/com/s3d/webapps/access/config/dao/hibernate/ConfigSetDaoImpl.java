@@ -1,0 +1,29 @@
+package com.s3d.webapps.access.config.dao.hibernate;
+
+import com.s3d.tech.data.dao.hibernate.HibernateDao;
+import com.s3d.webapps.access.config.dao.ConfigSetDao;
+import com.s3d.webapps.access.config.persistence.ConfigSet;
+import com.s3d.webapps.pub.datatype.ValidationStatus;
+import org.springframework.stereotype.Repository;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @author wind.chen
+ * @date 2015/5/23.
+ */
+@Repository
+public class ConfigSetDaoImpl extends HibernateDao<ConfigSet, Integer> implements ConfigSetDao {
+
+    @Override
+    public List<ConfigSet> getConfigSets(String fdType, ValidationStatus validationStatus) {
+        StringBuilder hql = new StringBuilder();
+        hql.append("from ConfigSet configSet where configSet.fdType = :fdType and configSet.fdStatus = :fdStatus");
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("fdType", fdType);
+        paramMap.put("fdStatus", validationStatus.ordinal());
+        return this.get(hql.toString(), paramMap);
+    }
+}

@@ -1,15 +1,12 @@
 package com.s3d.webapps.da.config.service.impl;
 
-import com.s3d.webapps.config.persistence.ConfigOperation;
-import com.s3d.webapps.config.vo.CodeTableItemVO;
+import com.s3d.webapps.access.config.persistence.ConfigOperation;
 import com.s3d.webapps.da.config.dao.IDaConfigOperationDao;
 import com.s3d.webapps.da.config.service.IDaConfigOperationService;
-import com.s3d.webapps.pub.datatype.ValidationStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

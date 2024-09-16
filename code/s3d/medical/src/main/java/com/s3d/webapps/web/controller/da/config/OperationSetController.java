@@ -1,6 +1,6 @@
 package com.s3d.webapps.web.controller.da.config;
 
-import com.s3d.webapps.config.persistence.ConfigOperation;
+import com.s3d.webapps.access.config.persistence.ConfigOperation;
 import com.s3d.webapps.da.config.service.IDaConfigOperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

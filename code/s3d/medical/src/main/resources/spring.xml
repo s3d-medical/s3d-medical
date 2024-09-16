@@ -25,17 +25,39 @@
 		<property name="locations" value="classpath*:/config.properties" />
 	</bean>
    -->
+<!--
 	<context:property-placeholder location="classpath*:/config.properties"/>
+-->
 
+    <bean id="placeholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="locations" value="classpath*:/config.properties" />
+    </bean>
 
+    <bean id="mongodbDatasourceConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="10"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="locations" value="classpath:mongodb-datasource.properties" />
+    </bean>
 
+    <bean id="propertyConfigurerForRedis" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="11" />
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="locations">
+            <list>
+                <value>classpath:redis-config.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <import resource="classpath*:app-context-mongodb-datasource.xml"/>
     <import resource="classpath*:spring-app-transaction.xml"/>
     <import resource="classpath*:spring-app-beans-def.xml"/>
     <import resource="classpath*:spring-app-security.xml"/>
 
 
-
-	<bean id="springContextHolder" class="com.s3d.tech.spring.SpringContextHolder" />
+    <bean id="springContextHolder" class="com.s3d.tech.spring.SpringContextHolder" />
 	<bean id="childOfAnnotationsProcessor" class="com.s3d.webapps.framework.spring.annotation.ChildOfBeanFactoryPostProcessor" />
     <bean id="resourceOfAnnotationsProcessor" class="com.s3d.webapps.framework.spring.annotation.ResourceOfBeanFactoryPostProcessor" />
 </beans> 

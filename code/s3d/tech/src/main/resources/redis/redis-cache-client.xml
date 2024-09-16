@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="${redis.shard.maxTotal}" />
+		<property name="maxIdle" value="${redis.shard.maxIdle}" />
+		<property name="minIdle" value="${redis.shard.minIdle}" />
+		<property name="maxWaitMillis" value="${redis.shard.maxWaitMillis}" />
+		<property name="testOnBorrow" value="true" />
+		<property name="testOnReturn" value="true" />
+		<property name="testWhileIdle" value="true" />
+	</bean>
+
+	<bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool"
+		destroy-method="destroy">
+		<constructor-arg ref="jedisPoolConfig" />
+		<constructor-arg>
+			<list>
+				<bean class="redis.clients.jedis.JedisShardInfo">
+					<constructor-arg value="${redis.shard1.host}" />
+					<constructor-arg type="int" value="${redis.shard1.port}" />
+					<constructor-arg value="instance:01" />
+				</bean>
+				<bean class="redis.clients.jedis.JedisShardInfo">
+					<constructor-arg value="${redis.shard2.host}" />
+					<constructor-arg type="int" value="${redis.shard2.port}" />
+					<constructor-arg value="instance:02" />
+				</bean>
+				<bean class="redis.clients.jedis.JedisShardInfo">
+					<constructor-arg value="${redis.shard3.host}" />
+					<constructor-arg type="int" value="${redis.shard3.port}" />
+					<constructor-arg value="instance:03" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="redisClient" class="com.s3d.tech.cache.ShardedRedisClient">
+		<property name="enableRedis" value="${enableRedis}"></property>
+		<property name="shardedJedisPool" ref = "shardedJedisPool"/>
+	</bean>
+	
+</beans>

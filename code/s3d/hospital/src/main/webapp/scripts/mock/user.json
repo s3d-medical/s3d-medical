@@ -1,0 +1,17 @@
+{
+  "user": {
+    "id": 1,
+    "realName": "高欢",
+    "code": "123123",
+    "departmentId": 1,
+    "departmentName" : "部门1",
+    "email": "xx@xx.com",
+    "phone": "123",
+    "tel": "321",
+    "userName": "gaohuan",
+    "languageId": 2,
+    "language": "",
+    "key": "123",
+    "remark": "备注用户1"
+  }
+}

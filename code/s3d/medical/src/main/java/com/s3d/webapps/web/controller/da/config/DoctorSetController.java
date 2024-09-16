@@ -1,6 +1,6 @@
 package com.s3d.webapps.web.controller.da.config;
 
-import com.s3d.webapps.config.persistence.ConfigDoctor;
+import com.s3d.webapps.access.config.persistence.ConfigDoctor;
 import com.s3d.webapps.da.config.service.IDaConfigDoctorService;
 import com.s3d.webapps.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,7 +6,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <changeSet id="1" author="wind" context="production">
-        <sqlFile path="scripts/create_test_table.sql"
+        <sqlFile path="scripts/2015-05-18_1_initdb.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
     </changeSet>
     <changeSet id="2" author="wind" context="production">
@@ -39,6 +39,50 @@
     </changeSet>
     <changeSet id="9" author="gary" context="production">
         <sqlFile path="scripts/2015-07-21_1_create_da_config_operation_table.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
+    <changeSet id="10" author="wind" context="production">
+        <sqlFile path="scripts/2015-11-03_0_initialize_auth_tables.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
+    <changeSet id="11" author="wind" context="production">
+        <sqlFile path="scripts/2015-11-07_0_mod_org.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
+    <changeSet id="12" author="wind" context="production">
+        <sqlFile path="scripts/2015-11-15_0_mod_org.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
+    <changeSet id="13" author="wind" context="production">
+        <sqlFile path="scripts/2015-11-15_1_mod_org_parent_null.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
+    <changeSet id="14" author="wind" context="production">
+        <sqlFile path="scripts/2015-11-22_0_modify_user.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
+    <changeSet id="15" author="gary" context="production">
+        <sqlFile path="scripts/2015-11-28_0_modify_org.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
+    <changeSet id="17" author="wind" context="production">
+        <sqlFile path="scripts/2015-12-03_0_modify_role.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
+    <changeSet id="18" author="gary" context="production">
+        <sqlFile path="scripts/2016-01-17_0_modify_role.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
+    <changeSet id="19" author="gary" context="production">
+        <sqlFile path="scripts/2016-01-17_1_modify_role_category.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
+    <changeSet id="20" author="gary" context="production">
+        <sqlFile path="scripts/2016-01-17_2_modify_action.sql"
+                 encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
+    </changeSet>
+    <changeSet id="21" author="wind" context="production">
+        <sqlFile path="scripts/2016-02-09_1_change_auth_user.sql"
                  encoding="UTF-8" endDelimiter=";" splitStatements="true" stripComments="true"/>
     </changeSet>
 </databaseChangeLog>

@@ -1,8 +1,6 @@
 package com.s3d.webapps.da.config.service;
 
-import com.s3d.webapps.config.persistence.ConfigOperation;
-import com.s3d.webapps.config.vo.CodeTableItemVO;
-import com.s3d.webapps.pub.datatype.ValidationStatus;
+import com.s3d.webapps.access.config.persistence.ConfigOperation;
 
 import java.util.List;
 

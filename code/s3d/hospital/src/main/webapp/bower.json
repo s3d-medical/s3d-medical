@@ -1,0 +1,19 @@
+{
+  "name": "hospital",
+  "description": "hospital",
+  "version": "0.0.0",
+  "dependencies": {
+    "jQuery": "2.1.4",
+    "lodash": "3.10.1",
+    "angular": "~1.4.5",
+    "angular-loader": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+    "html5-boilerplate": "~5.2.0",
+    "ui-router": "0.2.14",
+    "bootstrap": "3.3.5",
+    "bootstrap-treeview": "1.2.0"
+  },
+  "resolutions": {
+    "angular": "~1.4.5"
+  }
+}

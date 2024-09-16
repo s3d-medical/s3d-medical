@@ -1,0 +1,30 @@
+.login .header {
+    height: 120px;
+}
+.login .content {
+    height: 450px;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+.login .content > div {
+    width: 295px;
+    height: 305px;
+    background-color: #fff;
+    border-radius: 3px;
+    float: right;
+    margin: 70px 180px;
+    padding: 20px 30px;
+}
+.login .content h3 {
+    margin: 0 0 20px;
+}
+.login form .form-group {
+    position: relative;
+}
+.login form i {
+    position: absolute; left: 10px; top: 10px;
+}
+.login form input[type="text"],
+.login form input[type="password"] {
+    padding-left: 28px;
+}

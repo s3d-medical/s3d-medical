@@ -2,7 +2,7 @@ package com.s3d.webapps.da.config.dao.impl;
 
 import com.s3d.tech.data.dao.hibernate.HibernateDao;
 import com.s3d.webapps.da.config.dao.IDaConfigDoctorDao;
-import com.s3d.webapps.config.persistence.ConfigDoctor;
+import com.s3d.webapps.access.config.persistence.ConfigDoctor;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
